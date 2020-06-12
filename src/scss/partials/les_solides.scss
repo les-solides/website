@@ -7,4 +7,25 @@
 	-webkit-appearance: none;
 }
 
+.bottom-5 {
+	bottom: 5%;
+}
 
+button.menu {
+	outline: none!important;
+	padding: $font-size-base * 1.5;
+}
+
+.mobile {
+	@media (min-width: 768px) {
+		display: none;
+	}
+}
+
+.top-100 {
+	top: 100%;
+}
+
+.transition-medium {
+	transition: 1s;
+}
