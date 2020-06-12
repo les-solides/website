@@ -1,6 +1,10 @@
 @import "variables";
 
 * {
-	background: black;
+	color: $color-primary;
 	font-family: $font-family;
+	text-decoration: none;
+	-webkit-appearance: none;
 }
+
+

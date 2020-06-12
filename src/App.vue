@@ -1,10 +1,10 @@
 <template>
 	<div id="app">
-		<!-- TheHeader -->
+		<TheHeader />
 		
 		<router-view />
 		
-		<!-- TheFooter -->
+		<TheFooter />
 	</div>
 </template>
 
@@ -30,3 +30,10 @@
 		color: #42b983;
 	}
 </style>
+<script>
+	import TheHeader from "./components/layout/TheHeader";
+	import TheFooter from "./components/layout/TheFooter";
+	export default {
+		components: { TheFooter, TheHeader }
+	};
+</script>
