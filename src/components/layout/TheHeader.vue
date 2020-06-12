@@ -1,5 +1,6 @@
 <template>
-	<header class="bg-white fixed h-full md:h-auto md:sticky md:p-4 md:top-0 top-0 transition-medium w-full"
+	<header class="bg-white fixed h-full md:h-auto md:sticky md:p-4 md:top-0
+					md:z-0 text-center top-0 transition-medium w-full z-20"
 			:class="{ 'top-100': !menuOpen }">
 		
 		<Burger @click.native="menuOpen = !menuOpen"
@@ -8,34 +9,34 @@
 		
 		<nav class="md:flex justify-between">
 			<Route class="md:py-0 py-8"
-						 to="/">
+				   to="/">
 				les solides
 			</Route>
 			<div class="md:flex">
 				<Route class="md:py-0 px-4 py-4"
-							 to="/products">
+					   to="/products">
 					products
 				</Route>
 				<Route class="md:py-0 px-4 py-4"
-							 to="/collaborations">
+					   to="/collaborations">
 					collaborations
 				</Route>
 				<Route class="md:py-0 px-4 py-4"
-							 to="/lookbook">
+					   to="/lookbook">
 					lookbook
 				</Route>
 				<Route class="md:py-0 px-4 py-4"
-							 to="/archive">
+					   to="/archive">
 					archive
 				</Route>
 				<Route class="md:py-0 px-4 py-4"
-							 to="/search">
+					   to="/search">
 					search
 				</Route>
 			</div>
 			<div class="md:flex">
 				<Route class="md:py-0 py-4"
-							 to="/checkout">
+					   to="/checkout">
 					bag (0)
 				</Route>
 			</div>
@@ -49,9 +50,9 @@
 	
 	export default {
 		name: "TheHeader",
-		components: { Route, Burger },
-		data: () => ( {
+		components: {Route, Burger},
+		data: () => ({
 			menuOpen: false
-		} )
+		})
 	};
 </script>
