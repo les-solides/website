@@ -3,4 +3,8 @@ $font-size-base: 1rem;
 
 $color-primary: black;
 
-$breakpoint-md: 768px // => @media (min-width: 768px) {
+$breakpoint-md: 768px; // => @media (min-width: 768px) {
+
+:root {
+	--header-height: 56px;
+}
