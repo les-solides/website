@@ -17,7 +17,7 @@
 			
 			root.style.setProperty(
 				'--header-height',
-				String(header.clientHeight)
+				`${header.clientHeight}px`
 			);
 		}
 	};

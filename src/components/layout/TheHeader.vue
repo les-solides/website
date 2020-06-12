@@ -1,5 +1,5 @@
 <template>
-	<header class="absolute bg-white h-full md:h-auto md:sticky md:p-4 md:top-0 top-0 transition-medium w-full"
+	<header class="bg-white fixed h-full md:h-auto md:sticky md:p-4 md:top-0 top-0 transition-medium w-full"
 			:class="{ 'top-100': !menuOpen }">
 		
 		<Burger @click.native="menuOpen = !menuOpen"
