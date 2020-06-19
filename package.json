@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "lodash": "^4.17.15",
+    "numbro": "^2.3.1",
+    "shopify-buy": "^2.10.0",
     "tailwindcss": "^1.4.6",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
@@ -44,7 +47,8 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "no-mixed-spaces-and-tabs": 0
+      "no-mixed-spaces-and-tabs": 0,
+      "no-unused-vars": 0
     },
     "overrides": [
       {

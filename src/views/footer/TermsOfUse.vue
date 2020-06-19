@@ -1,7 +1,7 @@
 <template>
-	<div class="w-2/3">
+	<div class="footer-page w-2/3">
 		<h3>{{ title }}</h3>
-		<p>{{ content }}</p>
+		<div class="md:column-3" v-html="content"></div>
 		<Error v-if="loaded && error" />
 	</div>
 </template>
@@ -9,7 +9,7 @@
 <script>
 	import Error from "../../components/partials/Error";
 	export default {
-		name: "About",
+		name: "TermsOfUse",
 		components: {Error},
 		data: () => ({
 			content: null,
@@ -20,7 +20,7 @@
 		async created() {
 			const result = await this.$store.dispatch(
 				'shopify/blog/fetchFirstArticleByTags',
-				'page:about'
+				'page:terms-of-use'
 			);
 			
 			this.loaded = true;

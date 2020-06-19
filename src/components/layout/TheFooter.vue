@@ -7,6 +7,8 @@
 					:open="true" />
 			
 			<About v-if="currentRoute === footer.routes.ABOUT" />
+			<SizeGuide v-if="currentRoute === footer.routes.SIZE" />
+			<TermsOfUse v-if="currentRoute === footer.routes.TERMS" />
 		</article>
 		
 		<div class="border-top md:flex mx-4 py-4">
@@ -51,10 +53,12 @@
 	import Burger from "../partials/Burger";
 	import Footer from "../../modules/Footer";
 	import About from "../../views/footer/About";
+	import TermsOfUse from "../../views/footer/TermsOfUse";
+	import SizeGuide from "../../views/footer/SizeGuide";
 	
 	export default {
 		name: "TheFooter",
-		components: {About, Burger},
+		components: {SizeGuide, TermsOfUse, About, Burger},
 		data: () => ({
 			currentRoute: null,
 			footer: Footer,

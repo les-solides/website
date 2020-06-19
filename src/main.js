@@ -5,8 +5,18 @@ import store from './store';
 
 import "./scss/main.scss";
 
-new Vue({
-	router,
-	store,
-	render: h => h(App)
-}).$mount('#app');
+(async () => {
+	
+	await require('./bootstrap').default();
+	
+	Vue.config.devtools = process.env.NODE_ENV === 'development';
+	
+	new Vue({
+		router,
+		store,
+		render: h => h(App)
+	}).$mount('#app');
+	
+})();
+
+

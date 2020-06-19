@@ -4,7 +4,7 @@
 	color: $color-primary;
 	font-family: $font-family;
 	font-size: $font-size-base;
-	outline: none!important;
+	outline: none !important;
 	overflow: -moz-scrollbars-none;
 	margin: 0;
 	padding: 0;
@@ -13,12 +13,13 @@
 	-ms-overflow-style: none;
 	-webkit-appearance: none;
 	-webkit-font-smoothing: antialiased;
+
 	&::-webkit-scrollbar {
 		display: none;
 	}
 }
 
-// -- B [Start]
+// -- B [start]
 .border-top {
 	border-top: 0.5px solid black;
 }
@@ -30,42 +31,100 @@
 button.menu {
 	padding: $font-size-base * 1.5;
 }
-// -- B [End]
 
-// -- H [Start]
+// -- B [end]
+
+// -- F [start]
+
+// -- F [end]
+
+// -- H [start]
+.h1 {
+	font-size: $font-size-base * 1.25;
+}
+.h2 {
+	font-size: $font-size-base * 1.20;
+}
+
+.h3 {
+	font-size: $font-size-base * 1.15;
+}
+
+.h4 {
+	font-size: $font-size-base * 1.10;
+}
+
 h1 {
 	font-size: $font-size-base * 1.25;
 }
+
 h2 {
 	font-size: $font-size-base * 1.20;
 }
+
 h3 {
 	font-size: $font-size-base * 1.15;
 }
+
 h4 {
 	font-size: $font-size-base * 1.10;
 }
-// -- H [End]
 
-// -- M [Start]
+// -- H [end]
+
+// -- M [start]
+@for $i from 1 through 4 {
+	.md\:column-#{ $i } {
+		@media (min-width: $breakpoint-md) {
+			column-count: $i;
+		}
+	}
+}
+
+.md\:p-default {
+	@media (min-width: $breakpoint-md) {
+		padding: $padding-default;
+	}
+}
+
 .mobile {
-	@media (min-width: 768px) {
+	@media (min-width: $breakpoint-md) {
 		display: none;
 	}
 }
-// -- M [End]
 
-// -- R [Start]
+// -- M [end]
+
+// -- P [start]
+.p-default {
+	padding: $padding-default;
+}
+
+.px-default {
+	padding-left: $padding-default;
+	padding-right: $padding-default;
+}
+
+.py-default {
+	padding-bottom: $padding-default;
+	padding-top: $padding-default;
+}
+
+// -- P [end]
+
+// -- R [start]
 .right {
 	right: 0;
 }
-// -- R [End]
 
-// -- T [Start]
+// -- R [end]
+
+// -- T [start]
 .top-100 {
 	top: 100%;
 }
-// -- T [End]
+
+// -- T [end]
 
 .transition-medium {
 	transition: 1s;
