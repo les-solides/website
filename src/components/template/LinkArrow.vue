@@ -1,9 +1,11 @@
 <template>
-	<a :href="article.content"
+	<a class="block h1 mt-4"
+	   :href="article.content"
 	   v-if="article.content && article.content.includes('http')">
 		{{ article.title }}
 	</a>
-	<router-link :to="article.content"
+	<router-link class="block h1 mt-4"
+				 :to="article.content"
 				 v-else>
 		{{ article.title }}
 	</router-link>

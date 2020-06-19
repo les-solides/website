@@ -2,6 +2,7 @@ import Image from "./Image";
 import Variant from "./Variant";
 import Collection from "./Collection";
 import PriceV2 from "./PriceV2";
+import DomParser from "./DomParser";
 
 export default class Product {
 
@@ -269,6 +270,20 @@ export default class Product {
         return !! this.collections
             .find(c => (c.handle === handle || c.parentHandle === handle));
     }
+    
+    selectElement(selector) {
+        return DomParser.fetchFirstBySelector(
+            this.descriptionHtml,
+            selector
+        ) || document.createElement('div');
+    }
+    
+    selectElements(selector) {
+        return DomParser.fetchAllBySelector(
+            this.descriptionHtml,
+            selector
+        ) || [];
+    }
 
     /**
      * Sets the _selectedVariant Property to the given Variant.
@@ -279,4 +294,6 @@ export default class Product {
     selectVariant(variant) {
         return this._selectedVariant = variant;
     }
+    
+    
 }

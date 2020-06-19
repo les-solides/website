@@ -2,9 +2,10 @@
 	<div class="flex flex-wrap justify-between">
 		<!-- Left [start] -->
 		<a :href="leftImage.alt"
-		   class="flex items-center relative w-1/2"
+		   class="flex items-center relative mb-4 md:mb-0 md:w-1/2 w-full"
+		   :class="{ darken: leftImage }"
 		   v-if="leftImage">
-			<LoadedImage class="pr-2 w-full"
+			<LoadedImage class="md:pr-2 w-full"
 						 :src="leftImage.src"
 						 :alt="leftImage.alt" />
 			<span class="absolute h1 text-center text-white w-full">
@@ -15,9 +16,9 @@
 		
 		<!-- Right [start] -->
 		<a :href="rightImage.alt"
-		   class="flex items-center relative w-1/2"
+		   class="flex items-center relative md:w-1/2 w-full"
 		   v-if="rightImage">
-			<LoadedImage class="pl-2 w-full"
+			<LoadedImage class="md:pl-2 w-full"
 						 :src="rightImage.src"
 						 :alt="rightImage.alt" />
 			<span class="absolute h1 text-center text-white w-full">

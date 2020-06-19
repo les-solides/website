@@ -5,6 +5,11 @@ export default class DomParser {
 		return element;
 	}
 	
+	static fetchAllBySelector(dom, selector) {
+		return DomParser.createDom(dom)
+						.querySelectorAll(selector);
+	}
+	
 	static fetchAllImages(dom) {
 		return DomParser.createDom(dom)
 						.querySelectorAll('img');

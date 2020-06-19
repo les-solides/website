@@ -60,4 +60,11 @@ export default class Article {
 		) || document.createElement('div');
 	}
 	
+	selectElements(selector) {
+		return DomParser.fetchAllBySelector(
+			this.contentHtml,
+			selector
+		) || [];
+	}
+	
 }

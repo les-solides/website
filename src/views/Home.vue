@@ -1,9 +1,10 @@
 <template>
 	<div>
-		<component :is="_.startCase(article.template).split(' ').join('')"
+		<component class="mb-8"
+				   :is="_.startCase(article.template).split(' ').join('')"
 				   :key="article.id"
 				   :article="article"
-					v-for="article of homeArticles"/>
+				   v-for="article of homeArticles" />
 	</div>
 </template>
 
@@ -15,6 +16,7 @@
 	import LinkTwoFrames from "../components/template/LinkTwoFrames";
 	
 	import FrameLink from "../modules/shopify/FrameLink";
+	
 	export default {
 		name: "Home",
 		components: {
