@@ -1,6 +1,6 @@
 <template>
 	<header class="bg-white fixed h-full md:h-auto md:sticky md:p-default md:top-0
-					md:z-0 text-center top-0 transition-medium w-full z-20"
+					text-center top-0 transition-medium w-full z-20"
 			:class="{ 'top-100': !menuOpen }">
 		
 		<Burger @click.native="menuOpen = !menuOpen"

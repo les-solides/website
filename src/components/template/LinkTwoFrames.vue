@@ -3,9 +3,9 @@
 		<!-- Left [start] -->
 		<a :href="leftImage.alt"
 		   class="flex items-center relative mb-4 md:mb-0 md:w-1/2 w-full"
-		   :class="{ darken: leftImage }"
 		   v-if="leftImage">
 			<LoadedImage class="md:pr-2 w-full"
+						 :class="{ darken: article.selectElement('#overlay-left').innerText }"
 						 :src="leftImage.src"
 						 :alt="leftImage.alt" />
 			<span class="absolute h1 text-center text-white w-full">
@@ -19,6 +19,7 @@
 		   class="flex items-center relative md:w-1/2 w-full"
 		   v-if="rightImage">
 			<LoadedImage class="md:pl-2 w-full"
+						 :class="{ darken: article.selectElement('#overlay-right').innerText }"
 						 :src="rightImage.src"
 						 :alt="rightImage.alt" />
 			<span class="absolute h1 text-center text-white w-full">

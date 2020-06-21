@@ -1,6 +1,6 @@
 <template>
 	<footer class="bg-white z-10">
-		<article class="bg-white fixed p-4 transition-medium w-full"
+		<article class="bg-white fixed md:z-30 p-4 transition-medium w-full"
 				 :class="{ 'top-0': open, 'top-100': !open }">
 			<Burger @click.native="closeFooter"
 					class="fixed mr-4 right"
