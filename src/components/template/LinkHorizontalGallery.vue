@@ -1,17 +1,29 @@
 <template>
 	<div class="absolute h-screen overflow-scroll bg-white left-0 top-0 w-screen z-50"
 		 ref="horizontal-scroll">
-		<div :style="`height: ${height}`"
+		<header class="h-full md:h-auto md:sticky md:p-default md:top-0
+					text-center top-0 transition-medium w-full z-20">
+			<nav class="md:flex justify-between">
+				<Route class="md:py-0 py-8"
+					   to="/home">
+					les solides
+				</Route>
+			</nav>
+		</header>
+		<div class="absolute top-0"
+			 :style="`height: ${height}`"
 			 v-if="article">
-			<div class="flex sticky overflow-x-hidden top-0">
-				<div class="flex h-screen" ref="translatable-element">
-					<div style="min-width: 100vw"
-						 :key="image.src"
-						 v-for="image of images">
+			<div class="flex sticky overflow-x-hidden top-0 w-screen">
+				<div class="flex h-screen"
+					 ref="translatable-element">
+					<Route :to="getImageLink(image)"
+						   style="min-width: 100vw"
+						   :key="image.src"
+						   v-for="image of images">
 						<img class="h-screen object-cover w-screen"
 							 :src="image.src"
 							 :alt="image.alt" />
-					</div>
+					</Route>
 				
 				</div>
 			</div>
@@ -22,13 +34,19 @@
 <script>
 	import Article from "../../modules/shopify/blog/Article";
 	import { mapGetters } from "vuex";
+	import Route from "../partials/Route";
 	
 	export default {
 		name: "LinkHorizontalGallery",
+		components: {Route},
 		props: {
 			article: {
 				type: Article,
 				required: true
+			},
+			fallbackRoute: {
+				type: String,
+				default: undefined
 			}
 		},
 		data: () => ({
@@ -50,11 +68,20 @@
 					return [];
 				}
 				return Array.from(this.article.images)
-						   .filter(image =>
-							   this.isMobile ?
-							   image.alt.includes('screen:mobile') :
-							   ! image.alt.includes('screen:mobile')
-						   );
+							.filter(image =>
+								this.isMobile ?
+								image.alt.includes('screen:mobile') :
+								! image.alt.includes('screen:mobile')
+							);
+			}
+		},
+		methods: {
+			getImageLink(image) {
+				const match = this.o(image.alt.match(/link:(.*)$/gm))[0];
+				if ( ! match) {
+					return this.fallbackRoute || this.$route.path;
+				}
+				return match.split(':')[1] || this.fallbackRoute || this.$route.path;
 			}
 		},
 		mounted() {
@@ -67,7 +94,7 @@
 					const translation = scrollTop * scrollRatio;
 					
 					this.$refs['translatable-element'].style.transform =
-						`translateX(${-translation}px)`;
+						`translateX(${ -translation }px)`;
 				});
 				
 			});

@@ -44,7 +44,6 @@ export default {
 		},
 		async fetchFirstArticleByBlog({commit, dispatch, rootState}, blog) {
 			let articles = await dispatch('fetchArticlesByBlog', blog);
-			console.log({articles});
 			return Array.isArray(articles) ? articles[0] : null;
 		},
 		fetchFirstArticleByTags({commit, rootState}, tags) {

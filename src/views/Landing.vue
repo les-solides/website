@@ -1,6 +1,7 @@
 <template>
 	<component :is="_.startCase(article.template).split(' ').join('')"
 			   :article="article"
+			   :fallback-route="article.filterTags(/fallback-route:(.*)/, 'fallback-route:')"
 			   v-if="article" />
 </template>
 

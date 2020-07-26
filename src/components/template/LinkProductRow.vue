@@ -25,7 +25,6 @@
 		computed: {
 			productHandles() {
 				const handles = Array.from(this.article.selectElements("li"));
-				console.log({handles}, this.article.selectElements("li"));
 				if ( ! Array.isArray(handles)) {
 					return [];
 				}
