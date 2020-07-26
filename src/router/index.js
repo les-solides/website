@@ -7,6 +7,10 @@ const routes = [
 	{
 		path: '',
 		name: 'Landing',
+		meta: {
+			noFooter: true,
+			noHeader: true
+		},
 		component: () => import(/* webpackChunkName: "Home" */ '../views/Landing')
 	},
 	{

@@ -1,12 +1,12 @@
 <template>
 	<div id="app">
-		<TheHeader />
+		<TheHeader v-if=" ! noHeader" />
 		
 		<TheBody>
 			<router-view />
 		</TheBody>
 		
-		<TheFooter />
+		<TheFooter v-if=" ! noFooter" />
 	</div>
 </template>
 <script>
@@ -17,6 +17,14 @@
 	
 	export default {
 		components: { TheBody, TheFooter, TheHeader },
+		computed: {
+			noFooter() {
+				return this.$route.meta.noFooter;
+			},
+			noHeader() {
+				return this.$route.meta.noHeader;
+			}
+		},
 		methods: {
 			handleResize() {
 				this.$store.commit('refreshIsMobile');
