@@ -13,10 +13,32 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
+		breakpoints: {
+			'sm': 640,
+			// => @media (min-width: 640px) { ... }
+			'md': 768,
+			// => @media (min-width: 768px) { ... }
+			'lg': 1024,
+			// => @media (min-width: 1024px) { ... }
+			'xl': 1280,
+			// => @media (min-width: 1280px) { ... }
+		},
+		isMobile: false,
 		storefront: storefront,
 	},
-	mutations: {},
-	actions: {},
+	getters: {
+		isMobile(state) {
+			return state.isMobile;
+		}
+	},
+	mutations: {
+		refreshIsMobile(state) {
+			state.isMobile = state.breakpoints.md >= window.innerWidth;
+		}
+	},
+	actions: {
+	
+	},
 	modules: {
 		shopify
 	}

@@ -13,7 +13,21 @@
 	import TheHeader from "./components/layout/TheHeader";
 	import TheFooter from "./components/layout/TheFooter";
 	import TheBody from "./components/layout/TheBody";
+	import { debounce } from 'lodash';
+	
 	export default {
-		components: { TheBody, TheFooter, TheHeader }
+		components: { TheBody, TheFooter, TheHeader },
+		methods: {
+			handleResize() {
+				this.$store.commit('refreshIsMobile');
+			}
+		},
+		mounted() {
+			window.addEventListener('resize', debounce(this.handleResize, 100));
+			this.handleResize();
+		},
+		destroyed() {
+			window.removeEventListener('resize', this.handleResize);
+		}
 	};
 </script>

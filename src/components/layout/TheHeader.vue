@@ -9,7 +9,7 @@
 		
 		<nav class="md:flex justify-between">
 			<Route class="md:py-0 py-8"
-				   to="/">
+				   to="/home">
 				les solides
 			</Route>
 			<div class="md:flex">

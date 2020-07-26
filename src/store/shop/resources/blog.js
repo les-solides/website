@@ -11,7 +11,7 @@ export default {
 		pages: []
 	},
 	actions: {
-		fetchArticlesByBlog({commit, rootState}, blog) {
+		async fetchArticlesByBlog({commit, rootState}, blog) {
 			const query = rootState.storefront.graphQLClient.query(root => {
 				root.addConnection(
 					"articles",
@@ -41,6 +41,11 @@ export default {
 					await commit('addManyToArticles', articles);
 					return articles;
 				});
+		},
+		async fetchFirstArticleByBlog({commit, dispatch, rootState}, blog) {
+			let articles = await dispatch('fetchArticlesByBlog', blog);
+			console.log({articles});
+			return Array.isArray(articles) ? articles[0] : null;
 		},
 		fetchFirstArticleByTags({commit, rootState}, tags) {
 			const query = rootState.storefront.graphQLClient.query(root => {

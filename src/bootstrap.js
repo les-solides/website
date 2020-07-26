@@ -8,5 +8,4 @@ export default async () => {
 	Vue.prototype.$cart = new Cart(checkout.id);
 	Vue.prototype._ = require('lodash');
 	Vue.prototype.o = (object) => { return object || {} };
-	
 };

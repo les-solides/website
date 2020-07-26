@@ -63,12 +63,16 @@ export default {
                 await commit('updateCheckout', checkout);
                 return checkout;
             }
-
+            
             // if checkout id is found in local storage,
             // then fetch checkout with that id
             checkout = await rootState.storefront.checkout
                 .fetch(id)
                 .then(checkout => checkout);
+            
+            if ( ! checkout) {
+                return await dispatch('createCheckout');
+            }
 
             // if checkout already completed (order submitted),
             // then create a new checkout
