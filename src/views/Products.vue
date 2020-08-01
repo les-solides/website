@@ -79,10 +79,6 @@
 			}
 		},
 		async created() {
-			if (this.productsArticles.length) {
-				return;
-			}
-			
 			await this.$store.dispatch(
 				'shopify/blog/fetchArticlesByBlog',
 				this.type

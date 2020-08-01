@@ -13,10 +13,12 @@
 					   to="/home">
 					les solides
 				</Route>
-				<NavigationFilter />
+				<NavigationFilter base="/products"
+								  name="Navigation (Products)" />
 			</div>
 			<div class="md:flex">
 				<Route class="md:py-0 px-4 py-4"
+					   :exact="false"
 					   to="/products">
 					products
 				</Route>

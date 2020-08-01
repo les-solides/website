@@ -1,5 +1,7 @@
 <template>
-	<router-link class="block" :to="to" exact>
+	<router-link class="block"
+				 :to="to"
+				 :exact="exact">
 		<slot></slot>
 	</router-link>
 </template>
@@ -8,6 +10,10 @@
 	export default {
 		name: "Route",
 		props: {
+			exact: {
+				type: Boolean,
+				default: () => true
+			},
 			to: {
 				type: String,
 				required: true

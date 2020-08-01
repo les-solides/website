@@ -20,6 +20,12 @@ export default class Article {
 		return this.blog.title || "";
 	}
 	
+	get contentNodes() {
+		const root = document.createElement('div');
+		root.innerHTML = this.contentHtml || "";
+		return root;
+	}
+	
 	get images() {
 		return DomParser.fetchAllImages(this.contentHtml) || [];
 	}
