@@ -8,10 +8,13 @@
 				:open="menuOpen" />
 		
 		<nav class="md:flex justify-between">
-			<Route class="md:py-0 py-8"
-				   to="/home">
-				les solides
-			</Route>
+			<div class="flex">
+				<Route class="md:py-0 py-8"
+					   to="/home">
+					les solides
+				</Route>
+				<NavigationFilter />
+			</div>
 			<div class="md:flex">
 				<Route class="md:py-0 px-4 py-4"
 					   to="/products">
@@ -47,10 +50,11 @@
 <script>
 	import Burger from "../partials/Burger";
 	import Route from "../partials/Route";
+	import NavigationFilter from "../partials/NavigationFilter";
 	
 	export default {
 		name: "TheHeader",
-		components: {Route, Burger},
+		components: {NavigationFilter, Route, Burger},
 		data: () => ({
 			menuOpen: false
 		})

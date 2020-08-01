@@ -2,6 +2,7 @@ import CategoryField from "../../../modules/shopify/blog/fields/CategoryField";
 import TagsField from "../../../modules/shopify/blog/fields/TagsField";
 import Article from "../../../modules/shopify/blog/Article";
 import BlogField from "../../../modules/shopify/blog/fields/BlogField";
+import ImageField from "../../../modules/shopify/fields/ImageField";
 
 export default {
 	namespaced: true,
@@ -19,6 +20,7 @@ export default {
 					(article) => {
 						BlogField.addTo(article);
 						article.add('id');
+						ImageField.addTo(article);
 						article.add('title');
 						article.add('contentHtml');
 						article.add('content');

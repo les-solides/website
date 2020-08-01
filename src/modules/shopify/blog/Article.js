@@ -8,6 +8,7 @@ export default class Article {
 		this.contentHtml = props.contentHtml;
 		this.handle = props.handle;
 		this.id = props.id;
+		this.featuredImage = props.image;
 		this.tags = props.tags;
 		this.title = props.title;
 	}
@@ -51,6 +52,10 @@ export default class Article {
 		return templateTag
 			.split(split)
 			.reduce((a,b) => a ? a : b);
+	}
+	
+	hasTag(tag) {
+		return !! this.tags.find(t => t.match(tag));
 	}
 	
 	selectElement(selector) {

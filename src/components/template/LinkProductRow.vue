@@ -1,5 +1,6 @@
 <template>
-	<div class="flex flex-wrap justify-between">
+	<div class="flex flex-wrap justify-between"
+		 v-if="ready">
 		<ProductLink :product="product"
 					 :key="product.id"
 					 v-for="product of products" />
@@ -20,7 +21,8 @@
 			}
 		},
 		data: () => ({
-			products: []
+			products: [],
+			ready: false
 		}),
 		computed: {
 			productHandles() {
@@ -46,6 +48,7 @@
 				}
 				this.products.push(product);
 			}
+			this.ready = true;
 		}
 	};
 </script>

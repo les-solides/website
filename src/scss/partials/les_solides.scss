@@ -34,6 +34,14 @@ button.menu {
 
 // -- B [end]
 
+// -- C [start]
+.center {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+// -- C [end]
+
 // -- D [start]
 .darken {
 	filter: brightness(0.75);
@@ -41,7 +49,9 @@ button.menu {
 // -- D [end]
 
 // -- F [start]
-
+.font-xl {
+	font-size: $font-size-base * 6;
+}
 // -- F [end]
 
 // -- H [start]
@@ -77,6 +87,9 @@ h4 {
 }
 
 // -- H [end]
+
+// -- L [start]
+// -- L [end]
 
 // -- M [start]
 @for $i from 1 through 4 {
