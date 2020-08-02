@@ -13,6 +13,7 @@
 	
 	import LinkArrow from "../components/template/LinkArrow";
 	import LinkArrowImage from "../components/template/LinkArrowImage";
+	import LinkProductFilter from "../components/template/LinkProductFilter";
 	import LinkProductRow from "../components/template/LinkProductRow";
 	import LinkTwoFrames from "../components/template/LinkTwoFrames";
 	import NewsletterSubscribe from "../components/template/NewsletterSubscribe";
@@ -25,6 +26,7 @@
 			LinkArrow,
 			LinkArrowImage,
 			LinkTwoFrames,
+			LinkProductFilter,
 			LinkProductRow,
 			NewsletterSubscribe
 		},

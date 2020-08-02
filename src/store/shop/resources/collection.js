@@ -1,5 +1,9 @@
 import CollectionField from "../../../modules/shopify/fields/CollectionField";
 import Collection from "../../../modules/shopify/Collection";
+import api from "../../../api/api";
+import CollectionByHandleQuery from "./queries/CollectionByHandleQuery";
+import Utils from "../../../modules/Utils";
+import Product from "../../../modules/shopify/Product";
 
 export default {
     namespaced: true,
@@ -27,7 +31,17 @@ export default {
             return collections;*/
         },
         async fetchByHandle (state, handle) {
-
+            console.log({api, state, handle});
+            return api.post("", CollectionByHandleQuery(handle))
+                      .then(data => {
+                          let products = Utils.getNested(data,
+                              "data", "data", "collectionByHandle", "products", "edges");
+                          console.log({products});
+                          if ( ! Array.isArray(products)) {
+                              return [];
+                          }
+                          return products.map(product => new Product(product.node));
+                      });
         },
         async fetchRecommendations({dispatch, rootState}, id) {
 

@@ -68,6 +68,12 @@ export default class Product {
     get descriptionHtml() {
         return this._graph.descriptionHtml;
     }
+    
+    get descriptionNodes() {
+        const root = document.createElement('div');
+        root.innerHTML = this.descriptionHtml || "";
+        return root;
+    }
 
     get firstImage() {
         if ( ! this.images.length) {
@@ -201,6 +207,10 @@ export default class Product {
             return ! this._graph.availableForSale;
         }
         return ! this.selectedVariant.available;
+    }
+    
+    get tags() {
+        return this._graph.tags;
     }
 
     /**

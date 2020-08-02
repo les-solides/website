@@ -6,6 +6,7 @@
          :alt="alt"
          v-if="src"
          @load="(loaded = true) && $emit('load')">
+    <div class="empty-image-box" v-else></div>
 </template>
 
 <script>

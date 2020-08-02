@@ -115,6 +115,10 @@ h4 {
 // -- M [end]
 
 // -- P [start]
+.product-image {
+	height: 40vw;
+}
+
 .p-default {
 	padding: $padding-default;
 }
@@ -152,3 +156,11 @@ h4 {
 .vh-100 {
 	height: 100vh;
 }
+
+// -- W [start]
+@for $i from 1 through 9 {
+	.w-#{$i}\/9 {
+		width: $i / 9 * 100%;
+	}
+}
+// -- W [end]

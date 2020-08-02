@@ -2,8 +2,7 @@
 	<router-link class="mb-4 product-link"
 				 :to="`/product/${ product.handle }`">
 		<LoadedImage class="h-full object-cover w-full"
-					 :src="product.images[0].src"
-					 v-if="product.images.length" />
+					 :src="o(product.images[0]).src" />
 		<div class="mt-4">
 			<span class="mr-4">{{ product.title }}</span>
 			<span>{{ product.price }}</span>
@@ -35,12 +34,15 @@
 <style lang="scss"
 	   scoped>
 	.product-link {
-		img	{
+		.empty-image-box {
+			background: whitesmoke;
+		}
+		img, .empty-image-box {
 			height: 60vw;
 		}
 		width: 48.5%;
 		@media (min-width: 768px) {
-			img	{
+			img, .empty-image-box {
 				height: 26vw;
 			}
 			width: 19%;

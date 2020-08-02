@@ -41,6 +41,11 @@ const routes = [
 			navigationArticle: "Navigation (Products)"
 		},
 		component: () => import(/* webpackChunkName: "Product" */ '../views/Products')
+	},
+	{
+		path: '/product/:handle',
+		name: 'Product',
+		component: () => import(/* webpackChunkName: "Product" */ '../components/shop/Product')
 	}
 ];
 

@@ -1,5 +1,8 @@
 import Product from "../../../modules/shopify/Product";
 import ProductField from "../../../modules/shopify/fields/ProductField";
+import api from "../../../api/api";
+import productByHandle from "./queries/productByHandle";
+import Utils from "../../../modules/Utils";
 
 export default {
     namespaced: true,
@@ -23,9 +26,12 @@ export default {
                 );
         },
         async fetchByHandle(state, handle) {
-            return await state.rootState.storefront.product
-                .fetchByHandle(handle)
-                .then(data => data ? new Product(data) : null);
+            return api.post("", productByHandle(handle))
+                      .then(data => {
+                          const product = Utils.getNested(data,
+                              "data", "data", "productByHandle")
+                          return product ? new Product(product) : null
+                      });
         },
         async fetchRecommendations({ dispatch, rootState }, id) {
             const query = rootState.storefront.graphQLClient
