@@ -1,5 +1,6 @@
 <template>
 	<router-link class="mb-4 product-link"
+				 :class="{ short }"
 				 :to="`/product/${ product.handle }`">
 		<LoadedImage class="h-full object-cover w-full"
 					 :src="o(product.images[0]).src" />
@@ -22,6 +23,10 @@
 			product: {
 				type: Product,
 				required: true
+			},
+			short: {
+				type: Boolean,
+				default: () => false
 			}
 		},
 		components: {
@@ -34,6 +39,16 @@
 <style lang="scss"
 	   scoped>
 	.product-link {
+		&.short {
+			img, .empty-image-box {
+				height: 45vw;
+			}
+			@media (min-width: 768px) {
+				img, .empty-image-box {
+					height: 20vw;
+				}
+			}
+		}
 		.empty-image-box {
 			background: whitesmoke;
 		}

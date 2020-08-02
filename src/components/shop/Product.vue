@@ -18,18 +18,29 @@
 					  v-html="product.descriptionHtml"></span>
 			</div>
 		</div>
-	
+		
+		<span class="block mt-32 text-center w-full">Recommended products</span>
+		
+		<div class="flex mt-4">
+			<ProductLink :product="recommendation"
+						 short
+						 :key="recommendation.id"
+						 :class="{ 'mr-4': index < recommendations.length - 1 }"
+						 v-for="(recommendation, index) of recommendations" />
+		</div>
 	</div>
 </template>
 
 <script>
 	import LoadedImage from "../partials/LoadedImage";
+	import ProductLink from "./ProductLink";
 	
 	export default {
 		name: "Product",
-		components: {LoadedImage},
+		components: {ProductLink, LoadedImage},
 		data: () => ({
-			product: null
+			product: null,
+			recommendations: []
 		}),
 		computed: {
 			mainNode() {
@@ -46,6 +57,11 @@
 			this.product = await this.$store.dispatch(
 				"shopify/product/fetchByHandle",
 				this.$route.params.handle
+			);
+			// 2. Fetch recommended Products
+			this.recommendations = await this.$store.dispatch(
+				"shopify/product/fetchRecommendations",
+				this.product.id
 			);
 		}
 	};
