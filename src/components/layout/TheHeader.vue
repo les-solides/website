@@ -8,7 +8,7 @@
 				:open="menuOpen" />
 		
 		<nav class="md:flex justify-between">
-			<div class="flex">
+			<div class="flex md:w-1/3">
 				<Route class="md:py-0 py-8"
 					   to="/home">
 					les solides
@@ -16,7 +16,7 @@
 				<NavigationFilter base="/products"
 								  name="Navigation (Products)" />
 			</div>
-			<div class="md:flex">
+			<div class="md:flex md:w-1/3">
 				<Route class="md:py-0 px-4 py-4"
 					   :exact="false"
 					   to="/products">
@@ -39,7 +39,7 @@
 					search
 				</Route>
 			</div>
-			<div class="md:flex">
+			<div class="md:flex justify-end md:w-1/3">
 				<Route class="md:py-0 py-4"
 					   to="/checkout">
 					bag (0)
