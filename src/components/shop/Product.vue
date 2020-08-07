@@ -25,9 +25,9 @@
 								@select="selectPairOption(pairOption, $event)"
 								v-if="pairOptionName" />
 						<Option :option="option"
-								:key="_.uniqueId(option.id)"
+								:key="option.id"
 								@select="selectOptionValue(option, $event)"
-								v-for="option of product.options.filter(o => pairOptionName ? o.name !== pairOptionName || selectedPairOptionValue.value === 'single' : true)" />
+								v-for="option of visibleOptions" />
 					</div>
 					<button @click="addToCart"
 							:disabled="addingToCart"
@@ -70,8 +70,7 @@
 			product: null,
 			recommendations: [],
 			selectedOptionValues: [],
-			selectedPairOptionValue: {},
-			selectedVariants: []
+			selectedPairOptionValue: {}
 		}),
 		computed: {
 			mainNode() {
@@ -86,6 +85,31 @@
 				return this.product ? this.product.getTag(
 					/^variant-rule-pairs:(.*)/, 'variant-rule-pairs:'
 				) : null;
+			},
+			price() {
+				let price = 0;
+				for (let variant of this.selectedVariants) {
+					price += Number(variant.price.amount);
+				}
+				return price;
+			},
+			selectedVariants() {
+				return this.product ? this.product.variants.filter(variant =>
+					variant.options.filter(o =>
+						(this.pairOptionName === o.name && this.selectedPairOptionValue.value === "pair") ||
+						this.selectedOptionValues.find(optionValue =>
+							o.name === optionValue.option.name &&
+							o.value === optionValue.value
+						)
+					).length === this.product.options.length
+				) : [];
+			},
+			visibleOptions() {
+				return this.product.options.filter(
+					o => this.pairOptionName ?
+						 o.name !== this.pairOptionName ||
+							 this.selectedPairOptionValue.value === 'single' : true
+				);
 			}
 		},
 		methods: {
@@ -112,24 +136,12 @@
 					option,
 					value
 				});
-				this.updateSelectedVariant();
 			},
 			selectPairOption(option, value) {
 				this.selectedPairOptionValue = {
 					option,
 					value
 				};
-			},
-			updateSelectedVariant() {
-				this.selectedVariants = this.product.variants.filter(variant =>
-					variant.options.filter(o =>
-						(this.pairOptionName === o.name && this.selectedPairOptionValue.value === "pair") ||
-						this.selectedOptionValues.find(optionValue =>
-							o.name === optionValue.option.name &&
-							o.value === optionValue.value
-						)
-					).length === this.product.options.length
-				);
 			}
 		},
 		async created() {
