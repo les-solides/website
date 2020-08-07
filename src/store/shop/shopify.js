@@ -24,13 +24,16 @@ export default {
                 .create().then(checkout => checkout);
             return state.checkout;
         },
-        async addToCheckout({state, rootState}, {variant, quantity, attr}) {
+        async addToCheckout({state, dispatch, rootState}, {variant, quantity, attr}) {
+            await dispatch("synchroniseCheckout");
             return await rootState.storefront.checkout
                 .addLineItems(state.checkout.id, [{
                     variantId: variant.id,
                     quantity: Number(quantity),
                     customAttributes: attr || []
-                }]); // todo: error handling
+                }]).then(async () =>
+                    await dispatch("synchroniseCheckout")
+                ); // todo: error handling
         },
         async removeFromCheckout({state, rootState}, id) {
             return await rootState.storefront.checkout

@@ -2,7 +2,7 @@
 	<div class="flex flex-wrap justify-between"
 		 v-if="ready">
 		<ProductLink :product="product"
-					 :key="product.id"
+					 :key="_.uniqueId(product.id)"
 					 v-for="product of products" />
 	</div>
 </template>

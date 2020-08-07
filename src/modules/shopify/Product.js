@@ -4,6 +4,7 @@ import Collection from "./Collection";
 import PriceV2 from "./PriceV2";
 import DomParser from "./DomParser";
 import ShopifyGraph from "./ShopifyGraph";
+import Option from "./Option";
 
 export default class Product extends ShopifyGraph {
 
@@ -157,7 +158,8 @@ export default class Product extends ShopifyGraph {
     }
 
     get options() {
-        return this._graph.options || [];
+        return Array.isArray(this._graph.options) ?
+               this._graph.options.map(o => new Option(o)) : [];
     }
 
     get price() {

@@ -6,16 +6,29 @@
 			<div class="w-1/3"
 				 :class="{ 'mr-4': index < product.images.length - 1 }"
 				 :key="image.id"
-				 v-for="(image, index) of product.images">
+				 v-for="(image, index) of product.images.splice(0,3)">
 				<LoadedImage class="h-full mb-4 object-cover product-image  w-full"
 							 :src="image.src" />
 				<div v-if="index === 0">
 					<span class="block"
 						  :key="tag"
-						  v-for="tag of product.tags">{{ tag }}</span>
+						  v-for="tag of product.tags.filter(t => ! t.includes('archive'))">{{ tag }}</span>
 				</div>
 				<span v-if="index === 1"
 					  v-html="product.descriptionHtml"></span>
+				<div class="flex justify-between md:flex-wrap"
+					 v-if="index === 2">
+					<div class="md:w-1/2">
+						<Option :option="option"
+								:key="_.uniqueId(option.id)"
+								@select="selectOptionValue(option, $event)"
+								v-for="option of product.options" />
+					</div>
+					<button @click="addToCart"
+							class="md:w-1/2 text-right">
+						add to cart
+					</button>
+				</div>
 			</div>
 		</div>
 		
@@ -34,13 +47,15 @@
 <script>
 	import LoadedImage from "../partials/LoadedImage";
 	import ProductLink from "./ProductLink";
+	import Option from "./Option";
 	
 	export default {
 		name: "Product",
-		components: {ProductLink, LoadedImage},
+		components: {Option, ProductLink, LoadedImage},
 		data: () => ({
 			product: null,
-			recommendations: []
+			recommendations: [],
+			selectedOptionValues: []
 		}),
 		computed: {
 			mainNode() {
@@ -50,6 +65,39 @@
 			mainListItems() {
 				return this.mainNode ?
 					   this.mainNode.querySelectorAll(':scope > li') : [];
+			}
+		},
+		methods: {
+			async addToCart() {
+				await this.$store.dispatch(
+					"shopify/addToCheckout", {
+						variant: this.product.selectedVariant,
+						quantity: 1
+					});
+				this.$toasted.show("added to cart", {
+					duration: 5000,
+					position: "bottom-center"
+				});
+			},
+			selectOptionValue(option, value) {
+				this.selectedOptionValues = this.selectedOptionValues
+												.filter(v => v.option.id !== option.id);
+				this.selectedOptionValues.push({
+					option,
+					value
+				});
+				this.updateSelectedVariant();
+			},
+			updateSelectedVariant() {
+				const selectedVariant = this.product.variants.find(variant =>
+					variant.options.filter(o =>
+						this.selectedOptionValues.find(optionValue =>
+							o.name === optionValue.option.name &&
+							o.value === optionValue.value
+						)
+					).length === this.product.options.length
+				);
+				this.product.selectVariant(selectedVariant);
 			}
 		},
 		async created() {
