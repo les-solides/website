@@ -4,11 +4,11 @@
 				 :to="`/product/${ product.handle }`">
 		<LoadedImage class="h-full object-cover w-full"
 					 :src="o(product.images[0]).src" />
-		<div class="mt-4">
+		<div class="mt-2">
 			<span class="mr-4">{{ product.title }}</span>
 			<span>{{ product.price }}</span>
 		</div>
-		<span>{{ o(product.selectElement("#preview")).innerText }}</span>
+		<!--<span>{{ o(product.selectElement("#preview")).innerText }}</span>-->
 		
 	</router-link>
 </template>

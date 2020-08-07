@@ -3,12 +3,14 @@ import Variant from "./Variant";
 import Collection from "./Collection";
 import PriceV2 from "./PriceV2";
 import DomParser from "./DomParser";
+import ShopifyGraph from "./ShopifyGraph";
 
-export default class Product {
+export default class Product extends ShopifyGraph {
 
     static colorRegex = "#[a-f,A-F,0-9]{6,6}";
 
     constructor(graph, defaultCurrency) {
+        super(graph);
         this._data = {};
         this._data.defaultCurrency = defaultCurrency || 'CHF';
         this._graph = graph;

@@ -31,12 +31,10 @@ export default {
             return collections;*/
         },
         async fetchByHandle (state, handle) {
-            console.log({api, state, handle});
             return api.post("", CollectionByHandleQuery(handle))
                       .then(data => {
                           let products = Utils.getNested(data,
                               "data", "data", "collectionByHandle", "products", "edges");
-                          console.log({products});
                           if ( ! Array.isArray(products)) {
                               return [];
                           }

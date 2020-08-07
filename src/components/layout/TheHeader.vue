@@ -3,7 +3,7 @@
 					text-center top-0 transition-medium w-full z-20"
 			:class="{ 'top-100': !menuOpen }">
 		
-		<Burger @click.native="menuOpen = !menuOpen"
+		<Burger @click.native="menuOpen = ! menuOpen"
 				class="bg-white bottom-0 fixed flex justify-center menu mobile p-2 shadow-inner w-full"
 				:open="menuOpen" />
 		
@@ -14,7 +14,8 @@
 					les solides
 				</Route>
 				<NavigationFilter base="/products"
-								  name="Navigation (Products)" />
+								  name="Navigation (Products)"
+								  v-if="$route.path.includes('product')" />
 			</div>
 			<div class="md:flex md:w-1/3">
 				<Route class="md:py-0 px-4 py-4"

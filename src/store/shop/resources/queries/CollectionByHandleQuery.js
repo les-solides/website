@@ -41,6 +41,7 @@ export default function (handle) {
 							}
 						},
 						productType,
+						tags,
 						title,
 						variants (first: 250) {
 							edges {
