@@ -10,6 +10,7 @@ export default class VariantOption {
     get name() {
         return this.props.name;
     }
+    
     get values() {
         return this.props.values;
     }

@@ -1,7 +1,8 @@
 <template>
 	<div class="flex"
 		 v-if="option">
-		<span class="mr-2">
+		<span class="mr-2"
+			  v-if="option.name">
 			{{ _.lowerCase(option.name) }}:
 		</span>
 		<button @click="select(value)"

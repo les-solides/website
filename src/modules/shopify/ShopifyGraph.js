@@ -11,8 +11,7 @@ export default class ShopifyGraph {
 	getTag(match, split) {
 		const tag = Array.isArray(this.tags) ?
 			   this.tags.find(tag => match.test(tag)) : "";
-		console.log({ split, tag })
-		return split ? tag.replace(split, '') : tag;
+		return split && tag ? tag.replace(split, '') : tag;
 	}
 	
 }

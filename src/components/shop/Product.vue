@@ -12,21 +12,27 @@
 				<div v-if="index === 0">
 					<span class="block"
 						  :key="tag"
-						  v-for="tag of product.tags.filter(t => ! t.includes('archive'))">{{ tag }}</span>
+						  v-for="tag of product.tags.filter(t => ! t.includes('archive') && ! t.includes('variant-rule'))">
+						{{ tag }}
+					</span>
 				</div>
 				<span v-if="index === 1"
 					  v-html="product.descriptionHtml"></span>
 				<div class="flex justify-between md:flex-wrap"
 					 v-if="index === 2">
 					<div class="md:w-1/2">
+						<Option :option="pairOption"
+								@select="selectPairOption(pairOption, $event)"
+								v-if="pairOptionName" />
 						<Option :option="option"
 								:key="_.uniqueId(option.id)"
 								@select="selectOptionValue(option, $event)"
-								v-for="option of product.options" />
+								v-for="option of product.options.filter(o => pairOptionName ? o.name !== pairOptionName || selectedPairOptionValue.value === 'single' : true)" />
 					</div>
 					<button @click="addToCart"
+							:disabled="addingToCart"
 							class="md:w-1/2 text-right">
-						add to cart
+						{{ addingToCart ? 'adding...' : 'add to cart' }}
 					</button>
 				</div>
 			</div>
@@ -46,16 +52,26 @@
 
 <script>
 	import LoadedImage from "../partials/LoadedImage";
-	import ProductLink from "./ProductLink";
 	import Option from "./Option";
+	import ProductLink from "./ProductLink";
+	import OptionModule from "./../../modules/shopify/Option";
+	import { uniqueId } from "lodash";
 	
 	export default {
 		name: "Product",
 		components: {Option, ProductLink, LoadedImage},
 		data: () => ({
+			addingToCart: false,
+			pairOption: new OptionModule({
+				id: uniqueId(),
+				name: '',
+				values: ['single', 'pair']
+			}),
 			product: null,
 			recommendations: [],
-			selectedOptionValues: []
+			selectedOptionValues: [],
+			selectedPairOptionValue: {},
+			selectedVariants: []
 		}),
 		computed: {
 			mainNode() {
@@ -65,39 +81,55 @@
 			mainListItems() {
 				return this.mainNode ?
 					   this.mainNode.querySelectorAll(':scope > li') : [];
+			},
+			pairOptionName() {
+				return this.product ? this.product.getTag(
+					/^variant-rule-pairs:(.*)/, 'variant-rule-pairs:'
+				) : null;
 			}
 		},
 		methods: {
 			async addToCart() {
-				await this.$store.dispatch(
-					"shopify/addToCheckout", {
-						variant: this.product.selectedVariant,
-						quantity: 1
-					});
+				this.addingToCart = true;
+				for (let variant of this.selectedVariants) {
+					await this.$store.dispatch(
+						"shopify/addToCheckout", {
+							variant,
+							quantity: 1
+						});
+				}
+				this.addingToCart = false;
 				this.$toasted.show("added to cart", {
 					duration: 5000,
 					position: "bottom-center"
 				});
 			},
 			selectOptionValue(option, value) {
-				this.selectedOptionValues = this.selectedOptionValues
-												.filter(v => v.option.id !== option.id);
+				this.selectedOptionValues = this.selectedOptionValues.filter(
+					v => v.option.id !== option.id
+				);
 				this.selectedOptionValues.push({
 					option,
 					value
 				});
 				this.updateSelectedVariant();
 			},
+			selectPairOption(option, value) {
+				this.selectedPairOptionValue = {
+					option,
+					value
+				};
+			},
 			updateSelectedVariant() {
-				const selectedVariant = this.product.variants.find(variant =>
+				this.selectedVariants = this.product.variants.filter(variant =>
 					variant.options.filter(o =>
+						(this.pairOptionName === o.name && this.selectedPairOptionValue.value === "pair") ||
 						this.selectedOptionValues.find(optionValue =>
 							o.name === optionValue.option.name &&
 							o.value === optionValue.value
 						)
 					).length === this.product.options.length
 				);
-				this.product.selectVariant(selectedVariant);
 			}
 		},
 		async created() {
