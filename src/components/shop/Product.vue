@@ -21,19 +21,23 @@
 				<div class="flex justify-between md:flex-wrap"
 					 v-if="index === 2">
 					<div class="md:w-1/2">
-						<Option :option="pairOption"
-								@select="selectPairOption(pairOption, $event)"
-								v-if="pairOptionName" />
 						<Option :option="option"
 								:key="option.id"
 								@select="selectOptionValue(option, $event)"
 								v-for="option of visibleOptions" />
+						<Option :option="pairOption"
+								@select="selectPairOption(pairOption, $event)"
+								v-if="pairOptionName" />
 					</div>
 					<button @click="addToCart"
 							:disabled="addingToCart"
 							class="md:w-1/2 text-right">
 						{{ addingToCart ? 'adding...' : 'add to cart' }}
 					</button>
+					<span class="mt-2"
+						  v-if="selectedVariants.length">
+						price: {{ price }} {{ selectedVariants[0].price.currencyCode }}
+					</span>
 				</div>
 			</div>
 		</div>
