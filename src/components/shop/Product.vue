@@ -4,7 +4,7 @@
 		<span class="block text-center w-full">{{ product.title }}</span>
 		<div class="flex justify-between mt-2">
 			<div class="w-1/3"
-				 :class="{ 'mr-4': index < product.images.length - 1 }"
+				 :class="{ 'mr-4': index < product.images.splice(0, 3).length - 1 }"
 				 :key="image.id"
 				 v-for="(image, index) of product.images.splice(0,3)">
 				<LoadedImage class="h-full mb-4 object-cover product-image  w-full"
@@ -31,7 +31,7 @@
 					</div>
 					<button @click="addToCart"
 							:disabled="addingToCart"
-							class="md:w-1/2 text-right">
+							class="grid md:w-1/2 text-right">
 						{{ addingToCart ? 'adding...' : 'add to cart' }}
 					</button>
 					<span class="mt-2"

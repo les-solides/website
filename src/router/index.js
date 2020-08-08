@@ -20,7 +20,7 @@ const routes = [
 	},
 	{
 		path: '/archive',
-		name: 'Products (Main)',
+		name: 'Archive',
 		component: () => import(/* webpackChunkName: "Product" */ '../views/Archive')
 	},
 	{

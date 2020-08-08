@@ -1,6 +1,15 @@
+@font-face {
+	font-family: 'Bradford';
+	src: url(/assets/fonts/AnyConv.com__BradfordLL-Light.eot);
+	src: url(/assets/fonts/AnyConv.com__BradfordLL-Light.ttf) format('ttf'),
+	url(/assets/fonts/AnyConv.com__BradfordLL-Light.woff) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 $size-base: 1rem;
 
-$font-family: 'Playfair Display', Helvetica, serif;
+$font-family: Bradford, Helvetica, serif;
 $font-size-base: $size-base * 0.9;
 
 $color-primary: black;
