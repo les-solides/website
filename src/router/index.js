@@ -85,7 +85,7 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach((to) => {
 	store.state.collaborationHash = to.hash.slice(1);
-	delay(() => store.state.routeClick = false, 1000);
-})
+	delay(() => store.state.routeClick = false, 100);
+});
 
 export default router;

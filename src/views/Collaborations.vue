@@ -69,7 +69,7 @@
 					observer.observe(document.querySelector(`#${ a.handle }`));
 				})
 				
-			}, 800));
+			}, 1200));
 			this.$store.state.collaborationHash = this.$route.hash.slice(1);
 		}
 	};
