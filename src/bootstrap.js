@@ -1,3 +1,5 @@
+require('intersection-observer');
+
 import Vue from 'vue';
 import Cart from "./modules/shopify/Cart";
 import store from './store/index';
