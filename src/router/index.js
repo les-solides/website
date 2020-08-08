@@ -83,7 +83,7 @@ router.beforeEach((to, from, next) => {
 	next();
 });
 
-router.afterEach((to, from) => {
+router.afterEach((to) => {
 	store.state.collaborationHash = to.hash.slice(1);
 	delay(() => store.state.routeClick = false, 1000);
 })
