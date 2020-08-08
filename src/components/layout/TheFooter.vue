@@ -1,6 +1,6 @@
 <template>
-	<footer class="bg-white z-10">
-		<article class="bg-white fixed md:z-30 p-4 transition-medium w-full"
+	<footer class="bg-white sticky" :class="{ 'bottom-0 z-20': open }">
+		<article class="bg-white fixed md:z-30 p-4 overflow-auto transition-medium w-full"
 				 :class="{ 'top-0': open, 'top-100': !open }">
 			<Burger @click.native="closeFooter"
 					class="fixed mr-4 right"
@@ -8,6 +8,11 @@
 			
 			<About v-if="currentRoute === footer.routes.ABOUT" />
 			<SizeGuide v-if="currentRoute === footer.routes.SIZE" />
+			<NewsletterSignup v-if="currentRoute === footer.routes.NEWSLETTER" />
+			<PrivacyPolicy v-if="currentRoute === footer.routes.PRIVACY" />
+			<ReturnsAndExchanges v-if="currentRoute === footer.routes.RETURNS" />
+			<Shipping v-if="currentRoute === footer.routes.SHIPPING" />
+			<Stockist v-if="currentRoute === footer.routes.STOCKISTS" />
 			<TermsOfUse v-if="currentRoute === footer.routes.TERMS" />
 		</article>
 		
@@ -21,9 +26,9 @@
 			<button @click="openFooter(footer.routes.PRIVACY)"
 					class="mr-4">privacy policy
 			</button>
-			<button @click="openFooter(footer.routes.COOKIE)"
+			<!--<button @click="openFooter(footer.routes.COOKIE)"
 					class="mr-4">cookie policy
-			</button>
+			</button>-->
 			<button @click="openFooter(footer.routes.SHIPPING)"
 					class="mr-4">shipping
 			</button>
@@ -42,9 +47,9 @@
 			<button @click="openFooter(footer.routes.SIZE)"
 					class="mr-4">size guide
 			</button>
-			<button @click="openFooter(footer.routes.PRESS)"
+			<!--<button @click="openFooter(footer.routes.PRESS)"
 					class="mr-4">press
-			</button>
+			</button>-->
 		</div>
 	</footer>
 </template>
@@ -55,10 +60,18 @@
 	import About from "../../views/footer/About";
 	import TermsOfUse from "../../views/footer/TermsOfUse";
 	import SizeGuide from "../../views/footer/SizeGuide";
+	import PrivacyPolicy from "../../views/footer/PrivacyPolicy";
+	import Shipping from "../../views/footer/Shipping";
+	import ReturnsAndExchanges from "../../views/footer/ReturnsAndExchanges";
+	import NewsletterSignup from "../../views/footer/NewsletterSignup";
+	import Stockist from "../../views/footer/Stockist";
 	
 	export default {
 		name: "TheFooter",
-		components: {SizeGuide, TermsOfUse, About, Burger},
+		components: {
+			Stockist,
+			NewsletterSignup,
+			ReturnsAndExchanges, Shipping, PrivacyPolicy, SizeGuide, TermsOfUse, About, Burger},
 		data: () => ({
 			currentRoute: null,
 			footer: Footer,
@@ -82,8 +95,12 @@
 	};
 </script>
 
-<style scoped>
+<style lang="scss">
 	article {
 		height: calc(100vh - var(--footer-height));
+		padding-bottom: var(--footer-height);
+		.footer-page h2 {
+			margin-top: 1rem!important;
+		}
 	}
 </style>

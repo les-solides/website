@@ -7,6 +7,12 @@
 			<router-view />
 		</TheBody>
 		
+		<CookieNotice button-content="accept-cookies">
+			We use cookies to improve user experience, and analyze website traffic.
+			For these reasons, we may share your site usage data with our analytics partners.
+			By clicking “accept cookies” you consent to store on your device all the technologies described in our cookie policy.
+		</CookieNotice>
+		
 		<TheFooter v-if=" ! noFooter" />
 	</div>
 </template>
@@ -15,9 +21,10 @@
 	import TheFooter from "./components/layout/TheFooter";
 	import TheBody from "./components/layout/TheBody";
 	import { debounce, delay } from 'lodash';
+	import CookieNotice from "./components/partials/CookieNotice";
 	
 	export default {
-		components: {TheBody, TheFooter, TheHeader},
+		components: {CookieNotice, TheBody, TheFooter, TheHeader},
 		data: () => ({
 			ready: false
 		}),

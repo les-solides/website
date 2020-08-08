@@ -3,14 +3,14 @@ import DomParser from "../DomParser";
 export default class Article {
 	
 	constructor(props = {}) {
-		this.blog = props.blog;
-		this.content = props.content;
-		this.contentHtml = props.contentHtml;
-		this.handle = props.handle;
-		this.id = props.id;
+		this.blog = props.blog || "";
+		this.content = props.content || "";
+		this.contentHtml = props.contentHtml || "";
+		this.handle = props.handle || "";
+		this.id = props.id || "";
 		this.featuredImage = props.image;
 		this.tags = props.tags;
-		this.title = props.title;
+		this.title = props.title || "";
 	}
 	
 	get blogTitle() {
