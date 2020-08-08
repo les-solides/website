@@ -4,7 +4,7 @@
          :src="src"
          :srcset="srcset"
          :alt="alt"
-         :style="`height: ${ height || 'auto' }`"
+         :style="`height: ${ height || '' }`"
          v-if="src"
          @load="(loaded = true) && $emit('load')">
     <div class="empty-image-box" v-else></div>

@@ -1,12 +1,12 @@
 <template>
 	<router-link class="mb-4 product-link"
-				 :class="{ short }"
+				 :class="{ short, small }"
 				 :to="`/product/${ product.handle }`">
 		<LoadedImage class="h-full object-cover w-full"
 					 :src="o(product.images[0]).src" />
-		<div class="mt-2">
-			<span class="mr-4">{{ product.title }}</span>
-			<span>{{ product.price }}</span>
+		<div class="mt-2 overflow-hidden">
+			<span class="mr-4 whitespace-no-wrap">{{ product.title }}</span>
+			<span v-if="withPrice">{{ product.price }}</span>
 		</div>
 		<!--<span>{{ o(product.selectElement("#preview")).innerText }}</span>-->
 		
@@ -27,7 +27,15 @@
 			short: {
 				type: Boolean,
 				default: () => false
-			}
+			},
+			small: {
+				type: Boolean,
+				default: () => false
+			},
+			withPrice: {
+				type: Boolean,
+				default: () => true
+			},
 		},
 		components: {
 			LoadedImage
@@ -66,6 +74,12 @@
 				height: 26vw;
 			}
 			width: 19%;
+			&.small {
+				img, .empty-image-box {
+					height: 13vw;
+				}
+				width: 9%;
+			}
 		}
 	}
 </style>
