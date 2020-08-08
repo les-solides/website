@@ -4,6 +4,7 @@
          :src="src"
          :srcset="srcset"
          :alt="alt"
+         :style="`height: ${ height || 'auto' }`"
          v-if="src"
          @load="(loaded = true) && $emit('load')">
     <div class="empty-image-box" v-else></div>
@@ -12,7 +13,7 @@
 <script>
     export default {
         name: "LoadedImage",
-        props: ['alt', 'loading', 'sizes', 'src', 'srcset'],
+        props: ['alt', 'loading', 'height', 'sizes', 'src', 'srcset'],
         data () { return { loaded: false }}
     }
 </script>

@@ -1,8 +1,10 @@
 import DomParser from "../DomParser";
+import ShopifyGraph from "../ShopifyGraph";
 
-export default class Article {
+export default class Article extends ShopifyGraph {
 	
 	constructor(props = {}) {
+		super(props);
 		this.blog = props.blog || "";
 		this.content = props.content || "";
 		this.contentHtml = props.contentHtml || "";

@@ -31,6 +31,11 @@ const routes = [
 		component: () => import(/* webpackChunkName: "Product" */ '../views/Collaborations')
 	},
 	{
+		path: '/lookbook',
+		name: 'Lookbook',
+		component: () => import(/* webpackChunkName: "Product" */ '../views/Lookbook')
+	},
+	{
 		path: '/products',
 		name: 'Products (Main)',
 		meta: {
