@@ -17,7 +17,7 @@
 								  name="Navigation (Products)"
 								  v-if="$route.path.includes('product')" />
 			</div>
-			<div class="md:flex md:w-1/3">
+			<div class="md:flex justify-between md:w-1/3">
 				<Route class="md:py-0 px-4 py-4"
 					   :exact="false"
 					   to="/products">

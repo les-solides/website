@@ -1,6 +1,6 @@
 <template>
 	<div :id="article.handle"
-		 class="collaboration mx-auto" style="transform: translateX(-1vw)">
+		 class="collaboration mx-auto">
 		<ProductLink :product="products[0]"
 					 v-if="products[0]" />
 	</div>
