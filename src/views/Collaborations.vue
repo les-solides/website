@@ -66,7 +66,8 @@
 						threshold: 1
 					});
 					
-					observer.observe(document.querySelector(`#${ a.handle }`));
+					const element = document.querySelector(`#${ a.handle }`);
+					element && observer.observe(element);
 				})
 				
 			}, 1200));
