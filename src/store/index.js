@@ -23,7 +23,9 @@ export default new Vuex.Store({
 			'xl': 1280,
 			// => @media (min-width: 1280px) { ... }
 		},
+		collaborationHash: undefined,
 		isMobile: false,
+		routeClick: true,
 		storefront: storefront,
 	},
 	getters: {

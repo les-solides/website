@@ -19,6 +19,7 @@ export default {
 					{args: {first: 250, query: `blog_title:'${ blog }'`} },
 					(article) => {
 						BlogField.addTo(article);
+						article.add('handle');
 						article.add('id');
 						ImageField.addTo(article);
 						article.add('title');

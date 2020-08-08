@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from './../store/index';
+import { delay } from "lodash";
 
 Vue.use(VueRouter);
 
@@ -22,6 +24,11 @@ const routes = [
 		path: '/archive',
 		name: 'Archive',
 		component: () => import(/* webpackChunkName: "Product" */ '../views/Archive')
+	},
+	{
+		path: '/collaborations',
+		name: 'Collaborations',
+		component: () => import(/* webpackChunkName: "Product" */ '../views/Collaborations')
 	},
 	{
 		path: '/products',
@@ -57,7 +64,28 @@ const routes = [
 const router = new VueRouter({
 	mode: 'history',
 	base: process.env.BASE_URL,
-	routes
+	routes,
+	scrollBehavior (to) {
+		if (to.hash) {
+			return {
+				offset: {
+					x: 0,
+					y: 120
+				},
+				selector: to.hash
+			}
+		}
+	}
 });
+
+router.beforeEach((to, from, next) => {
+	store.state.routeClick = true;
+	next();
+});
+
+router.afterEach((to, from) => {
+	store.state.collaborationHash = to.hash.slice(1);
+	delay(() => store.state.routeClick = false, 1000);
+})
 
 export default router;

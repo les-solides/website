@@ -1,5 +1,5 @@
 <template>
-	<div class="fixed bottom-0 shadow-lg-reverse w-full z-50">
+	<div class="fixed bottom-0 shadow-md-reverse w-full z-50">
 		<div class="bg-white flex justify-between px-8 py-4 w-full z-10"
 			 v-if=" ! accepted">
 			<div class="md:w-3/4 w-full">

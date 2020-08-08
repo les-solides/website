@@ -38,6 +38,11 @@
 
 <style lang="scss"
 	   scoped>
+	.collaboration .product-link {
+		img, .empty-image-box {
+			height: 50vw;
+		}
+	}
 	.product-link {
 		&.short {
 			img, .empty-image-box {
