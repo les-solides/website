@@ -3,6 +3,7 @@ import ProductField from "../../../modules/shopify/fields/ProductField";
 import api from "../../../api/api";
 import productByHandle from "./queries/productByHandle";
 import Utils from "../../../modules/Utils";
+import productRecommendations from "./queries/productRecommendations";
 
 export default {
     namespaced: true,
@@ -34,17 +35,8 @@ export default {
                       });
         },
         async fetchRecommendations({ dispatch, rootState }, id) {
-            const query = rootState.storefront.graphQLClient
-                .query(root => {
-                    root.add("productRecommendations",
-                        { args: { productId: id } },
-                        recommendations => {
-                            ProductField.addTo(recommendations);
-                        });
-                });
-            let recommendations = await rootState.storefront.graphQLClient
-                .send(query)
-                .then(({ data }) => data
+            let recommendations = await api.post("", productRecommendations(id))
+                .then(({ data }) => data.data
                     .productRecommendations
                     .slice(0, 6)
                     .map(r => new Product(r))

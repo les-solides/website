@@ -41,7 +41,7 @@ export default class Variant {
     }
 
     get options() {
-        return this._graph.selectedOptions
+        return this._graph.selectedOptions && this._graph.selectedOptions
             .map(o => new VariantOption(o.name, o.value));
     }
 

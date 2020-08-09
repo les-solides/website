@@ -142,15 +142,16 @@
 				return price;
 			},
 			selectedVariants() {
-				return this.product ? this.product.variants.filter(variant =>
-					variant.options.filter(o =>
-						(this.pairOptionName === o.name && this.selectedPairOptionValue.value === "pair") ||
-						this.selectedOptionValues.find(optionValue =>
-							o.name === optionValue.option.name &&
-							o.value === optionValue.value
-						)
-					).length === this.product.options.length
-				) : [];
+				return this.product && Array.isArray(this.product.variants) ?
+					   this.product.variants.filter(variant =>
+							variant.options.filter(o =>
+								(this.pairOptionName === o.name && this.selectedPairOptionValue.value === "pair") ||
+								this.selectedOptionValues.find(optionValue =>
+									o.name === optionValue.option.name &&
+									o.value === optionValue.value
+								)
+							).length === this.product.options.length
+						) : [];
 			},
 			variantDynamicHeight() {
 				if (this.visibleOptions.length === 1) {
