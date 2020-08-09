@@ -1,6 +1,6 @@
 <template>
 	<div class="mb-4 product-link"
-				 :class="{ short, small }">
+		 :class="{ short, small }">
 		
 		<!-- Image & QuickShop Overlay [start] -->
 		<div class="relative"
@@ -17,12 +17,12 @@
 				 :class="{ block: hover && hasValidAmountOfOptions }">
 				<div class="flex"
 					 :key="option.name"
-					 style="height: 12vw;"
-					 v-for="option of product.options">
+					 :style="variantDynamicHeight"
+					 v-for="option of visibleOptions">
 					<button class="block h-full items-center left product-link-variant text-center w-1/2"
 							:class="{ 'text-gray-600': o(selectedOptionValues.find(o => o.option.id === option.id)).value !== option.values[0]  }"
 							@click="selectOptionValue(option, option.values[0])"
-						 v-if="option.values.length === 2">
+							v-if="option.values.length === 2">
 						{{ option.values[0] }}
 					</button>
 					<button class="block h-full items-center right product-link-variant text-center w-1/2"
@@ -32,6 +32,22 @@
 						{{ option.values[1] }}
 					</button>
 					<div v-if="option.values.length > 2">hello</div>
+				</div>
+				<div class="flex"
+					 :style="visiblePairOptionDynamicHeight"
+					 v-if="pairOptionName">
+					<button class="block h-full items-center right product-link-variant text-center w-1/2"
+							:class="{ 'text-gray-600' : o(selectedPairOptionValue).value !== pairOption.values[0] }"
+							@click="selectPairOption(pairOption, pairOption.values[0])"
+							v-if="pairOption.values.length === 2">
+						{{ pairOption.values[0] }}
+					</button>
+					<button class="block h-full items-center right product-link-variant text-center w-1/2"
+							:class="{ 'text-gray-600' : o(selectedPairOptionValue).value !== pairOption.values[1] }"
+							@click="selectPairOption(pairOption, pairOption.values[1])"
+							v-if="pairOption.values.length === 2">
+						{{ pairOption.values[1] }}
+					</button>
 				</div>
 				<button class="text-center w-full"
 						@click="addToCart"
@@ -136,6 +152,32 @@
 					).length === this.product.options.length
 				) : [];
 			},
+			variantDynamicHeight() {
+				if (this.visibleOptions.length === 1) {
+					return this.pairOptionName ?
+						   "height:12vw" : "height: 24vw";
+				}
+				if (this.visibleOptions.length === 2) {
+					return this.pairOptionName ?
+						   "height:8vw" : "height: 12vw";
+				}
+				return "height: 0";
+			},
+			visiblePairOptionDynamicHeight() {
+				if ( ! this.selectedPairOptionValue.value && this.visibleOptions.length === 1) {
+					return this.o(this.selectedPairOptionValue).value === "pair" ?
+						   "height:12vw" : "height: 12vw";
+				}
+				if (this.visibleOptions.length === 1) {
+					return this.o(this.selectedPairOptionValue).value === "pair" ?
+						   "height:12vw" : "height: 8vw";
+				}
+				if (this.visibleOptions.length === 2) {
+					return this.o(this.selectedPairOptionValue).value === "pair" ?
+						   "height:12vw" : "height: 8vw";
+				}
+				return "height: 0";
+			},
 			visibleOptions() {
 				return this.product.options.filter(
 					o => this.pairOptionName ?
@@ -146,7 +188,6 @@
 		},
 		methods: {
 			async addToCart(eventt) {
-				console.log({eventt})
 				this.addingToCart = true;
 				for (let variant of this.selectedVariants) {
 					await this.$store.dispatch(
