@@ -1,45 +1,69 @@
 <template>
-	<router-link class="mb-4 product-link"
-				 :class="{ short, small }"
-				 :to="`/product/${ product.handle }`">
+	<div class="mb-4 product-link"
+				 :class="{ short, small }">
+		
+		<!-- Image & QuickShop Overlay [start] -->
 		<div class="relative"
 			 @mouseenter="hover = true"
 			 @mouseleave="hover = false">
+			
+			<!-- Image -->
 			<LoadedImage class="h-full object-cover w-full"
 						 :src="o(product.images[0]).src" />
+			<!-- Image -->
+			
+			<!-- QuickShop Overlay -->
 			<div class="absolute h-full hidden left-0 product-link-overlay top-0 w-full"
 				 :class="{ block: hover && hasValidAmountOfOptions }">
 				<div class="flex"
 					 :key="option.name"
 					 style="height: 12vw;"
 					 v-for="option of product.options">
-					<div class="flex items-center left product-link-variant w-1/2"
+					<button class="block h-full items-center left product-link-variant text-center w-1/2"
+							:class="{ 'text-gray-600': o(selectedOptionValues.find(o => o.option.id === option.id)).value !== option.values[0]  }"
+							@click="selectOptionValue(option, option.values[0])"
 						 v-if="option.values.length === 2">
-						<div class="mx-auto">{{ option.values[0] }}</div>
-					</div>
-					<div class="flex items-center right product-link-variant w-1/2"
-						 v-if="option.values.length === 2">
-						<div class="mx-auto">{{ option.values[1] }}</div>
-					</div>
+						{{ option.values[0] }}
+					</button>
+					<button class="block h-full items-center right product-link-variant text-center w-1/2"
+							:class="{ 'text-gray-600' : o(selectedOptionValues.find(o => o.option.id === option.id)).value !== option.values[1] }"
+							@click="selectOptionValue(option, option.values[1])"
+							v-if="option.values.length === 2">
+						{{ option.values[1] }}
+					</button>
 					<div v-if="option.values.length > 2">hello</div>
 				</div>
 				<button class="text-center w-full"
-						style="height: 2vw">add to cart
+						@click="addToCart"
+						:disabled=" ! selectedVariants.length"
+						:class="{ 'text-gray-600': ! selectedVariants.length }"
+						style="height: 2vw">
+					{{ addingToCart ? 'adding...' : 'add to cart' }}
 				</button>
 			</div>
+			<!-- QuickShop Overlay -->
+		
 		</div>
-		<div class="mt-2 overflow-hidden">
+		<!-- Image & QuickShop Overlay [end] -->
+		
+		<!-- Title & Price -->
+		<router-link :to="`/product/${ product.handle }`"
+					 class="block mt-2 overflow-hidden">
 			<span class="mr-4 whitespace-no-wrap">{{ product.title }}</span>
 			<span v-if="withPrice">{{ product.price }}</span>
-		</div>
+		</router-link>
+		<!-- Title & Price -->
+		
 		<!--<span>{{ o(product.selectElement("#preview")).innerText }}</span>-->
 	
-	</router-link>
+	</div>
 </template>
 
 <script>
 	import LoadedImage from "../partials/LoadedImage";
 	import Product from "../../modules/shopify/Product";
+	import OptionModule from "../../modules/shopify/Option";
+	import { uniqueId } from "lodash";
 	
 	export default {
 		name: "ProductLink",
@@ -65,13 +89,92 @@
 			LoadedImage
 		},
 		data: () => ({
+			addingToCart: false,
 			hover: false,
+			pairOption: new OptionModule({
+				id: uniqueId(),
+				name: '',
+				values: ['single', 'pair']
+			}),
+			selectedOptionValues: [],
+			selectedPairOptionValue: {},
 			validAmountOfOptions: 2
 		}),
 		computed: {
 			hasValidAmountOfOptions() {
 				return this.product.options.length &&
 					this.product.options.length <= this.validAmountOfOptions;
+			},
+			mainNode() {
+				return this.product ?
+					   this.product.descriptionNodes.querySelector("ul") : null;
+			},
+			mainListItems() {
+				return this.mainNode ?
+					   this.mainNode.querySelectorAll(':scope > li') : [];
+			},
+			pairOptionName() {
+				return this.product ? this.product.getTag(
+					/^variant-rule-pairs:(.*)/, 'variant-rule-pairs:'
+				) : null;
+			},
+			price() {
+				let price = 0;
+				for (let variant of this.selectedVariants) {
+					price += Number(variant.price.amount);
+				}
+				return price;
+			},
+			selectedVariants() {
+				return this.product ? this.product.variants.filter(variant =>
+					variant.options.filter(o =>
+						(this.pairOptionName === o.name && this.selectedPairOptionValue.value === "pair") ||
+						this.selectedOptionValues.find(optionValue =>
+							o.name === optionValue.option.name &&
+							o.value === optionValue.value
+						)
+					).length === this.product.options.length
+				) : [];
+			},
+			visibleOptions() {
+				return this.product.options.filter(
+					o => this.pairOptionName ?
+						 o.name !== this.pairOptionName ||
+							 this.selectedPairOptionValue.value === 'single' : true
+				);
+			}
+		},
+		methods: {
+			async addToCart(eventt) {
+				console.log({eventt})
+				this.addingToCart = true;
+				for (let variant of this.selectedVariants) {
+					await this.$store.dispatch(
+						"shopify/addToCheckout", {
+							variant,
+							quantity: 1
+						});
+				}
+				this.addingToCart = false;
+				this.$toasted.show("added to cart", {
+					duration: 5000,
+					position: "bottom-center"
+				});
+			},
+			selectOptionValue(option, value) {
+				this.selectedOptionValues = this.selectedOptionValues.filter(
+					v => v.option.id !== option.id
+				);
+				this.selectedOptionValues.push({
+					option,
+					value
+				});
+			},
+			selectPairOption(option, value) {
+				this.selectedPairOptionValue = {
+					option,
+					value
+				};
 			}
 		}
 		
@@ -80,6 +183,7 @@
 
 <style lang="scss"
 	   scoped>
+	/*todo:refactor*/
 	.collaboration .product-link {
 		img, .empty-image-box {
 			height: 50vw;
