@@ -3,18 +3,21 @@
 		 :class="{ short, small }">
 		
 		<!-- Image & QuickShop Overlay [start] -->
-		<div class="relative"
+		<div class="relative quick-buy"
 			 @mouseenter="hover = true"
 			 @mouseleave="hover = false">
 			
 			<!-- Image -->
-			<LoadedImage class="h-full object-cover w-full"
-						 :src="o(product.images[0]).src" />
+			<router-link :to="`/product/${ product.handle }`"
+					 class="block mt-2 overflow-hidden">
+				<LoadedImage class="h-full object-cover w-full"
+							 :src="o(product.images[0]).src" />
+			</router-link>
 			<!-- Image -->
 			
 			<!-- QuickShop Overlay -->
 			<div class="absolute h-full hidden left-0 product-link-overlay top-0 w-full"
-				 :class="{ block: hover && hasValidAmountOfOptions }">
+				 :class="{ block: hover && hasValidAmountOfOptions && quickBuyActive }">
 				<div class="flex"
 					 :key="option.name"
 					 :style="variantDynamicHeight"
@@ -57,6 +60,17 @@
 					{{ addingToCart ? 'adding...' : 'add to cart' }}
 				</button>
 			</div>
+			<button class="absolute bottom-0 text-center w-full"
+					@click="quickBuyActive = true"
+					style="height: 2vw"
+					v-show="hasValidAmountOfOptions && hover && ! quickBuyActive">
+				quickbuy
+			</button>
+			<button class="absolute bottom-0 text-center w-full"
+					@click="addToCart"
+					v-show=" ! hasValidAmountOfOptions && hover">
+				{{ addingToCart ? 'adding...' : 'add to cart' }}
+			</button>
 			<!-- QuickShop Overlay -->
 		
 		</div>
@@ -79,7 +93,7 @@
 	import LoadedImage from "../partials/LoadedImage";
 	import Product from "../../modules/shopify/Product";
 	import OptionModule from "../../modules/shopify/Option";
-	import { uniqueId } from "lodash";
+	import { delay, uniqueId } from "lodash";
 	
 	export default {
 		name: "ProductLink",
@@ -114,6 +128,7 @@
 			}),
 			selectedOptionValues: [],
 			selectedPairOptionValue: {},
+			quickBuyActive: false,
 			validAmountOfOptions: 2
 		}),
 		computed: {
@@ -144,14 +159,14 @@
 			selectedVariants() {
 				return this.product && Array.isArray(this.product.variants) ?
 					   this.product.variants.filter(variant =>
-							variant.options.filter(o =>
-								(this.pairOptionName === o.name && this.selectedPairOptionValue.value === "pair") ||
-								this.selectedOptionValues.find(optionValue =>
-									o.name === optionValue.option.name &&
-									o.value === optionValue.value
-								)
-							).length === this.product.options.length
-						) : [];
+						   variant.options.filter(o =>
+							   (this.pairOptionName === o.name && this.selectedPairOptionValue.value === "pair") ||
+							   this.selectedOptionValues.find(optionValue =>
+								   o.name === optionValue.option.name &&
+								   o.value === optionValue.value
+							   )
+						   ).length === this.product.options.length
+					   ) : [];
 			},
 			variantDynamicHeight() {
 				if (this.visibleOptions.length === 1) {
@@ -188,8 +203,18 @@
 			}
 		},
 		methods: {
-			async addToCart(eventt) {
+			async addToCart() {
 				this.addingToCart = true;
+				if ( ! this.selectedVariants.length && this.product.variants.length) {
+					return this.$router.push(`/product/${ this.product.handle }`);
+				}
+				if ( ! this.selectedVariants.length && this.product.variants.length === 1) {
+					return await this.$store.dispatch(
+						"shopify/addToCheckout", {
+							variant: this.product.variants[0],
+							quantity: 1
+						});
+				}
 				for (let variant of this.selectedVariants) {
 					await this.$store.dispatch(
 						"shopify/addToCheckout", {
@@ -197,7 +222,7 @@
 							quantity: 1
 						});
 				}
-				this.addingToCart = false;
+				delay(() => this.addingToCart = false, 200);
 				this.$toasted.show("added to cart", {
 					duration: 5000,
 					position: "bottom-center"
@@ -289,6 +314,11 @@
 				}
 				
 				width: 9%;
+			}
+		}
+		.quick-buy {
+			button {
+				border-top: 1px solid white;
 			}
 		}
 	}
