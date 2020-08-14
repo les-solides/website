@@ -86,6 +86,7 @@
 				</button>
 				<button class="absolute bottom-0 text-center w-full"
 						@click="addToCart"
+						style="height: 2vw"
 						v-show="quickShopType === 0 && hover">
 					{{ addingToCart ? 'adding...' : 'add to cart' }}
 				</button>
