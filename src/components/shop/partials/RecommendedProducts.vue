@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<span class="block mt-32 text-center w-full">Recommended products</span>
+		<span class="block md:mt-32 mt-8 md:text-center w-full">Recommended products</span>
 		
 		<div class="flex mt-4">
 			<ProductLink :product="recommendation"

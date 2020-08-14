@@ -2,6 +2,10 @@
 	<div class="mb-4 product-link"
 		 :class="{ short, small }">
 		
+		<PopupMobile v-model="productDetailsOpen">
+			<ProductDetail :product="product" />
+		</PopupMobile>
+		
 		<!-- Image & QuickShop Overlay [start] -->
 		<div class="relative quick-buy"
 			 @mouseenter="hover = true"
@@ -9,15 +13,20 @@
 			
 			<!-- Image -->
 			<router-link :to="`/product/${ product.handle }`"
-						 class="block mt-2 overflow-hidden">
+						 class="hidden md:block mt-2 overflow-hidden">
 				<LoadedImage class="h-full object-cover w-full"
 							 :src="o(imageShown).src || o(imageShown).originalSrc" />
 			</router-link>
+			<div class="block md:hidden"
+				 @click="productDetailsOpen = true">
+				<LoadedImage class="h-full object-cover w-full"
+							 :src="o(imageShown).src || o(imageShown).originalSrc" />
+			</div>
 			<!-- Image -->
 			
 			<!-- QuickShop Overlay -->
 			<div class="absolute bg-overlay h-full hidden left-0 product-link-overlay top-0 w-full"
-				 :class="{ block: hover && hasValidAmountOfOptions && quickBuyActive }">
+				 :class="{ 'md:block': hover && hasValidAmountOfOptions && quickBuyActive }">
 				<div class="flex"
 					 :key="option.name"
 					 :style="variantDynamicHeight"
@@ -78,16 +87,16 @@
 			
 			<!--Buy Buttons (before / without QuickShop) [start]-->
 			<div>
-				<button class="absolute bg-overlay bottom-0 outside-btn text-center w-full"
+				<button class="absolute bg-overlay bottom-0 hidden md:block outside-btn text-center w-full"
 						@click="quickBuyActive = true"
 						style="height: 2vw"
-						v-show="quickShopType !== 0 && hasValidAmountOfOptions && hover && ! quickBuyActive">
+						v-if="quickShopType !== 0 && hasValidAmountOfOptions && hover && ! quickBuyActive">
 					quickbuy
 				</button>
-				<button class="absolute bg-overlay bottom-0 outside-btn text-center w-full"
+				<button class="absolute bg-overlay bottom-0 hidden md:block outside-btn text-center w-full"
 						@click="addToCart"
 						style="height: 2vw"
-						v-show="quickShopType === 0 && hover">
+						v-if="quickShopType === 0 && hover">
 					{{ addingToCart ? 'adding...' : 'add to cart' }}
 				</button>
 			</div>
@@ -112,6 +121,8 @@
 	import Product from "../../modules/shopify/Product";
 	import OptionModule from "../../modules/shopify/Option";
 	import { delay, uniqueId } from "lodash";
+	import PopupMobile from "../partials/PopupMobile";
+	import ProductDetail from "./partials/ProductDetail";
 	
 	export default {
 		name: "ProductLink",
@@ -134,6 +145,8 @@
 			}
 		},
 		components: {
+			ProductDetail,
+			PopupMobile,
 			LoadedImage
 		},
 		data: () => ({
@@ -144,6 +157,7 @@
 				name: '',
 				values: ['single', 'pair']
 			}),
+			productDetailsOpen: false,
 			selectedOptionValues: [],
 			selectedPairOptionValue: {},
 			quickBuyActive: false,
@@ -184,7 +198,7 @@
 				if (this.quickShopType === 2 && this.selectedPairOptionValue.value === "pair") {
 					price = price * 2;
 				}
-				return price ? `CHF ${price.toFixed(2)}` : this.product.price;
+				return price ? `CHF ${ price.toFixed(2) }` : this.product.price;
 			},
 			quickShopType() {
 				if (this.product.options.length === 1 && this.product.variants.length === 1) {
@@ -323,8 +337,10 @@
 	
 	.product-link {
 		.product-link-overlay {
-			&.block {
-				display: block !important;
+			&.md\:block {
+				@media (min-width: 768px) {
+					display: block !important;
+				}
 			}
 		}
 		
