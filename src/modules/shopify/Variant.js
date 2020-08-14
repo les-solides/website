@@ -1,5 +1,6 @@
 import VariantOption from "./VariantOption";
 import PriceV2 from "./PriceV2";
+import Image from "./Image";
 
 /* todo:i variant onSale */
 
@@ -33,7 +34,7 @@ export default class Variant {
     }
 
     get image() {
-        return this._graph.image;
+        return new Image(this._graph.image);
     }
 
     get onSale() {

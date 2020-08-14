@@ -11,25 +11,25 @@
 			<router-link :to="`/product/${ product.handle }`"
 						 class="block mt-2 overflow-hidden">
 				<LoadedImage class="h-full object-cover w-full"
-							 :src="o(product.images[0]).src" />
+							 :src="o(imageShown).src || o(imageShown).originalSrc" />
 			</router-link>
 			<!-- Image -->
 			
 			<!-- QuickShop Overlay -->
-			<div class="absolute h-full hidden left-0 product-link-overlay top-0 w-full"
+			<div class="absolute bg-overlay h-full hidden left-0 product-link-overlay top-0 w-full"
 				 :class="{ block: hover && hasValidAmountOfOptions && quickBuyActive }">
 				<div class="flex"
 					 :key="option.name"
 					 :style="variantDynamicHeight"
 					 v-for="option of visibleOptions">
 					<button class="block h-full items-center left product-link-variant text-center w-1/2"
-							:class="{ 'text-gray-600': o(selectedOptionValues.find(o => o.option.id === option.id)).value !== option.values[0]  }"
+							:class="{ 'text-gray-800': o(selectedOptionValues.find(o => o.option.id === option.id)).value !== option.values[0]  }"
 							@click="selectOptionValue(option, option.values[0])"
 							v-if="option.values.length === 2">
 						{{ option.values[0] }}
 					</button>
 					<button class="block h-full items-center right product-link-variant text-center w-1/2"
-							:class="{ 'text-gray-600' : o(selectedOptionValues.find(o => o.option.id === option.id)).value !== option.values[1] }"
+							:class="{ 'text-gray-800' : o(selectedOptionValues.find(o => o.option.id === option.id)).value !== option.values[1] }"
 							@click="selectOptionValue(option, option.values[1])"
 							v-if="option.values.length === 2">
 						{{ option.values[1] }}
@@ -54,22 +54,22 @@
 					 :style="visiblePairOptionDynamicHeight"
 					 v-if="pairOptionName">
 					<button class="block h-full items-center right product-link-variant text-center w-1/2"
-							:class="{ 'text-gray-600' : o(selectedPairOptionValue).value !== pairOption.values[0] }"
+							:class="{ 'text-gray-800' : o(selectedPairOptionValue).value !== pairOption.values[0] }"
 							@click="selectPairOption(pairOption, pairOption.values[0])"
 							v-if="pairOption.values.length === 2">
 						{{ pairOption.values[0] }}
 					</button>
 					<button class="block h-full items-center right product-link-variant text-center w-1/2"
-							:class="{ 'text-gray-600' : o(selectedPairOptionValue).value !== pairOption.values[1] }"
+							:class="{ 'text-gray-800' : o(selectedPairOptionValue).value !== pairOption.values[1] }"
 							@click="selectPairOption(pairOption, pairOption.values[1])"
 							v-if="pairOption.values.length === 2">
 						{{ pairOption.values[1] }}
 					</button>
 				</div>
-				<button class="text-center w-full"
+				<button class="outside-btn text-center w-full"
 						@click="addToCart"
 						:disabled=" ! selectedVariants.length"
-						:class="{ 'text-gray-600': ! selectedVariants.length }"
+						:class="{ 'text-gray-800': ! selectedVariants.length }"
 						style="height: 2vw">
 					{{ addingToCart ? 'adding...' : 'add to cart' }}
 				</button>
@@ -78,13 +78,13 @@
 			
 			<!--Buy Buttons (before / without QuickShop) [start]-->
 			<div>
-				<button class="absolute bottom-0 text-center w-full"
+				<button class="absolute bg-overlay bottom-0 outside-btn text-center w-full"
 						@click="quickBuyActive = true"
 						style="height: 2vw"
 						v-show="quickShopType !== 0 && hasValidAmountOfOptions && hover && ! quickBuyActive">
 					quickbuy
 				</button>
-				<button class="absolute bottom-0 text-center w-full"
+				<button class="absolute bg-overlay bottom-0 outside-btn text-center w-full"
 						@click="addToCart"
 						style="height: 2vw"
 						v-show="quickShopType === 0 && hover">
@@ -154,6 +154,15 @@
 				return this.product.options.length &&
 					this.product.options.length <= this.validAmountOfOptions;
 			},
+			imageShown() {
+				if (this.selectedVariants.length) {
+					return this.selectedVariants[0].image || this.product.images[0];
+				}
+				if (this.hover) {
+					return this.product.images[1] || this.product.images[0];
+				}
+				return this.product.images[0];
+			},
 			mainNode() {
 				return this.product ?
 					   this.product.descriptionNodes.querySelector("ul") : null;
@@ -177,18 +186,6 @@
 				}
 				return price ? `CHF ${price.toFixed(2)}` : this.product.price;
 			},
-			selectedVariants() {
-				return this.product && Array.isArray(this.product.variants) ?
-					   this.product.variants.filter(variant =>
-						   variant.options.filter(o =>
-							   (this.pairOptionName === o.name && this.selectedPairOptionValue.value === "pair") ||
-							   this.selectedOptionValues.find(optionValue =>
-								   o.name === optionValue.option.name &&
-								   o.value === optionValue.value
-							   )
-						   ).length === this.product.options.length
-					   ) : [];
-			},
 			quickShopType() {
 				if (this.product.options.length === 1 && this.product.variants.length === 1) {
 					return 0;
@@ -203,6 +200,18 @@
 					return 5;
 				}
 				return 6;
+			},
+			selectedVariants() {
+				return this.product && Array.isArray(this.product.variants) ?
+					   this.product.variants.filter(variant =>
+						   variant.options.filter(o =>
+							   (this.pairOptionName === o.name && this.selectedPairOptionValue.value === "pair") ||
+							   this.selectedOptionValues.find(optionValue =>
+								   o.name === optionValue.option.name &&
+								   o.value === optionValue.value
+							   )
+						   ).length === this.product.options.length
+					   ) : [];
 			},
 			variantDynamicHeight() {
 				if (this.visibleOptions.length === 1) {
@@ -314,20 +323,18 @@
 	
 	.product-link {
 		.product-link-overlay {
-			background: #ffffff55;
-			
 			&.block {
 				display: block !important;
 			}
 		}
 		
 		.product-link-variant {
-			border-bottom: 1px solid white;
+			/*border-bottom: 1px solid white;*/
 			border-top: 1px solid white;
 			
-			&.left {
+			/*&.left {
 				border-right: 1px white solid;
-			}
+			}*/
 			
 			&.right {
 				border-left: 1px white solid;
@@ -373,10 +380,8 @@
 			}
 		}
 		
-		.quick-buy {
-			button {
-				border-top: 1px solid white;
-			}
+		button.outside-btn {
+			border-top: 1px solid white;
 		}
 	}
 </style>
