@@ -1,9 +1,11 @@
 require('intersection-observer');
 
 import Vue from 'vue';
+
 import Cart from "./modules/shopify/Cart";
 import store from './store/index';
 import Toasted from 'vue-toasted';
+import { delay } from "lodash";
 
 Vue.use(Toasted);
 
@@ -12,4 +14,6 @@ export default async () => {
 	Vue.prototype.$cart = new Cart(checkout.id);
 	Vue.prototype._ = require('lodash');
 	Vue.prototype.o = (object) => { return object || {} };
+	Vue.prototype.wait = (milliseconds) => new Promise(resolve =>
+		delay(() => resolve(resolve()), milliseconds));
 };

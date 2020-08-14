@@ -1,11 +1,12 @@
 <template>
-	<div id="app"
-		 v-if="ready">
+	<div id="app">
 		<TheHeader v-if=" ! noHeader" />
 		
 		<TheBody>
 			<router-view />
 		</TheBody>
+		
+		<TheLoadingScreen :active.sync="loading" />
 		
 		<CookieNotice button-content="accept-cookies">
 			We use cookies to improve user experience, and analyze website traffic.
@@ -22,13 +23,16 @@
 	import TheBody from "./components/layout/TheBody";
 	import { debounce, delay } from 'lodash';
 	import CookieNotice from "./components/partials/CookieNotice";
+	import TheLoadingScreen from "./components/layout/TheLoadingScreen";
+	import { mapGetters } from "vuex";
 	
 	export default {
-		components: {CookieNotice, TheBody, TheFooter, TheHeader},
+		components: {TheLoadingScreen, CookieNotice, TheBody, TheFooter, TheHeader},
 		data: () => ({
 			ready: false
 		}),
 		computed: {
+			...mapGetters(['loading']),
 			noFooter() {
 				return this.$route.meta.noFooter;
 			},
@@ -44,7 +48,6 @@
 		mounted() {
 			window.addEventListener('resize', debounce(this.handleResize, 100));
 			this.handleResize();
-			delay(() => this.ready = true, 500);
 		},
 		destroyed() {
 			window.removeEventListener('resize', this.handleResize);

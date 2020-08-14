@@ -65,7 +65,7 @@
 		<!-- Title & Price -->
 		<router-link :to="`/product/${ product.handle }`"
 					 class="block mt-2 overflow-hidden">
-			<span class="mr-4 whitespace-no-wrap">{{ product.title }}</span>
+			<span class="block mr-4 whitespace-no-wrap">{{ product.title }}</span>
 			<span v-if="withPrice">{{ product.price }}</span>
 		</router-link>
 		<!-- Title & Price -->
@@ -219,7 +219,6 @@
 				};
 			}
 		}
-		
 	};
 </script>
 

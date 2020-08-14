@@ -37,18 +37,27 @@
 				);
 			}
 		},
-		async created() {
-			for (let handle of this.productHandles) {
-				const product = await this.$store.dispatch(
-					'shopify/product/fetchByHandle',
-					handle
-				);
-				if ( ! product) {
-					continue;
+		methods: {
+			async load() {
+				for (let handle of this.productHandles) {
+					const product = await this.$store.dispatch(
+						'shopify/product/fetchByHandle',
+						handle
+					);
+					if ( ! product) {
+						continue;
+					}
+					this.products.push(product);
 				}
-				this.products.push(product);
 			}
-			this.ready = true;
+		},
+		async created() {
+			this.$emit('promise', new Promise(resolve => {
+				this.load().then(() => {
+					this.ready = true;
+					this.$nextTick(() => resolve(true));
+				});
+			}));
 		}
 	};
 </script>

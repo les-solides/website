@@ -1,10 +1,12 @@
 <template>
 	<div>
-		<component class="mb-8"
-				   :is="_.startCase(article.template).split(' ').join('')"
-				   :key="article.id"
-				   :article="article"
-				   v-for="article of homeArticles" />
+		<keep-alive :key="article.id"
+					v-for="article of homeArticles">
+			<component class="mb-8"
+					   :is="_.startCase(article.template).split(' ').join('')"
+					   :article="article"
+					   @promise="promises.push($event)" />
+		</keep-alive>
 	</div>
 </template>
 
@@ -17,6 +19,7 @@
 	import NewsletterSubscribe from "../components/template/NewsletterSubscribe";
 	
 	import FrameLink from "../modules/shopify/FrameLink";
+	import { delay } from "lodash";
 	
 	export default {
 		name: "Home",
@@ -27,7 +30,8 @@
 			NewsletterSubscribe
 		},
 		data: () => ({
-			FrameLink
+			FrameLink,
+			promises: []
 		}),
 		computed: {
 			...mapGetters("shopify/blog", ["articles"]),
@@ -38,6 +42,8 @@
 			}
 		},
 		async created() {
+			await this.$store.commit('updateLoading', true);
+			
 			if (this.homeArticles.length) {
 				return;
 			}
@@ -46,6 +52,11 @@
 				'shopify/blog/fetchArticlesByBlog',
 				'Homepage'
 			);
+		},
+		async mounted() {
+			await this.wait(250);
+			Promise.allSettled(this.promises)
+				   .then(() => this.$store.commit('updateLoading', false));
 		}
 	};
 </script>

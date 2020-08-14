@@ -25,17 +25,24 @@ export default new Vuex.Store({
 		},
 		collaborationHash: undefined,
 		isMobile: false,
+		loading: false,
 		routeClick: true,
 		storefront: storefront,
 	},
 	getters: {
 		isMobile(state) {
 			return state.isMobile;
+		},
+		loading(state) {
+			return !! state.loading;
 		}
 	},
 	mutations: {
 		refreshIsMobile(state) {
 			state.isMobile = state.breakpoints.md >= window.innerWidth;
+		},
+		updateLoading(state, value) {
+			state.loading = !! value;
 		}
 	},
 	actions: {

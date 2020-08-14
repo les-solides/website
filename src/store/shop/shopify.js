@@ -59,7 +59,7 @@ export default {
 
                 // if checkout already completed (order submitted),
                 // then create a new checkout
-                if (checkout.completedAt) {
+                if ( ! checkout || checkout.completedAt) {
                     return await dispatch('createCheckout');
                 }
 
@@ -72,14 +72,10 @@ export default {
             checkout = await rootState.storefront.checkout
                 .fetch(id)
                 .then(checkout => checkout);
-            
-            if ( ! checkout) {
-                return await dispatch('createCheckout');
-            }
 
             // if checkout already completed (order submitted),
             // then create a new checkout
-            if (checkout.completedAt) {
+            if ( ! checkout || checkout.completedAt) {
                 return await dispatch('createCheckout');
             }
 
