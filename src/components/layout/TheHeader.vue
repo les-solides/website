@@ -41,10 +41,11 @@
 				</Route>
 			</div>
 			<div class="md:flex justify-end md:w-1/3">
-				<Route class="md:py-0 py-4"
-					   to="/checkout">
-					bag (0)
-				</Route>
+				<a class="md:py-0 py-4"
+				   :href="$cart.url"
+				   target="_blank">
+					bag ({{ amountOfCartItems }})
+				</a>
 			</div>
 		</nav>
 	</header>
@@ -60,6 +61,11 @@
 		components: {NavigationFilter, Route, Burger},
 		data: () => ({
 			menuOpen: false
-		})
+		}),
+		computed: {
+			amountOfCartItems() { // new
+				return this.$cart.length;
+			}
+		}
 	};
 </script>

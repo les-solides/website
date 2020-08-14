@@ -60,18 +60,23 @@
 					{{ addingToCart ? 'adding...' : 'add to cart' }}
 				</button>
 			</div>
-			<button class="absolute bottom-0 text-center w-full"
-					@click="quickBuyActive = true"
-					style="height: 2vw"
-					v-show="hasValidAmountOfOptions && hover && ! quickBuyActive">
-				quickbuy
-			</button>
-			<button class="absolute bottom-0 text-center w-full"
-					@click="addToCart"
-					v-show=" ! hasValidAmountOfOptions && hover">
-				{{ addingToCart ? 'adding...' : 'add to cart' }}
-			</button>
 			<!-- QuickShop Overlay -->
+			
+			<!--Buy Buttons (before / without QuickShop) [start]-->
+			<div>
+				<button class="absolute bottom-0 text-center w-full"
+						@click="quickBuyActive = true"
+						style="height: 2vw"
+						v-show="quickShopType !== 0 && hasValidAmountOfOptions && hover && ! quickBuyActive">
+					quickbuy
+				</button>
+				<button class="absolute bottom-0 text-center w-full"
+						@click="addToCart"
+						v-show="quickShopType === 0 && hover">
+					{{ addingToCart ? 'adding...' : 'add to cart' }}
+				</button>
+			</div>
+			<!--Buy Buttons (before / without QuickShop) [end]-->
 		
 		</div>
 		<!-- Image & QuickShop Overlay [end] -->
@@ -83,8 +88,6 @@
 			<span v-if="withPrice">{{ product.price }}</span>
 		</router-link>
 		<!-- Title & Price -->
-		
-		<!--<span>{{ o(product.selectElement("#preview")).innerText }}</span>-->
 	
 	</div>
 </template>
@@ -168,6 +171,21 @@
 						   ).length === this.product.options.length
 					   ) : [];
 			},
+			quickShopType() {
+				if (this.product.options.length === 1 && this.product.variants.length === 1) {
+					return 0;
+				}
+				if (this.product.options.length === 1 && this.product.variants.length === 2) {
+					return this.pairOptionName === "default" ? 2 : 1;
+				}
+				if (this.product.options.length === 2 && this.product.variants.length === 4) {
+					return this.pairOptionName === "side" ? 4 : 3;
+				}
+				if (this.product.options.length === 2	) {
+					return 5;
+				}
+				return 6;
+			},
 			variantDynamicHeight() {
 				if (this.visibleOptions.length === 1) {
 					return this.pairOptionName ?
@@ -205,15 +223,32 @@
 		methods: {
 			async addToCart() {
 				this.addingToCart = true;
-				if ( ! this.selectedVariants.length && this.product.variants.length) {
+				if (this.quickShopType === 6) {
 					return this.$router.push(`/product/${ this.product.handle }`);
 				}
-				if ( ! this.selectedVariants.length && this.product.variants.length === 1) {
-					return await this.$store.dispatch(
+				if (this.quickShopType === 0) {
+					await this.$store.dispatch(
 						"shopify/addToCheckout", {
 							variant: this.product.variants[0],
 							quantity: 1
 						});
+					delay(() => this.addingToCart = false, 200);
+					return this.$toasted.show("added to cart", {
+						duration: 5000,
+						position: "bottom-center"
+					});
+				}
+				if (this.quickShopType === 2) {
+					await this.$store.dispatch(
+						"shopify/addToCheckout", {
+							variant: this.selectedVariants[0],
+							quantity: 2
+						});
+					delay(() => this.addingToCart = false, 200);
+					return this.$toasted.show("added to cart", {
+						duration: 5000,
+						position: "bottom-center"
+					});
 				}
 				for (let variant of this.selectedVariants) {
 					await this.$store.dispatch(
