@@ -9,7 +9,7 @@
 			
 			<!-- Image -->
 			<router-link :to="`/product/${ product.handle }`"
-					 class="block mt-2 overflow-hidden">
+						 class="block mt-2 overflow-hidden">
 				<LoadedImage class="h-full object-cover w-full"
 							 :src="o(product.images[0]).src" />
 			</router-link>
@@ -34,7 +34,21 @@
 							v-if="option.values.length === 2">
 						{{ option.values[1] }}
 					</button>
-					<div v-if="option.values.length > 2">hello</div>
+					<div class="flex flex-wrap items-center justify-center w-full"
+						 v-if="option.values.length > 2">
+						<div>
+							<div class="text-center w-full">{{ option.name }}</div>
+							<div class="flex justify-center">
+								<button @click="selectOptionValue(option, value)"
+										class="mr-1"
+										:class="{ 'font-bold' : o(selectedOptionValues.find(o => o.option.id === option.id)).value === value }"
+										:key="value"
+										v-for="(value, index) of option.values">
+									{{ value }}{{ option.values.length - 1 > index ? ',' : '' }}
+								</button>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="flex"
 					 :style="visiblePairOptionDynamicHeight"
@@ -85,7 +99,7 @@
 		<router-link :to="`/product/${ product.handle }`"
 					 class="block mt-2 overflow-hidden">
 			<span class="block mr-4 whitespace-no-wrap">{{ product.title }}</span>
-			<span v-if="withPrice">{{ product.price }}</span>
+			<span v-if="withPrice">{{ price }}</span>
 		</router-link>
 		<!-- Title & Price -->
 	
@@ -157,7 +171,10 @@
 				for (let variant of this.selectedVariants) {
 					price += Number(variant.price.amount);
 				}
-				return price;
+				if (this.quickShopType === 2 && this.selectedPairOptionValue.value === "pair") {
+					price = price * 2;
+				}
+				return price ? `CHF ${price.toFixed(2)}` : this.product.price;
 			},
 			selectedVariants() {
 				return this.product && Array.isArray(this.product.variants) ?
@@ -181,7 +198,7 @@
 				if (this.product.options.length === 2 && this.product.variants.length === 4) {
 					return this.pairOptionName === "side" ? 4 : 3;
 				}
-				if (this.product.options.length === 2	) {
+				if (this.product.options.length === 2) {
 					return 5;
 				}
 				return 6;
@@ -198,6 +215,9 @@
 				return "height: 0";
 			},
 			visiblePairOptionDynamicHeight() {
+				if (this.quickShopType === 2 && this.selectedPairOptionValue.value !== "pair") {
+					return "height:12vw";
+				}
 				if ( ! this.selectedPairOptionValue.value && this.visibleOptions.length === 1) {
 					return this.o(this.selectedPairOptionValue).value === "pair" ?
 						   "height:12vw" : "height: 12vw";
@@ -351,6 +371,7 @@
 				width: 9%;
 			}
 		}
+		
 		.quick-buy {
 			button {
 				border-top: 1px solid white;
