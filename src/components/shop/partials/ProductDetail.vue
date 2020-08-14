@@ -54,7 +54,10 @@
 				 v-html="product.descriptionHtml"></div>
 			
 			<!--todo: recommended mobile component that just switches the product prop-->
-			<!--<RecommendedProducts :product="product" />-->
+			<RecommendedProducts :product="product"
+								 @click="switchProduct($event)"
+								 mobile
+								 v-if="product" />
 		</div>
 	
 	</div>
@@ -67,10 +70,11 @@
 	import LoadedImage from "../../partials/LoadedImage";
 	import ArrowUp from "../../partials/ArrowUp";
 	import Option from "../Option";
+	import RecommendedProducts from "./RecommendedProducts";
 	
 	export default {
 		name: "ProductDetail",
-		components: {Option, ArrowUp, LoadedImage},
+		components: {RecommendedProducts, Option, ArrowUp, LoadedImage},
 		props: {
 			product: {
 				type: Product,
@@ -97,6 +101,9 @@
 					this.product.options.length <= this.validAmountOfOptions;
 			},
 			imageShown() {
+				if ( ! this.product || ! this.product.images.length) {
+					return {};
+				}
 				if (this.selectedVariants.length) {
 					return this.selectedVariants[0].image || this.product.images[0];
 				}
@@ -249,6 +256,10 @@
 					option,
 					value
 				};
+			},
+			switchProduct(product) {
+				
+				this.$emit('click', product);
 			}
 		}
 	};

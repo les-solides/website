@@ -2,24 +2,32 @@
 	<div>
 		<span class="block md:mt-32 mt-8 md:text-center w-full">Recommended products</span>
 		
-		<div class="flex mt-4">
-			<ProductLink :product="recommendation"
-						 short
-						 :key="recommendation.id"
-						 :class="{ 'mr-4': index < recommendations.length - 1 }"
-						 v-for="(recommendation, index) of recommendations" />
-		</div>
+		<ul class="flex mt-4 overflow-x-auto">
+			<ProductRecommended :product="recommendation"
+								@click="$emit('click', recommendation)"
+								short
+								:key="recommendation.id"
+								:class="{ 'mr-4': index < recommendations.length - 1 }"
+								v-for="(recommendation, index) of recommendations"
+								:mobile="mobile" />
+		</ul>
 	</div>
 </template>
 
 <script>
 	import Product from "../../../modules/shopify/Product";
-	import ProductLink from "../ProductLink";
+	import ProductRecommended from "../ProductRecommended";
 	
 	export default {
 		name: "RecommendedProducts",
-		components: {ProductLink},
+		components: {ProductRecommended},
 		props: {
+			mobile: {
+				type: Boolean,
+				default() {
+					return false;
+				}
+			},
 			product: {
 				type: Product,
 				required: true

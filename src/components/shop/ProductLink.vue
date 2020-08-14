@@ -2,8 +2,10 @@
 	<div class="mb-4 product-link"
 		 :class="{ short, small }">
 		
-		<PopupMobile v-model="productDetailsOpen">
-			<ProductDetail :product="product" />
+		<PopupMobile v-model="productDetailsOpen"
+					 v-if="popupProduct">
+			<ProductDetail :product="popupProduct"
+						   @click="switchProduct($event)" />
 		</PopupMobile>
 		
 		<!-- Image & QuickShop Overlay [start] -->
@@ -126,6 +128,11 @@
 	
 	export default {
 		name: "ProductLink",
+		components: {
+			ProductDetail,
+			PopupMobile,
+			LoadedImage
+		},
 		props: {
 			product: {
 				type: Product,
@@ -144,11 +151,6 @@
 				default: () => true
 			}
 		},
-		components: {
-			ProductDetail,
-			PopupMobile,
-			LoadedImage
-		},
 		data: () => ({
 			addingToCart: false,
 			hover: false,
@@ -157,6 +159,7 @@
 				name: '',
 				values: ['single', 'pair']
 			}),
+			popupProduct: null,
 			productDetailsOpen: false,
 			selectedOptionValues: [],
 			selectedPairOptionValue: {},
@@ -321,7 +324,18 @@
 					option,
 					value
 				};
+			},
+			async switchProduct(product) {
+				this.$store.commit('updateLoading', true);
+				this.popupProduct = await this.$store.dispatch(
+					"shopify/product/fetchByHandle",
+					product.handle
+				);
+				delay(() => this.$store.commit('updateLoading', false), 500);
 			}
+		},
+		created() {
+			this.popupProduct = this.product;
 		}
 	};
 </script>

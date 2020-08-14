@@ -35,13 +35,22 @@ export default {
                       });
         },
         async fetchRecommendations({ dispatch, rootState }, id) {
-            let recommendations = await api.post("", productRecommendations(id))
-                .then(({ data }) => data.data
-                    .productRecommendations
-                    .slice(0, 6)
-                    .map(r => new Product(r))
-                );
-            if (recommendations.length < 6) { // fill until 3 items
+            const query = rootState.storefront.graphQLClient
+                                   .query(root => {
+                                       root.add("productRecommendations",
+                                           { args: { productId: id } },
+                                           recommendations => {
+                                               ProductField.addTo(recommendations);
+                                           });
+                                   });
+            let recommendations = await rootState.storefront.graphQLClient
+                                                 .send(query)
+                                                 .then(({ data }) => data
+                                                     .productRecommendations
+                                                     .slice(0, 6)
+                                                     .map(r => new Product(r))
+                                                 );
+            if (recommendations.length < 6) { // fill until 6 items
                 let more = await dispatch("fetchAll", 8);
                 for (let product of more) {
                     if (recommendations.find(r => r.id === product.id)) {

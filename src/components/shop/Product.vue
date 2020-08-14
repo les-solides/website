@@ -1,57 +1,66 @@
 <template>
-	<div class="mb-12 md:mt-4"
-		 v-if="product">
-		
-		<span class="block text-center w-full">{{ product.title }}</span>
-		
-		<div class="flex justify-between mt-2 overflow-x-auto">
-			<LoadedImage class="h-full mb-4 object-contain product-image"
-						 :class="{
+	<div>
+		<div class="hidden md:block mb-12 md:mt-4"
+			 v-if="product">
+			
+			<span class="block text-center w-full">{{ product.title }}</span>
+			
+			<div class="flex justify-between mt-2 overflow-x-auto">
+				<LoadedImage class="h-full mb-4 object-contain product-image"
+							 :class="{
 							'mr-2': index < product.images.length - 1,
 							 'object-cover w-1/3': index < 3
 						}"
-						 :key="image.id"
-						 v-for="(image, index) of product.images"
-						 :src="image.src" />
-		</div>
-		
-		<div class="flex justify-between">
-			<div class="mr-4 w-1/3">
+							 :key="image.id"
+							 v-for="(image, index) of product.images"
+							 :src="image.src" />
+			</div>
+			
+			<div class="flex justify-between">
+				<div class="mr-4 w-1/3">
 					<span class="block"
 						  :key="tag"
 						  v-for="tag of product.tags.filter(t => ! t.includes('archive') && ! t.includes('variant-rule'))">
 						{{ tag }}
 					</span>
-			</div>
-			<span class="mr-4 w-1/3"
-				  v-html="product.descriptionHtml"></span>
-			<div class="w-1/3">
-				<div class="flex justify-between">
-					<div class="md:w-1/2">
-						<Option :option="option"
-								:key="option.id"
-								@select="selectOptionValue(option, $event)"
-								v-for="option of visibleOptions" />
-						<Option :option="pairOption"
-								@select="selectPairOption(pairOption, $event)"
-								v-if="pairOptionName" />
-					</div>
-					<div class="flex flex-wrap justify-end w-1/2">
+				</div>
+				<span class="mr-4 w-1/3"
+					  v-html="product.descriptionHtml"></span>
+				<div class="w-1/3">
+					<div class="flex justify-between">
+						<div class="md:w-1/2">
+							<Option :option="option"
+									:key="option.id"
+									@select="selectOptionValue(option, $event)"
+									v-for="option of visibleOptions" />
+							<Option :option="pairOption"
+									@select="selectPairOption(pairOption, $event)"
+									v-if="pairOptionName" />
+						</div>
+						<div class="flex flex-wrap justify-end w-1/2">
 						<span class="block mb-2 text-right w-full"
 							  v-if="selectedVariants.length">
 								{{ price }}
 							</span>
-						<button @click="addToCart"
-								:disabled="addingToCart"
-								class="text-right w-full">
-							{{ addingToCart ? 'adding...' : 'add to cart' }}
-						</button>
+							<button @click="addToCart"
+									:disabled="addingToCart"
+									class="text-right w-full">
+								{{ addingToCart ? 'adding...' : 'add to cart' }}
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
+			
+			<RecommendedProducts :product="product" />
 		</div>
-		
-		<RecommendedProducts :product="product" />
+		<PopupMobile class="block md:hidden"
+					 :value="true"
+					 @close="$router.back()"
+					 v-if="product">
+			<ProductDetail :product="product"
+						   @click="switchProduct($event)" />
+		</PopupMobile>
 	</div>
 </template>
 
@@ -59,12 +68,14 @@
 	import LoadedImage from "../partials/LoadedImage";
 	import Option from "./Option";
 	import OptionModule from "./../../modules/shopify/Option";
-	import { uniqueId } from "lodash";
+	import { delay, uniqueId } from "lodash";
 	import RecommendedProducts from "./partials/RecommendedProducts";
+	import ProductDetail from "./partials/ProductDetail";
+	import PopupMobile from "../partials/PopupMobile";
 	
 	export default {
 		name: "Product",
-		components: {RecommendedProducts, Option, LoadedImage},
+		components: {PopupMobile, ProductDetail, RecommendedProducts, Option, LoadedImage},
 		data: () => ({
 			addingToCart: false,
 			pairOption: new OptionModule({
@@ -171,13 +182,18 @@
 					option,
 					value
 				};
+			},
+			switchProduct(product) {
+				location.href = `/product/${product.handle}`;
 			}
 		},
 		async created() {
+			this.$store.commit('updateLoading', true);
 			this.product = await this.$store.dispatch(
 				"shopify/product/fetchByHandle",
 				this.$route.params.handle
 			);
+			delay(() => this.$store.commit('updateLoading', false), 500);
 		}
 	};
 </script>
