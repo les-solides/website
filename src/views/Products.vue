@@ -86,10 +86,12 @@
 		},
 		async created() {
 			await this.$store.commit('updateLoading', true);
-			await this.$store.dispatch(
-				'shopify/blog/fetchArticlesByBlog',
-				this.type
-			);
+			if ( ! this.productsArticles.length) {
+				await this.$store.dispatch(
+					'shopify/blog/fetchArticlesByBlog',
+					this.type
+				);
+			}
 		},
 		async mounted() {
 			await this.wait(250);

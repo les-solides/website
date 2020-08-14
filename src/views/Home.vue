@@ -44,14 +44,12 @@
 		async created() {
 			await this.$store.commit('updateLoading', true);
 			
-			if (this.homeArticles.length) {
-				return;
+			if ( ! this.homeArticles.length) {
+				await this.$store.dispatch(
+					'shopify/blog/fetchArticlesByBlog',
+					'Homepage'
+				);
 			}
-			
-			await this.$store.dispatch(
-				'shopify/blog/fetchArticlesByBlog',
-				'Homepage'
-			);
 		},
 		async mounted() {
 			await this.wait(250);

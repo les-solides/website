@@ -44,10 +44,9 @@
 						'shopify/product/fetchByHandle',
 						handle
 					);
-					if ( ! product) {
-						continue;
+					if (product) {
+						this.products.push(product);
 					}
-					this.products.push(product);
 				}
 			}
 		},

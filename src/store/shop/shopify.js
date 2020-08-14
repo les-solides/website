@@ -11,7 +11,8 @@ export default {
         product
     },
     state: {
-        checkout: null
+        checkout: null,
+        products: []
     },
     getters: {
         checkout(state) {
