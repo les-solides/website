@@ -1,5 +1,8 @@
 <template>
 	<div>
+		<NavigationFilter base="/products"
+						  class="bg-white block md:hidden ml-0 py-4 sticky top-0 z-10"
+						  name="Navigation (Products)" />
 		<div :key="article.id"
 					v-for="article of productsArticles">
 			<component class="mb-8"
@@ -21,10 +24,12 @@
 	import NewsletterSubscribe from "../components/template/NewsletterSubscribe";
 	
 	import FrameLink from "../modules/shopify/FrameLink";
+	import NavigationFilter from "../components/partials/NavigationFilter";
 	
 	export default {
 		name: "Products",
 		components: {
+			NavigationFilter,
 			LinkArrow,
 			LinkArrowImage,
 			LinkTwoFrames,

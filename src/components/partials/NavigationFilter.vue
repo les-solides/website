@@ -1,5 +1,5 @@
 <template>
-	<div class="flex ml-4">
+	<div class="flex md:ml-4">
 		<Route class="mr-1"
 			   :class="{ 'text-gray-600': active !== mainItem }"
 			   @click="active = mainItem"

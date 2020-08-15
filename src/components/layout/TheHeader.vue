@@ -14,6 +14,7 @@
 					les solides
 				</Route>
 				<NavigationFilter base="/products"
+								  class="hidden md:block"
 								  name="Navigation (Products)"
 								  v-if="$route.path.includes('product')" />
 			</div>
