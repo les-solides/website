@@ -199,6 +199,10 @@ export default class Product extends ShopifyGraph {
         }
         return this.variants[0];
     }
+    
+    set selectedVariant(variant) {
+        variant instanceof Variant && (this._selectedVariant = variant);
+    }
 
     /**
      * Reverse Flag of availableForSale.

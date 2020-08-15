@@ -1,12 +1,12 @@
 <template>
 	<div>
-		<keep-alive :key="article.id"
+		<div :key="article.id"
 					v-for="article of productsArticles">
 			<component class="mb-8"
 					   :is="_.startCase(article.template).split(' ').join('')"
 					   :article="article"
 					   @promise="promises.push($event)" />
-		</keep-alive>
+		</div>
 	</div>
 </template>
 
@@ -21,7 +21,6 @@
 	import NewsletterSubscribe from "../components/template/NewsletterSubscribe";
 	
 	import FrameLink from "../modules/shopify/FrameLink";
-	import { delay } from "lodash";
 	
 	export default {
 		name: "Products",
@@ -99,10 +98,14 @@
 				   .then(() => this.$store.commit('updateLoading', false));
 		},
 		async updated() {
+			await this.$store.commit('updateLoading', true);
 			await this.$store.dispatch(
 				'shopify/blog/fetchArticlesByBlog',
 				this.type
 			);
+			await this.wait(250);
+			Promise.allSettled(this.promises)
+				   .then(() => this.$store.commit('updateLoading', false));
 		}
 	};
 </script>

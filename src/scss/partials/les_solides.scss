@@ -56,8 +56,11 @@ button.menu {
 // -- D [end]
 
 // -- F [start]
-.font-xl {
-	font-size: $font-size-base * 6;
+.font-xl p, .font-xl span, .font-xl div {
+	font-size: $font-size-base * 2.5;
+	@media screen and (min-width: $breakpoint-md){
+		font-size: $font-size-base * 6;
+	}
 }
 // -- F [end]
 

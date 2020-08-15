@@ -46,15 +46,24 @@ export default function (handle) {
 						variants (first: 250) {
 							edges {
 								node {
-									availableForSale,
+									available,
 									compareAtPriceV2 {
 										amount,
 										currencyCode
-									}
+									},
 									id,
+									image {
+										originalSrc,
+										transformedSrc,
+										altText
+									},
 									priceV2 {
 										amount,
 										currencyCode
+									},
+									selectedOptions {
+										name,
+										value
 									},
 									title
 								}

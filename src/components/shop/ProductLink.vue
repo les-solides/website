@@ -312,7 +312,7 @@
 			},
 			selectOptionValue(option, value) {
 				this.selectedOptionValues = this.selectedOptionValues.filter(
-					v => v.option.id !== option.id
+					v => v.option.name !== option.name
 				);
 				this.selectedOptionValues.push({
 					option,
@@ -335,6 +335,14 @@
 			}
 		},
 		created() {
+			if (this.product.selectedVariant) {
+				this.product
+					.selectedVariant
+					.options
+					.forEach(option =>
+						this.selectOptionValue(option, option.value)
+					);
+			}
 			this.popupProduct = this.product;
 		}
 	};

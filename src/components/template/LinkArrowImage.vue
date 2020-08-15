@@ -4,18 +4,16 @@
 	   v-if="link && link.includes('http')">
 		<LoadedImage class="w-full"
 					 :src="o(article.featuredImage).originalSrc" />
-		<span class="absolute center font-xl text-center w-full">
-			{{ article.content }}
-		</span>
+		<div class="absolute center font-xl text-center w-full"
+			  v-html="article.contentHtml"></div>
 	</a>
 	<router-link class="block h1 mt-4 relative"
 				 :to="link"
 				 v-else>
 		<LoadedImage class="w-full"
 					 :src="o(article.featuredImage).originalSrc" />
-		<span class="absolute center font-xl text-center w-full">
-			{{ article.content }}
-		</span>
+		<div class="absolute center font-xl text-center w-full"
+			  v-html="article.contentHtml"></div>
 	</router-link>
 </template>
 

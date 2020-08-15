@@ -3,7 +3,7 @@
 		 v-if="ready">
 		<ProductLink :product="product"
 					 :key="product.id"
-					 v-for="product of products" />
+					 v-for="product of filteredProducts" />
 	</div>
 </template>
 
@@ -24,12 +24,23 @@
 			products: [],
 			ready: false
 		}),
+		computed: {
+			filter() {
+				return this.$route.params.filter;
+			},
+			filteredProducts() {
+				return this.products
+					.filter(product => product.selectedVariant = product.variants.find(variant => variant.options.find(option => option.value === this.filter)));
+			}
+		},
 		async created() {
+			await this.$store.commit('updateLoading', true);
 			this.products = await this.$store.dispatch(
 				'shopify/collection/fetchByHandle',
 				this.$route.params.collection
 			);
 			this.ready = true;
+			await this.$store.commit('updateLoading', false);
 		}
 	};
 </script>
