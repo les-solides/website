@@ -61,6 +61,7 @@
 			}
 		},
 		async created() {
+			this.blocked = true;
 			await this.$store.commit('updateLoading', true);
 			if (this.collaborationArticles.length) {
 				return this.$store.commit('updateLoading', false);
@@ -85,7 +86,6 @@
 			}
 			await this.$store.commit('updateLoading', false);
 			await this.wait(200);
-			this.blocked = true;
 			this.articles.forEach(a => {
 				let observer = new IntersectionObserver((entries) => {
 					if (this.blocked) {
