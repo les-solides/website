@@ -171,7 +171,9 @@ h4 {
 }
 
 // -- T [end]
-
+.toasted .primary.error, .toasted.toasted-primary.error {
+	background: #790303;
+}
 .transition-medium {
 	transition: 1s;
 }

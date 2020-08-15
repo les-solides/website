@@ -1,6 +1,6 @@
 import Product from "../../../modules/shopify/Product";
 import ProductField from "../../../modules/shopify/fields/ProductField";
-import api from "../../../api/api";
+import api from "../../../api/shopifyAPI";
 import productByHandle from "./queries/productByHandle";
 import Utils from "../../../modules/Utils";
 import productRecommendations from "./queries/productRecommendations";

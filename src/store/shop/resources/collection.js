@@ -1,6 +1,6 @@
 import CollectionField from "../../../modules/shopify/fields/CollectionField";
 import Collection from "../../../modules/shopify/Collection";
-import api from "../../../api/api";
+import api from "../../../api/shopifyAPI";
 import CollectionByHandleQuery from "./queries/CollectionByHandleQuery";
 import Utils from "../../../modules/Utils";
 import Product from "../../../modules/shopify/Product";
