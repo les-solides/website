@@ -3,18 +3,29 @@
 					text-center top-0 transition-medium w-full z-20"
 			:class="{ 'top-100': ! menuOpen }">
 		
-		<Burger @click.native="updateMenuOpen( ! menuOpen)"
-				class="bg-white bottom-0 fixed flex justify-center menu mobile p-2 shadow-inner w-full"
-				:open="menuOpen" />
+		<div class="bg-white bottom-0 fixed flex justify-between menu mobile p-4 shadow-inner w-full z-10">
+			<Burger @click.native="updateMenuOpen( ! menuOpen)"
+					:open="menuOpen" />
+			<div class="flex justify-end md:w-1/3">
+				<Route class="px-4"
+					   to="/search">
+					search
+				</Route>
+				<a :href="$cart.url"
+				   target="_blank">
+					bag ({{ amountOfCartItems }})
+				</a>
+			</div>
+		</div>
 		
-		<nav class="md:flex justify-between">
+		<nav class="h-full md:flex justify-between">
 			<div class="flex md:w-1/3">
-				<Route class="md:py-0 md:text-left md:w-auto py-8 text-center w-full"
+				<Route class="md:py-0 md:text-left md:w-auto py-16 text-center w-full"
 					   to="/home">
 					les solides
 				</Route>
 				<NavigationFilter base="/products"
-								  class="hidden md:block"
+								  class="hidden md:flex"
 								  name="Navigation (Products)"
 								  v-if="$route.path.includes('product')" />
 			</div>
@@ -36,12 +47,13 @@
 					   to="/archive">
 					archive
 				</Route>
-				<Route class="md:py-0 px-4 py-4"
+				<Route class="hidden md:block md:py-0 px-4 py-4"
 					   to="/search">
 					search
 				</Route>
+				<TheFooter class="block bottom-0 md:hidden mt-16 relative z-0" />
 			</div>
-			<div class="md:flex justify-end md:w-1/3">
+			<div class="hidden md:flex justify-end md:w-1/3">
 				<a class="md:py-0 py-4"
 				   :href="$cart.url"
 				   target="_blank">
@@ -57,10 +69,11 @@
 	import Route from "../partials/Route";
 	import NavigationFilter from "../partials/NavigationFilter";
 	import { mapGetters } from "vuex";
+	import TheFooter from "./TheFooter";
 	
 	export default {
 		name: "TheHeader",
-		components: {NavigationFilter, Route, Burger},
+		components: {TheFooter, NavigationFilter, Route, Burger},
 		computed: {
 			...mapGetters(['menuOpen']),
 			amountOfCartItems() { // new

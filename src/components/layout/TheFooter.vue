@@ -1,7 +1,7 @@
 <template>
-	<footer class="bg-white sticky" :class="{ 'bottom-0 z-20': open }">
+	<footer class="bg-white md:sticky" :class="{ 'bottom-0 z-20': open }">
 		<article class="bg-white fixed md:z-30 p-4 overflow-auto transition-medium w-full"
-				 :class="{ 'top-0': open, 'top-100': !open }">
+				 :class="{ 'top-0': open, 'top-100': ! open }">
 			<Burger @click.native="closeFooter"
 					class="fixed mr-4 right"
 					:open="true" />
