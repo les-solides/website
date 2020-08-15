@@ -29,7 +29,7 @@
 				return this.$route.params.filter;
 			},
 			filteredProducts() {
-				return this.products
+				return this.filter === 'all' ? this.products : this.products
 					.filter(product => product.selectedVariant = product.variants.find(variant => variant.options.find(option => option.value === this.filter)));
 			}
 		},

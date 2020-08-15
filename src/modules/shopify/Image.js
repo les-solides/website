@@ -1,6 +1,6 @@
 export default class Image {
     constructor(graphQLImage) {
-        this._graph = graphQLImage;
+        this._graph = graphQLImage || {};
     }
 
     get alt() {

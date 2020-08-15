@@ -335,7 +335,7 @@
 			}
 		},
 		created() {
-			if (this.product.selectedVariant) {
+			if (this.product._selectedVariant) {
 				this.product
 					.selectedVariant
 					.options
