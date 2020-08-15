@@ -85,6 +85,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
 	store.state.routeClick = true;
+	store.commit('updateMenuOpen', false);
 	next();
 });
 

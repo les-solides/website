@@ -4,7 +4,6 @@
 		<div class="horizontal-scroller flex justify-start mt-4"
 			 :class="{ open }">
 			<LoadedImage class="mr-4 object-contain"
-						 height="40vw"
 						 :src="image.src"
 						 :key="image.src"
 						 v-for="image of images" />
@@ -44,14 +43,31 @@
 
 <style scoped
 	   lang="scss">
+	@import "./src/scss/partials/variables";
 	.horizontal-scroller {
-		height: 40vw;
+		height: 70vw;
 		max-height: 0;
 		overflow-y: hidden;
 		transition: .25s;
 		
+		img {
+			height: 70vw;
+		}
+		
 		&.open {
-			max-height: 40vw;
+			max-height: 70vw;
+		}
+		
+		@media screen and (min-width: $breakpoint-md) {
+			height: 40vw;
+			
+			img {
+				height: 40vw;
+			}
+			
+			&.open {
+				max-height: 40vw;
+			}
 		}
 	}
 </style>

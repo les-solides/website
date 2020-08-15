@@ -26,6 +26,7 @@ export default new Vuex.Store({
 		collaborationHash: undefined,
 		isMobile: false,
 		loading: false,
+		menuOpen: false,
 		routeClick: true,
 		storefront: storefront,
 	},
@@ -35,6 +36,9 @@ export default new Vuex.Store({
 		},
 		loading(state) {
 			return !! state.loading;
+		},
+		menuOpen(state) {
+			return !! state.menuOpen;
 		}
 	},
 	mutations: {
@@ -43,6 +47,9 @@ export default new Vuex.Store({
 		},
 		updateLoading(state, value) {
 			state.loading = !! value;
+		},
+		updateMenuOpen(state, value) {
+			state.menuOpen = !! value;
 		}
 	},
 	actions: {

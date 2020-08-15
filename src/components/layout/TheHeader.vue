@@ -1,15 +1,15 @@
 <template>
 	<header class="bg-white fixed h-full md:h-auto md:sticky md:p-default md:top-0
 					text-center top-0 transition-medium w-full z-20"
-			:class="{ 'top-100': !menuOpen }">
+			:class="{ 'top-100': ! menuOpen }">
 		
-		<Burger @click.native="menuOpen = ! menuOpen"
+		<Burger @click.native="updateMenuOpen( ! menuOpen)"
 				class="bg-white bottom-0 fixed flex justify-center menu mobile p-2 shadow-inner w-full"
 				:open="menuOpen" />
 		
 		<nav class="md:flex justify-between">
 			<div class="flex md:w-1/3">
-				<Route class="md:py-0 py-8"
+				<Route class="md:py-0 md:text-left md:w-auto py-8 text-center w-full"
 					   to="/home">
 					les solides
 				</Route>
@@ -55,16 +55,20 @@
 	import Burger from "../partials/Burger";
 	import Route from "../partials/Route";
 	import NavigationFilter from "../partials/NavigationFilter";
+	import { mapGetters } from "vuex";
 	
 	export default {
 		name: "TheHeader",
 		components: {NavigationFilter, Route, Burger},
-		data: () => ({
-			menuOpen: false
-		}),
 		computed: {
+			...mapGetters(['menuOpen']),
 			amountOfCartItems() { // new
 				return this.$cart.length;
+			}
+		},
+		methods: {
+			updateMenuOpen(value) {
+				this.$store.commit('updateMenuOpen', value);
 			}
 		}
 	};
