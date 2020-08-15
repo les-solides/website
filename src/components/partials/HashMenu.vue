@@ -4,6 +4,7 @@
 		<router-link :to="$route.path + '#' + item.hash"
 					 class="block"
 					 :class="{ 'text-gray-600': item.hash !== collaborationHash }"
+					 @click.native="$emit('route')"
 					 :key="item.handle"
 					 v-for="item of items">
 			x {{ item.name }}

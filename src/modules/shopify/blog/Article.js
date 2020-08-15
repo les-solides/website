@@ -11,6 +11,7 @@ export default class Article extends ShopifyGraph {
 		this.handle = props.handle || "";
 		this.id = props.id || "";
 		this.featuredImage = props.image;
+		this.products = [];
 		this.tags = props.tags;
 		this.title = props.title || "";
 	}
