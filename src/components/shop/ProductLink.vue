@@ -28,7 +28,8 @@
 			
 			<!-- QuickShop Overlay -->
 			<div class="absolute bg-overlay h-full hidden left-0 product-link-overlay top-0 w-full"
-				 :class="{ 'md:block': hover && hasValidAmountOfOptions && quickBuyActive }">
+				 :class="{ 'md:block': hover && hasValidAmountOfOptions && quickBuyActive }"
+				 v-if=" ! this.small">
 				<div class="flex"
 					 :key="option.name"
 					 :style="variantDynamicHeight"
@@ -88,7 +89,7 @@
 			<!-- QuickShop Overlay -->
 			
 			<!--Buy Buttons (before / without QuickShop) [start]-->
-			<div>
+			<div v-if=" ! this.small">
 				<button class="absolute bg-overlay bottom-0 hidden md:block outside-btn text-center w-full"
 						@click="quickBuyActive = true"
 						style="height: 2vw"

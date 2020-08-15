@@ -1,6 +1,6 @@
 <template>
-	<div class="flex flex-wrap justify-start">
-		<ProductLink :class="{ 'mr-4': (index % 10) - 9 }"
+	<div class="flex flex-wrap justify-between md:justify-start">
+		<ProductLink :class="{ 'md:mr-4': (index % 10) - 9 }"
 					 :product="product"
 					 :key="product.id"
 					 small

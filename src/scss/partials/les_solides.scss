@@ -164,6 +164,12 @@ h4 {
 	top: 100%;
 }
 
+.md\:top-100px {
+	@media screen and (min-width: $breakpoint-md){
+		top: calc(var(--header-height));
+	}
+}
+
 // -- T [end]
 
 .transition-medium {
