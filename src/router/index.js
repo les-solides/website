@@ -63,6 +63,11 @@ const routes = [
 		path: '/product/:handle',
 		name: 'Product',
 		component: () => import(/* webpackChunkName: "Product" */ '../components/shop/Product')
+	},
+	{
+		path: '*',
+		name: 'PageNotFound404',
+		component: () => import(/* webpackChunkName: "404 Page Not Found"*/'./../views/errors/PageNotFound404')
 	}
 ];
 

@@ -7,6 +7,7 @@
 					:open="true" />
 			
 			<About v-if="currentRoute === footer.routes.ABOUT" />
+			<Contact v-if="currentRoute === footer.routes.CONTACT" />
 			<SizeGuide v-if="currentRoute === footer.routes.SIZE" />
 			<NewsletterSignup v-if="currentRoute === footer.routes.NEWSLETTER" />
 			<PrivacyPolicy v-if="currentRoute === footer.routes.PRIVACY" />
@@ -65,10 +66,12 @@
 	import ReturnsAndExchanges from "../../views/footer/ReturnsAndExchanges";
 	import NewsletterSignup from "../../views/footer/NewsletterSignup";
 	import Stockist from "../../views/footer/Stockist";
+	import Contact from "../template/Contact";
 	
 	export default {
 		name: "TheFooter",
 		components: {
+			Contact,
 			Stockist,
 			NewsletterSignup,
 			ReturnsAndExchanges, Shipping, PrivacyPolicy, SizeGuide, TermsOfUse, About, Burger},

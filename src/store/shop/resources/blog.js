@@ -53,7 +53,7 @@ export default {
 			const query = rootState.storefront.graphQLClient.query(root => {
 				root.addConnection(
 					"articles",
-					{args: {first: 1, query: `tags:['${ tags }']`} },
+					{args: {first: 1, query: `tag:'${ tags }'`} },
 					(article) => {
 						BlogField.addTo(article);
 						article.add('id');
