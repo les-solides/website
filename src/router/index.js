@@ -65,6 +65,11 @@ const routes = [
 		component: () => import(/* webpackChunkName: "Product" */ '../components/shop/Product')
 	},
 	{
+		path: '/search',
+		name: 'Search',
+		component: () => import(/* webpackChunkName: "Search" */ '../views/Search')
+	},
+	{
 		path: '*',
 		name: 'PageNotFound404',
 		component: () => import(/* webpackChunkName: "404 Page Not Found"*/'./../views/errors/PageNotFound404')

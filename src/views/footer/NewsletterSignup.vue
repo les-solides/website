@@ -1,17 +1,17 @@
 <template>
 	<div class="footer-page w-full">
-		<NewsletterSubscribe :article="article" v-if="article"/>
+		<NewsletterSubscribeBig :article="article" v-if="article"/>
 		<Error v-if="loaded && error" />
 	</div>
 </template>
 
 <script>
 	import Error from "../../components/partials/Error";
-	import NewsletterSubscribe from "../../components/template/NewsletterSubscribe";
 	import Article from "../../modules/shopify/blog/Article";
+	import NewsletterSubscribeBig from "../../components/template/NewsletterSubscribeBig";
 	export default {
 		name: "NewsletterSignup",
-		components: {NewsletterSubscribe, Error},
+		components: {NewsletterSubscribeBig, Error},
 		data: () => ({
 			article: null,
 			content: null,
