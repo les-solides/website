@@ -5,7 +5,8 @@
 			
 			<span class="block text-center w-full">{{ product.title }}</span>
 			
-			<div class="flex justify-between mt-2 overflow-x-auto">
+			<div id="scroller"
+				 class="flex justify-between mt-2 overflow-x-auto">
 				<LoadedImage class="h-full mb-4 object-contain product-image"
 							 :class="{
 							'mr-2': index < product.images.length - 1,
@@ -72,6 +73,7 @@
 	import RecommendedProducts from "./partials/RecommendedProducts";
 	import ProductDetail from "./partials/ProductDetail";
 	import PopupMobile from "../partials/PopupMobile";
+	import HorizontalScrollIndicator from "../../modules/HorizontalScrollIndicator";
 	
 	export default {
 		name: "Product",
@@ -184,7 +186,7 @@
 				};
 			},
 			switchProduct(product) {
-				location.href = `/product/${product.handle}`;
+				location.href = `/product/${ product.handle }`;
 			}
 		},
 		async created() {
@@ -194,6 +196,11 @@
 				this.$route.params.handle
 			);
 			delay(() => this.$store.commit('updateLoading', false), 500);
+			this.$nextTick(async () => {
+				await this.wait(2000);
+				let indicator = new HorizontalScrollIndicator('#scroller');
+				await indicator.start();
+			});
 		}
 	};
 </script>

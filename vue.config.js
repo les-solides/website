@@ -7,6 +7,8 @@ module.exports = {
 		],
 	},
 	devServer: {
+		host: 'localhost',
+		hot: true,
 		https: {
 			key: './ssl/localhost.key',
 			cert: './ssl/localhost.crt'

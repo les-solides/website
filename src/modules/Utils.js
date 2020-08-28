@@ -1,3 +1,5 @@
+import { delay } from "lodash";
+
 export default { // TODO: rename to Utils
 	
 	/**
@@ -106,6 +108,10 @@ export default { // TODO: rename to Utils
 		
 		return (parseInt(converted, 10) + 0.5);
 		
+	},
+	
+	wait(milliseconds) {
+		return new Promise(resolve => delay(() => resolve(resolve()), milliseconds));
 	}
 	
 }
