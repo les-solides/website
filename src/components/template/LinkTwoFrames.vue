@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-wrap justify-between">
+	<div class="flex flex-wrap justify-between mb-12">
 		<!-- Left [start] -->
 		<a :href="leftImage.alt"
 		   class="flex items-center relative mb-4 md:mb-0 md:w-1/2 w-full"

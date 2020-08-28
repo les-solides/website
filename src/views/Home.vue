@@ -2,8 +2,7 @@
 	<div>
 		<keep-alive :key="article.id"
 					v-for="article of homeArticles">
-			<component class="mb-8"
-					   :is="_.startCase(article.template).split(' ').join('')"
+			<component :is="_.startCase(article.template).split(' ').join('')"
 					   :article="article"
 					   @promise="promises.push($event)" />
 		</keep-alive>

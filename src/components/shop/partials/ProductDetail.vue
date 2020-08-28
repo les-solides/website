@@ -41,7 +41,7 @@
 			<button class="border-btn my-8 px-6 py-4 w-full"
 					@click="addToCart"
 					:disabled="addingToCart">
-				{{ addingToCart ? 'adding...' : 'add to cart' }}
+				{{ addingToCart ? 'adding...' : 'add to bag' }}
 			</button>
 			
 			<span class="block"
@@ -212,7 +212,7 @@
 							quantity: 1
 						});
 					delay(() => this.addingToCart = false, 200);
-					return this.$toasted.show("added to cart", {
+					return this.$toasted.show("added to bag", {
 						duration: 5000,
 						position: "bottom-center"
 					});
@@ -224,7 +224,7 @@
 							quantity: 2
 						});
 					delay(() => this.addingToCart = false, 200);
-					return this.$toasted.show("added to cart", {
+					return this.$toasted.show("added to bag", {
 						duration: 5000,
 						position: "bottom-center"
 					});
@@ -237,7 +237,7 @@
 						});
 				}
 				delay(() => this.addingToCart = false, 200);
-				this.$toasted.show("added to cart", {
+				this.$toasted.show("added to bag", {
 					duration: 5000,
 					position: "bottom-center"
 				});

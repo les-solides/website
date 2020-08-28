@@ -46,7 +46,7 @@
 							<button @click="addToCart"
 									:disabled="addingToCart"
 									class="text-right w-full">
-								{{ addingToCart ? 'adding...' : 'add to cart' }}
+								{{ addingToCart ? 'adding...' : 'add to bag' }}
 							</button>
 						</div>
 					</div>
@@ -165,7 +165,7 @@
 						});
 				}
 				this.addingToCart = false;
-				this.$toasted.show("added to cart", {
+				this.$toasted.show("added to bag", {
 					duration: 5000,
 					position: "bottom-center"
 				});

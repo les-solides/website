@@ -1,16 +1,15 @@
 @font-face {
 	font-family: 'Bradford';
-	src: url(/assets/fonts/AnyConv.com__BradfordLL-Light.eot);
-	src: url(/assets/fonts/AnyConv.com__BradfordLL-Light.ttf) format('ttf'),
-	url(/assets/fonts/AnyConv.com__BradfordLL-Light.woff) format('woff');
-	font-weight: normal;
+	src: url(/assets/fonts/Bradford_LesSolides-Light.otf) format('opentype');
+	font-weight: 200;
 	font-style: normal;
+	font-stretch: semi-condensed;
 }
 
 $size-base: 1rem;
 
-$font-family: Bradford, Helvetica, serif;
-$font-size-base: $size-base * 0.9;
+$font-family: Bradford, "Times New Roman", serif;
+$font-size-base: $size-base * 1;
 
 $color-primary: black;
 

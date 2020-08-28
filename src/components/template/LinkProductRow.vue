@@ -1,9 +1,10 @@
 <template>
-	<div class="flex flex-wrap justify-between"
+	<div class="flex flex-wrap justify-center"
 		 v-if="ready">
-		<ProductLink :product="product"
+		<ProductLink :class="{ 'md:mr-4': (index % 5) - 4}"
+					 :product="product"
 					 :key="_.uniqueId(product.id)"
-					 v-for="product of products" />
+					 v-for="(product, index) of products" />
 	</div>
 </template>
 

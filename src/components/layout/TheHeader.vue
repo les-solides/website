@@ -3,7 +3,7 @@
 					text-center top-0 transition-medium w-full z-20"
 			:class="{ 'top-100': ! menuOpen }">
 		
-		<div class="bg-white bottom-0 fixed flex justify-between menu mobile p-4 shadow-inner w-full z-10">
+		<div class="left-0 bg-white bottom-0 fixed flex justify-between menu mobile p-4 shadow-inner w-full z-10">
 			<Burger @click.native="updateMenuOpen( ! menuOpen)"
 					:open="menuOpen" />
 			<div class="flex justify-end md:w-1/3">
@@ -21,7 +21,8 @@
 		<nav class="h-full md:flex justify-between">
 			<div class="flex md:w-1/3">
 				<Route class="md:py-0 md:text-left md:w-auto py-16 text-center w-full"
-					   to="/home">
+					   to="/home"
+					   style="font-style: normal!important;">
 					les solides
 				</Route>
 				<NavigationFilter base="/products"
@@ -29,7 +30,7 @@
 								  name="Navigation (Products)"
 								  v-if="$route.path.includes('product')" />
 			</div>
-			<div class="md:flex justify-between md:w-1/3">
+			<div class="md:flex justify-center md:w-1/3">
 				<Route class="md:py-0 px-4 py-4"
 					   :exact="false"
 					   to="/products">

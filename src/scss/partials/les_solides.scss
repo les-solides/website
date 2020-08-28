@@ -3,17 +3,19 @@
 * {
 	color: $color-primary;
 	font-family: $font-family;
+	font-kerning: auto;
 	font-size: $font-size-base;
+	font-stretch: 90%;
+	letter-spacing: -1px;
+	margin: 0;
 	outline: none !important;
 	overflow: -moz-scrollbars-none;
-	margin: 0;
 	padding: 0;
 	text-decoration: none;
 	-moz-osx-font-smoothing: grayscale;
 	-ms-overflow-style: none;
 	-webkit-appearance: none;
 	-webkit-font-smoothing: antialiased;
-
 	&::-webkit-scrollbar {
 		display: none;
 	}
@@ -95,12 +97,28 @@ h3 {
 h4 {
 	font-size: $font-size-base * 1.10;
 }
+
+header {
+	nav {
+		margin-top: -4px;
+	}
+	&.md\:p-default {
+		padding: 1rem 1rem .8rem 1rem !important;
+	}
+}
 // -- H [end]
 
 // -- L [start]
+.line-height-1 {
+	line-height: 1;
+}
 // -- L [end]
 
 // -- M [start]
+#main {
+	padding-top: 3rem;
+}
+
 @for $i from 1 through 4 {
 	.md\:column-#{ $i } {
 		@media (min-width: $breakpoint-md) {

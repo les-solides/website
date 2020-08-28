@@ -97,6 +97,10 @@ export default {
         async search({ rootState }, searchQuery) {
             return api.post("", productsByQuery(searchQuery))
                       .then(({ data }) =>  data.data.products.edges.map(e => new Product(e.node)));
+        },
+        async searchByHandle({ rootState }, handles) {
+            return api.post("", productsByQuery(handles))
+                      .then(({ data }) =>  data.data.products.edges.map(e => new Product(e.node)));
         }
     },
     getters: {

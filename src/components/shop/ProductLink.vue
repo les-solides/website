@@ -1,5 +1,5 @@
 <template>
-	<div class="mb-4 product-link"
+	<div class="mb-12 product-link"
 		 :class="{ short, small }">
 		
 		<PopupMobile v-model="productDetailsOpen"
@@ -15,7 +15,7 @@
 			
 			<!-- Image -->
 			<router-link :to="`/product/${ product.handle }`"
-						 class="hidden md:block mt-2 overflow-hidden">
+						 class="hidden md:block overflow-hidden">
 				<LoadedImage class="h-full object-cover w-full"
 							 :src="o(imageShown).src || o(imageShown).originalSrc" />
 			</router-link>
@@ -82,8 +82,8 @@
 						@click="addToCart"
 						:disabled=" ! selectedVariants.length"
 						:class="{ 'text-gray-800': ! selectedVariants.length }"
-						style="height: 2vw">
-					{{ addingToCart ? 'adding...' : 'add to cart' }}
+						style="height: 3vw">
+					{{ addingToCart ? 'adding...' : 'add to bag' }}
 				</button>
 			</div>
 			<!-- QuickShop Overlay -->
@@ -92,15 +92,15 @@
 			<div v-if=" ! this.small">
 				<button class="absolute bg-overlay bottom-0 hidden md:block outside-btn text-center w-full"
 						@click="quickBuyActive = true"
-						style="height: 2vw"
+						style="height: 3vw"
 						v-if="quickShopType !== 0 && hasValidAmountOfOptions && hover && ! quickBuyActive">
 					quickbuy
 				</button>
 				<button class="absolute bg-overlay bottom-0 hidden md:block outside-btn text-center w-full"
 						@click="addToCart"
-						style="height: 2vw"
+						style="height: 3vw"
 						v-if="quickShopType === 0 && hover">
-					{{ addingToCart ? 'adding...' : 'add to cart' }}
+					{{ addingToCart ? 'adding...' : 'add to bag' }}
 				</button>
 			</div>
 			<!--Buy Buttons (before / without QuickShop) [end]-->
@@ -110,9 +110,9 @@
 		
 		<!-- Title & Price -->
 		<router-link :to="`/product/${ product.handle }`"
-					 class="block mt-2 overflow-hidden">
-			<span class="block mr-4 whitespace-no-wrap">{{ product.title }}</span>
-			<span v-if="withPrice">{{ price }}</span>
+					 class="block line-height-1 overflow-hidden">
+			<span class="block line-height-1 mr-4 mt-2 whitespace-no-wrap">{{ product.title }}</span>
+			<span class="block line-height-1 mt-1" v-if="withPrice">{{ price }}</span>
 		</router-link>
 		<!-- Title & Price -->
 	
@@ -281,7 +281,7 @@
 							quantity: 1
 						});
 					delay(() => this.addingToCart = false, 200);
-					return this.$toasted.show("added to cart", {
+					return this.$toasted.show("added to bag", {
 						duration: 5000,
 						position: "bottom-center"
 					});
@@ -293,7 +293,7 @@
 							quantity: 2
 						});
 					delay(() => this.addingToCart = false, 200);
-					return this.$toasted.show("added to cart", {
+					return this.$toasted.show("added to bag", {
 						duration: 5000,
 						position: "bottom-center"
 					});
@@ -306,7 +306,7 @@
 						});
 				}
 				delay(() => this.addingToCart = false, 200);
-				this.$toasted.show("added to cart", {
+				this.$toasted.show("added to bag", {
 					duration: 5000,
 					position: "bottom-center"
 				});
