@@ -4,6 +4,7 @@ import api from "../../../api/shopifyAPI";
 import productByHandle from "./queries/productByHandle";
 import Utils from "../../../modules/Utils";
 import productRecommendations from "./queries/productRecommendations";
+import productsByQuery from "./queries/productsByQuery";
 
 export default {
     namespaced: true,
@@ -94,21 +95,8 @@ export default {
                 });
         },
         async search({ rootState }, searchQuery) {
-            const query = rootState.storefront.graphQLClient
-                .query(root => {
-                    root.addConnection(
-                        "products",
-                        { args: { first: 250, query: searchQuery } },
-                        (product) => {
-                            ProductField.addTo(product);
-                        }
-                    );
-                });
-            return rootState.storefront.graphQLClient
-                .send(query)
-                .then(({ data }) =>
-                    data.products.edges.map(e => new Product(e.node))
-                );
+            return api.post("", productsByQuery(searchQuery))
+                      .then(({ data }) =>  data.data.products.edges.map(e => new Product(e.node)));
         }
     },
     getters: {
