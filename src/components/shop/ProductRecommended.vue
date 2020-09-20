@@ -21,7 +21,7 @@
 		<router-link :to="`/product/${ product.handle }`"
 					 class="block mt-2 overflow-hidden">
 			<span class="block mr-4 whitespace-no-wrap">{{ product.title }}</span>
-			<span>{{ price }}</span>
+			<span class="kapitälchen">{{ price }}</span>
 		</router-link>
 		<!-- Title & Price -->
 	</a>
@@ -50,7 +50,7 @@
 		<router-link :to="`/product/${ product.handle }`"
 					 class="block mt-2 overflow-hidden">
 			<span class="block mr-4 whitespace-no-wrap">{{ product.title }}</span>
-			<span>{{ price }}</span>
+			<span class="kapitälchen">{{ price }}</span>
 		</router-link>
 		<!-- Title & Price -->
 	</li>

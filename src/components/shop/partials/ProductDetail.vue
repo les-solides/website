@@ -20,7 +20,7 @@
 				<!-- Title & Price -->
 				<div class="block overflow-hidden">
 					<span class="block mr-4 whitespace-no-wrap">{{ product.title }}</span>
-					<span>{{ price }}</span>
+					<span class="kapitälchen">{{ price }}</span>
 				</div>
 				<!-- Title & Price -->
 				<ArrowUp />

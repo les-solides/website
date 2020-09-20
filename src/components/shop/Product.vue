@@ -1,32 +1,28 @@
 <template>
 	<div>
-		<div class="hidden md:block mb-12 md:mt-4"
+		<div class="hidden md:block"
 			 v-if="product">
 			
-			<span class="block text-center w-full">{{ product.title }}</span>
-			
 			<div id="scroller"
-				 class="flex justify-between mt-2 overflow-x-auto">
-				<LoadedImage class="h-full mb-4 object-contain product-image"
+				 class="flex justify-between mb-1 mt-2 overflow-x-auto">
+				<LoadedImage class="h-full object-contain product-image"
 							 :class="{
-							'mr-2': index < product.images.length - 1,
-							 'object-cover w-1/3': index < 3
+							'mr-4': index < product.images.length - 1,
+							 'object-cover ws-1/3': index < 3
 						}"
 							 :key="image.id"
 							 v-for="(image, index) of product.images"
 							 :src="image.src" />
 			</div>
 			
-			<div class="flex justify-between">
+			<div class="flex justify-between mb-12">
 				<div class="mr-4 w-1/3">
-					<span class="block"
-						  :key="tag"
-						  v-for="tag of product.tags.filter(t => ! t.includes('archive') && ! t.includes('variant-rule'))">
-						{{ tag }}
-					</span>
+					<div class="kerned w-full">
+						<div>{{ product.title }}</div>
+					</div>
 				</div>
-				<span class="mr-4 w-1/3"
-					  v-html="product.descriptionHtml"></span>
+				<div class="mr-4 w-1/3"
+					 v-html="descriptionTag.innerHTML"></div>
 				<div class="w-1/3">
 					<div class="flex justify-between">
 						<div class="md:w-1/2">
@@ -39,8 +35,8 @@
 									v-if="pairOptionName" />
 						</div>
 						<div class="flex flex-wrap justify-end w-1/2">
-						<span class="block kapitälchen mb-2 text-right w-full"
-							  v-if="selectedVariants.length">
+							<span class="block kapitälchen mb-2 text-right w-full"
+								  v-if="selectedVariants.length">
 								{{ price }}
 							</span>
 							<button @click="addToCart"
@@ -52,6 +48,9 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="mb-16 ws-1/3"
+				 v-html="product.descriptionRest.innerHTML"></div>
 			
 			<RecommendedProducts :product="product" />
 		</div>
@@ -91,6 +90,16 @@
 			selectedPairOptionValue: {}
 		}),
 		computed: {
+			descriptionTag() {
+				if (this.product.hasGoldSilverTag) {
+					return this.selectedSilver ?
+						   this.product.getDescriptionTagByDataOption('material:silver') :
+						   this.product.getDescriptionTagByDataOption('material:gold');
+				}
+				const tags = document.createElement('div');
+				[].forEach.call(this.product.descriptionTags || [], node => tags.appendChild(node));
+				return tags;
+			},
 			mainNode() {
 				return this.product ?
 					   this.product.descriptionNodes.querySelector("ul") : null;
@@ -128,6 +137,9 @@
 					return 5;
 				}
 				return 6;
+			},
+			selectedSilver() {
+				return this.selectedOptionValues.find(o => o.value === "silver");
 			},
 			selectedVariants() {
 				if (this.product.variants.length === 1) {

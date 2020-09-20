@@ -72,10 +72,28 @@ export default class Product extends ShopifyGraph {
         return this._graph.descriptionHtml;
     }
     
+    get descriptionRest() {
+        const root = document.createElement('div');
+        const tags = this.descriptionNodes
+                         .querySelectorAll(':scope > :not([data-tag])');
+        [].forEach.call(tags, node => root.appendChild(node));
+        return root;
+    }
+    
+    get descriptionTags() {
+        return this.descriptionNodes
+                   .querySelectorAll(':scope > [data-tag]');
+    }
+    
     get descriptionNodes() {
         const root = document.createElement('div');
         root.innerHTML = this.descriptionHtml || "";
         return root;
+    }
+    
+    get descriptionOptions() {
+        return this.descriptionNodes
+            .querySelectorAll(':scope > [data-option]');
     }
 
     get firstImage() {
@@ -83,6 +101,14 @@ export default class Product extends ShopifyGraph {
             return null;
         }
         return this.images[0];
+    }
+    
+    get hasDescriptionTag() {
+        return !! this.descriptionTags.length;
+    }
+    
+    get hasGoldSilverTag() {
+        return !! this.getDescriptionTagByDataOption('material:gold');
     }
 
     get id() {
@@ -287,6 +313,11 @@ export default class Product extends ShopifyGraph {
         }
         return !! this.collections
             .find(c => (c.handle === handle || c.parentHandle === handle));
+    }
+    
+    getDescriptionTagByDataOption(option) {
+        return Array.from(this.descriptionTags)
+                    .find(node => node.dataset.option === option);
     }
     
     selectElement(selector) {

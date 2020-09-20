@@ -7,6 +7,7 @@
 	font-size: $font-size-base;
 	font-stretch: 90%;
 	letter-spacing: -1px;
+	line-height: 1.25;
 	margin: 0;
 	outline: none !important;
 	overflow: -moz-scrollbars-none;
@@ -190,6 +191,10 @@ header {
 	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0px -4px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
+/*.kerned > * {
+	display: block;
+	transform: scale(.9, 1) translate(-5%, 0);
+}*/
 // -- T [start]
 .top-100 {
 	top: 100%;
@@ -215,6 +220,9 @@ header {
 
 // -- W [start]
 @for $i from 1 through 9 {
+	.ws-#{$i}\/3 {
+		width: calc(#{ $i / 3 * 100%} - .5rem);
+	}
 	.w-#{$i}\/9 {
 		width: $i / 9 * 100%;
 	}
