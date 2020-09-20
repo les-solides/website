@@ -112,7 +112,7 @@
 		<router-link :to="`/product/${ product.handle }`"
 					 class="block line-height-1 overflow-hidden">
 			<span class="block line-height-1 mr-4 mt-2 whitespace-no-wrap">{{ product.title }}</span>
-			<span class="block line-height-1 mt-1" v-if="withPrice">{{ price }}</span>
+			<span class="block kapitälchen line-height-1 mt-1" v-if="withPrice">{{ price }}</span>
 		</router-link>
 		<!-- Title & Price -->
 	

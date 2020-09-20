@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-wrap justify-center"
+	<div class="flex flex-wrap justify-between"
 		 v-if="ready">
 		<ProductLink :class="{ 'md:mr-4': (index % 5) - 4}"
 					 :product="product"

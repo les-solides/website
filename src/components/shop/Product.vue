@@ -39,7 +39,7 @@
 									v-if="pairOptionName" />
 						</div>
 						<div class="flex flex-wrap justify-end w-1/2">
-						<span class="block mb-2 text-right w-full"
+						<span class="block kapitälchen mb-2 text-right w-full"
 							  v-if="selectedVariants.length">
 								{{ price }}
 							</span>
