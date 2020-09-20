@@ -1,8 +1,27 @@
 <template>
 	<div :id="article.handle"
-		 class="collaboration mx-auto" v-if="products.length">
-		<div class="horizontal-scroller flex justify-start mt-4 open">
-			<LoadedImage :src="product.image.transformedSrc"/>
+		 class="collaboration">
+		<div class="horizontal-scroller	flex justify-start open">
+			<router-link
+					class="initial-product  mr-4"
+					:to="productRoute">
+				<LoadedImage
+						:src="article.featuredImage.originalSrc"
+						v-if="article.featuredImage" />
+				<div class="flex justify-between">
+					<div>{{ o(product).title }}</div>
+					<div class="kapitälchen">{{ o(product).price }}</div>
+				</div>
+			</router-link>
+			<div class="collaboration-images items-baseline object-contain flex">
+				<LoadedImage
+						class="mr-4 object-contain"
+						:key="image.src"
+						v-for="image of article.images"
+						:src="image.src" />
+			</div>
+			
+		
 		</div>
 	</div>
 </template>
@@ -20,39 +39,61 @@
 				required: true
 			}
 		},
+		data: () => ({
+			product: null
+		}),
 		computed: {
-			products() {
-				return this.article.products || [];
+			productHandle() {
+				return this.article.getTag(/product:*/, /product:*/);
+			},
+			productRoute() {
+				return this.o(this.product).handle ?
+					   `/product/${ this.product.handle }` :
+					   '';
 			}
+		},
+		async created() {
+			this.product = await this.$store.dispatch(
+				'shopify/product/fetchByHandle',
+				this.productHandle
+			);
 		}
 	};
 </script>
 
-<style scoped lang="scss">
+<style scoped
+	   lang="scss">
 	@import "./src/scss/partials/variables";
-	.horizontal-scroller {
-		height: 70vw;
-		max-height: 0;
-		overflow-y: hidden;
-		transition: .25s;
+	
+	$height: 85vh;
+	
+	.collaboration {
+		left: -1rem;
+		position: relative;
+		width: calc(100vw);
 		
-		img {
-			height: 70vw;
+		.collaboration-images {
+			img {
+				height: $height;
+				max-width: unset;
+			}
 		}
 		
-		&.open {
-			max-height: 70vw;
+		.horizontal-scroller {
+			overflow-y: scroll;
+			width: 100vw;
 		}
 		
-		@media screen and (min-width: $breakpoint-md) {
-			height: 40vw;
+		.initial-product {
+			display: block;
+			margin-left: calc(50vw - 16vw);
+			max-width: 30vw;
+			min-width: 30vw;
 			
 			img {
-				height: 40vw;
-			}
-			
-			&.open {
-				max-height: 40vw;
+				height: $height;
+				object-fit: cover;
+				width: 100%;
 			}
 		}
 	}

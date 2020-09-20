@@ -37,7 +37,7 @@
 		},
 		methods: {
 			async load() {
-				let products = await this.$store.dispatch(
+				const products = await this.$store.dispatch(
 					'shopify/product/searchByHandles',
 					this.productHandles
 				);

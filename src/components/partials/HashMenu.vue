@@ -1,6 +1,6 @@
 <template>
-	<div class="sticky w-1/6"
-		 style="top: 115px">
+	<div class="fixed w-1/6"
+		 style="top: 5.5rem">
 		<router-link :to="$route.path + '#' + item.hash"
 					 class="block"
 					 :class="{ 'text-gray-600': item.hash !== collaborationHash }"
@@ -31,7 +31,3 @@
 		}
 	};
 </script>
-
-<style scoped>
-
-</style>

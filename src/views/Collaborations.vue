@@ -1,8 +1,9 @@
 <template>
 	<div id="observer">
-		<HashMenu :items="hashMenuItems"
+		<HashMenu class="z-10"
+				  :items="hashMenuItems"
 				  @route="blocked = true" />
-		<component class="mb-32"
+		<component class="mb-12"
 				   :is="_.startCase(article.template).split(' ').join('')"
 				   :key="article.id"
 				   :article="article"
@@ -15,13 +16,11 @@
 	import Collaboration from "../components/template/Collaboration";
 	import HashMenu from "../components/partials/HashMenu";
 	import HashMenuItem from "../modules/HashMenuItem";
-	import { delay } from "lodash";
 	
 	export default {
 		name: "Collaborations",
 		components: {Collaboration, HashMenu},
 		data: () => ({
-			blocked: false,
 			observeReady: false
 		}),
 		computed: {
@@ -39,79 +38,15 @@
 						   ));
 			}
 		},
-		methods: {
-			getProductHandles(article) {
-				const handles = Array.from(article.selectElements("li"));
-				if ( ! Array.isArray(handles)) {
-					return [];
-				}
-				return handles.map(h =>
-					h.children && h.children.length ?
-					h.children[0].innerText :
-					h.innerText
-				);
-			},
-			scrollToAnchor () {
-				this.$nextTick(() => {
-					if(this.$route.hash) {
-						const $el = document.querySelector(this.$route.hash)
-						$el && window.scrollTo(0, $el.offsetTop - 100);
-					}
-				});
-			}
-		},
 		async created() {
-			this.blocked = true;
 			await this.$store.commit('updateLoading', true);
-			if (this.collaborationArticles.length) {
-				return this.$store.commit('updateLoading', false);
-			}
 			
 			await this.$store.dispatch(
 				'shopify/blog/fetchArticlesByBlog',
 				'Collaborations'
 			);
 			
-			for (let article of this.collaborationArticles) {
-				const productHandles = this.getProductHandles(article);
-				for (let handle of productHandles) {
-					const product = await this.$store.dispatch(
-						'shopify/product/fetchByHandle',
-						handle
-					);
-					if (product) {
-						article.products.push(product);
-					}
-				}
-			}
 			await this.$store.commit('updateLoading', false);
-			await this.wait(200);
-			this.articles.forEach(a => {
-				let observer = new IntersectionObserver((entries) => {
-					if (this.blocked) {
-						return delay(() => this.blocked = false, 200);
-					}
-					history.pushState(
-						{},
-						window.title,
-						window.location.pathname + "#" + entries[0].target.id
-					);
-					this.$store.state.collaborationHash = entries[0].target.id;
-				}, {
-					root: null,
-					threshold: 1
-				});
-				
-				const element = document.querySelector(`#${ a.handle }`);
-				element && observer.observe(element);
-			});
-			this.scrollToAnchor();
-			await this.wait(200);
-			this.blocked = false;
 		}
 	};
 </script>
-
-<style scoped>
-
-</style>
