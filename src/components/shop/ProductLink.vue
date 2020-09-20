@@ -404,7 +404,7 @@
 			height: 60vw;
 		}
 		
-		width: 48.5%;
+		width: calc(50% - .5rem);
 		@media (min-width: 768px) {
 			img, .empty-image-box {
 				height: 26vw;

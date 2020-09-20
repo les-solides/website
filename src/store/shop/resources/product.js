@@ -5,6 +5,7 @@ import productByHandle from "./queries/productByHandle";
 import Utils from "../../../modules/Utils";
 import productRecommendations from "./queries/productRecommendations";
 import productsByQuery from "./queries/productsByQuery";
+import productsByHandles from "./queries/productsByHandles";
 
 export default {
     namespaced: true,
@@ -98,8 +99,8 @@ export default {
             return api.post("", productsByQuery(searchQuery))
                       .then(({ data }) =>  data.data.products.edges.map(e => new Product(e.node)));
         },
-        async searchByHandle({ rootState }, handles) {
-            return api.post("", productsByQuery(handles))
+        async searchByHandles({ rootState }, handles) {
+            return api.post("", productsByHandles(handles))
                       .then(({ data }) =>  data.data.products.edges.map(e => new Product(e.node)));
         }
     },

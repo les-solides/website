@@ -1,7 +1,11 @@
 <template>
-	<div class="flex flex-wrap justify-between"
+	<div class="flex flex-wrap"
 		 v-if="ready">
-		<ProductLink :class="{ 'md:mr-4': (index % 5) - 4}"
+		<ProductLink :class="{
+						'mr-4': (index % 2) - 1,
+						'md:mr-4': (index % 5) - 4,
+						'md:mr-0': (index % 5) - 5
+					 }"
 					 :product="product"
 					 :key="_.uniqueId(product.id)"
 					 v-for="(product, index) of products" />
@@ -27,28 +31,17 @@
 		}),
 		computed: {
 			productHandles() {
-				const handles = Array.from(this.article.selectElements("li"));
-				if ( ! Array.isArray(handles)) {
-					return [];
-				}
-				return handles.map(h =>
-					h.children && h.children.length ?
-					h.children[0].innerText :
-					h.innerText
-				);
+				const handles = Array.from(this.article.selectElements("ul > li"));
+				return Array.isArray(handles) ? handles.map(h => h.innerText) : [];
 			}
 		},
 		methods: {
 			async load() {
-				for (let handle of this.productHandles) {
-					const product = await this.$store.dispatch(
-						'shopify/product/fetchByHandle',
-						handle
-					);
-					if (product) {
-						this.products.push(product);
-					}
-				}
+				let products = await this.$store.dispatch(
+					'shopify/product/searchByHandles',
+					this.productHandles
+				);
+				this.products = this.productHandles.map(h => products.find(p => p.handle === h));
 			}
 		},
 		async created() {
