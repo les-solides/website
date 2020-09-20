@@ -16,7 +16,7 @@
 		<!-- Image & QuickShop Overlay [end] -->
 		
 		<div class="bg-white py-4 relative z-10">
-			<div class="flex justify-between">
+			<div class="flex justify-between mb-8">
 				<!-- Title & Price -->
 				<div class="block overflow-hidden">
 					<span class="block mr-4 whitespace-no-wrap">{{ product.title }}</span>
@@ -26,7 +26,7 @@
 				<ArrowUp />
 			</div>
 			
-			<div class="flex justify-between mt-8">
+			<div class="flex justify-between mb-8">
 				<div v-if="product.variants.length > 1">
 					<Option :option="option"
 							:key="option.id"
@@ -38,20 +38,17 @@
 				</div>
 			</div>
 			
-			<button class="border-btn my-8 px-6 py-4 w-full"
+			<button class="border-btn mb-8 px-6 py-4 w-full"
 					@click="addToCart"
 					:disabled="addingToCart">
 				{{ addingToCart ? 'adding...' : 'add to bag' }}
 			</button>
 			
-			<span class="block"
-				  :key="tag"
-				  v-for="tag of product.tags.filter(t => ! t.includes('archive') && ! t.includes('variant-rule'))">
-				{{ tag }}
-			</span>
+			<div class="mb-8"
+				 v-html="descriptionTag.innerHTML"></div>
 			
-			<div class="mt-8"
-				 v-html="product.descriptionHtml"></div>
+			<div class="mb-8"
+				 v-html="product.descriptionRest.innerHTML"></div>
 			
 			<!--todo: recommended mobile component that just switches the product prop-->
 			<RecommendedProducts :product="product"
@@ -96,6 +93,16 @@
 			validAmountOfOptions: 2
 		}),
 		computed: {
+			descriptionTag() {
+				if (this.product.hasGoldSilverTag) {
+					return this.selectedSilver ?
+						   this.product.getDescriptionTagByDataOption('material:silver') :
+						   this.product.getDescriptionTagByDataOption('material:gold');
+				}
+				const tags = document.createElement('div');
+				[].forEach.call(this.product.descriptionTags || [], node => tags.appendChild(node));
+				return tags;
+			},
 			hasValidAmountOfOptions() {
 				return this.product.options.length &&
 					this.product.options.length <= this.validAmountOfOptions;
