@@ -1,6 +1,6 @@
 <template>
 	<div :id="article.handle"
-		 class="collaboration">
+		 class="collaboration mt-4 md:mt-0">
 		<div class="horizontal-scroller	flex justify-start open">
 			<router-link
 					class="initial-product  mr-4"
@@ -74,8 +74,11 @@
 		
 		.collaboration-images {
 			img {
-				height: $height;
+				height: calc(#{$height} - 20vh);
 				max-width: unset;
+				@media screen and (min-width: $breakpoint-md){
+					height: $height;
+				}
 			}
 		}
 		
@@ -86,14 +89,22 @@
 		
 		.initial-product {
 			display: block;
-			margin-left: calc(50vw - 16vw);
-			max-width: 30vw;
-			min-width: 30vw;
+			margin-left: 1rem;
+			max-width: calc(100vw - 4rem);
+			min-width: calc(100vw - 4rem);
+			@media screen and (min-width: $breakpoint-md){
+				margin-left: calc(50vw - 16vw);
+				max-width: 30vw;
+				min-width: 30vw;
+			}
 			
 			img {
-				height: $height;
+				height: calc(#{$height} - 20vh);
 				object-fit: cover;
 				width: 100%;
+				@media screen and (min-width: $breakpoint-md){
+					height: $height;
+				}
 			}
 		}
 	}

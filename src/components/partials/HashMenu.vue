@@ -1,6 +1,5 @@
 <template>
-	<div class="fixed w-1/6"
-		 style="top: 5.5rem">
+	<div class="hash-menu sticky md:fixed md:w-1/6 w-full">
 		<router-link :to="$route.path + '#' + item.hash"
 					 class="block"
 					 :class="{ 'text-gray-600': item.hash !== collaborationHash }"
@@ -31,3 +30,12 @@
 		}
 	};
 </script>
+<style lang="scss">
+	@import "./../../scss/partials/variables";
+	.hash-menu {
+		top: 1rem;
+		@media screen and (min-width: $breakpoint-md){
+			top: 5.5rem;
+		}
+	}
+</style>

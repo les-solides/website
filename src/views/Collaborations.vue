@@ -1,5 +1,5 @@
 <template>
-	<div id="observer">
+	<div class="mb-32">
 		<HashMenu class="z-10"
 				  :items="hashMenuItems"
 				  @route="blocked = true" />
