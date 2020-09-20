@@ -409,7 +409,7 @@
 			img, .empty-image-box {
 				height: 26vw;
 			}
-			width: 19%;
+			width: calc(20% - .8rem);
 			&.small {
 				img, .empty-image-box {
 					height: 13vw;
