@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<component class="mb-8"
+		<component class="mb-4"
 				   :is="_.startCase(article.template).split(' ').join('')"
 				   :key="article.id"
 				   :article="article"

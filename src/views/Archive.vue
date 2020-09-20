@@ -2,12 +2,12 @@
 	<div>
 		<div :key="year"
 			 v-for="year of years">
-			<div class="bg-white md:pt-0 pt-4 sticky top-0 md:top-100px w-full z-10">
-				<h1>{{ year }}</h1>
-				<Divider class="mt-2" />
+			<div class="bg-white md:pt-0 pt-4 sticky top-0 mb-4 md:top-100px w-full z-10">
+				<h1 class="kapitälchen mb-1">{{ year }}</h1>
+				<Divider />
 			</div>
 			<LinkProductGroup
-					class="mb-8 mt-8"
+					class="mb-4"
 					:products="products.filter(product => product.getTag(/^archive:(.*)/, 'archive:') === year)"/>
 		</div>
 	</div>

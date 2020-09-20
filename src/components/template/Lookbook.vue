@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<button @click="open = ! open">x {{ article.title }}</button>
-		<div class="horizontal-scroller flex justify-start mt-4"
+		<div class="horizontal-scroller flex justify-start"
 			 :class="{ open }">
 			<LoadedImage class="mr-4 object-contain"
 						 :src="image.src"

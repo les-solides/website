@@ -415,7 +415,7 @@
 					height: 13vw;
 				}
 				
-				width: 9%;
+				width: calc(10% - .9rem);
 			}
 		}
 		
