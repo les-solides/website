@@ -1,10 +1,10 @@
 <template>
-	<a class="block h1 mb-12"
+	<a class="block h1 mb-12 mt-minus-4"
 	   :href="article.content"
 	   v-if="article.content && article.content.includes('http')">
 		{{ article.title }}
 	</a>
-	<router-link class="block h1 mb-12"
+	<router-link class="block h1 mb-12 mt-minus-4"
 				 :to="article.content"
 				 v-else>
 		{{ article.title }}
