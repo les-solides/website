@@ -51,7 +51,7 @@
 			</div>
 			
 			<div class="mb-16 ws-1/3"
-				 v-html="product.descriptionRest.innerHTML"></div>
+				 v-html="descriptionRest.innerHTML"></div>
 			
 			<RecommendedProducts :product="product" />
 		</div>
@@ -91,6 +91,16 @@
 			selectedPairOptionValue: {}
 		}),
 		computed: {
+			descriptionRest() {
+				if (this.product.hasGoldSilverDescription) {
+					return this.selectedSilver ?
+						   this.product.descriptionRest
+							   .find(d => d.dataset.option === "material:silver") :
+						   this.product.descriptionRest
+							   .find(d => d.dataset.option === "material:gold");
+				}
+				return this.descriptionRest;
+			},
 			descriptionTag() {
 				if (this.product.hasGoldSilverTag) {
 					return this.selectedSilver ?

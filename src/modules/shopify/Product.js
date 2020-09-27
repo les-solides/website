@@ -73,6 +73,12 @@ export default class Product extends ShopifyGraph {
     }
     
     get descriptionRest() {
+        if (this.hasGoldSilverDescription) {
+            return Array.from(this.descriptionOptions)
+                        .filter(description =>
+                            ! description.dataset.tag && description.dataset.tag !== ""
+                        );
+        }
         const root = document.createElement('div');
         const tags = this.descriptionNodes
                          .querySelectorAll(':scope > :not([data-tag])');
@@ -105,6 +111,15 @@ export default class Product extends ShopifyGraph {
     
     get hasDescriptionTag() {
         return !! this.descriptionTags.length;
+    }
+    
+    get hasGoldSilverDescription() {
+        return !! Array.from(this.descriptionNodes.querySelectorAll(':scope > div'))
+            .filter(div => !
+                div.dataset.tag &&
+                div.dataset.tag !== "" &&
+                div.dataset.option
+            ).length;
     }
     
     get hasGoldSilverTag() {
