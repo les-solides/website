@@ -2,12 +2,17 @@
 	<div class="mb-32">
 		<HashMenu class="z-10"
 				  :items="hashMenuItems"
-				  @route="blocked = true" />
-		<component class="mb-12"
-				   :is="_.startCase(article.template).split(' ').join('')"
-				   :key="article.id"
-				   :article="article"
-				   v-for="article of collaborationArticles" />
+				  @route="$refs.fullPage.moveTo($event)" />
+		<full-page ref="fullPage"
+				   :options="options"
+				   :skip-init="true"
+				   v-if="options.anchors.length">
+			<component class="mb-12 section"
+					   :is="_.startCase(article.template).split(' ').join('')"
+					   :key="article.id"
+					   :article="article"
+					   v-for="(article) of collaborationArticles" />
+		</full-page>
 	</div>
 </template>
 
@@ -34,11 +39,22 @@
 				return this.collaborationArticles
 						   .map(a => new HashMenuItem(
 							   a.title,
-							   a.handle
+							   `collaboration-${ a.handle }`
 						   ));
+			},
+			options() {
+				return {
+					anchors: this.collaborationArticles.map(a => `collaboration-${ a.handle }`),
+					licenseKey: 'BEEAAF1E-F23E4BCD-85FA7E40-2F7456B5'
+				};
 			}
 		},
-		async created() {
+		methods: {
+			componentsReady() {
+				this.$refs.fullPage.init();
+			}
+		},
+		async mounted() {
 			await this.$store.commit('updateLoading', true);
 			
 			await this.$store.dispatch(
@@ -47,6 +63,10 @@
 			);
 			
 			await this.$store.commit('updateLoading', false);
+			
+			this.$nextTick(() => {
+				this.componentsReady();
+			});
 		}
 	};
 </script>

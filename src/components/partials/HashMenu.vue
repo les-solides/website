@@ -1,13 +1,13 @@
 <template>
 	<div class="hash-menu sticky md:fixed md:w-1/6 w-full">
-		<router-link :to="$route.path + '#' + item.hash"
+		<button :to="$route.path + '#section-' + index"
 					 class="block"
-					 :class="{ 'text-gray-600': item.hash !== collaborationHash }"
-					 @click.native="$emit('route')"
+					 :class="{ 'text-gray-600': `#${ item.hash }` !== $route.hash }"
+					 @click="move(index)"
 					 :key="item.handle"
-					 v-for="item of items">
+					 v-for="(item, index) of items">
 			x {{ item.name }}
-		</router-link>
+		</button>
 	</div>
 </template>
 
@@ -27,6 +27,11 @@
 			...mapState({
 				collaborationHash: state => state.collaborationHash
 			})
+		},
+		methods: {
+			move(index) {
+				window.fullpage_api.moveTo(index + 1);
+			}
 		}
 	};
 </script>
