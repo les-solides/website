@@ -58,7 +58,6 @@
 			);
 			const root = document.createElement('div');
 			root.innerHTML = article.contentHtml || "";
-			console.log({root, article});
 			this.suggestions = Array.from(
 				root.querySelectorAll('li')
 			) || [];

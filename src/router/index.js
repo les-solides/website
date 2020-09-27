@@ -5,6 +5,16 @@ import { delay } from "lodash";
 
 Vue.use(VueRouter);
 
+const maintenanceRoute = [{
+	path: '*',
+	name: 'Maintenance',
+	meta: {
+		noFooter: true,
+		noHeader: true
+	},
+	component: () => import(/* webpackChunkName: "Home" */ '../views/Maintenance')
+}];
+
 const routes = [
 	{
 		path: '',
@@ -79,7 +89,7 @@ const routes = [
 const router = new VueRouter({
 	mode: 'history',
 	base: process.env.BASE_URL,
-	routes,
+	routes: process.env.VUE_APP_MAINTENANCE === "true" ? maintenanceRoute : routes,
 	scrollBehavior (to) {
 		if (to.hash) {
 			return {
