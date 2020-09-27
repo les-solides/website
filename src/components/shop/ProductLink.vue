@@ -82,7 +82,7 @@
 						@click="addToCart"
 						:disabled=" ! selectedVariants.length"
 						:class="{ 'text-gray-800': ! selectedVariants.length }"
-						style="height: 3vw">
+						style="height: 4vw">
 					{{ addingToCart ? 'adding...' : 'add to bag' }}
 				</button>
 			</div>
@@ -92,13 +92,13 @@
 			<div v-if=" ! this.small">
 				<button class="absolute bg-overlay bottom-0 hidden md:block outside-btn text-center w-full"
 						@click="quickBuyActive = true"
-						style="height: 3vw"
+						style="height: 4vw"
 						v-if="quickShopType !== 0 && hasValidAmountOfOptions && hover && ! quickBuyActive">
 					quickbuy
 				</button>
 				<button class="absolute bg-overlay bottom-0 hidden md:block outside-btn text-center w-full"
 						@click="addToCart"
-						style="height: 3vw"
+						style="height: 4vw"
 						v-if="quickShopType === 0 && hover">
 					{{ addingToCart ? 'adding...' : 'add to bag' }}
 				</button>
@@ -109,11 +109,12 @@
 		<!-- Image & QuickShop Overlay [end] -->
 		
 		<!-- Title & Price -->
-		<router-link :to="`/product/${ product.handle }`"
-					 class="block line-height-1 overflow-hidden">
-			<span class="block line-height-1 mr-4 mt-2 whitespace-no-wrap">{{ product.title }}</span>
-			<span class="block kapitälchen line-height-1 mt-1" v-if="withPrice">{{ price }}</span>
-		</router-link>
+		<ProductTitlePrice
+				:product="product"
+				:quick-shop-type="quickShopType"
+				:selected-variants="selectedVariants"
+				:selected-pair-option-value="selectedPairOptionValue"
+				with-price />
 		<!-- Title & Price -->
 	
 	</div>
@@ -126,10 +127,12 @@
 	import { delay, uniqueId } from "lodash";
 	import PopupMobile from "../partials/PopupMobile";
 	import ProductDetail from "./partials/ProductDetail";
+	import ProductTitlePrice from "./partials/ProductTitlePrice";
 	
 	export default {
 		name: "ProductLink",
 		components: {
+			ProductTitlePrice,
 			ProductDetail,
 			PopupMobile,
 			LoadedImage
@@ -194,16 +197,6 @@
 					/^variant-rule-pairs:(.*)/, 'variant-rule-pairs:'
 				) : null;
 			},
-			price() {
-				let price = 0;
-				for (let variant of this.selectedVariants) {
-					price += Number(variant.price.amount);
-				}
-				if (this.quickShopType === 2 && this.selectedPairOptionValue.value === "pair") {
-					price = price * 2;
-				}
-				return price ? `CHF ${ price.toFixed(2) }` : this.product.price;
-			},
 			quickShopType() {
 				if (this.product.options.length === 1 && this.product.variants.length === 1) {
 					return 0;
@@ -234,29 +227,29 @@
 			variantDynamicHeight() {
 				if (this.visibleOptions.length === 1) {
 					return this.pairOptionName ?
-						   "height:12vw" : "height: 24vw";
+						   "height:11vw" : "height: 22vw";
 				}
 				if (this.visibleOptions.length === 2) {
 					return this.pairOptionName ?
-						   "height:8vw" : "height: 12vw";
+						   "height:7.3333333vw" : "height: 11vw";
 				}
 				return "height: 0";
 			},
 			visiblePairOptionDynamicHeight() {
 				if (this.quickShopType === 2 && this.selectedPairOptionValue.value !== "pair") {
-					return "height:12vw";
+					return "height:11vw";
 				}
 				if ( ! this.selectedPairOptionValue.value && this.visibleOptions.length === 1) {
 					return this.o(this.selectedPairOptionValue).value === "pair" ?
-						   "height:12vw" : "height: 12vw";
+						   "height:11vw" : "height: 11vw";
 				}
 				if (this.visibleOptions.length === 1) {
 					return this.o(this.selectedPairOptionValue).value === "pair" ?
-						   "height:12vw" : "height: 8vw";
+						   "height:11vw" : "height: 7.3333333vw";
 				}
 				if (this.visibleOptions.length === 2) {
 					return this.o(this.selectedPairOptionValue).value === "pair" ?
-						   "height:12vw" : "height: 8vw";
+						   "height:11vw" : "height: 7.3333333vw";
 				}
 				return "height: 0";
 			},
