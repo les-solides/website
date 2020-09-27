@@ -1,8 +1,20 @@
 <template>
 	<router-link :to="`/product/${ product.handle }`"
 				 class="block line-height-1 overflow-hidden">
-		<span class="block line-height-1 mr-4 mt-2 whitespace-no-wrap">{{ product.title }}</span>
-		<span class="block kapitälchen line-height-1 mt-1" v-if="withPrice">{{ price }}</span>
+		<div class="flex flex-wrap">
+			<span class="block line-height-1 mr-2 mt-2 whitespace-no-wrap">
+				{{ product.title }}
+			</span>
+			<div class="line-height-1 mt-2"
+				 style="color: #8a4646"
+				 v-if=" ! o(product.selectedVariant).available">
+				[out of stock]
+			</div>
+		</div>
+		<span class="block kapitälchen line-height-1 mt-1"
+			  v-if="withPrice">
+			{{ price }}
+		</span>
 	</router-link>
 </template>
 
@@ -31,7 +43,7 @@
 			selectedPairOptionValue: {
 				type: Object,
 				default() {
-					return {}
+					return {};
 				}
 			},
 			withPrice: {

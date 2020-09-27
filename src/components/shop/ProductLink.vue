@@ -65,7 +65,7 @@
 				<div class="flex"
 					 :style="visiblePairOptionDynamicHeight"
 					 v-if="pairOptionName">
-					<button class="block h-full items-center right product-link-variant text-center w-1/2"
+					<button class="block h-full items-center left product-link-variant text-center w-1/2"
 							:class="{ 'text-gray-800' : o(selectedPairOptionValue).value !== pairOption.values[0] }"
 							@click="selectPairOption(pairOption, pairOption.values[0])"
 							v-if="pairOption.values.length === 2">
@@ -362,14 +362,14 @@
 		
 		.product-link-variant {
 			/*border-bottom: 1px solid white;*/
-			border-top: 1px solid white;
+			border-top: 2px solid white;
 			
 			/*&.left {
 				border-right: 1px white solid;
 			}*/
 			
 			&.right {
-				border-left: 1px white solid;
+				border-left: 2px white solid;
 			}
 			
 			> div {
@@ -413,7 +413,7 @@
 		}
 		
 		button.outside-btn {
-			border-top: 1px solid white;
+			border-top: 2px solid white;
 		}
 	}
 </style>
