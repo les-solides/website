@@ -48,7 +48,7 @@
 				 v-html="descriptionTag.innerHTML"></div>
 			
 			<div class="mb-8"
-				 v-html="product.descriptionRest.innerHTML"></div>
+				 v-html="descriptionRest.innerHTML"></div>
 			
 			<!--todo: recommended mobile component that just switches the product prop-->
 			<RecommendedProducts :product="product"
@@ -93,6 +93,16 @@
 			validAmountOfOptions: 2
 		}),
 		computed: {
+			descriptionRest() {
+				if (this.product.hasGoldSilverDescription) {
+					return this.selectedSilver ?
+						   this.product.descriptionRest
+							   .find(d => d.dataset.option === "material:silver") :
+						   this.product.descriptionRest
+							   .find(d => d.dataset.option === "material:gold");
+				}
+				return this.product.descriptionRest;
+			},
 			descriptionTag() {
 				if (this.product.hasGoldSilverTag) {
 					return this.selectedSilver ?
@@ -156,6 +166,9 @@
 					return 5;
 				}
 				return 6;
+			},
+			selectedSilver() {
+				return this.selectedOptionValues.find(o => o.value === "silver");
 			},
 			selectedVariants() {
 				return this.product && Array.isArray(this.product.variants) ?

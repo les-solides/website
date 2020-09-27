@@ -99,7 +99,7 @@
 						   this.product.descriptionRest
 							   .find(d => d.dataset.option === "material:gold");
 				}
-				return this.descriptionRest;
+				return this.product.descriptionRest;
 			},
 			descriptionTag() {
 				if (this.product.hasGoldSilverTag) {
