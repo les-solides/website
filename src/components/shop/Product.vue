@@ -7,11 +7,11 @@
 				 class="flex justify-between mb-1 mt-2 overflow-x-auto">
 				<LoadedImage class="h-full object-contain product-image"
 							 :class="{
-							'mr-4': index < product.images.length - 1,
+							'mr-4': index < images.length - 1,
 							 'object-cover ws-1/3': index < 3
 						}"
 							 :key="image.id"
-							 v-for="(image, index) of product.images"
+							 v-for="(image, index) of images"
 							 :src="image.src" />
 			</div>
 			
@@ -110,6 +110,13 @@
 				const tags = document.createElement('div');
 				[].forEach.call(this.product.descriptionTags || [], node => tags.appendChild(node));
 				return tags;
+			},
+			images() {
+				return this.product.images.filter(i =>
+					this.selectedSilver?
+					! i.altText.includes("material:gold") :
+					! i.altText.includes("material:silver")
+				);
 			},
 			mainNode() {
 				return this.product ?
