@@ -3,7 +3,7 @@
 		<button @click="open = ! open">x {{ article.title }}</button>
 		<div class="horizontal-scroller flex justify-start"
 			 :class="{ open }">
-			<LoadedImage class="mr-4 object-contain"
+			<LoadedImage class="mr-4 object-contain object-top"
 						 :src="image.src"
 						 :key="image.src"
 						 v-for="image of images" />
@@ -59,14 +59,14 @@
 		}
 		
 		@media screen and (min-width: $breakpoint-md) {
-			height: 40vw;
+			height: calc(100vh - 12rem);
 			
 			img {
-				height: 40vw;
+				height: calc(100vh - 12rem);
 			}
 			
 			&.open {
-				max-height: 40vw;
+				max-height: calc(100vh - 12rem);
 			}
 		}
 	}
