@@ -11,7 +11,7 @@
 		<!-- Image & QuickShop Overlay [start] -->
 		<div class="relative quick-buy"
 			 @mouseenter="hover = true"
-			 @mouseleave="hover = false">
+			 @mouseleave="unhover">
 			
 			<!-- Image -->
 			<router-link :to="`/product/${ product.handle }`"
@@ -34,14 +34,14 @@
 					 :key="option.name"
 					 :style="variantDynamicHeight"
 					 v-for="option of visibleOptions">
-					<button class="block h-full items-center left product-link-variant text-center w-1/2"
-							:class="{ 'text-gray-800': o(selectedOptionValues.find(o => o.option.id === option.id)).value !== option.values[0]  }"
+					<button class="block h-full items-center left product-link-variant text-center w-1/2 italic"
+							:class="{ 'not-italic': o(selectedOptionValues.find(o => o.option.id === option.id)).value !== option.values[0]  }"
 							@click="selectOptionValue(option, option.values[0])"
 							v-if="option.values.length === 2">
 						{{ option.values[0] }}
 					</button>
-					<button class="block h-full items-center right product-link-variant text-center w-1/2"
-							:class="{ 'text-gray-800' : o(selectedOptionValues.find(o => o.option.id === option.id)).value !== option.values[1] }"
+					<button class="block h-full items-center right product-link-variant text-center w-1/2 italic"
+							:class="{ 'not-italic' : o(selectedOptionValues.find(o => o.option.id === option.id)).value !== option.values[1] }"
 							@click="selectOptionValue(option, option.values[1])"
 							v-if="option.values.length === 2">
 						{{ option.values[1] }}
@@ -65,14 +65,14 @@
 				<div class="flex"
 					 :style="visiblePairOptionDynamicHeight"
 					 v-if="pairOptionName">
-					<button class="block h-full items-center left product-link-variant text-center w-1/2"
-							:class="{ 'text-gray-800' : o(selectedPairOptionValue).value !== pairOption.values[0] }"
+					<button class="block h-full items-center left product-link-variant text-center w-1/2 italic"
+							:class="{ 'not-italic' : o(selectedPairOptionValue).value !== pairOption.values[0] }"
 							@click="selectPairOption(pairOption, pairOption.values[0])"
 							v-if="pairOption.values.length === 2">
 						{{ pairOption.values[0] }}
 					</button>
-					<button class="block h-full items-center right product-link-variant text-center w-1/2"
-							:class="{ 'text-gray-800' : o(selectedPairOptionValue).value !== pairOption.values[1] }"
+					<button class="block h-full items-center right product-link-variant text-center w-1/2 italic"
+							:class="{ 'not-italic' : o(selectedPairOptionValue).value !== pairOption.values[1] }"
 							@click="selectPairOption(pairOption, pairOption.values[1])"
 							v-if="pairOption.values.length === 2">
 						{{ pairOption.values[1] }}
@@ -81,7 +81,7 @@
 				<button class="outside-btn text-center w-full"
 						@click="addToCart"
 						:disabled=" ! selectedVariants.length"
-						:class="{ 'text-gray-800': ! selectedVariants.length }"
+						:class="{ 'not-italic': ! selectedVariants.length }"
 						style="height: 4vw">
 					{{ addingToCart ? 'adding...' : 'add to bag' }}
 				</button>
@@ -326,6 +326,10 @@
 					product.handle
 				);
 				delay(() => this.$store.commit('updateLoading', false), 500);
+			},
+			unhover() {
+				this.selectedOptionValues = [];
+				this.hover = false;
 			}
 		},
 		created() {
@@ -362,14 +366,14 @@
 		
 		.product-link-variant {
 			/*border-bottom: 1px solid white;*/
-			border-top: 2px solid white;
+			border-top: 1px solid white;
 			
 			/*&.left {
 				border-right: 1px white solid;
 			}*/
 			
 			&.right {
-				border-left: 2px white solid;
+				border-left: 1px white solid;
 			}
 			
 			> div {
@@ -413,7 +417,7 @@
 		}
 		
 		button.outside-btn {
-			border-top: 2px solid white;
+			border-top: 1px solid white;
 		}
 	}
 </style>

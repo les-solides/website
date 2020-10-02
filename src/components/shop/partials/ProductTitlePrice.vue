@@ -2,7 +2,7 @@
 	<router-link :to="`/product/${ product.handle }`"
 				 class="block line-height-1 overflow-hidden">
 		<div class="flex flex-wrap">
-			<span class="block line-height-1 mr-2 mt-2 whitespace-no-wrap">
+			<span class="block line-height-1 mr-2 mt-2 whitespace-no-wrap" style="line-height: .7">
 				{{ product.title }}
 			</span>
 			<div class="line-height-1 mt-2"
