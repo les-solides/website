@@ -112,7 +112,8 @@ header {
 // -- K [start]
 .kapitälchen {
 	box-shadow: 0 0 0 black;
-	font-variant: all-small-caps;
+	font-size: $font-size-base * 0.9;
+	// font-variant: all-small-caps;
 }
 
 // -- L [start]
