@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<button @click="open = ! open">{{ open ? 'v' : 'x' }} {{ article.title }}</button>
+	<div style="margin-top: -1.1rem">
+		<button style="line-height: 1.75" @click="open = ! open">{{ open ? 'v' : 'x' }} {{ article.title }}</button>
 		<div class="horizontal-scroller flex justify-start"
 			 :class="{ open }">
 			<LoadedImage class="mr-4 object-contain object-top"
@@ -48,7 +48,9 @@
 		height: 70vw;
 		max-height: 0;
 		overflow-y: hidden;
+		position: relative;
 		transition: .25s;
+		width: calc(100% + 1rem);
 		
 		img {
 			height: 70vw;

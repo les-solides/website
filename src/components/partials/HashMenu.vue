@@ -1,6 +1,6 @@
 <template>
 	<div class="hash-menu sticky md:fixed md:w-1/6 w-full"
-		 style="margin-top: -1rem">
+		 style="margin-top: -1.2rem">
 		<button :to="$route.path + '#section-' + index"
 				class="block"
 				:class="{ 'text-gray-600': `#${ item.hash }` !== $route.hash }"
