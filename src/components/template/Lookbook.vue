@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<button @click="open = ! open">x {{ article.title }}</button>
+		<button @click="open = ! open">{{ open ? 'v' : 'x' }} {{ article.title }}</button>
 		<div class="horizontal-scroller flex justify-start"
 			 :class="{ open }">
 			<LoadedImage class="mr-4 object-contain object-top"

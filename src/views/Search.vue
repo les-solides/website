@@ -68,7 +68,7 @@
 <style scoped
 	   lang="scss">
 	button.suggestion {
-		border: 1px solid;
+		// border: 1px solid;
 		border-radius: 300px;
 		padding: .25rem 1rem;
 		
