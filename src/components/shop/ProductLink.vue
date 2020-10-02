@@ -110,6 +110,7 @@
 		
 		<!-- Title & Price -->
 		<ProductTitlePrice
+				style="padding-top: 4.8px;"
 				:product="product"
 				:quick-shop-type="quickShopType"
 				:selected-variants="selectedVariants"
