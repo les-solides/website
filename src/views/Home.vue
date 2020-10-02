@@ -14,16 +14,17 @@
 	
 	import LinkArrow from "../components/template/LinkArrow";
 	import LinkProductRow from "../components/template/LinkProductRow";
+	import LinkCenterFrame from "../components/template/LinkCenterFrame";
 	import LinkTwoFrames from "../components/template/LinkTwoFrames";
 	import NewsletterSubscribe from "../components/template/NewsletterSubscribe";
 	
 	import FrameLink from "../modules/shopify/FrameLink";
-	import { delay } from "lodash";
 	
 	export default {
 		name: "Home",
 		components: {
 			LinkArrow,
+			LinkCenterFrame,
 			LinkTwoFrames,
 			LinkProductRow,
 			NewsletterSubscribe
