@@ -1,7 +1,7 @@
 <template>
 	<a :href="product.handle"
 	   :class="{ mobile }"
-	   class="mb-4 product-link"
+	   class="mb-8 product-link"
 	   v-if=" ! mobile">
 		
 		<!-- Image & QuickShop Overlay [start] -->
