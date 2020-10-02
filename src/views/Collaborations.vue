@@ -45,6 +45,7 @@
 			options() {
 				return {
 					anchors: this.collaborationArticles.map(a => `collaboration-${ a.handle }`),
+					fitToSection: false,
 					licenseKey: 'BEEAAF1E-F23E4BCD-85FA7E40-2F7456B5'
 				};
 			}

@@ -1,28 +1,21 @@
 <template>
 	<div :id="article.handle"
 		 class="collaboration mt-4 md:mt-0">
-		<div class="horizontal-scroller	flex justify-start open">
-			<router-link
-					class="initial-product  mr-4"
-					:to="productRoute">
-				<LoadedImage
-						:src="article.featuredImage.originalSrc"
-						v-if="article.featuredImage" />
-				<div class="flex justify-between">
+		<button
+			@click="activeImageIndex >= imageCount - 1 ? (activeImageIndex = 0) : activeImageIndex++"
+			class="inner">
+			<LoadedImage
+					class="mr-4 object-contain"
+					:key="o(activeImage).src || o(activeImage).transformedSrc"
+					:src="o(activeImage).src || o(activeImage).transformedSrc" />
+			<div class="flex justify-between md:ml-1/3 md:w-2/3 w-full">
+				<div>
 					<div>{{ o(product).title }}</div>
-					<div class="kapitälchen">{{ o(product).price }}</div>
+					<div class="text-left kapitälchen">{{ o(product).price }}</div>
 				</div>
-			</router-link>
-			<div class="collaboration-images items-baseline object-contain flex">
-				<LoadedImage
-						class="mr-4 object-contain"
-						:key="image.src"
-						v-for="image of article.images"
-						:src="image.src" />
+				<router-link :to="productRoute">go to product</router-link>
 			</div>
-			
-		
-		</div>
+		</button>
 	</div>
 </template>
 
@@ -40,9 +33,22 @@
 			}
 		},
 		data: () => ({
+			activeImageIndex: 0,
 			product: null
 		}),
 		computed: {
+			activeImage() {
+				return this.images?.[this.activeImageIndex];
+			},
+			imageCount() {
+				return this.images?.length || 0;
+			},
+			images() {
+				return [
+					this.article?.featuredImage,
+					...this.article?.images
+				].filter(i => i);
+			},
 			productHandle() {
 				return this.article.getTag(/product:*/, /product:*/);
 			},
@@ -60,52 +66,18 @@
 		}
 	};
 </script>
-
-<style scoped
-	   lang="scss">
-	@import "./src/scss/partials/variables";
-	
-	$height: 85vh;
-	
+<style lang="scss">
 	.collaboration {
-		left: -1rem;
-		position: relative;
-		width: calc(100vw);
+		width: 100%;
+	}
+	.inner {
+		height: calc(100vh - 12rem);
+		width: 100%;
 		
-		.collaboration-images {
-			img {
-				height: calc(#{$height} - 20vh);
-				max-width: unset;
-				@media screen and (min-width: $breakpoint-md){
-					height: $height;
-				}
-			}
-		}
-		
-		.horizontal-scroller {
-			overflow-y: scroll;
-			width: 100vw;
-		}
-		
-		.initial-product {
-			display: block;
-			margin-left: 1rem;
-			max-width: calc(100vw - 4rem);
-			min-width: calc(100vw - 4rem);
-			@media screen and (min-width: $breakpoint-md){
-				margin-left: calc(50vw - 16vw);
-				max-width: 30vw;
-				min-width: 30vw;
-			}
-			
-			img {
-				height: calc(#{$height} - 20vh);
-				object-fit: cover;
-				width: 100%;
-				@media screen and (min-width: $breakpoint-md){
-					height: $height;
-				}
-			}
+		img {
+			height: 100%;
+			object-fit: cover;
+			width: 100%;
 		}
 	}
 </style>

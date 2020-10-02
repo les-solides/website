@@ -132,6 +132,11 @@ header {
 			column-count: $i;
 		}
 	}
+	.md\:ml-#{ $i }\/3 {
+		@media (min-width: $breakpoint-md) {
+			margin-left: #{ $i / 3 * 100% };
+		}
+	}
 }
 
 .md\:p-default {
