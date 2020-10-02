@@ -10,7 +10,7 @@
 
 <style scoped>
 	.divider {
-		background: black;
+		background: #5d5d5d;
 		display: block;
 		height: 1px;
 		width: 100%;

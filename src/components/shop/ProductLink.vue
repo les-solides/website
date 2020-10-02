@@ -409,7 +409,7 @@
 			width: calc(20% - .8rem);
 			&.small {
 				img, .empty-image-box {
-					height: 13vw;
+					height: 12vw;
 				}
 				
 				width: calc(10% - .9rem);

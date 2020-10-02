@@ -17,39 +17,39 @@
 			<TermsOfUse v-if="currentRoute === footer.routes.TERMS" />
 		</article>
 		
-		<div class="border-top md:flex mx-4 py-4">
+		<div class="border-top md:flex mx-4" style="padding: .870rem 0 0.870rem 0 !important;">
 			<button @click="openFooter(footer.routes.ABOUT)"
-					class="mr-4">about
+					class="margin-deduct-4 mr-4">about
 			</button>
 			<button @click="openFooter(footer.routes.TERMS)"
-					class="mr-4">terms of use
+					class="margin-deduct-4 mr-4">terms of use
 			</button>
 			<button @click="openFooter(footer.routes.PRIVACY)"
-					class="mr-4">privacy policy
+					class="margin-deduct-4 mr-4">privacy policy
 			</button>
 			<!--<button @click="openFooter(footer.routes.COOKIE)"
-					class="mr-4">cookie policy
+					class="mrmargin-deduct-4 -4">cookie policy
 			</button>-->
 			<button @click="openFooter(footer.routes.SHIPPING)"
-					class="mr-4">shipping
+					class="margin-deduct-4 mr-4">shipping
 			</button>
 			<button @click="openFooter(footer.routes.RETURNS)"
-					class="mr-4">returns and exchange
+					class="margin-deduct-4 mr-4">returns and exchange
 			</button>
 			<button @click="openFooter(footer.routes.NEWSLETTER)"
-					class="mr-4">newsletter signup
+					class="margin-deduct-4 mr-4">newsletter signup
 			</button>
 			<button @click="openFooter(footer.routes.CONTACT)"
-					class="mr-4">contact
+					class="margin-deduct-4 mr-4">contact
 			</button>
 			<button @click="openFooter(footer.routes.STOCKISTS)"
-					class="mr-4">stockist
+					class="margin-deduct-4 mr-4">stockist
 			</button>
 			<button @click="openFooter(footer.routes.SIZE)"
-					class="mr-4">size guide
+					class="margin-deduct-4 mr-4">size guide
 			</button>
 			<!--<button @click="openFooter(footer.routes.PRESS)"
-					class="mr-4">press
+					class="mrmargin-deduct-4 -4">press
 			</button>-->
 		</div>
 	</footer>
