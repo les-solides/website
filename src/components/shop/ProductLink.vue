@@ -82,7 +82,7 @@
 						@click="addToCart"
 						:disabled=" ! selectedVariants.length"
 						:class="{ 'not-italic': ! selectedVariants.length }"
-						style="height: 4vw">
+						style="height: 3vw">
 					{{ addingToCart ? 'adding...' : 'add to bag' }}
 				</button>
 			</div>
@@ -92,13 +92,13 @@
 			<div v-if=" ! this.small">
 				<button class="absolute bg-overlay bottom-0 hidden md:block outside-btn text-center w-full"
 						@click="quickBuyActive = true"
-						style="height: 4vw"
+						style="height: 3vw"
 						v-if="quickShopType !== 0 && hasValidAmountOfOptions && hover && ! quickBuyActive">
 					quickbuy
 				</button>
 				<button class="absolute bg-overlay bottom-0 hidden md:block outside-btn text-center w-full"
 						@click="addToCart"
-						style="height: 4vw"
+						style="height: 3vw"
 						v-if="quickShopType === 0 && hover">
 					{{ addingToCart ? 'adding...' : 'add to bag' }}
 				</button>
@@ -228,29 +228,29 @@
 			variantDynamicHeight() {
 				if (this.visibleOptions.length === 1) {
 					return this.pairOptionName ?
-						   "height:11vw" : "height: 22vw";
+						   "height: 11.5vw" : "height: 23vw";
 				}
 				if (this.visibleOptions.length === 2) {
 					return this.pairOptionName ?
-						   "height:7.3333333vw" : "height: 11vw";
+						   "height: 7.666666666vw" : "height: 11.5vw";
 				}
 				return "height: 0";
 			},
 			visiblePairOptionDynamicHeight() {
 				if (this.quickShopType === 2 && this.selectedPairOptionValue.value !== "pair") {
-					return "height:11vw";
+					return "height: 11.5vw";
 				}
 				if ( ! this.selectedPairOptionValue.value && this.visibleOptions.length === 1) {
 					return this.o(this.selectedPairOptionValue).value === "pair" ?
-						   "height:11vw" : "height: 11vw";
+						   "height: 11.5vw" : "height: 11.5vw";
 				}
 				if (this.visibleOptions.length === 1) {
 					return this.o(this.selectedPairOptionValue).value === "pair" ?
-						   "height:11vw" : "height: 7.3333333vw";
+						   "height: 11.5vw" : "height: 7.666666666vw";
 				}
 				if (this.visibleOptions.length === 2) {
 					return this.o(this.selectedPairOptionValue).value === "pair" ?
-						   "height:11vw" : "height: 7.3333333vw";
+						   "height: 11.5vw" : "height: 7.666666666vw";
 				}
 				return "height: 0";
 			},
