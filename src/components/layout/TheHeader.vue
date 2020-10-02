@@ -7,7 +7,7 @@
 			<Burger @click.native="updateMenuOpen( ! menuOpen)"
 					:open="menuOpen" />
 			<div class="flex justify-end md:w-1/3">
-				<Route class="px-4"
+				<Route class="px-2"
 					   to="/search">
 					search
 				</Route>
@@ -31,24 +31,24 @@
 								  v-if="$route.path.includes('product')" />
 			</div>
 			<div class="md:flex justify-center md:w-1/3">
-				<Route class="md:py-0 px-4 py-4"
+				<Route class="md:py-0 px-2 py-4"
 					   :exact="false"
 					   to="/products">
 					products
 				</Route>
-				<Route class="md:py-0 px-4 py-4"
+				<Route class="md:py-0 px-2 py-4"
 					   to="/collaborations">
 					collaborations
 				</Route>
-				<Route class="md:py-0 px-4 py-4"
+				<Route class="md:py-0 px-2 py-4"
 					   to="/lookbook">
 					lookbook
 				</Route>
-				<Route class="md:py-0 px-4 py-4"
+				<Route class="md:py-0 px-2 py-4"
 					   to="/archive">
 					archive
 				</Route>
-				<Route class="hidden md:block md:py-0 px-4 py-4"
+				<Route class="hidden md:block md:py-0 px-2 py-4"
 					   to="/search">
 					search
 				</Route>
