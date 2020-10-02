@@ -161,7 +161,7 @@ header {
 
 // -- P [start]
 .product-image {
-	height: 40vw;
+	height: calc(100vh - 13rem);
 }
 
 .p-default {
