@@ -1,5 +1,5 @@
 <template>
-	<div style="margin-top: -1.1rem">
+	<div>
 		<button style="line-height: 1.75" @click="open = ! open">{{ open ? 'v' : 'x' }} {{ article.title }}</button>
 		<div class="horizontal-scroller flex justify-start"
 			 :class="{ open }">
