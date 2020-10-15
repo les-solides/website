@@ -2,7 +2,7 @@
 	<div :id="article.handle"
 		 class="collaboration mt-4 md:mt-0">
 		<button
-			@click="activeImageIndex >= imageCount - 1 ? (activeImageIndex = 0) : activeImageIndex++"
+			@click="handleClick"
 			class="inner">
 			<LoadedImage
 					class="mr-4 object-contain"
@@ -56,6 +56,16 @@
 				return this.o(this.product).handle ?
 					   `/product/${ this.product.handle }` :
 					   '';
+			}
+		},
+		methods: {
+			handleClick() {
+				if (this.activeImageIndex >= this.imageCount - 1) {
+					this.activeImageIndex = 0;
+					return this.$emit('index:update', 0);
+				}
+				this.activeImageIndex++;
+				return this.$emit('index:update', this.activeImageIndex);
 			}
 		},
 		async created() {

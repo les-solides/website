@@ -1,6 +1,7 @@
 <template>
 	<div class="mb-32">
 		<HashMenu class="z-10"
+				  :indices="activeImageIndices"
 				  :items="hashMenuItems"
 				  @route="$refs.fullPage.moveTo($event)" />
 		<full-page ref="fullPage"
@@ -11,6 +12,7 @@
 					   :is="_.startCase(article.template).split(' ').join('')"
 					   :key="article.id"
 					   :article="article"
+					   @index:update="activeImageIndices[article.id] = $event"
 					   v-for="(article) of collaborationArticles" />
 		</full-page>
 	</div>
@@ -26,6 +28,7 @@
 		name: "Collaborations",
 		components: {Collaboration, HashMenu},
 		data: () => ({
+			activeImageIndices: {},
 			observeReady: false
 		}),
 		computed: {
@@ -39,7 +42,9 @@
 				return this.collaborationArticles
 						   .map(a => new HashMenuItem(
 							   a.title,
-							   `collaboration-${ a.handle }`
+							   `collaboration-${ a.handle }`,
+							   a.images?.length,
+							   a.id
 						   ));
 			},
 			options() {
@@ -67,6 +72,7 @@
 			
 			this.$nextTick(() => {
 				this.componentsReady();
+				this.collaborationArticles.forEach(a => this.activeImageIndices[a.id] = 0);
 			});
 		}
 	};

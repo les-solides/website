@@ -7,7 +7,7 @@
 				@click="move(index)"
 				:key="item.handle"
 				v-for="(item, index) of items">
-			x {{ item.name }}
+			x {{ item.name }} ({{ indices[item.id] }}/{{ item.count }})
 		</button>
 	</div>
 </template>
@@ -19,6 +19,10 @@
 	export default {
 		name: "HashMenu",
 		props: {
+			indices: {
+				type: Object,
+				required: true
+			},
 			items: {
 				type: Array,
 				validator: prop => prop.every(i => i instanceof HashMenuItem)
