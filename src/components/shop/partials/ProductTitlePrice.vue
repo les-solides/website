@@ -1,12 +1,12 @@
 <template>
 	<router-link :to="`/product/${ product.handle }`"
 				 class="block line-height-1 overflow-hidden">
-		<div class="flex flex-wrap">
+		<div class="flex flex-wrap justify-between">
 			<span class="block line-height-1 mr-2 mt-2 whitespace-no-wrap" style="line-height: .7">
 				{{ product.title }}
 			</span>
 			<div class="line-height-1 mt-2"
-				 style="color: #8a4646"
+				 style="color: #8a4646;line-height: .7"
 				 v-if=" ! o(product.selectedVariant).available">
 				[out of stock]
 			</div>
