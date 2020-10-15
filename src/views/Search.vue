@@ -11,7 +11,7 @@
 				   v-model="search">
 			<div class="py-4">
 				<!--:class="{ selected: search === suggestion.innerText }"-->
-				<button class="mr-2 suggestion"
+				<button class="suggestion"
 						:key="suggestion.innerText"
 						@click="search = suggestion.innerText"
 						v-for="suggestion of suggestions">
@@ -70,7 +70,7 @@
 	button.suggestion {
 		// border: 1px solid;
 		border-radius: 300px;
-		padding: .25rem 1rem;
+		padding: .25rem .5rem;
 		
 		&.selected {
 			background: black;

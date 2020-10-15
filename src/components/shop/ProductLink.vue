@@ -53,7 +53,7 @@
 							<div class="flex justify-center">
 								<button @click="selectOptionValue(option, value)"
 										class="mr-1"
-										:class="{ 'font-bold' : o(selectedOptionValues.find(o => o.option.id === option.id)).value === value }"
+										:class="{ 'italic' : o(selectedOptionValues.find(o => o.option.id === option.id)).value === value }"
 										:key="value"
 										v-for="(value, index) of option.values">
 									{{ value }}{{ option.values.length - 1 > index ? ',' : '' }}
