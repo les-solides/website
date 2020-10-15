@@ -35,13 +35,13 @@
 									v-if="pairOptionName" />
 						</div>
 						<div class="flex flex-wrap justify-end w-1/2">
-							<span class="block kapitälchen mb-2 text-right w-full"
+							<span class="block kapitälchen text-right w-full"
 								  v-if="selectedVariants.length">
 								{{ price }}
 							</span>
 							<button @click="addToCart"
 									:disabled="addingToCart || ! o(product.selectedVariant).available"
-									:style="o(product.selectedVariant).available ? 'line-height:1px' : 'line-height:1px;color: #8a4646'"
+									:style="o(product.selectedVariant).available ? '' : 'color: #8a4646'"
 									class="text-right w-full">
 								{{ addingToCart ? 'adding...' : o(product.selectedVariant).available ? 'add to bag' :
 								'[out of stock]' }}
