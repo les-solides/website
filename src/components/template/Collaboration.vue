@@ -6,6 +6,7 @@
 			class="inner">
 			<LoadedImage
 					class="mr-4 object-contain"
+					style="cursor: w-resize;"
 					:key="o(activeImage).src || o(activeImage).transformedSrc"
 					:src="o(activeImage).src || o(activeImage).transformedSrc" />
 			<div class="flex justify-between md:ml-1/3 md:w-2/3 w-full">
