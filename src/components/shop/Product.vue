@@ -41,9 +41,10 @@
 							</span>
 							<button @click="addToCart"
 									:disabled="addingToCart || ! o(product.selectedVariant).available"
-									:style="o(product.selectedVariant).available ? '' : 'color: #8a4646'"
+									:style="o(product.selectedVariant).available ? 'line-height:1px' : 'line-height:1px;color: #8a4646'"
 									class="text-right w-full">
-								{{ addingToCart ? 'adding...' : o(product.selectedVariant).available ? 'add to bag' : '[out of stock]' }}
+								{{ addingToCart ? 'adding...' : o(product.selectedVariant).available ? 'add to bag' :
+								'[out of stock]' }}
 							</button>
 						</div>
 					</div>
@@ -113,7 +114,7 @@
 			},
 			images() {
 				return this.product.images.filter(i =>
-					this.selectedSilver?
+					this.selectedSilver ?
 					! i.altText.includes("material:gold") :
 					! i.altText.includes("material:silver")
 				);
