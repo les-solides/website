@@ -1,6 +1,9 @@
 <template>
-	<div class="footer-page w-full">
-		<NewsletterSubscribeBig :article="article" v-if="article"/>
+	<div class="footer-page h-full flex items-center w-full">
+		<NewsletterSubscribeBig
+				class="w-full"
+				:article="article"
+				v-if="article" />
 		<Error v-if="loaded && error" />
 	</div>
 </template>
@@ -9,6 +12,7 @@
 	import Error from "../../components/partials/Error";
 	import Article from "../../modules/shopify/blog/Article";
 	import NewsletterSubscribeBig from "../../components/template/NewsletterSubscribeBig";
+	
 	export default {
 		name: "NewsletterSignup",
 		components: {NewsletterSubscribeBig, Error},
@@ -30,7 +34,7 @@
 			if ( ! result) {
 				return this.error = true;
 			}
-
+			
 			this.article = new Article(result);
 			
 			this.content = result.contentHtml;

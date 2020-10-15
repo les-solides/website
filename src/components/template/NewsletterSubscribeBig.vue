@@ -1,15 +1,13 @@
 <template>
-	<form @submit.prevent="subscribe">
-		<label for="email"
+	<form @submit.prevent="subscribe"
+		  class="bg-white search-bar mb-8 pt-4 md:pt-0 sticky z-10">
+		<div v-html="article.contentHtml"></div>
+		<label for="query"
 			   hidden></label>
-		<input id="email"
-			   type="email"
-			   placeholder="(subscribe to our newsletter!)"
+		<input id="query"
+			   placeholder="email"
+			   type="text"
 			   v-model="email">
-		
-		<input class="bg-transparent block mt-4 mx-auto p-4 text-center"
-			   type="submit"
-			   value="Submit">
 	</form>
 </template>
 
@@ -41,7 +39,7 @@
 							 position: "bottom-center"
 						 }))
 						 .catch(error => {
-						 	this.$toasted.show(error.response.data, {
+						 	this.$toasted.show(error.response.data?.message, {
 								 duration: 5000,
 								 position: "bottom-center",
 								 type: "error"
@@ -51,19 +49,35 @@
 		}
 	};
 </script>
-
-<style scoped lang="scss">
-	input {
-		display: block;
-		position: absolute;
-		top: 45%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 90%;
-		border: 1px solid;
-		font-size: 3.5rem;
+<style scoped
+	   lang="scss">
+	button.suggestion {
+		// border: 1px solid;
 		border-radius: 300px;
-		padding: 2rem 4rem;
-		text-align: center;
+		padding: .25rem .5rem;
+		
+		&.selected {
+			background: black;
+			color: white;
+		}
+	}
+	
+	input {
+		border: 1px solid;
+		border-radius: 500px;
+		padding: .5rem 1rem;
+		width: 100%;
+		font-size: 1.5rem;
+		
+		&::placeholder {
+			color: gray;
+		}
+	}
+	
+	.search-bar {
+		top: 0;
+		@media (min-width: 768px) {
+			top: var(--header-height);
+		}
 	}
 </style>
