@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<div :key="year"
-			 :style="index === 0 ? 'margin-top: -1rem;' : ''"
-			 v-for="(year, index) of years">
+			 :style="'margin-top: calc(-1rem - 8px)'"
+			 v-for="(year) of years">
 			<div class="bg-white md:pt-0 pt-4 sticky top-0 mb-4 md:top-100px w-full z-10">
 				<h5 class="kapitälchen mb-1">{{ year }}</h5>
 				<Divider />

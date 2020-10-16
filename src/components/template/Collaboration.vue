@@ -9,7 +9,8 @@
 					style="cursor: w-resize;"
 					:key="o(activeImage).src || o(activeImage).transformedSrc"
 					:src="o(activeImage).src || o(activeImage).transformedSrc" />
-			<div class="flex justify-between md:ml-1/3 md:w-2/3 w-full">
+			<div class="flex justify-between w-full"
+				 style="margin-left: calc(33.33333% - 1rem);width: calc(66.66666% + 1rem)">
 				<div>
 					<div>{{ o(product).title }}</div>
 					<div class="text-left kapitälchen">{{ o(product).price }}</div>
@@ -82,7 +83,7 @@
 		width: 100%;
 	}
 	.inner {
-		height: calc(100vh - 12rem);
+		height: calc(45.5vw - .9rem);
 		width: 100%;
 		
 		img {
