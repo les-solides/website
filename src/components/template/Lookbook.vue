@@ -3,10 +3,12 @@
 		<button style="line-height: 1.75" @click="open = ! open">{{ open ? 'v' : 'x' }} {{ article.title }}</button>
 		<div class="horizontal-scroller flex justify-start"
 			 :class="{ open }">
-			<LoadedImage class="mr-4 object-contain object-top"
+			<LoadedImage class="object-contain object-top"
+						 :class="{ 'mr-4': index < images.length - 1 }"
 						 :src="image.src"
 						 :key="image.src"
-						 v-for="image of images" />
+						 v-for="(image, index) of images" />
+			<div style="height: 100%;min-width: 1rem;"></div>
 		</div>
 	</div>
 </template>
