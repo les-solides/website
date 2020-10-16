@@ -11,10 +11,59 @@
 					   to="/search">
 					search
 				</Route>
-				<a :href="$cart.url"
-				   target="_blank">
+				<div class="cursor-pointer select-none z-10"
+					 unselectable="on"
+					 @click="checkoutOpen = ! checkoutOpen">
 					bag ({{ amountOfCartItems }})
-				</a>
+				</div>
+				<div class="checkout-overview checkout-footer shadow mt-2 z-10"
+					 :class="{ open: checkoutOpen }">
+					<div class="loading-overlay h-full w-full"
+						 v-if="loading"></div>
+					<ul v-if=" ! amountOfCartItems">
+						<li>your cart is empty</li>
+					</ul>
+					<ul class="mb-4 checkout-item-list"
+						v-if="amountOfCartItems">
+						<li class="flex mb-4"
+							:key="item.id"
+							v-for="item of $cart.items">
+							<div style="width: 80px">
+								<img :src="item.image.src"
+									 :alt="item.image.alt" />
+							</div>
+							<div class="ml-4">
+								<div class="text-left">{{ item.title }}</div>
+								<div class="flex mb-4">
+									<span class="kapitälchen">{{ item.price.currencyCode }} {{ Number(item.price.amount).toFixed(2) }}</span>
+								</div>
+								<div class="flex text-left">
+									<div class="mr-8 text-left"
+										 v-if=" ! selectedLineItemForQuantityEdit || (selectedLineItemForQuantityEdit.id !== item.id)">
+										quantity: {{ item.quantity }}
+									</div>
+									<input @change="updateQuantity(item, $event)"
+										   class="mr-8 text-left"
+										   style="border-bottom: 1px solid gray;width: 65px"
+										   type="number"
+										   :value="item.quantity"
+										   v-if="selectedLineItemForQuantityEdit && (selectedLineItemForQuantityEdit.id === item.id)">
+									<button @click="selectedLineItemForQuantityEdit = item">
+										edit
+									</button>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<div class="flex justify-between">
+						<div class="text-left">total</div>
+						<div class="kapitälchen">CHF {{ Number($cart.total).toFixed(2) }}</div>
+					</div>
+					<a class="checkout-button mt-4"
+					   :href="amountOfCartItems ? $cart.url : '/products'">
+						{{ amountOfCartItems ? 'checkout' : 'go to products' }}
+					</a>
+				</div>
 			</div>
 		</div>
 		
@@ -54,11 +103,59 @@
 				</Route>
 				<TheFooter class="block bottom-0 md:hidden mt-16 relative z-0" />
 			</div>
-			<div class="hidden md:flex justify-end md:w-1/3">
-				<a class="md:py-0 py-4"
-				   :href="$cart.url"
-				   target="_blank">
+			<div class="cursor-pointer hidden md:flex justify-end md:w-1/3 select-none z-20"
+				 unselectable="on"
+				 @click="checkoutOpen = ! checkoutOpen">
+				<div class="md:py-0 py-4">
 					bag ({{ amountOfCartItems }})
+				</div>
+			</div>
+			<div class="checkout-overview shadow mt-2 z-10"
+				 :class="{ open: checkoutOpen }">
+				<div class="loading-overlay h-full w-full"
+					 v-if="loading"></div>
+				<ul v-if=" ! amountOfCartItems">
+					<li>your cart is empty</li>
+				</ul>
+				<ul class="mb-4 checkout-item-list"
+					v-if="amountOfCartItems">
+					<li class="flex mb-4"
+						:key="item.id"
+						v-for="item of $cart.items">
+						<div style="width: 80px">
+							<img :src="item.image.src"
+								 :alt="item.image.alt" />
+						</div>
+						<div class="ml-4">
+							<div class="text-left">{{ item.title }}</div>
+							<div class="flex mb-4">
+								<span class="kapitälchen">{{ item.price.currencyCode }} {{ Number(item.price.amount).toFixed(2) }}</span>
+							</div>
+							<div class="flex text-left">
+								<div class="mr-8 text-left"
+									 v-if=" ! selectedLineItemForQuantityEdit || (selectedLineItemForQuantityEdit.id !== item.id)">
+									quantity: {{ item.quantity }}
+								</div>
+								<input @change="updateQuantity(item, $event)"
+									   class="mr-8 text-left"
+									   style="border-bottom: 1px solid gray;width: 65px"
+									   type="number"
+									   :value="item.quantity"
+									   v-if="selectedLineItemForQuantityEdit && (selectedLineItemForQuantityEdit.id === item.id)">
+								<button @click="selectedLineItemForQuantityEdit = item">
+									edit
+								</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div class="flex justify-between">
+					<div class="text-left">total</div>
+					<div class="kapitälchen">CHF {{ Number($cart.total).toFixed(2) }}</div>
+				</div>
+				<a class="checkout-button mt-4"
+				   :href="amountOfCartItems ? $cart.url : '/products'">
+					{{ amountOfCartItems ? 'checkout' : 'go to products' }}
 				</a>
 			</div>
 		</nav>
@@ -75,6 +172,11 @@
 	export default {
 		name: "TheHeader",
 		components: {TheFooter, NavigationFilter, Route, Burger},
+		data: () => ({
+			checkoutOpen: true,
+			loading: false,
+			selectedLineItemForQuantityEdit: null
+		}),
 		computed: {
 			...mapGetters(['menuOpen']),
 			amountOfCartItems() { // new
@@ -82,6 +184,17 @@
 			}
 		},
 		methods: {
+			async updateQuantity(item, {target}) {
+				this.loading = true;
+				if (Number(target?.value) === 0) {
+					await this.$cart.remove(item);
+					this.selectedLineItemForQuantityEdit = null;
+					return this.loading = false;
+				}
+				await this.$cart.updateQuantity(item, Number(target?.value) || 1);
+				this.selectedLineItemForQuantityEdit = null;
+				this.loading = false;
+			},
 			updateMenuOpen(value) {
 				this.$store.commit('updateMenuOpen', value);
 			}

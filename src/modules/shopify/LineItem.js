@@ -9,6 +9,14 @@ export default class LineItem {
     get id() {
         return this._graph.id;
     }
+    
+    get image() {
+        return this._graph.variant?.image;
+    }
+    
+    get price() {
+        return this._graph.variant?.priceV2;
+    }
 
     get title() {
         return this._graph.title;
