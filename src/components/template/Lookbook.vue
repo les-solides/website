@@ -65,6 +65,7 @@
 			
 			img {
 				height: calc(100vh - 12rem);
+				max-width: calc(100vh - 12rem);
 			}
 			
 			&.open {
