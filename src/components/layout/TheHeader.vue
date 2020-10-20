@@ -173,7 +173,7 @@
 		name: "TheHeader",
 		components: {TheFooter, NavigationFilter, Route, Burger},
 		data: () => ({
-			checkoutOpen: true,
+			checkoutOpen: false,
 			loading: false,
 			selectedLineItemForQuantityEdit: null
 		}),

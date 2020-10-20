@@ -24,6 +24,7 @@ export default new Vuex.Store({
 			// => @media (min-width: 1280px) { ... }
 		},
 		collaborationHash: undefined,
+		collaborationIndices: [],
 		isMobile: false,
 		loading: false,
 		menuOpen: false,

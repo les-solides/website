@@ -6,7 +6,10 @@
 			<router-view />
 		</TheBody>
 		
-		<TheLoadingScreen :active.sync="loading" />
+		<!--<TheLoadingScreen :active.sync="loading" />-->
+		<transition name="fade">
+			<TheGifLoadingScreen v-if="loading" />
+		</transition>
 		
 		<CookieNotice button-content="accept-cookies">
 			We use cookies to improve user experience, and analyze website traffic.
@@ -23,13 +26,14 @@
 	import TheHeader from "./components/layout/TheHeader";
 	import TheFooter from "./components/layout/TheFooter";
 	import TheBody from "./components/layout/TheBody";
-	import { debounce, delay } from 'lodash';
+	import { debounce } from 'lodash';
 	import CookieNotice from "./components/partials/CookieNotice";
-	import TheLoadingScreen from "./components/layout/TheLoadingScreen";
+	/*import TheLoadingScreen from "./components/layout/TheLoadingScreen";*/
 	import { mapGetters } from "vuex";
+	import TheGifLoadingScreen from "./components/layout/TheGifLoadingScreen";
 	
 	export default {
-		components: {TheLoadingScreen, CookieNotice, TheBody, TheFooter, TheHeader},
+		components: {TheGifLoadingScreen, CookieNotice, TheBody, TheFooter, TheHeader},
 		data: () => ({
 			ready: false
 		}),

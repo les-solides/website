@@ -94,6 +94,13 @@ button.menu {
 // -- D [end]
 
 // -- F [start]
+.fade-enter-active, .fade-leave-active {
+	transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+	opacity: 0;
+}
+
 .font-xl p, .font-xl span, .font-xl div {
 	font-size: $font-size-base * 2.5;
 	@media screen and (min-width: $breakpoint-md){
