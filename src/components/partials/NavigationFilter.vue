@@ -8,11 +8,11 @@
 			   :key="mainItem.innerText"
 			   v-for="(mainItem, index) of mainListItems">
 			{{ mainItem.innerText }}{{
-				mainListItems[index + 1] ||
-				(getSubListItems(active).length) ? ',' : ''
+				mainListItems[index + 1] ? ',' : ''
 			}}
 		</Route>
 		<Route class="mr-1"
+			   :class="{ 'ml-4': index === 0 }"
 			   :to="getRoute(subItem, active)"
 			   :key="subItem.innerText"
 			   v-for="(subItem, index) of getSubListItems(active)">

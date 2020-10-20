@@ -16,7 +16,7 @@
 			<!-- Image -->
 			<router-link :to="`/product/${ product.handle }`"
 						 class="hidden md:block overflow-hidden">
-				<LoadedImage class="h-full object-cover w-full"
+				<LoadedImage class="h-full object-cover zoomed w-full"
 							 :src="o(imageShown).src || o(imageShown).originalSrc" />
 			</router-link>
 			<div class="block md:hidden"

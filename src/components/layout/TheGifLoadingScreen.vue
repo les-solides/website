@@ -1,6 +1,7 @@
 <template>
 	<div class="gif-loading">
-		<LoadedImage :src="selectedImage"
+		<LoadedImage class="h-full object-cover"
+					 :src="selectedImage"
 					 @load="loaded = true" />
 		<TheLoadingScreen :active=" ! loaded" />
 	</div>

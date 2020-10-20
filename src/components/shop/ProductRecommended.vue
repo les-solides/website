@@ -8,7 +8,7 @@
 		<div class="relative quick-buy">
 			
 			<!-- Image -->
-			<div class="block">
+			<div class="block zoomed">
 				<LoadedImage class="h-full object-cover w-full"
 							 :src="o(imageShown).src || o(imageShown).originalSrc" />
 			</div>

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<span class="block md:text-center w-full">Recommended products</span>
+		<span class="block md:text-center w-full">recommended products</span>
 		
 		<ul class="flex mt-4 overflow-x-auto">
 			<ProductRecommended :product="recommendation"
