@@ -32,12 +32,15 @@
 								<img :src="item.image.src"
 									 :alt="item.image.alt" />
 							</div>
-							<div class="ml-4">
+							<div class="ml-4"
+								 style="width: calc(100% - 80px - 1rem);">
 								<div class="text-left">{{ item.title }}</div>
 								<div class="flex mb-4">
-									<span class="kapitälchen">{{ item.price.currencyCode }} {{ Number(item.price.amount).toFixed(2) }}</span>
+									<span class="kapitälchen">
+										{{ item.price.currencyCode }} {{ Number(item.price.amount).toFixed(2) }}
+									</span>
 								</div>
-								<div class="flex text-left">
+								<div class="flex justify-between text-left">
 									<div class="mr-8 text-left"
 										 v-if=" ! selectedLineItemForQuantityEdit || (selectedLineItemForQuantityEdit.id !== item.id)">
 										quantity: {{ item.quantity }}
@@ -61,7 +64,7 @@
 					</div>
 					<a class="checkout-button mt-4"
 					   :href="amountOfCartItems ? $cart.url : '/products'">
-						{{ amountOfCartItems ? 'checkout' : 'go to products' }}
+						{{ amountOfCartItems ? '( checkout )' : '( go to products )' }}
 					</a>
 				</div>
 			</div>
@@ -106,58 +109,66 @@
 			<div class="cursor-pointer hidden md:flex justify-end md:w-1/3 select-none z-20"
 				 unselectable="on"
 				 @click="checkoutOpen = ! checkoutOpen">
-				<div class="md:py-0 py-4">
+				<div class="md:py-0 py-4" v-if=" ! checkoutOpen">
 					bag ({{ amountOfCartItems }})
 				</div>
-			</div>
-			<div class="checkout-overview shadow mt-2 z-10"
-				 :class="{ open: checkoutOpen }">
-				<div class="loading-overlay h-full w-full"
-					 v-if="loading"></div>
-				<ul v-if=" ! amountOfCartItems">
-					<li>your cart is empty</li>
-				</ul>
-				<ul class="mb-4 checkout-item-list"
-					v-if="amountOfCartItems">
-					<li class="flex mb-4"
-						:key="item.id"
-						v-for="item of $cart.items">
-						<div style="width: 80px">
-							<img :src="item.image.src"
-								 :alt="item.image.alt" />
-						</div>
-						<div class="ml-4">
-							<div class="text-left">{{ item.title }}</div>
-							<div class="flex mb-4">
-								<span class="kapitälchen">{{ item.price.currencyCode }} {{ Number(item.price.amount).toFixed(2) }}</span>
-							</div>
-							<div class="flex text-left">
-								<div class="mr-8 text-left"
-									 v-if=" ! selectedLineItemForQuantityEdit || (selectedLineItemForQuantityEdit.id !== item.id)">
-									quantity: {{ item.quantity }}
-								</div>
-								<input @change="updateQuantity(item, $event)"
-									   class="mr-8 text-left"
-									   style="border-bottom: 1px solid gray;width: 65px"
-									   type="number"
-									   :value="item.quantity"
-									   v-if="selectedLineItemForQuantityEdit && (selectedLineItemForQuantityEdit.id === item.id)">
-								<button @click="selectedLineItemForQuantityEdit = item">
-									edit
-								</button>
-							</div>
-						</div>
-					</li>
-				</ul>
-				<div class="flex justify-between">
-					<div class="text-left">total</div>
-					<div class="kapitälchen">CHF {{ Number($cart.total).toFixed(2) }}</div>
+				<div class="md:py-0 py-4"
+					 v-if="checkoutOpen">
+					<Cross />
 				</div>
-				<a class="checkout-button mt-4"
-				   :href="amountOfCartItems ? $cart.url : '/products'">
-					{{ amountOfCartItems ? 'checkout' : 'go to products' }}
-				</a>
 			</div>
+			<transition name="fade">
+				<div class="checkout-overview mt-2 open z-10"
+					 v-show="checkoutOpen">
+					<div class="loading-overlay h-full w-full"
+						 v-if="loading"></div>
+					<ul v-if=" ! amountOfCartItems">
+						<li>your cart is empty</li>
+					</ul>
+					<ul class="mb-4 checkout-item-list"
+						v-if="amountOfCartItems">
+						<li class="flex mb-4"
+							:key="item.id"
+							style="min-width: calc(18vw)"
+							v-for="item of $cart.items">
+							<div style="width: 80px">
+								<img :src="item.image.src"
+									 :alt="item.image.alt" />
+							</div>
+							<div class="ml-4"
+								 style="width: calc(100% - 80px - 1rem);">
+								<div class="text-left">{{ item.title }}</div>
+								<div class="flex mb-4">
+									<span class="kapitälchen">{{ item.price.currencyCode }} {{ Number(item.price.amount).toFixed(2) }}</span>
+								</div>
+								<div class="flex justify-between text-left">
+									<div class="text-left"
+										 v-if=" ! selectedLineItemForQuantityEdit || (selectedLineItemForQuantityEdit.id !== item.id)">
+										quantity: {{ item.quantity }}
+									</div>
+									<input @change="updateQuantity(item, $event)"
+										   class="text-left"
+										   style="border-bottom: 1px solid gray;width: 65px"
+										   type="number"
+										   :value="item.quantity"
+										   v-if="selectedLineItemForQuantityEdit && (selectedLineItemForQuantityEdit.id === item.id)">
+									<button @click="selectedLineItemForQuantityEdit = item">
+										edit
+									</button>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<div class="flex justify-between">
+						<div class="text-left">total</div>
+						<div class="kapitälchen">CHF {{ Number($cart.total).toFixed(2) }}</div>
+					</div>
+					<a class="checkout-button mt-4"
+					   :href="amountOfCartItems ? $cart.url : '/products'">
+						{{ amountOfCartItems ? '( checkout )' : '( go to products )' }}
+					</a>
+				</div>
+			</transition>
 		</nav>
 	</header>
 </template>
@@ -168,19 +179,27 @@
 	import NavigationFilter from "../partials/NavigationFilter";
 	import { mapGetters } from "vuex";
 	import TheFooter from "./TheFooter";
+	import Cross from "../partials/Cross";
 	
 	export default {
 		name: "TheHeader",
-		components: {TheFooter, NavigationFilter, Route, Burger},
+		components: {Cross, TheFooter, NavigationFilter, Route, Burger},
 		data: () => ({
-			checkoutOpen: false,
 			loading: false,
 			selectedLineItemForQuantityEdit: null
 		}),
 		computed: {
-			...mapGetters(['menuOpen']),
+			...mapGetters(['bagIsOpen', 'menuOpen']),
 			amountOfCartItems() { // new
 				return this.$cart.length;
+			},
+			checkoutOpen: {
+				get() {
+					return this.bagIsOpen;
+				},
+				set(value) {
+					this.$store.commit('updateBagOpen', value);
+				}
 			}
 		},
 		methods: {
@@ -197,6 +216,11 @@
 			},
 			updateMenuOpen(value) {
 				this.$store.commit('updateMenuOpen', value);
+			}
+		},
+		watch: {
+			amountOfCartItems() {
+				this.$store.commit('updateBagOpen', true);
 			}
 		}
 	};

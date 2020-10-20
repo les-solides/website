@@ -13,6 +13,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
+		bagIsOpen: false,
 		breakpoints: {
 			'sm': 640,
 			// => @media (min-width: 640px) { ... }
@@ -32,6 +33,9 @@ export default new Vuex.Store({
 		storefront: storefront,
 	},
 	getters: {
+		bagIsOpen(state) {
+			return !! state.bagIsOpen;
+		},
 		isMobile(state) {
 			return state.isMobile;
 		},
@@ -45,6 +49,9 @@ export default new Vuex.Store({
 	mutations: {
 		refreshIsMobile(state) {
 			state.isMobile = state.breakpoints.md >= window.innerWidth;
+		},
+		updateBagOpen(state, value) {
+			state.bagIsOpen = !! value;
 		},
 		updateLoading(state, value) {
 			state.loading = !! value;
