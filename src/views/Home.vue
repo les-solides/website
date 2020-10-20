@@ -41,9 +41,10 @@
 						   .sort((a, b) => a.order - b.order);
 			}
 		},
+		beforeCreate() {
+			this.$store.commit('updateLoading', true);
+		},
 		async created() {
-			await this.$store.commit('updateLoading', true);
-			
 			if ( ! this.homeArticles.length) {
 				await this.$store.dispatch(
 					'shopify/blog/fetchArticlesByBlog',
