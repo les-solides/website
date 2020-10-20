@@ -2,13 +2,14 @@
 	<div>
 		<div :key="year"
 			 :style="'margin-top: calc(-1rem - 8px)'"
-			 v-for="(year) of years">
+			 v-for="(year, index) of years">
 			<div class="bg-white md:pt-0 pt-4 sticky top-0 mb-4 md:top-100px w-full z-10">
 				<h5 class="kapitälchen mb-1">{{ year }}</h5>
 				<Divider />
 			</div>
 			<LinkProductGroup
 					class="mb-4"
+					:style="`align-content: baseline; ${ index === years.length - 1 ? ' min-height: calc(100vh - 10rem)' : ''}`"
 					:products="products.filter(product => product.getTag(/^archive:(.*)/, 'archive:') === year)"/>
 		</div>
 	</div>
