@@ -4,7 +4,7 @@
 				   :is="_.startCase(article.template).split(' ').join('')"
 				   :key="article.id"
 				   :article="article"
-				   :style="index === 0 ? 'margin-top: -1rem;' : ''"
+				   :style="index === 0 ? 'margin-top: -2rem;' : ''"
 				   v-for="(article, index) of lookbookArticles" />
 	</div>
 </template>

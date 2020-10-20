@@ -1,6 +1,8 @@
 <template>
 	<div>
-		<button style="line-height: 1.75" @click="open = ! open">{{ open ? 'v' : 'x' }} {{ article.title }}</button>
+		<button @click="open = ! open">
+			{{ open ? 'v' : 'x' }} {{ article.title }}
+		</button>
 		<div class="horizontal-scroller flex justify-start"
 			 :class="{ open }">
 			<LoadedImage class="object-contain object-top"
@@ -63,15 +65,15 @@
 		}
 		
 		@media screen and (min-width: $breakpoint-md) {
-			height: calc(100vh - 12rem);
+			height: calc(100vh - 11rem);
 			
 			img {
-				height: calc(100vh - 12rem);
-				max-width: calc(100vh - 12rem);
+				height: calc(100vh - 11rem);
+				max-width: calc(100vh - 11rem);
 			}
 			
 			&.open {
-				max-height: calc(100vh - 12rem);
+				max-height: calc(100vh - 11rem);
 			}
 		}
 	}
