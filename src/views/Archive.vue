@@ -9,7 +9,7 @@
 			</div>
 			<LinkProductGroup
 					class="mb-4"
-					:style="`align-content: baseline; ${ index === years.length - 1 ? ' min-height: calc(100vh - 10rem)' : ''}`"
+					:style="`align-content: baseline; ${ index === years.length - 1 ? ' min-height: calc(100vh - 10gsrem)' : ''}`"
 					:products="products.filter(product => product.getTag(/^archive:(.*)/, 'archive:') === year)"/>
 		</div>
 	</div>
