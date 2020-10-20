@@ -7,7 +7,7 @@
 				@click="move(index)"
 				:key="item.handle"
 				v-for="(item, index) of items">
-			x {{ item.name }} ({{ indices[item.id] }}/{{ item.count }})
+			x {{ item.name }} <!--({{ indices[item.id] }}/{{ item.count }})-->
 		</button>
 	</div>
 </template>

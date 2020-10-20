@@ -249,6 +249,11 @@ header {
 	transform: scale(.9, 1) translate(-5%, 0);
 }*/
 // -- T [start]
+.tooltip {
+	position: absolute;
+	color: black;
+}
+
 .top-100 {
 	top: 100%;
 }
