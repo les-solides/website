@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<button @click="open = ! open">
+		<button class="mb-1" @click="open = ! open">
 			{{ open ? 'v' : 'x' }} {{ article.title }}
 		</button>
 		<div class="horizontal-scroller flex justify-start"
