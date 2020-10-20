@@ -359,7 +359,7 @@
 	.product-link {
 		.product-link-overlay {
 			&.md\:block {
-				@media (min-width: 768px) {
+				@media (min-width: 1024px) {
 					display: block !important;
 				}
 			}
@@ -387,7 +387,7 @@
 				height: 45vw;
 			}
 			
-			@media (min-width: 768px) {
+			@media (min-width: 1024px) {
 				img, .empty-image-box {
 					height: 20vw;
 				}
@@ -403,7 +403,7 @@
 		}
 		
 		width: calc(50% - .5rem);
-		@media (min-width: 768px) {
+		@media (min-width: 1024px) {
 			img, .empty-image-box {
 				height: 26vw;
 			}

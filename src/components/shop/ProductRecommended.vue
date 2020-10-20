@@ -103,7 +103,7 @@
 		}
 		.product-link-overlay {
 			&.md\:block {
-				@media (min-width: 768px) {
+				@media (min-width: 1024px) {
 					display: block !important;
 				}
 			}
@@ -131,7 +131,7 @@
 				height: 45vw;
 			}
 			
-			@media (min-width: 768px) {
+			@media (min-width: 1024px) {
 				img, .empty-image-box {
 					height: 22vw;
 				}
@@ -147,7 +147,7 @@
 		}
 		
 		width: 48.5%;
-		@media (min-width: 768px) {
+		@media (min-width: 1024px) {
 			img, .empty-image-box {
 				height: 22vw;
 			}

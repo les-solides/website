@@ -16,7 +16,7 @@ export default new Vuex.Store({
 		breakpoints: {
 			'sm': 640,
 			// => @media (min-width: 640px) { ... }
-			'md': 768,
+			'md': 1024,
 			// => @media (min-width: 768px) { ... }
 			'lg': 1024,
 			// => @media (min-width: 1024px) { ... }
