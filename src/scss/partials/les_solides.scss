@@ -34,6 +34,14 @@
 	bottom: 5%;
 }
 
+button[disabled] {
+	color: #5A5A5A;
+}
+
+button.add-to-cart {
+	background: rgba(255, 255, 255, 0.4);
+}
+
 button.menu {
 	padding: $font-size-base * 1.5;
 }

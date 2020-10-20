@@ -27,7 +27,7 @@
 			<!-- Image -->
 			
 			<!-- QuickShop Overlay -->
-			<div class="absolute bg-overlay h-full hidden left-0 product-link-overlay top-0 w-full"
+			<div class="absolute  h-full hidden left-0 product-link-overlay top-0 w-full"
 				 :class="{ 'md:block': hover && hasValidAmountOfOptions && quickBuyActive }"
 				 v-if=" ! this.small">
 				<div class="flex"
@@ -85,7 +85,7 @@
 						{{ pairOption.values[1] }}
 					</button>
 				</div>
-				<button class="outside-btn text-center w-full"
+				<button class="add-to-cart outside-btn text-center w-full"
 						@click="addToCart"
 						:disabled=" ! selectedVariants.length"
 						:class="{ 'not-italic': ! selectedVariants.length }"
@@ -97,13 +97,13 @@
 			
 			<!--Buy Buttons (before / without QuickShop) [start]-->
 			<div v-if=" ! this.small">
-				<button class="absolute bg-overlay bottom-0 hidden md:block outside-btn text-center w-full"
-						@click="quickBuyActive = true"
+				<button class="absolute add-to-cart bottom-0 hidden md:block outside-btn text-center w-full"
+						@click="openQuickBuy"
 						style="height: 3vw"
 						v-if="quickShopType !== 0 && hasValidAmountOfOptions && hover && ! quickBuyActive">
 					quickbuy
 				</button>
-				<button class="absolute bg-overlay bottom-0 hidden md:block outside-btn text-center w-full"
+				<button class="absolute add-to-cart  bottom-0 hidden md:block outside-btn text-center w-full"
 						@click="addToCart"
 						style="height: 3vw"
 						v-if="quickShopType === 0 && hover">
@@ -317,6 +317,15 @@
 				this.$store.commit('updateFooterRoute', Footer.routes.SIZE);
 				this.$store.commit('updateFooterOpen', true);
 			},
+			openQuickBuy() {
+				this.quickBuyActive = true
+				this.product
+					.selectedVariant
+					.options
+					.forEach(option =>
+						this.selectOptionValue(option, option.value)
+					);
+			},
 			selectOptionValue(option, value) {
 				this.selectedOptionValues = this.selectedOptionValues.filter(
 					v => v.option.name !== option.name
@@ -343,6 +352,7 @@
 			unhover() {
 				this.selectedOptionValues = [];
 				this.hover = false;
+				this.quickBuyActive = false;
 			}
 		},
 		created() {
