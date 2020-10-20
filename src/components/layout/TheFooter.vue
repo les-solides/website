@@ -1,7 +1,7 @@
 <template>
 	<footer class="bg-white md:sticky" :class="{ 'bottom-0 z-20': open }">
 		<article class="bg-white fixed md:z-30 p-4 overflow-auto transition-medium w-full"
-				 :class="{ 'top-0': open, 'top-100': ! open }">
+				 :class="{ 'top-100': ! open }">
 			<Burger @click.native="closeFooter"
 					class="fixed mr-4 right"
 					:open="true" />
@@ -76,13 +76,19 @@
 			NewsletterSignup,
 			ReturnsAndExchanges, Shipping, PrivacyPolicy, SizeGuide, TermsOfUse, About, Burger},
 		data: () => ({
-			currentRoute: null,
-			footer: Footer,
-			open: false
+			footer: Footer
 		}),
+		computed: {
+			currentRoute() {
+				return this.$store.getters['footerRoute'];
+			},
+			open() {
+				return this.$store.getters['footerIsOpen'];
+			}
+		},
 		methods: {
 			closeFooter() {
-				this.open = false;
+				this.$store.commit('updateFooterOpen', false);
 			},
 			openFooter(route) {
 				if (
@@ -91,8 +97,8 @@
 				) {
 					return this.closeFooter();
 				}
-				this.currentRoute = route;
-				return this.open = true;
+				this.$store.commit('updateFooterRoute', route);
+				return this.$store.commit('updateFooterOpen', true);
 			}
 		}
 	};
@@ -102,6 +108,7 @@
 	article {
 		height: calc(100vh - var(--footer-height));
 		padding-bottom: var(--footer-height);
+		top: var(--header-height);
 		.footer-page h2 {
 			margin-top: 1rem!important;
 		}

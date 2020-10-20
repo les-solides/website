@@ -49,7 +49,14 @@
 					<div class="flex flex-wrap items-center justify-center w-full"
 						 v-if="option.values.length > 2">
 						<div>
-							<div class="text-center w-full">{{ option.name }}</div>
+							<button @click="openSizeGuide"
+								 class="cursor-pointer text-center w-full"
+								 v-if="option.name === 'choose your size'">{{ option.name }}
+							</button>
+							<div class="text-center w-full"
+								 v-if="option.name !== 'choose your size'">
+								{{ option.name }}
+							</div>
 							<div class="flex justify-center">
 								<button @click="selectOptionValue(option, value)"
 										class="mr-1"
@@ -129,6 +136,7 @@
 	import PopupMobile from "../partials/PopupMobile";
 	import ProductDetail from "./partials/ProductDetail";
 	import ProductTitlePrice from "./partials/ProductTitlePrice";
+	import Footer from "../../modules/Footer";
 	
 	export default {
 		name: "ProductLink",
@@ -304,6 +312,10 @@
 					duration: 5000,
 					position: "bottom-center"
 				});
+			},
+			openSizeGuide() {
+				this.$store.commit('updateFooterRoute', Footer.routes.SIZE);
+				this.$store.commit('updateFooterOpen', true);
 			},
 			selectOptionValue(option, value) {
 				this.selectedOptionValues = this.selectedOptionValues.filter(

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import shopify from "./shop/shopify";
 import Client from "shopify-buy/index.unoptimized.umd";
+import Footer from "../modules/Footer";
 
 const storefront = Client.buildClient({
 	domain: 'lessolides.myshopify.com',
@@ -26,6 +27,8 @@ export default new Vuex.Store({
 		},
 		collaborationHash: undefined,
 		collaborationIndices: [],
+		footerIsOpen: false,
+		footerRoute: null,
 		isMobile: false,
 		loading: false,
 		menuOpen: false,
@@ -35,6 +38,12 @@ export default new Vuex.Store({
 	getters: {
 		bagIsOpen(state) {
 			return !! state.bagIsOpen;
+		},
+		footerIsOpen(state) {
+			return !! state.footerIsOpen;
+		},
+		footerRoute(state) {
+			return state.footerRoute;
 		},
 		isMobile(state) {
 			return state.isMobile;
@@ -52,6 +61,17 @@ export default new Vuex.Store({
 		},
 		updateBagOpen(state, value) {
 			state.bagIsOpen = !! value;
+		},
+		updateFooterOpen(state, value) {
+			state.footerIsOpen = !! value;
+		},
+		updateFooterRoute(state, value) {
+			const exists = Object
+				.values(Footer.routes)
+				.find(v => v === value);
+			if (exists) {
+				state.footerRoute = value;
+			}
 		},
 		updateLoading(state, value) {
 			state.loading = !! value;
