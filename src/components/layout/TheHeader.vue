@@ -180,6 +180,9 @@
 	import { mapGetters } from "vuex";
 	import TheFooter from "./TheFooter";
 	import Cross from "../partials/Cross";
+	import store from './../../store/index';
+	
+	let timeout = null;
 	
 	export default {
 		name: "TheHeader",
@@ -220,6 +223,13 @@
 		},
 		watch: {
 			amountOfCartItems() {
+				if ( ! store.getters['bagIsOpen']) {
+					clearTimeout(timeout);
+					timeout = setTimeout(
+						() => this.$store.commit('updateBagOpen', false),
+						3000
+					);
+				}
 				this.$store.commit('updateBagOpen', true);
 			}
 		}
