@@ -12,7 +12,7 @@
 			}}
 		</Route>
 		<Route class="mr-1"
-			   :class="{ 'ml-4': index === 0 }"
+			   :class="{ 'ml-3': index === 0 }"
 			   :to="getRoute(subItem, active)"
 			   :key="subItem.innerText"
 			   v-for="(subItem, index) of getSubListItems(active)">
