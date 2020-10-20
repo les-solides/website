@@ -12,7 +12,7 @@
 					  ref="tooltipContent"
 					  v-show="tooltipActive">
 				<span class="block">
-					{{ o(product).title }} ({{ activeImageIndex + 1 }}/{{ imageCount - 1 }})
+					{{ o(product).title }} ({{ activeImageIndex + 1 }}/{{ imageCount }})
 				</span>
 				<span class="block text-left kapitälchen">
 					{{ o(product).price }}
