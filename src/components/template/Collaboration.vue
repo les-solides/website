@@ -112,6 +112,9 @@
 				this.tooltipContainer.removeEventListener('mousemove', this.handleMouseMove);
 				this.tooltipContainer.addEventListener('mousemove', this.handleMouseMove);
 			});
+		},
+		destroyed() {
+			this.tooltipContainer.removeEventListener('mousemove', this.handleMouseMove);
 		}
 	};
 </script>

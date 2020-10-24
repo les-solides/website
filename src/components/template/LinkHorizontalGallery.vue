@@ -11,6 +11,7 @@
 			</nav>
 		</header>
 		<div class="absolute top-0"
+			 ref="tooltipContainer"
 			 :style="`height: ${height}`"
 			 v-if="article">
 			<div class="flex sticky overflow-x-hidden top-0 w-screen">
@@ -24,10 +25,17 @@
 							 :src="image.src"
 							 :alt="image.alt" />
 					</Route>
-				
 				</div>
 			</div>
 		</div>
+		<transition name="fade-fast">
+			<div class="absolute"
+				 ref="tooltipContent"
+				 v-show="tooltipActive">
+				<div>click to enter /</div>
+				<div>scroll for more images</div>
+			</div>
+		</transition>
 	</div>
 </template>
 
@@ -54,7 +62,10 @@
 				vuescroll: {
 					wheelDirectionReverse: true
 				}
-			}
+			},
+			scrollTop: 0,
+			tooltipActive: false,
+			transitionName: 'fade'
 		}),
 		computed: {
 			...mapGetters(['isMobile']),
@@ -73,6 +84,12 @@
 								image.alt.includes('screen:mobile') :
 								! image.alt.includes('screen:mobile')
 							);
+			},
+			tooltipContainer() {
+				return this.$refs.tooltipContainer;
+			},
+			tooltipContent() {
+				return this.$refs.tooltipContent;
 			}
 		},
 		methods: {
@@ -86,24 +103,32 @@
 			handleMouseMove(e) {
 				this.tooltipActive = true;
 				clearTimeout(this.tooltipTimeout);
-				this.tooltipContent.style.left = `${ e.clientX }px`;
-				this.tooltipContent.style.top = `${ e.clientY - 100 }px`;
+				this.tooltipContent.style.left = `${ e.clientX + 25 }px`;
+				this.tooltipContent.style.top = `${ e.clientY + this.scrollTop }px`;
 				this.tooltipTimeout = setTimeout(() => this.tooltipActive = false, 1500);
-			},
+			}
 		},
 		mounted() {
 			this.$nextTick(() => {
 				this.$refs['horizontal-scroll'].addEventListener('scroll', () => {
-					const scrollTop = this.$refs['horizontal-scroll'].scrollTop;
+					this.transitionName = 'none';
+					this.tooltipActive = false;
+					this.scrollTop = this.$refs['horizontal-scroll'].scrollTop;
 					const scrollHeight = this.$refs['horizontal-scroll'].scrollHeight;
 					const scrollWidth = this.$refs['translatable-element'].scrollWidth;
 					const scrollRatio = scrollWidth / scrollHeight;
-					const translation = scrollTop * scrollRatio;
+					this.translation = this.scrollTop * scrollRatio;
 					
 					this.$refs['translatable-element'].style.transform =
-						`translateX(${ -translation }px)`;
+						`translateX(${ -this.translation }px)`;
+					this.transitionName = 'fade';
 				});
+				this.tooltipContainer.removeEventListener('mousemove', this.handleMouseMove);
+				this.tooltipContainer.addEventListener('mousemove', this.handleMouseMove);
 			});
+		},
+		destroyed() {
+			this.tooltipContainer.removeEventListener('mousemove', this.handleMouseMove);
 		}
 	};
 </script>
