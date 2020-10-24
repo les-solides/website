@@ -1,12 +1,12 @@
 <template>
-	<div id="app">
+	<div id="app"
+		 class="transition-opacity-0">
 		<TheHeader v-if=" ! noHeader" />
 		
 		<TheBody>
 			<router-view />
 		</TheBody>
 		
-		<!--<TheLoadingScreen :active.sync="loading" />-->
 		<transition name="fade">
 			<TheGifLoadingScreen v-if="loading" />
 		</transition>
@@ -26,9 +26,7 @@
 	import TheHeader from "./components/layout/TheHeader";
 	import TheFooter from "./components/layout/TheFooter";
 	import TheBody from "./components/layout/TheBody";
-	import { debounce } from 'lodash';
 	import CookieNotice from "./components/partials/CookieNotice";
-	/*import TheLoadingScreen from "./components/layout/TheLoadingScreen";*/
 	import { mapGetters } from "vuex";
 	import TheGifLoadingScreen from "./components/layout/TheGifLoadingScreen";
 	
@@ -49,11 +47,21 @@
 		methods: {
 			handleResize() {
 				this.$store.commit('refreshIsMobile');
+			},
+			async removeInitialLoadingScreen() {
+				const app = document.querySelector('#app');
+				const loader = document.querySelector('#initial-load');
+				if ( ! loader) { return; }
+				loader.style.opacity = 0;
+				await this.wait(500);
+				loader.remove();
+				app.style.opacity = 1;
 			}
 		},
 		mounted() {
-			window.addEventListener('resize', debounce(this.handleResize, 100));
-			this.handleResize();
+			// window.addEventListener('resize', debounce(this.handleResize, 100));
+			// this.handleResize();
+			this.removeInitialLoadingScreen();
 		},
 		destroyed() {
 			window.removeEventListener('resize', this.handleResize);

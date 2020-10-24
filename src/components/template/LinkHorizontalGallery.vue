@@ -82,7 +82,14 @@
 					return this.fallbackRoute || this.$route.path;
 				}
 				return match.split(':')[1] || this.fallbackRoute || this.$route.path;
-			}
+			},
+			handleMouseMove(e) {
+				this.tooltipActive = true;
+				clearTimeout(this.tooltipTimeout);
+				this.tooltipContent.style.left = `${ e.clientX }px`;
+				this.tooltipContent.style.top = `${ e.clientY - 100 }px`;
+				this.tooltipTimeout = setTimeout(() => this.tooltipActive = false, 1500);
+			},
 		},
 		mounted() {
 			this.$nextTick(() => {
@@ -96,7 +103,6 @@
 					this.$refs['translatable-element'].style.transform =
 						`translateX(${ -translation }px)`;
 				});
-				
 			});
 		}
 	};

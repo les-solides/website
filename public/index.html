@@ -1,17 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible"
+		  content="IE=edge">
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0">
+	<link rel="icon"
+		  href="<%= BASE_URL %>favicon.ico">
+	<title><%= htmlWebpackPlugin.options.title %></title>
+	<style>
+		@font-face {
+			font-family: 'Bradford';
+			src: url(/assets/fonts/Regular/BradfordLL-Light90.otf) format('opentype');
+			font-weight: 200;
+			font-style: normal;
+			font-stretch: 90%;
+		}
+		@font-face {
+			font-family: 'Bradford';
+			src: url(/assets/fonts/Italic/BradfordLL-LightItalic90.otf) format('opentype');
+			font-weight: 200;
+			font-style: italic;
+			font-stretch: 90%;
+		}
+		* {
+			color: black;
+			font-family: Bradford, "Times New Roman", serif;
+			font-kerning: auto;
+			font-size: 1rem;
+			font-stretch: 90%;
+			letter-spacing: 0.1px;
+			line-height: 1.25;
+			margin: 0;
+			outline: none !important;
+			overflow: -moz-scrollbars-none;
+			padding: 0;
+			text-decoration: none;
+			-moz-osx-font-smoothing: grayscale;
+			-ms-overflow-style: none;
+			-webkit-appearance: none;
+			-webkit-font-smoothing: antialiased;
+		}
+		
+		.initial-loading-text {
+			bottom: 0;
+			left: 0;
+			padding: 1rem;
+			position: absolute;
+		}
+		
+		.transition-opacity-0 {
+			opacity: 0;
+			-webkit-transition: opacity 500ms linear;
+			transition: opacity 500ms linear;
+		}
+		
+		.transition-opacity-1 {
+			opacity: 1;
+			-webkit-transition: opacity 500ms linear;
+			transition: opacity 500ms linear;
+		}
+		
+		.mobile-only {
+			display: block;
+		}
+		
+		@media screen and (min-width: 1024px) {
+			.desktop-only {
+				display: block;
+			}
+			
+			.mobile-only {
+				display: none;
+			}
+		}
+	</style>
+</head>
+<body>
+<noscript>
+	<strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+			Please enable it to continue.</strong>
+</noscript>
+<div id="initial-load"
+	 class="fixed h-screen left-0 transition-opacity-1 top-0 w-screen"
+	 style="z-index: 100">
+	<div class="initial-loading-text">loading...</div>
+	<img class="mobile-only h-screen object-cover w-screen"
+		 src="/assets/loading/lessolides_placeholder_loading_8.gif"
+		 alt="">
+	<img class="md:block h-screen object-cover desktop-only w-screen"
+		 src="/assets/loading/lessolides_placeholder_loading_7.gif"
+		 alt="">
+</div>
+<div id="app"></div>
+<!-- built files will be auto injected -->
+</body>
 </html>
