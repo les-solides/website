@@ -17,14 +17,20 @@
 	};
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "./src/scss/partials/variables";
 .subfilter {
 	background: white;
 	left: 0;
-	padding: 0 1rem 1rem;
-	position: fixed;
-	top: var(--header-height);
+	padding: 0 1rem 1rem 0;
+	position: sticky;
+	top: 0;
 	width: 100%;
 	z-index: 10;
+	@media (min-width: $breakpoint-md) {
+		padding: 0 1rem 1rem;
+		position: fixed;
+		top: var(--header-height);
+	}
 }
 </style>

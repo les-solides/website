@@ -15,7 +15,7 @@
 				<!--:class="{ selected: search === suggestion.innerText }"-->
 				<button class="suggestion"
 						:key="suggestion.innerText"
-						@click="search = suggestion.innerText"
+						@click.prevent="search = suggestion.innerText"
 						v-for="suggestion of suggestions">
 					{{ suggestion.innerText }}
 				</button>
@@ -27,7 +27,8 @@
 			no products found...
 		</div>
 		
-		<div class="flex flex-wrap">
+		<div class="flex flex-wrap"
+			 v-if="search">
 			<ProductLink
 					:class="{
 						'mr-4': (index % 2) - 1,
@@ -52,21 +53,32 @@
 		components: {Cross, ProductLink},
 		data: () => ({
 			loaded: false,
-			results: [],
+			/*results: [],*/
 			search: "",
 			suggestions: []
 		}),
+		computed: {
+			results() {
+				return this.$store.getters['shopify/product/allProducts'].filter(p =>
+					p.title.includes(this.search) ||
+					p.handle.includes(this.search) ||
+					p.collections.find(c => c.title.includes(this.search)) ||
+					p.tags.find(t => t.includes(this.search)) ||
+					p.productType.includes(this.search)
+				);
+			}
+		},
 		methods: {
 			find: debounce(async function () {
-				this.false = false;
-				this.$store.commit('updateLoading', true);
-				this.results = await this.$store.dispatch(
-					'shopify/product/search',
-					this.search
-				);
-				this.wait(500);
-				this.$store.commit('updateLoading', false);
-				this.loaded = true;
+				/*this.false = false;
+				 this.$store.commit('updateLoading', true);
+				 /!*this.results = await this.$store.dispatch(
+				 'shopify/product/search',
+				 this.search
+				 );*!/
+				 this.wait(500);
+				 this.$store.commit('updateLoading', false);
+				 this.loaded = true;*/
 			}, 500)
 		},
 		async mounted() {
