@@ -9,136 +9,137 @@ import productsByHandles from "./queries/productsByHandles";
 import productsSchema from "./queries/productsSchema";
 
 export default {
-    namespaced: true,
-    state: {
-        cursor: null,
-        hasNextPage: false,
-        pagination: 1,
-        products: []
-    },
-    actions: {
-        async fetchAll({ commit }, first = 250) {
-            return api.post("", productsSchema(first))
-                      .then(({ data }) => {
-                          const products = data.data.products.edges.map(e =>
-                              new Product(e.node)
-                          );
-                          commit('addProducts', products);
-                          return products;
-                      });
-        },
-        async fetchByHandle(state, handle) {
-            return api.post("", productByHandle(handle))
-                      .then(data => {
-                          const product = Utils.getNested(data,
-                              "data", "data", "productByHandle")
-                          return product ? new Product(product) : null
-                      });
-        },
-        async fetchRecommendations({ dispatch, rootState }, id) {
-            const query = rootState.storefront.graphQLClient
-                                   .query(root => {
-                                       root.add("productRecommendations",
-                                           { args: { productId: id } },
-                                           recommendations => {
-                                               ProductField.addTo(recommendations);
-                                           });
-                                   });
-            let recommendations = await rootState.storefront.graphQLClient
-                                                 .send(query)
-                                                 .then(({ data }) => data
-                                                     .productRecommendations
-                                                     .slice(0, 6)
-                                                     .map(r => new Product(r))
-                                                 );
-            if (recommendations.length < 6) { // fill until 6 items
-                let more = await dispatch("fetchAll", 8);
-                for (let product of more) {
-                    if (recommendations.find(r => r.id === product.id)) {
-                        continue;
-                    }
-                    if (recommendations.length >= 6) {
-                        break;
-                    }
-                    recommendations.push(product);
-                }
-            }
-            return recommendations;
-        },
-        async paginate({ commit, rootState, state }, searchQuery = "") {
-            const query = rootState.storefront.graphQLClient
-                .query(root => {
-                    root.addConnection(
-                        "products",
-                        {
-                            args: {
-                                after: state.cursor,
-                                first: state.pagination,
-                                query: searchQuery
-                            }
-                        },
-                        (product) => {
-                            ProductField.addTo(product);
-                        }
-                    );
-                });
-            return rootState.storefront.graphQLClient
-                .send(query)
-                .then(async ({ data }) => {
-                    state.hasNextPage = data.products.pageInfo.hasNextPage;
-                    const products = data.products.edges.map(e => {
-                        state.cursor = e.cursor;
-                        return new Product(e.node);
-                    });
-                    await commit('addProducts', products);
-                    return products;
-                });
-        },
-        async search({ rootState }, searchQuery) {
-            return api.post("", productsByQuery(searchQuery))
-                      .then(({ data }) =>  data.data.products.edges.map(e => new Product(e.node)));
-        },
-        async searchByHandles({ rootState }, handles) {
-            return api.post("", productsByHandles(handles))
-                      .then(({ data }) =>  data.data.products.edges.map(e => new Product(e.node)));
-        }
-    },
-    getters: {
-        allProducts(state) {
-            return state.products || [];
-        }
-    },
-    mutations: {
-        /**
-         * Pushes items of product array to the inventory.
-         *
-         * @param {Array<Product>} products
-         * @param {Object} state
-         */
-        addProducts(state, products) {
-            if ( ! Array.isArray(products)) {
-                throw new TypeError('[store/shopify] products must be an array.');
-            }
-            products.forEach(product => {
-                product = product instanceof Product ? product : new Product(product);
-                state.products = state.products.filter(p => p.id !== product.id);
-                state.products.push(product);
-            });
-        },
-        addOneToInventory(state, product) {
-            if ( ! (product instanceof Product)) {
-                return;
-            }
-
-            const exists = state.inventory
-                .find(p => p.id === product.id);
-
-            if ( ! exists) {
-                state.inventory.push(product);
-            }
-        },
-        resetCursor(state) {
-            state.cursor = null;
-        }
-    }
+	namespaced: true,
+	state: {
+		cursor: null,
+		hasNextPage: false,
+		pagination: 1,
+		products: []
+	},
+	actions: {
+		async fetchAll({commit}, first = 250) {
+			return api
+				.post("", productsSchema(first))
+				.then(({data}) => {
+					const products = data.data.products.edges.map(e =>
+						new Product(e.node)
+					);
+					commit('addProducts', products);
+					return products;
+				});
+		},
+		async fetchByHandle(state, handle) {
+			return api.post("", productByHandle(handle))
+					  .then(data => {
+						  const product = Utils.getNested(data,
+							  "data", "data", "productByHandle");
+						  return product ? new Product(product) : null;
+					  });
+		},
+		async fetchRecommendations({dispatch, rootState}, id) {
+			const query = rootState.storefront.graphQLClient
+								   .query(root => {
+									   root.add("productRecommendations",
+										   {args: {productId: id}},
+										   recommendations => {
+											   ProductField.addTo(recommendations);
+										   });
+								   });
+			let recommendations = await rootState.storefront.graphQLClient
+												 .send(query)
+												 .then(({data}) => data
+													 .productRecommendations
+													 .slice(0, 6)
+													 .map(r => new Product(r))
+												 );
+			if (recommendations.length < 6) { // fill until 6 items
+				let more = await dispatch("fetchAll", 8);
+				for (let product of more) {
+					if (recommendations.find(r => r.id === product.id)) {
+						continue;
+					}
+					if (recommendations.length >= 6) {
+						break;
+					}
+					recommendations.push(product);
+				}
+			}
+			return recommendations;
+		},
+		async paginate({commit, rootState, state}, searchQuery = "") {
+			const query = rootState.storefront.graphQLClient
+								   .query(root => {
+									   root.addConnection(
+										   "products",
+										   {
+											   args: {
+												   after: state.cursor,
+												   first: state.pagination,
+												   query: searchQuery
+											   }
+										   },
+										   (product) => {
+											   ProductField.addTo(product);
+										   }
+									   );
+								   });
+			return rootState.storefront.graphQLClient
+							.send(query)
+							.then(async ({data}) => {
+								state.hasNextPage = data.products.pageInfo.hasNextPage;
+								const products = data.products.edges.map(e => {
+									state.cursor = e.cursor;
+									return new Product(e.node);
+								});
+								await commit('addProducts', products);
+								return products;
+							});
+		},
+		async search({rootState}, searchQuery) {
+			return api.post("", productsByQuery(searchQuery))
+					  .then(({data}) => data.data.products.edges.map(e => new Product(e.node)));
+		},
+		async searchByHandles({rootState}, handles) {
+			return api.post("", productsByHandles(handles))
+					  .then(({data}) => data.data.products.edges.map(e => new Product(e.node)));
+		}
+	},
+	getters: {
+		allProducts(state) {
+			return state.products || [];
+		}
+	},
+	mutations: {
+		/**
+		 * Pushes items of product array to the inventory.
+		 *
+		 * @param {Array<Product>} products
+		 * @param {Object} state
+		 */
+		addProducts(state, products) {
+			if ( ! Array.isArray(products)) {
+				throw new TypeError('[store/shopify] products must be an array.');
+			}
+			products.forEach(product => {
+				product = product instanceof Product ? product : new Product(product);
+				state.products = state.products.filter(p => p.id !== product.id);
+				state.products.push(product);
+			});
+		},
+		addOneToInventory(state, product) {
+			if ( ! (product instanceof Product)) {
+				return;
+			}
+			
+			const exists = state.inventory
+								.find(p => p.id === product.id);
+			
+			if ( ! exists) {
+				state.inventory.push(product);
+			}
+		},
+		resetCursor(state) {
+			state.cursor = null;
+		}
+	}
 };

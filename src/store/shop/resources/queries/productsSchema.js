@@ -9,7 +9,8 @@ export default function (first = 250) {
                         edges {
                             node {
                                 descriptionHtml,
-                                handle
+                                handle,
+                                title
                             }
                         }
                     },
@@ -32,6 +33,7 @@ export default function (first = 250) {
                     },
                     tags,
                     title,
+                    productType,
                     variants(first: 250) {
                         edges {
                             node {

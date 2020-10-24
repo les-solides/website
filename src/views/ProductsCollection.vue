@@ -36,7 +36,7 @@
 	import { shuffle } from "lodash";
 	
 	export default {
-		name: "Products",
+		name: "ProductsFiltered",
 		components: {
 			ProductLink,
 			NavigationFilter
@@ -45,18 +45,23 @@
 			...mapGetters("shopify/blog", ["articles"]),
 			...mapGetters("shopify/product", ["allProducts"]),
 			amountPerChunk() {
-				const amount = Math.floor(this.allProducts.length / this.links.length);
+				const amount = Math.floor(this.filteredProducts.length / this.links.length);
 				return amount - (amount % 5);
 			},
 			chunkedArray() {
 				return this.chunkArray(
-					shuffle([...this.allProducts]),
+					shuffle([...this.filteredProducts]),
 					this.amountPerChunk
 				);
 			},
 			content() {
 				return this.articles.find(a =>
-					a.title === "Products Page (Main Links)"
+					a.title === "Products Page (Category Links)"
+				);
+			},
+			filteredProducts() {
+				return this.allProducts.filter(p =>
+					p.collections.find(c => c.title === this.$route.params.collection)
 				);
 			},
 			images() {
@@ -69,7 +74,11 @@
 				if ( ! this.content) {
 					return [];
 				}
-				return Array.from(this.content.selectElements('a'));
+				return Array
+					.from(this.content.selectElements('a'))
+					.filter(a =>
+						a.href.includes(this.$route.params.collection)
+					);
 			}
 		},
 		methods: {

@@ -5,7 +5,7 @@
 						  name="Navigation (Products)" />
 		<div class="flex flex-wrap"
 			 :key="o(chunk[0]).id"
-			 v-for="(chunk, index) of chunkedArray">
+			 v-for="chunk of chunkedArray">
 			<ProductLink :class="{
 							'mr-4': (index % 2) - 1,
 							'md:mr-4': (index % 5) - 4,
@@ -14,62 +14,44 @@
 						 :product="product"
 						 :key="product.id"
 						 v-for="(product, index) of chunk" />
-			<router-link class="block mb-16 relative w-full"
-						 :to="'/products/' + o(links[index]).href.split('/products/')[1]"
-						 v-if="o(links[index]).href">
-				<span class="absolute-center flex items-center justify-center magnified w-full"
-					  v-html="o(links[index]).innerHTML">
-				</span>
-				<img class="w-full"
-					 :src="o(images[index]).src"
-					 alt="">
-			</router-link>
 		</div>
 	</div>
 </template>
 
 <script>
 	import { mapGetters } from "vuex";
+	import { shuffle } from "lodash";
 	
 	import NavigationFilter from "../components/partials/NavigationFilter";
 	import ProductLink from "../components/shop/ProductLink";
-	import { shuffle } from "lodash";
 	
 	export default {
-		name: "Products",
+		name: "ProductsFiltered",
 		components: {
 			ProductLink,
 			NavigationFilter
 		},
 		computed: {
-			...mapGetters("shopify/blog", ["articles"]),
 			...mapGetters("shopify/product", ["allProducts"]),
 			amountPerChunk() {
-				const amount = Math.floor(this.allProducts.length / this.links.length);
-				return amount - (amount % 5);
+				return this.filteredProducts.length;
 			},
 			chunkedArray() {
 				return this.chunkArray(
-					shuffle([...this.allProducts]),
+					shuffle([...this.filteredProducts]),
 					this.amountPerChunk
 				);
 			},
-			content() {
-				return this.articles.find(a =>
-					a.title === "Products Page (Main Links)"
+			filteredProducts() {
+				const products = this.allProducts.filter(p =>
+					p.collections.find(c => c.title === this.$route.params.collection) &&
+					p.variants.find(v => v.title === this.$route.params.variant) ||
+					(p.productType && p.productType.toLowerCase() === this.$route.params.variant)
 				);
-			},
-			images() {
-				if ( ! this.content) {
-					return [];
-				}
-				return Array.from(this.content.images) || [];
-			},
-			links() {
-				if ( ! this.content) {
-					return [];
-				}
-				return Array.from(this.content.selectElements('a'));
+				products.forEach(p =>
+					p.selectedVariant = p.variants.find(v => v.title === this.$route.params.variant)
+				);
+				return products;
 			}
 		},
 		methods: {

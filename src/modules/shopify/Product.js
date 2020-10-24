@@ -212,6 +212,10 @@ export default class Product extends ShopifyGraph {
         }
         return this.selectedVariant.price;
     }
+    
+    get productType() {
+        return this._graph?.productType || "";
+    }
 
     get secondImage() {
         if ( ! this.images.length) {

@@ -59,15 +59,15 @@ const routes = [
 		meta: {
 			navigationArticle: "Navigation (Products)"
 		},
-		component: () => import(/* webpackChunkName: "Product" */ '../views/Products')
+		component: () => import(/* webpackChunkName: "Product" */ '../views/ProductsCollection')
 	},
 	{
-		path: '/products/:collection/:filter',
-		name: 'Products (Filter)',
+		path: '/products/:collection/:variant',
+		name: 'Products (Filtered)',
 		meta: {
 			navigationArticle: "Navigation (Products)"
 		},
-		component: () => import(/* webpackChunkName: "Product" */ '../views/Products')
+		component: () => import(/* webpackChunkName: "Product" */ '../views/ProductsFiltered')
 	},
 	{
 		path: '/product/:handle',
@@ -100,12 +100,13 @@ const router = new VueRouter({
 				selector: to.hash
 			}
 		}
+		return { x: 0, y: 0}
 	}
 });
 
 router.beforeEach((to, from, next) => {
 	store.state.routeClick = true;
-	store.commit('updateLoading', true);
+	// store.commit('updateLoading', true);
 	store.commit('updateMenuOpen', false);
 	next();
 });

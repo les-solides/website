@@ -185,8 +185,8 @@
 					this.product.options.length <= this.validAmountOfOptions;
 			},
 			imageShown() {
-				if (this.selectedVariants.length) {
-					return this.selectedVariants[0].image || this.product.images[0];
+				if (this.product?.selectedVariant) {
+					return this.product?.selectedVariant.image || this.product.images[0];
 				}
 				if (this.hover) {
 					return this.product.images[1] || this.product.images[0];
