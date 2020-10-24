@@ -3,6 +3,8 @@
 		<NavigationFilter base="/products"
 						  class="bg-white block md:hidden ml-0 py-4 sticky top-0 z-10"
 						  name="Navigation (Products)" />
+		<NavigationSubfilter
+				v-if="$route.params.collection === 'jewelry'" />
 		<div class="flex flex-wrap"
 			 :key="o(chunk[0]).id"
 			 v-for="chunk of chunkedArray">
@@ -24,10 +26,12 @@
 	
 	import NavigationFilter from "../components/partials/NavigationFilter";
 	import ProductLink from "../components/shop/ProductLink";
+	import NavigationSubfilter from "../components/partials/NavigationSubfilter";
 	
 	export default {
 		name: "ProductsFiltered",
 		components: {
+			NavigationSubfilter,
 			ProductLink,
 			NavigationFilter
 		},

@@ -1,23 +1,25 @@
 <template>
-	<div class="flex md:ml-4">
-		<Route class="mr-1"
-			   :class="{ 'text-gray-600': active !== mainItem }"
-			   @click="active = mainItem"
-			   :exact="false"
-			   :to="getRoute(mainItem)"
-			   :key="mainItem.innerText"
-			   v-for="(mainItem, index) of mainListItems">
-			{{ mainItem.innerText }}{{
+	<div>
+		<div class="flex md:ml-4">
+			<Route class="mr-1"
+				   :class="{ 'text-gray-600': active !== mainItem }"
+				   @click="active = mainItem"
+				   :exact="false"
+				   :to="getRoute(mainItem)"
+				   :key="mainItem.innerText"
+				   v-for="(mainItem, index) of mainListItems">
+				{{ mainItem.innerText }}{{
 				mainListItems[index + 1] ? ',' : ''
-			}}
-		</Route>
-		<Route class="mr-1"
-			   :class="{ 'ml-3': index === 0 }"
-			   :to="getRoute(subItem, active)"
-			   :key="subItem.innerText"
-			   v-for="(subItem, index) of getSubListItems(active)">
-			{{ subItem.innerText }}{{ getSubListItems(active)[index + 1] ? ',' : '' }}
-		</Route>
+				}}
+			</Route>
+			<Route class="mr-1"
+				   :class="{ 'ml-3': index === 0 }"
+				   :to="getRoute(subItem, active)"
+				   :key="subItem.innerText"
+				   v-for="(subItem, index) of getSubListItems(active)">
+				{{ subItem.innerText }}{{ getSubListItems(active)[index + 1] ? ',' : '' }}
+			</Route>
+		</div>
 	</div>
 </template>
 
