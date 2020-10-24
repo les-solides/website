@@ -101,7 +101,7 @@
 			}
 		},
 		async created() {
-			this.$store.commit('updateLoading', true);
+			// this.$store.commit('updateLoading', true);
 			this.article = (await this.$store.dispatch(
 				'shopify/blog/fetchArticlesByBlog',
 				"Products Page (Main)"
