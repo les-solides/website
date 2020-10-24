@@ -105,6 +105,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
 	store.state.routeClick = true;
+	store.commit('updateLoading', true);
 	store.commit('updateMenuOpen', false);
 	next();
 });
@@ -112,6 +113,7 @@ router.beforeEach((to, from, next) => {
 router.afterEach((to) => {
 	store.state.collaborationHash = to.hash.slice(1);
 	delay(() => store.state.routeClick = false, 100);
+	delay(() => store.commit('updateLoading', false));
 });
 
 export default router;

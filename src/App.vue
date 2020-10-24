@@ -4,7 +4,9 @@
 		<TheHeader v-if=" ! noHeader" />
 		
 		<TheBody>
-			<router-view />
+			<transition name="fade">
+				<router-view />
+			</transition>
 		</TheBody>
 		
 		<transition name="fade">

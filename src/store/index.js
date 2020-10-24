@@ -31,6 +31,7 @@ export default new Vuex.Store({
 		footerRoute: null,
 		isMobile: false,
 		loading: false,
+		loadingTimeout: null,
 		menuOpen: false,
 		routeClick: true,
 		storefront: storefront,
@@ -74,7 +75,13 @@ export default new Vuex.Store({
 			}
 		},
 		updateLoading(state, value) {
-			state.loading = !! value;
+			clearTimeout(state.loadingTimeout);
+			if ( ! value) {
+				return state.loadingTimeout = setTimeout(() =>
+					state.loading = false, 1000
+				);
+			}
+			state.loading = value;
 		},
 		updateMenuOpen(state, value) {
 			state.menuOpen = !! value;

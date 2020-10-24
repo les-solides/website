@@ -39,7 +39,7 @@
 			}
 		},
 		async created() {
-			await this.$store.commit('updateLoading', true);
+			// await this.$store.commit('updateLoading', true);
 			this.products = await this.$store.dispatch(
 				'shopify/collection/fetchByHandle',
 				this.$route.params.collection

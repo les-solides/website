@@ -3,17 +3,15 @@
 		<LoadedImage class="h-full object-cover"
 					 :src="selectedImage"
 					 @load="loaded = true" />
-		<TheLoadingScreen :active=" ! loaded" />
 	</div>
 </template>
 
 <script>
 	import LoadedImage from "../partials/LoadedImage";
-	import TheLoadingScreen from "./TheLoadingScreen";
 	
 	export default {
 		name: "TheGifLoadingScreen",
-		components: {TheLoadingScreen, LoadedImage},
+		components: {LoadedImage},
 		data: () => ({
 			images: [
 				"/assets/loading/lessolides_placeholder_loading_1.gif",
@@ -42,6 +40,6 @@
 		position: fixed;
 		top: 0;
 		width: 100vw;
-		z-index: 100;
+		z-index: 200;
 	}
 </style>
