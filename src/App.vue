@@ -54,6 +54,7 @@
 				const app = document.querySelector('#app');
 				const loader = document.querySelector('#initial-load');
 				if ( ! loader) { return; }
+				loader.innerHTML = "loading (100%)";
 				loader.style.opacity = 0;
 				await this.wait(500);
 				loader.remove();

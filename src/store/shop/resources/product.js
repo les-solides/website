@@ -6,27 +6,26 @@ import Utils from "../../../modules/Utils";
 import productRecommendations from "./queries/productRecommendations";
 import productsByQuery from "./queries/productsByQuery";
 import productsByHandles from "./queries/productsByHandles";
+import productsSchema from "./queries/productsSchema";
 
 export default {
     namespaced: true,
     state: {
         cursor: null,
         hasNextPage: false,
-        inventory: [],
-        pagination: 1
+        pagination: 1,
+        products: []
     },
     actions: {
-        async fetchAll(state, first = 250) {
-            const query = state.rootState.storefront.graphQLClient.query(root => {
-                root.addConnection("products", { args: { first } }, (product) => {
-                    ProductField.addTo(product);
-                });
-            });
-            return state.rootState.storefront.graphQLClient
-                .send(query)
-                .then(({ data }) =>
-                    data.products.edges.map(e => new Product(e.node))
-                );
+        async fetchAll({ commit }, first = 250) {
+            return api.post("", productsSchema(first))
+                      .then(({ data }) => {
+                          const products = data.data.products.edges.map(e =>
+                              new Product(e.node)
+                          );
+                          commit('addProducts', products);
+                          return products;
+                      });
         },
         async fetchByHandle(state, handle) {
             return api.post("", productByHandle(handle))
@@ -91,7 +90,7 @@ export default {
                         state.cursor = e.cursor;
                         return new Product(e.node);
                     });
-                    await commit('addManyToInventory', products);
+                    await commit('addProducts', products);
                     return products;
                 });
         },
@@ -105,8 +104,8 @@ export default {
         }
     },
     getters: {
-        inventory(state) {
-            return state.inventory || [];
+        allProducts(state) {
+            return state.products || [];
         }
     },
     mutations: {
@@ -116,21 +115,14 @@ export default {
          * @param {Array<Product>} products
          * @param {Object} state
          */
-        addManyToInventory(state, products = []) {
+        addProducts(state, products) {
             if ( ! Array.isArray(products)) {
-                throw new TypeError("Must be of type Array");
+                throw new TypeError('[store/shopify] products must be an array.');
             }
             products.forEach(product => {
-                if ( ! (product instanceof Product)) {
-                    return;
-                }
-
-                const exists = state.inventory
-                    .find(p => p.id === product.id);
-
-                if ( ! exists) {
-                    state.inventory.push(product);
-                }
+                product = product instanceof Product ? product : new Product(product);
+                state.products = state.products.filter(p => p.id !== product.id);
+                state.products.push(product);
             });
         },
         addOneToInventory(state, product) {

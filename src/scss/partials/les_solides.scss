@@ -22,6 +22,14 @@
 	}
 }
 
+// -- A [start]
+.absolute-center {
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
 // -- B [start]
 .bg-overlay {
 	background: rgba(255, 255, 255, 0.4);
@@ -182,6 +190,33 @@ header {
 // -- M [start]
 #main {
 	padding-top: 3rem;
+}
+
+.magnified {
+	h1 {
+		font-size: 2.5 * $font-size-base;
+		@media (min-width: $breakpoint-md) {
+			font-size: 5 * $font-size-base;
+		}
+	}
+	h2 {
+		font-size: 2 * $font-size-base;
+		@media (min-width: $breakpoint-md) {
+			font-size: 4 * $font-size-base;
+		}
+	}
+	h3 {
+		font-size: 1.5 * $font-size-base;
+		@media (min-width: $breakpoint-md) {
+			font-size: 3 * $font-size-base;
+		}
+	}
+	h4 {
+		font-size: 1 * $font-size-base;
+		@media (min-width: $breakpoint-md) {
+			font-size: 2 * $font-size-base;
+		}
+	}
 }
 
 .margin-deduct-4 {

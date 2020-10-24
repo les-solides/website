@@ -3,12 +3,27 @@
 		<NavigationFilter base="/products"
 						  class="bg-white block md:hidden ml-0 py-4 sticky top-0 z-10"
 						  name="Navigation (Products)" />
-		<div :key="article.id"
-					v-for="article of productsArticles">
-			<component class="mb-8"
-					   :is="_.startCase(article.template).split(' ').join('')"
-					   :article="article"
-					   @promise="promises.push($event)" />
+		<div class="flex flex-wrap"
+			 :key="chunk[0].id"
+			 v-for="(chunk, index) of chunkedArray">
+			<ProductLink :class="{
+							'mr-4': (index % 2) - 1,
+							'md:mr-4': (index % 5) - 4,
+							'md:mr-0': (index % 5) - 5
+						 }"
+						 :product="product"
+						 :key="product.id"
+						 v-for="(product, index) of chunk" />
+			<router-link class="block mb-16 relative w-full"
+						 :to="'/products/' + o(links[index]).href.split('/products/')[1]"
+						 v-if="o(links[index]).href">
+				<span class="absolute-center flex items-center justify-center magnified w-full"
+					  v-html="o(links[index]).innerHTML">
+				</span>
+				<img class="w-full"
+					 :src="o(images[index]).src"
+					 alt="">
+			</router-link>
 		</div>
 	</div>
 </template>
@@ -25,92 +40,78 @@
 	
 	import FrameLink from "../modules/shopify/FrameLink";
 	import NavigationFilter from "../components/partials/NavigationFilter";
+	import ProductLink from "../components/shop/ProductLink";
 	
 	export default {
 		name: "Products",
 		components: {
-			NavigationFilter,
-			LinkArrow,
-			LinkArrowImage,
-			LinkTwoFrames,
-			LinkProductFilter,
-			LinkProductRow,
-			NewsletterSubscribe
+			ProductLink,
+			NavigationFilter
 		},
 		data: () => ({
 			FrameLink,
+			indices: [9, 19, 29],
 			promises: []
 		}),
 		computed: {
 			...mapGetters("shopify/blog", ["articles"]),
-			filter() {
-				if (this.$route.params.filter) {
-					return [
-						`collection:${ this.$route.params.collection }`,
-						`filter:${ this.$route.params.filter }`
-					];
-				}
-				if (this.$route.params.collection) {
-					return [
-						`collection:${ this.$route.params.collection }`
-					]
-				}
-				return [];
+			...mapGetters("shopify/product", ["allProducts"]),
+			amountPerChunk() {
+				const amount = Math.floor(this.allProducts.length / this.links.length);
+				return amount - (amount % 5);
 			},
-			productsArticles() {
-				if (this.$route.params.filter) {
-					return this.articles
-							   .filter(a => a.blogTitle === this.type)
-							   .filter(a => a.hasTag(`filter:${ this.$route.params.filter }`))
-							   .filter(a => a.hasTag(`collection:${ this.$route.params.collection }`))
-							   .sort((a, b) => a.order - b.order);
-				}
-				if (this.$route.params.collection) {
-					return this.articles
-							   .filter(a => a.blogTitle === this.type)
-							   .filter(a => a.hasTag(`collection:${ this.$route.params.collection }`))
-							   .filter(a => ! a.hasTag(/filter:(.*)/))
-							   .sort((a, b) => a.order - b.order);
-				}
-				return this.articles
-						   .filter(a => a.blogTitle === this.type)
-						   .filter(a => ! a.hasTag(/filter:(.*)/))
-						   .filter(a => ! a.hasTag(/collection:(.*)/))
-						   .sort((a, b) => a.order - b.order);
+			chunkedArray() {
+				return this.chunkArray(
+					[...this.allProducts],
+					this.amountPerChunk
+				);
 			},
-			type() {
-				if (this.$route.params.filter) {
-					return "Products Page (Filter)";
+			content() {
+				return this.articles.find(a =>
+					a.title === "Products Page (Main Links)"
+				);
+			},
+			images() {
+				if ( ! this.content) {
+					return [];
 				}
-				if (this.$route.params.collection) {
-					return "Products Page (Collection)";
+				return Array.from(this.content.images) || [];
+			},
+			links() {
+				if ( ! this.content) {
+					return [];
 				}
-				return "Products Page (Main)";
+				return Array.from(this.content.selectElements('a'));
+			}
+		},
+		methods: {
+			chunkArray(myArray, chunk_size) {
+				let index = 0;
+				let arrayLength = myArray.length;
+				let tempArray = [];
+				
+				for (index = 0; index < arrayLength; index += chunk_size) {
+					let myChunk = myArray.slice(index, index + chunk_size);
+					// Do something if you want with the group
+					tempArray.push(myChunk);
+				}
+				
+				return tempArray;
 			}
 		},
 		async created() {
-			await this.$store.commit('updateLoading', true);
-			if ( ! this.productsArticles.length) {
-				await this.$store.dispatch(
-					'shopify/blog/fetchArticlesByBlog',
-					this.type
-				);
-			}
-		},
-		async mounted() {
-			await this.wait(250);
-			Promise.allSettled(this.promises)
-				   .then(() => this.$store.commit('updateLoading', false));
-		},
-		async updated() {
-			await this.$store.commit('updateLoading', true);
-			await this.$store.dispatch(
+			this.$store.commit('updateLoading', true);
+			this.article = (await this.$store.dispatch(
 				'shopify/blog/fetchArticlesByBlog',
-				this.type
-			);
-			await this.wait(250);
-			Promise.allSettled(this.promises)
-				   .then(() => this.$store.commit('updateLoading', false));
+				"Products Page (Main)"
+			))?.[0];
+			this.$store.commit('updateLoading', false);
 		}
 	};
 </script>
+<style scoped
+	   lang="scss">
+	.magnified h1 {
+		font-size: 2rem;
+	}
+</style>

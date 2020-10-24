@@ -17,6 +17,7 @@
 			font-style: normal;
 			font-stretch: 90%;
 		}
+		
 		@font-face {
 			font-family: 'Bradford';
 			src: url(/assets/fonts/Italic/BradfordLL-LightItalic90.otf) format('opentype');
@@ -24,6 +25,7 @@
 			font-style: italic;
 			font-stretch: 90%;
 		}
+		
 		* {
 			color: black;
 			font-family: Bradford, "Times New Roman", serif;
@@ -43,7 +45,15 @@
 			-webkit-font-smoothing: antialiased;
 		}
 		
-		.initial-loading-text {
+		.gif-loading {
+			height: 100vh;
+			left: 0;
+			position: fixed;
+			top: 0;
+			width: 100vw;
+		}
+		
+		#initial-loading-text {
 			bottom: 0;
 			left: 0;
 			padding: 1rem;
@@ -85,15 +95,39 @@
 <div id="initial-load"
 	 class="fixed h-screen left-0 transition-opacity-1 top-0 w-screen"
 	 style="z-index: 100">
-	<div class="initial-loading-text">loading...</div>
-	<img class="mobile-only h-screen object-cover w-screen"
+	<div id="initial-loading-text"
+		 class="loading">loading (0%)
+	</div>
+	<img class="gif-loading mobile-only h-screen object-cover w-screen"
 		 src="/assets/loading/lessolides_placeholder_loading_8.gif"
 		 alt="">
-	<img class="md:block h-screen object-cover desktop-only w-screen"
+	<img class="gif-loading md:block h-screen object-cover desktop-only w-screen"
 		 src="/assets/loading/lessolides_placeholder_loading_7.gif"
 		 alt="">
 </div>
 <div id="app"></div>
 <!-- built files will be auto injected -->
 </body>
+<script>
+	function loop(times, start = 1000, callback) {
+		setTimeout(function () {   //  call a 3s setTimeout when the loop is called
+			if (times >= 0) {
+				times--; //  if the counter < 10, call the loop function
+				start = 1.05 * start;
+				callback();
+				loop(times, start, callback);             //  ..  again which will trigger another
+			}                       //  ..  setTimeout()
+		}, start);
+	}
+	
+	function fakeLoader() {
+		let loaded = 0;
+		const loader = document.querySelector('.loading');
+		loop(100, 20, () => {
+			loader.innerHTML = "loading (" + loaded++ + "%)";
+		});
+	}
+	
+	fakeLoader();
+</script>
 </html>

@@ -2,6 +2,7 @@ import blog from "./resources/blog";
 import collection from "./resources/collection";
 import product from "./resources/product";
 import Cart from "../../modules/shopify/Cart";
+import Product from "../../modules/shopify/Product";
 
 export default {
     namespaced: true,
@@ -11,8 +12,7 @@ export default {
         product
     },
     state: {
-        checkout: null,
-        products: []
+        checkout: null
     },
     getters: {
         checkout(state) {
