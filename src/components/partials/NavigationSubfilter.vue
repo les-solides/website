@@ -24,7 +24,7 @@
 	left: 0;
 	padding: 0 1rem 1rem 0;
 	position: sticky;
-	top: 0;
+	top: 3rem;
 	width: 100%;
 	z-index: 10;
 	@media (min-width: $breakpoint-md) {
