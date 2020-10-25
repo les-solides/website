@@ -332,7 +332,7 @@ header {
 // -- W [start]
 @for $i from 1 through 9 {
 	.ws-#{$i}\/3 {
-		width: calc(#{ $i / 3 * 100%} - .75rem);
+		width: calc(#{ $i / 3 * 100%} - .675rem);
 	}
 	.w-#{$i}\/9 {
 		width: $i / 9 * 100%;

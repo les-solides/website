@@ -5,10 +5,14 @@
 			
 			<div id="scroller"
 				 style="margin-bottom: .5rem"
-				 class="flex justify-between mt-2 overflow-x-auto">
+				 class="flex mt-2 overflow-x-auto">
 				<LoadedImage class="h-full object-cover product-image ws-1/3"
 							 :key="image.id"
-							 v-for="image of images"
+							 :class="{
+								'mr-4': index < images.length - 1,
+									 'object-cover w-1/3': index < 3
+							}"
+							 v-for="(image, index) of images"
 							 :src="image.src" />
 			</div>
 			
