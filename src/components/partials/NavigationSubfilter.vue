@@ -49,9 +49,9 @@
 		width: 100%;
 		z-index: 10;
 		@media (min-width: $breakpoint-md) {
-			padding: 0 1rem 0rem;
+			padding: calc(1rem + var(--header-height)) 1rem 1rem;
 			position: fixed;
-			top: calc(var(--header-height) + 1rem);
+			top: 0;
 		}
 	}
 </style>

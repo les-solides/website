@@ -13,7 +13,7 @@
 				}}
 			</Route>
 			<Route class="mr-1"
-				   :class="{ 'ml-3': index === 0 }"
+				   :class="{ 'ml-3': index === 0, 'text-gray-600': subItem.innerText !== $route.params.variant }"
 				   :to="getRoute(subItem, active)"
 				   :key="subItem.innerText"
 				   v-for="(subItem, index) of getSubListItems(active)">
