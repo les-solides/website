@@ -6,7 +6,7 @@
 	export default {
 		name: "PageNotFound404",
 		created() {
-			location.href = "/404.html";
+			this.$store.dispatch('goToNotFound');
 		}
 	};
 </script>

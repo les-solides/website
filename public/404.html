@@ -8,9 +8,78 @@
 	<meta http-equiv="X-UA-Compatible"
 		  content="ie=edge">
 	<title>404 Page not Found</title>
+	<style>
+		@font-face {
+			font-family: 'Bradford';
+			src: url(/assets/fonts/Regular/BradfordLL-Light90.otf) format('opentype');
+			font-weight: 200;
+			font-style: normal;
+			font-stretch: 90%;
+		}
+		
+		@font-face {
+			font-family: 'Bradford';
+			src: url(/assets/fonts/Italic/BradfordLL-LightItalic90.otf) format('opentype');
+			font-weight: 200;
+			font-style: italic;
+			font-stretch: 90%;
+		}
+		
+		* {
+			color: black;
+			font-family: Bradford, "Times New Roman", serif;
+			font-kerning: auto;
+			font-size: 1rem;
+			font-stretch: 90%;
+			letter-spacing: 0.1px;
+			line-height: 1.25;
+			margin: 0;
+			outline: none !important;
+			overflow: -moz-scrollbars-none;
+			padding: 0;
+			text-decoration: none;
+			-moz-osx-font-smoothing: grayscale;
+			-ms-overflow-style: none;
+			-webkit-appearance: none;
+			-webkit-font-smoothing: antialiased;
+		}
+		
+		#initial-loading-text {
+			bottom: 0;
+			left: 0;
+			padding: 1rem;
+			position: absolute;
+		}
+		
+		.transition-opacity-0 {
+			opacity: 0;
+			-webkit-transition: opacity 500ms linear;
+			transition: opacity 500ms linear;
+		}
+		
+		.transition-opacity-1 {
+			opacity: 1;
+			-webkit-transition: opacity 500ms linear;
+			transition: opacity 500ms linear;
+		}
+		
+		.mobile-only {
+			display: block;
+		}
+		
+		@media screen and (min-width: 1024px) {
+			.desktop-only {
+				display: block;
+			}
+			
+			.mobile-only {
+				display: none;
+			}
+		}
+	</style>
 </head>
 <body>
-<h1 style="text-align:center; width: 100%;">404 Page Not Found</h1>
+<h1 style="margin-top: 4rem; text-align:center; width: 100%;">404 Page Not Found</h1>
 <a href="https://lessolides.com"
    style="display:block;text-align:center; width: 100%;">return</a>
 </body>

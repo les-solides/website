@@ -88,7 +88,9 @@ export default new Vuex.Store({
 		}
 	},
 	actions: {
-	
+		goToNotFound() {
+			location.href = "/404.html";
+		}
 	},
 	modules: {
 		shopify
