@@ -36,7 +36,7 @@ export default {
 						  return product ? new Product(product) : null;
 					  });
 		},
-		async fetchRecommendations({dispatch, rootState}, id) {
+		async fetchRecommendations({getters, dispatch, rootState}, id) {
 			const query = rootState.storefront.graphQLClient
 								   .query(root => {
 									   root.add("productRecommendations",
@@ -53,7 +53,10 @@ export default {
 													 .map(r => new Product(r))
 												 );
 			if (recommendations.length < 5) { // fill until 5 items
-				let more = await dispatch("fetchAll", 8);
+				// let more = await dispatch("fetchAll", 8);
+				let more = [...getters['allProducts']]
+					.sort(() => Math.random() - Math.random())
+					.slice(0, 8);
 				for (let product of more) {
 					if (recommendations.find(r => r.id === product.id)) {
 						continue;
