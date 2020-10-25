@@ -7,7 +7,7 @@
 			</span>
 			<div class="line-height-1 mt-2"
 				 style="color: #8a4646;line-height: .7"
-				 v-if=" ! o(product.selectedVariant).available">
+				 v-if="outOfStock">
 				[out of stock]
 			</div>
 		</div>
@@ -54,6 +54,11 @@
 			}
 		},
 		computed: {
+			outOfStock() {
+				return this.selectedVariants.length ?
+					! this.selectedVariants[0].available :
+					! this.product.available;
+			},
 			price() {
 				let price = 0;
 				for (let variant of this.selectedVariants) {
