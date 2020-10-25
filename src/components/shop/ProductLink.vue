@@ -185,13 +185,15 @@
 					this.product.options.length <= this.validAmountOfOptions;
 			},
 			imageShown() {
-				if (this.product?.selectedVariant) {
-					return this.product?.selectedVariant.image || this.product.images[0];
+				if (this.hover && this.selectedVariants[0]?.image) {
+					return this.selectedVariants[0]?.image;
 				}
 				if (this.hover) {
-					return this.product.images[1] || this.product.images[0];
+					return this.product.images[1] ||
+						this.product.images[0];
 				}
-				return this.product.images[0];
+				return this.selectedVariantImage ||
+					this.product.images[0];
 			},
 			mainNode() {
 				return this.product ?
@@ -220,6 +222,9 @@
 					return 5;
 				}
 				return 6;
+			},
+			selectedVariantImage() {
+				return this.product?.selectedVariant?.image;
 			},
 			selectedVariants() {
 				return this.product && Array.isArray(this.product.variants) ?
