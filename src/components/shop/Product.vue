@@ -55,7 +55,8 @@
 				</div>
 			</div>
 			
-			<div class="mb-16 ws-1/3"
+			<div class="ws-1/3"
+				 style="margin-bottom: var(--header-height)"
 				 v-html="descriptionRest.innerHTML"></div>
 			
 			<RecommendedProducts :product="product" />

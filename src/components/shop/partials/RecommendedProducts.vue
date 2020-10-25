@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<span class="block md:text-center w-full">recommended products</span>
+		<span class="block mb-3 md:text-center w-full">recommended products</span>
 		
-		<ul class="flex mt-4 overflow-x-auto">
+		<ul class="flex overflow-x-auto">
 			<ProductLink
 					:class="{
 						'mr-4': (index % 2) - 1,
