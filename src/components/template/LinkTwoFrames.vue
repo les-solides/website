@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-wrap justify-between mb-12">
+	<div class="flex flex-wrap justify-between" style="margin-bottom: var(--header-height)">
 		<!-- Left [start] -->
 		<a :href="leftImage.alt"
 		   class="flex items-center relative mb-4 md:mb-0 md:w-1/2 w-full"

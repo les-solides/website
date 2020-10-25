@@ -1,6 +1,7 @@
 <template>
-	<div class="mb-12 product-link"
-		 :class="{ short, small }">
+	<div class="product-link"
+		 :class="{ short, small }"
+		 style="margin-bottom: var(--header-height)">
 		
 		<PopupMobile v-model="productDetailsOpen"
 					 v-if="popupProduct">
@@ -37,21 +38,21 @@
 					<button class="block h-full items-center left product-link-variant text-center w-1/2 italic"
 							:class="{ 'not-italic': o(selectedOptionValues.find(o => o.option.id === option.id)).value !== option.values[0]  }"
 							@click="selectOptionValue(option, option.values[0])"
-							v-if="option.values.length === 2">
+							v-if="option.values.length === 2 && option.name !== 'choose your size'">
 						{{ option.values[0] }}
 					</button>
 					<button class="block h-full items-center right product-link-variant text-center w-1/2 italic"
 							:class="{ 'not-italic' : o(selectedOptionValues.find(o => o.option.id === option.id)).value !== option.values[1] }"
 							@click="selectOptionValue(option, option.values[1])"
-							v-if="option.values.length === 2">
+							v-if="option.values.length === 2 && option.name !== 'choose your size'">
 						{{ option.values[1] }}
 					</button>
 					<div class="flex flex-wrap items-center justify-center w-full"
-						 v-if="option.values.length > 2">
+						 v-if="option.values.length > 2 || option.name === 'choose your size'">
 						<div>
 							<button @click="openSizeGuide"
-								 class="cursor-pointer text-center w-full"
-								 v-if="option.name === 'choose your size'">{{ option.name }}
+									class="cursor-pointer text-center w-full"
+									v-if="option.name === 'choose your size'">{{ option.name }}
 							</button>
 							<div class="text-center w-full"
 								 v-if="option.name !== 'choose your size'">
@@ -323,7 +324,7 @@
 				this.$store.commit('updateFooterOpen', true);
 			},
 			openQuickBuy() {
-				this.quickBuyActive = true
+				this.quickBuyActive = true;
 				this.product
 					.selectedVariant
 					.options

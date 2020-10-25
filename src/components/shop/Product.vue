@@ -4,7 +4,8 @@
 			 v-if="product">
 			
 			<div id="scroller"
-				 class="flex justify-between mb-1 mt-2 overflow-x-auto">
+				 style="margin-bottom: .5rem"
+				 class="flex justify-between mt-2 overflow-x-auto">
 				<LoadedImage class="h-full object-contain product-image"
 							 :class="{
 							'mr-4': index < images.length - 1,

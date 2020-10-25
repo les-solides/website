@@ -1,5 +1,6 @@
 <template>
-	<div class="flex flex-wrap justify-center mb-12">
+	<div class="flex flex-wrap justify-center"
+		 style="margin-bottom: var(--header-height)">
 		<!-- Right [start] -->
 		<a :href="image.alt"
 		   class="flex items-center relative md:w-1/2 w-full"

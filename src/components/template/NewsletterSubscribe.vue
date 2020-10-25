@@ -1,5 +1,6 @@
 <template>
-	<form class="border border-black mb-12 md:w-1/2 mx-auto p-8 w-full"
+	<form class="border border-black md:w-1/2 mx-auto p-8 w-full"
+		  style="margin-bottom: var(--header-height)"
 		  @submit.prevent="subscribe">
 		<h1 class="text-center">
 			{{ article.content }}

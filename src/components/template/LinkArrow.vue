@@ -1,11 +1,13 @@
 <template>
 	<!-- .h1 -->
-	<a class="block mb-12 mt-minus-4"
+	<a class="block mt-minus-4"
+	   style="margin-bottom: var(--header-height)"
 	   :href="article.content"
 	   v-if="article.content && article.content.includes('http')">
 		{{ article.title }}
 	</a>
-	<router-link class="block mb-12 mt-minus-4"
+	<router-link class="block mt-minus-4"
+				 style="margin-bottom: var(--header-height)"
 				 :to="article.content"
 				 v-else>
 		{{ article.title }}

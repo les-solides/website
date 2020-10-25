@@ -15,7 +15,9 @@ export default class Product extends ShopifyGraph {
         this._data = {};
         this._data.defaultCurrency = defaultCurrency || 'CHF';
         this._graph = graph;
-        this._selectedVariant = this.variants[Math.floor(Math.random() * this.variants.length)];
+        this._selectedVariant =
+            this.variantsAvailable[Math.floor(Math.random() * this.variantsAvailable.length)] ||
+            this.variants[Math.floor(Math.random() * this.variants.length)];
     }
 
     get availableForSale() {
