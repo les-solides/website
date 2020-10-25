@@ -134,6 +134,7 @@ export default {
 			});
 		},
 		updateSelectedProduct(state, product) {
+			state.selectedProduct = null;
 			state.selectedProduct = product instanceof Product ? product : null;
 		}
 	}

@@ -152,6 +152,9 @@
 				}
 				return price ? `CHF ${ price.toFixed(2) }` : this.product.price;
 			},
+			productId() {
+				return this.product?.id;
+			},
 			quickShopType() {
 				if (this.product.options.length === 1 && this.product.variants.length === 1) {
 					return 0;
@@ -211,6 +214,18 @@
 					position: "bottom-center"
 				});
 			},
+			async load() {
+				// this.$store.commit('updateLoading', true);
+				this.product = await this.$store.dispatch(
+					"shopify/product/fetchByHandle",
+					this.$route.params.handle
+				);
+				this.$nextTick(async () => {
+					await this.wait(2000);
+					let indicator = new HorizontalScrollIndicator('#scroller');
+					await indicator.start();
+				});
+			},
 			selectOptionValue(option, value) {
 				this.selectedOptionValues = this.selectedOptionValues.filter(
 					v => v.option.id !== option.id
@@ -231,17 +246,14 @@
 			}
 		},
 		async created() {
-			this.$store.commit('updateLoading', true);
-			this.product = await this.$store.dispatch(
-				"shopify/product/fetchByHandle",
-				this.$route.params.handle
-			);
-			delay(() => this.$store.commit('updateLoading', false), 500);
-			this.$nextTick(async () => {
-				await this.wait(2000);
-				let indicator = new HorizontalScrollIndicator('#scroller');
-				await indicator.start();
-			});
+			await this.load();
+			this.$store.commit('updateLoading', false);
+		},
+		watch: {
+			async $route() {
+				await this.load();
+				this.$store.commit('updateLoading', false);
+			}
 		}
 	};
 </script>

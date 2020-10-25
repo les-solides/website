@@ -5,7 +5,7 @@
 		<ul class="flex overflow-x-auto">
 			<ProductLink
 					:class="{
-						'mr-4': (index % 2) - 1,
+						'mr-4': true,
 						'md:mr-4': (index % 5) - 4,
 						'md:mr-0': (index % 5) - 5
 					 }"
@@ -24,12 +24,6 @@
 		name: "RecommendedProducts",
 		components: {ProductLink},
 		props: {
-			mobile: {
-				type: Boolean,
-				default() {
-					return false;
-				}
-			},
 			product: {
 				type: Product,
 				required: true
@@ -51,6 +45,14 @@
 				"shopify/product/fetchRecommendations",
 				this.product.id
 			);
+		},
+		watch: {
+			async product() {
+				this.recommendations = await this.$store.dispatch(
+					"shopify/product/fetchRecommendations",
+					this.product.id
+				);
+			}
 		}
 	};
 </script>

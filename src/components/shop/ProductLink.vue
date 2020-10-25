@@ -3,12 +3,6 @@
 		 :class="{ short, small }"
 		 style="margin-bottom: var(--header-height)">
 		
-		<PopupMobile v-model="productDetailsOpen"
-					 v-if="popupProduct">
-			<ProductDetail :product="popupProduct"
-						   @click="switchProduct($event)"/>
-		</PopupMobile>
-		
 		<!-- Image & QuickShop Overlay [start] -->
 		<div class="relative quick-buy"
 			 @mouseenter="hover = true"
@@ -21,7 +15,7 @@
 							 :src="o(imageShown).src || o(imageShown).originalSrc" />
 			</router-link>
 			<div class="block md:hidden"
-				 @click="productDetailsOpen = true">
+				 @click="openMobileProduct">
 				<LoadedImage class="h-full object-cover w-full"
 							 :src="o(imageShown).src || o(imageShown).originalSrc" />
 			</div>
@@ -135,8 +129,6 @@
 	import Product from "../../modules/shopify/Product";
 	import OptionModule from "../../modules/shopify/Option";
 	import { delay, uniqueId } from "lodash";
-	import PopupMobile from "../partials/PopupMobile";
-	import ProductDetail from "./partials/ProductDetail";
 	import ProductTitlePrice from "./partials/ProductTitlePrice";
 	import Footer from "../../modules/Footer";
 	
@@ -144,8 +136,6 @@
 		name: "ProductLink",
 		components: {
 			ProductTitlePrice,
-			ProductDetail,
-			PopupMobile,
 			LoadedImage
 		},
 		props: {
@@ -175,7 +165,6 @@
 				values: ['single', 'pair']
 			}),
 			popupProduct: null,
-			productDetailsOpen: false,
 			selectedOptionValues: [],
 			selectedPairOptionValue: {},
 			quickBuyActive: false,
@@ -320,6 +309,9 @@
 					duration: 5000,
 					position: "bottom-center"
 				});
+			},
+			openMobileProduct() {
+				this.$store.commit('shopify/product/updateSelectedProduct', this.product);
 			},
 			openSizeGuide() {
 				this.$store.commit('updateFooterRoute', Footer.routes.SIZE);

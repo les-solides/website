@@ -16,7 +16,7 @@
 						class="mr-4"
 						:key="o(image).src || o(image).originalSrc"
 						:src="o(image).src || o(image).originalSrc"
-						v-for="image of product.images.filter(i => i.id === o(imageShown).id)" />
+						v-for="image of otherImages" />
 			</div>
 			<!-- Image -->
 		</div>
@@ -57,11 +57,17 @@
 			<div class="mb-8"
 				 v-html="descriptionRest.innerHTML"></div>
 			
+			<AddOnProducts
+					:name="product.handle"
+					:product="product"
+					@click="switchProduct($event)"
+					v-if="product" />
+			
 			<!--todo: recommended mobile component that just switches the product prop-->
-			<RecommendedProducts :product="product"
-								 @click="switchProduct($event)"
-								 mobile
-								 v-if="product" />
+			<RecommendedProducts
+					:product="product"
+					@click="switchProduct($event)"
+					v-if="product" />
 		</div>
 	
 	</div>
@@ -76,10 +82,11 @@
 	import Option from "../Option";
 	import RecommendedProducts from "./RecommendedProducts";
 	import Cross from "../../partials/Cross";
+	import AddOnProducts from "./AddOnProducts";
 	
 	export default {
 		name: "ProductDetail",
-		components: {Cross, RecommendedProducts, Option, ArrowUp, LoadedImage},
+		components: {AddOnProducts, Cross, RecommendedProducts, Option, ArrowUp, LoadedImage},
 		props: {
 			product: {
 				type: Product,
@@ -144,6 +151,12 @@
 			mainListItems() {
 				return this.mainNode ?
 					   this.mainNode.querySelectorAll(':scope > li') : [];
+			},
+			otherImages() {
+				if ( ! this.product?.images?.length) {
+					return [];
+				}
+				return this.product.images.filter(i => i.id !== this.imageShown?.id);
 			},
 			pairOptionName() {
 				return this.product ? this.product.getTag(
@@ -289,8 +302,7 @@
 				};
 			},
 			switchProduct(product) {
-				
-				this.$emit('click', product);
+				this.$store.commit('shopify/product/updateSelectedProduct', product);
 			}
 		}
 	};
