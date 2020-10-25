@@ -41,10 +41,10 @@
 								{{ price }}
 							</span>
 							<button @click="addToCart"
-									:disabled="addingToCart || ! o(product.selectedVariant).available"
-									:style="o(product.selectedVariant).available ? '' : 'color: #8a4646'"
+									:disabled="addingToCart || ! o(selectedVariants[0]).available"
+									:style="o(selectedVariants[0]).available ? '' : 'color: #8a4646'"
 									class="text-right w-full">
-								{{ addingToCart ? 'adding...' : o(product.selectedVariant).available ? 'add to bag' :
+								{{ addingToCart ? 'adding...' : o(selectedVariants[0]).available ? 'add to bag' :
 								'[out of stock]' }}
 							</button>
 						</div>
