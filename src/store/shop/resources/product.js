@@ -14,7 +14,8 @@ export default {
 		cursor: null,
 		hasNextPage: false,
 		pagination: 1,
-		products: []
+		products: [],
+		selectedProduct: null
 	},
 	actions: {
 		async fetchAll({commit}, first = 250) {
@@ -110,6 +111,9 @@ export default {
 	getters: {
 		allProducts(state) {
 			return state.products || [];
+		},
+		selectedProduct(state) {
+			return state.selectedProduct || null;
 		}
 	},
 	mutations: {
@@ -129,20 +133,8 @@ export default {
 				state.products.push(product);
 			});
 		},
-		addOneToInventory(state, product) {
-			if ( ! (product instanceof Product)) {
-				return;
-			}
-			
-			const exists = state.inventory
-								.find(p => p.id === product.id);
-			
-			if ( ! exists) {
-				state.inventory.push(product);
-			}
-		},
-		resetCursor(state) {
-			state.cursor = null;
+		updateSelectedProduct(state, product) {
+			state.selectedProduct = product instanceof Product ? product : null;
 		}
 	}
 };

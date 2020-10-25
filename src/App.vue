@@ -9,6 +9,14 @@
 			</transition>
 		</TheBody>
 		
+		
+		<transition name="fade">
+			<ProductDetail
+					class="fixed"
+					:product="selectedProduct"
+					v-if="selectedProduct" />
+		</transition>
+		
 		<transition name="fade">
 			<TheGifLoadingScreen v-if="loading" />
 		</transition>
@@ -31,9 +39,10 @@
 	import CookieNotice from "./components/partials/CookieNotice";
 	import { mapGetters } from "vuex";
 	import TheGifLoadingScreen from "./components/layout/TheGifLoadingScreen";
+	import ProductDetail from "./components/shop/partials/ProductDetail";
 	
 	export default {
-		components: {TheGifLoadingScreen, CookieNotice, TheBody, TheFooter, TheHeader},
+		components: {ProductDetail, TheGifLoadingScreen, CookieNotice, TheBody, TheFooter, TheHeader},
 		data: () => ({
 			ready: false
 		}),
@@ -44,6 +53,9 @@
 			},
 			noHeader() {
 				return this.$route.meta.noHeader;
+			},
+			selectedProduct() {
+				return this.$store.getters['shopify/product/selectedProduct'];
 			}
 		},
 		methods: {
@@ -53,7 +65,9 @@
 			async removeInitialLoadingScreen() {
 				const app = document.querySelector('#app');
 				const loader = document.querySelector('#initial-load');
-				if ( ! loader) { return; }
+				if ( ! loader) {
+					return;
+				}
 				loader.innerHTML = "loading (100%)";
 				loader.style.opacity = 0;
 				await this.wait(500);

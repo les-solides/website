@@ -6,7 +6,7 @@
 		<PopupMobile v-model="productDetailsOpen"
 					 v-if="popupProduct">
 			<ProductDetail :product="popupProduct"
-						   @click="switchProduct($event)" />
+						   @click="switchProduct($event)"/>
 		</PopupMobile>
 		
 		<!-- Image & QuickShop Overlay [start] -->
@@ -435,11 +435,13 @@
 			height: 60vw;
 		}
 		
+		min-width: calc(50% - .5rem);
 		width: calc(50% - .5rem);
 		@media (min-width: 1024px) {
 			img, .empty-image-box {
 				height: 26vw;
 			}
+			min-width: auto;
 			width: calc(20% - .8rem);
 			&.small {
 				img, .empty-image-box {

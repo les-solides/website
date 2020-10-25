@@ -1,15 +1,22 @@
 <template>
-	<div class="overflow-y-auto relative"
-		 style="height: 95%">
+	<div class="bg-white overflow-y-auto fixed p-default h-full top-0 w-full z-40">
 		<!-- Image & QuickShop Overlay [start] -->
 		<div class="sticky top-0 quick-buy"
 			 @mouseenter="hover = true"
 			 @mouseleave="hover = false">
+			<div class="flex justify-end pb-4 w-full">
+				<Cross @click="close" />
+			</div>
 			<!-- Image -->
-			<div class="block md:hidden"
+			<div class="block flex md:hidden overflow-x-scroll"
 				 style="height: 125vw">
-				<LoadedImage class="h-full object-cover w-full"
+				<LoadedImage class="h-full object-cover mr-4 w-full"
 							 :src="o(imageShown).src || o(imageShown).originalSrc" />
+				<LoadedImage
+						class="mr-4"
+						:key="o(image).src || o(image).originalSrc"
+						:src="o(image).src || o(image).originalSrc"
+						v-for="image of product.images.filter(i => i.id === o(imageShown).id)" />
 			</div>
 			<!-- Image -->
 		</div>
@@ -68,10 +75,11 @@
 	import ArrowUp from "../../partials/ArrowUp";
 	import Option from "../Option";
 	import RecommendedProducts from "./RecommendedProducts";
+	import Cross from "../../partials/Cross";
 	
 	export default {
 		name: "ProductDetail",
-		components: {RecommendedProducts, Option, ArrowUp, LoadedImage},
+		components: {Cross, RecommendedProducts, Option, ArrowUp, LoadedImage},
 		props: {
 			product: {
 				type: Product,
@@ -261,6 +269,9 @@
 					duration: 5000,
 					position: "bottom-center"
 				});
+			},
+			close() {
+				this.$store.commit('shopify/product/updateSelectedProduct');
 			},
 			selectOptionValue(option, value) {
 				this.selectedOptionValues = this.selectedOptionValues.filter(

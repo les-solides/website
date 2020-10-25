@@ -30,10 +30,10 @@
 					return;
 				}
 				
-				root.style.setProperty(
+				/*root.style.setProperty(
 					'--header-height',
 					`${ header.clientHeight }px`
-				);
+				);*/
 			}
 		},
 		mounted() {
