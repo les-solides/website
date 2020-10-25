@@ -33,7 +33,7 @@
 		<div class="flex w-full">
 			<div class="w-1/4">
 				<label for="phone" hidden></label>
-				<h1>phone number*</h1>
+				<h1>phone number</h1>
 			</div>
 			<div class="flex items-center w-3/4">
 				<input id="phone"
@@ -47,7 +47,7 @@
 		<div class="flex w-full">
 			<div class="w-1/4">
 				<label for="order" hidden></label>
-				<h1>order number*</h1>
+				<h1>order number</h1>
 			</div>
 			<div class="flex items-center w-3/4">
 				<input id="order"

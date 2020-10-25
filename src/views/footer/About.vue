@@ -1,7 +1,6 @@
 <template>
-	<div class="w-2/3">
-		<h3>{{ title }}</h3>
-		<p>{{ content }}</p>
+	<div class="w-1/3">
+		<div v-html="content"></div>
 		<Error v-if="loaded && error" />
 	</div>
 </template>

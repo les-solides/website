@@ -106,9 +106,9 @@
 
 <style lang="scss">
 	article {
-		height: calc(100vh - var(--footer-height));
+		height: calc(100vh - 5.3rem);
 		padding-bottom: var(--footer-height);
-		top: var(--header-height);
+		top: 2.5rem;
 		.footer-page h2 {
 			margin-top: 1rem!important;
 		}
