@@ -100,9 +100,9 @@
 			<div v-if=" ! this.small">
 				<button class="absolute add-to-cart bottom-0 hidden md:block outside-btn text-center w-full"
 						@click="openQuickBuy"
-						style="height: 3vw"
+						style="height: 3vw; line-height: 1px"
 						v-if="quickShopType !== 0 && hasValidAmountOfOptions && hover && ! quickBuyActive">
-					quickbuy
+					quick buy
 				</button>
 				<button class="absolute add-to-cart  bottom-0 hidden md:block outside-btn text-center w-full"
 						@click="addToCart"
