@@ -109,8 +109,5 @@
 		height: calc(100vh - 5.3rem);
 		padding-bottom: var(--footer-height);
 		top: 2.5rem;
-		.footer-page h2 {
-			margin-top: 1rem!important;
-		}
 	}
 </style>

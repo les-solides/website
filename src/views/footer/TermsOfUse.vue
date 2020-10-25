@@ -1,6 +1,5 @@
 <template>
 	<div class="footer-page w-2/3">
-		<h3>{{ title }}</h3>
 		<div class="md:column-3" v-html="content"></div>
 		<Error v-if="loaded && error" />
 	</div>
