@@ -6,17 +6,14 @@
 			<div id="scroller"
 				 style="margin-bottom: .5rem"
 				 class="flex justify-between mt-2 overflow-x-auto">
-				<LoadedImage class="h-full object-contain product-image"
-							 :class="{
-							'mr-4': index < images.length - 1,
-							 'object-cover ws-1/3': index < 3
-						}"
+				<LoadedImage class="h-full object-cover product-image ws-1/3"
 							 :key="image.id"
-							 v-for="(image, index) of images"
+							 v-for="image of images"
 							 :src="image.src" />
 			</div>
 			
-			<div class="flex justify-between mb-12">
+			<div class="flex w-full"
+				 style="margin-bottom: var(--header-height)">
 				<div class="mr-4 w-1/3">
 					<div class="kerned w-full">
 						<div>{{ product.title }}</div>
@@ -41,11 +38,13 @@
 								{{ price }}
 							</span>
 							<button @click="addToCart"
+									data-text="( add to bag )"
 									:disabled="addingToCart || ! o(selectedVariants[0]).available"
 									:style="o(selectedVariants[0]).available ? '' : 'color: #8a4646'"
-									class="text-right w-full">
-								{{ addingToCart ? 'adding...' : o(selectedVariants[0]).available ? 'add to bag' :
+									class="glitch md:w-auto relative text-right w-full">
+								{{ addingToCart ? 'adding...' : o(selectedVariants[0]).available ? '( add to bag )' :
 								'[out of stock]' }}
+								<div class="scanlines"></div>
 							</button>
 						</div>
 					</div>
