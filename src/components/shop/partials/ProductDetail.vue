@@ -52,10 +52,10 @@
 			</button>
 			
 			<div class="mb-8"
-				 v-html="descriptionTag.innerHTML"></div>
+				 v-html="o(descriptionTag).innerHTML"></div>
 			
 			<div class="mb-8"
-				 v-html="descriptionRest.innerHTML"></div>
+				 v-html="o(descriptionRest).innerHTML"></div>
 			
 			<AddOnProducts
 					:name="product.handle"
