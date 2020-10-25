@@ -248,11 +248,13 @@
 		async created() {
 			await this.load();
 			this.$store.commit('updateLoading', false);
+			this.$store.commit('shopify/product/updateSelectedProduct', this.product);
 		},
 		watch: {
 			async $route() {
 				await this.load();
 				this.$store.commit('updateLoading', false);
+				this.$store.commit('shopify/product/updateSelectedProduct', this.product);
 			}
 		}
 	};

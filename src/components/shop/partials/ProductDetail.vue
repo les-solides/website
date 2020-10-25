@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-white overflow-y-auto fixed p-default h-full top-0 w-full z-40">
+	<div class="bg-white overflow-y-auto fixed p-default h-full top-0 w-full z-40 md:hidden">
 		<!-- Image & QuickShop Overlay [start] -->
 		<div class="sticky top-0 quick-buy"
 			 @mouseenter="hover = true"
@@ -284,6 +284,11 @@
 				});
 			},
 			close() {
+				if (this.$route.path.includes('/product/')) {
+					this.$router.push({
+						name: 'Products (Main)'
+					});
+				}
 				this.$store.commit('shopify/product/updateSelectedProduct');
 			},
 			selectOptionValue(option, value) {
