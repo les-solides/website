@@ -49,16 +49,16 @@ export default {
 												 .send(query)
 												 .then(({data}) => data
 													 .productRecommendations
-													 .slice(0, 6)
+													 .slice(0, 5)
 													 .map(r => new Product(r))
 												 );
-			if (recommendations.length < 6) { // fill until 6 items
+			if (recommendations.length < 5) { // fill until 5 items
 				let more = await dispatch("fetchAll", 8);
 				for (let product of more) {
 					if (recommendations.find(r => r.id === product.id)) {
 						continue;
 					}
-					if (recommendations.length >= 6) {
+					if (recommendations.length >= 5) {
 						break;
 					}
 					recommendations.push(product);
