@@ -88,7 +88,7 @@
 				</div>
 				<button class="add-to-cart outside-btn text-center w-full"
 						@click="addToCart"
-						:disabled=" ! selectedVariants.length"
+						:disabled=" ! selectedVariants.length || ! selectedVariants[0].available"
 						:class="{ 'not-italic': ! selectedVariants.length }"
 						style="height: 3vw">
 					{{ addingToCart ? 'adding...' : 'add to bag' }}
@@ -106,6 +106,7 @@
 				</button>
 				<button class="absolute add-to-cart  bottom-0 hidden md:block outside-btn text-center w-full"
 						@click="addToCart"
+						:disabled=" ! o(selectedVariants[0]).available"
 						style="height: 3vw"
 						v-if="quickShopType === 0 && hover">
 					{{ addingToCart ? 'adding...' : 'add to bag' }}
@@ -210,11 +211,12 @@
 				) : null;
 			},
 			quickShopType() {
+				// if only one variant (default)
 				if (this.product.options.length === 1 && this.product.variants.length === 1) {
 					return 0;
 				}
 				if (this.product.options.length === 1 && this.product.variants.length === 2) {
-					return this.pairOptionName === "default" ? 2 : 1;
+					return 2;
 				}
 				if (this.product.options.length === 2 && this.product.variants.length === 4) {
 					return this.pairOptionName === "side" ? 4 : 3;
@@ -266,7 +268,7 @@
 					return this.o(this.selectedPairOptionValue).value === "pair" ?
 						   "height: 11.5vw" : "height: 7.666666666vw";
 				}
-				return "height: 0";
+				return "height: 23vw";
 			},
 			visibleOptions() {
 				return this.product.options.filter(
@@ -331,6 +333,9 @@
 					.forEach(option =>
 						this.selectOptionValue(option, option.value)
 					);
+				if (this.pairOptionName) {
+					this.selectPairOption(this.pairOption, "single")
+				}
 			},
 			selectOptionValue(option, value) {
 				this.selectedOptionValues = this.selectedOptionValues.filter(
