@@ -1,7 +1,15 @@
 <template>
 	<div>
-		<button class="mb-1" @click="open = ! open">
-			{{ open ? 'v' : 'x' }} {{ article.title }}
+		<button class="flex items-center mb-1"
+				@click="open = ! open">
+			<img class="mr-2 mt-1"
+				 src="/assets/chevron.jpeg"
+				 style="width: 10px"
+				 v-if=" ! open">
+			<span class="block mr-2"
+				  style="width: 10px;"
+				  v-if="open">x</span>
+			<span class="block">{{ article.title }}</span>
 		</button>
 		<div class="horizontal-scroller flex justify-start"
 			 :class="{ open }">
@@ -48,6 +56,7 @@
 <style scoped
 	   lang="scss">
 	@import "./src/scss/partials/variables";
+	
 	.horizontal-scroller {
 		height: 70vw;
 		max-height: 0;
