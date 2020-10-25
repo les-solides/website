@@ -59,15 +59,21 @@
 				 style="margin-bottom: var(--header-height)"
 				 v-html="descriptionRest.innerHTML"></div>
 			
-			<RecommendedProducts :product="product" />
+			<AddOnProducts
+					:name="product.id"
+					:product="product" />
+			
+			<RecommendedProducts
+					:name="product.id"
+					:product="product" />
 		</div>
-		<PopupMobile class="block md:hidden"
+		<!--<PopupMobile class="block md:hidden"
 					 :value="true"
 					 @close="$router.back()"
 					 v-if="product">
 			<ProductDetail :product="product"
 						   @click="switchProduct($event)" />
-		</PopupMobile>
+		</PopupMobile>-->
 	</div>
 </template>
 
@@ -77,13 +83,12 @@
 	import OptionModule from "./../../modules/shopify/Option";
 	import { delay, uniqueId } from "lodash";
 	import RecommendedProducts from "./partials/RecommendedProducts";
-	import ProductDetail from "./partials/ProductDetail";
-	import PopupMobile from "../partials/PopupMobile";
 	import HorizontalScrollIndicator from "../../modules/HorizontalScrollIndicator";
+	import AddOnProducts from "./partials/AddOnProducts";
 	
 	export default {
 		name: "Product",
-		components: {PopupMobile, ProductDetail, RecommendedProducts, Option, LoadedImage},
+		components: {AddOnProducts, RecommendedProducts, Option, LoadedImage},
 		data: () => ({
 			addingToCart: false,
 			pairOption: new OptionModule({

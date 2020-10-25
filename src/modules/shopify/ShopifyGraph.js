@@ -14,4 +14,10 @@ export default class ShopifyGraph {
 		return split && tag ? tag.replace(split, '') : tag;
 	}
 	
+	getTags(match, split) {
+		const tags = Array.isArray(this.graphTags) ?
+				 this.graphTags.filter(tag => match.test(tag)) : [];
+		return tags.map(tag => split ? tag.replace(split, '') : tag);
+	}
+	
 }
