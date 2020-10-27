@@ -109,8 +109,29 @@ export default {
 		}
 	},
 	getters: {
+		allAddOns(state) {
+			return state.products.filter(product =>
+				!! product.images.find(image =>
+					/.*add-on:*/.test(image.alt)
+				)
+			);
+		},
+		allAddOnsByProduct: (_, getters) => product => {
+			return getters['allAddOns'].filter(addOn =>
+				addOn.images.find(image =>
+					image.alt.includes(product.handle)
+				)
+			);
+		},
 		allProducts(state) {
 			return state.products || [];
+		},
+		allProductsByAddOn: (_, getters) => addOn => {
+			return getters['allProducts'].filter(product =>
+				addOn.images.find(image =>
+					image.alt.includes(`add-on:${ product.handle }`)
+				)
+			);
 		},
 		selectedProduct(state) {
 			return state.selectedProduct || null;

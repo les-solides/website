@@ -139,6 +139,10 @@
 			LoadedImage
 		},
 		props: {
+			addOnReference: {
+				type: Product
+			},
+			isAddOn: Boolean,
 			product: {
 				type: Product,
 				required: true
@@ -171,11 +175,39 @@
 			validAmountOfOptions: 2
 		}),
 		computed: {
+			addOnMainImages() {
+				return this.product.getAddOnMainImages(
+					this.product,
+					this.addOnReference
+				);
+			},
+			addOnImages() {
+				return this.product.getAddOnImages(
+					this.product,
+					this.addOnReference
+				);
+			},
+			addOnImageShown() {
+				if (this.hover) {
+					if (this.product.materialIsSelected("gold")) {
+						return this.addOnMainImages.find(i => i.alt.includes("material:gold"));
+					}
+					return this.addOnMainImages.find(i => i.alt.includes("material:silver"));
+				}
+				if (this.product.materialIsSelected("gold")) {
+					return this.addOnImages.find(i => i.alt.includes("material:gold"));
+				}
+				return this.addOnImages.find(i => i.alt.includes("material:silver"));
+			},
+			
 			hasValidAmountOfOptions() {
 				return this.product.options.length &&
 					this.product.options.length <= this.validAmountOfOptions;
 			},
 			imageShown() {
+				if (this.addOnImages.length) {
+					return this.addOnImageShown;
+				}
 				if (this.hover && this.selectedVariants[0]?.image) {
 					return this.selectedVariants[0]?.image;
 				}
@@ -310,6 +342,17 @@
 					position: "bottom-center"
 				});
 			},
+			initialize() {
+				if (this.product.selectedVariant) {
+					this.product
+						.selectedVariant
+						.options
+						.forEach(option =>
+							this.selectOptionValue(option, option.value)
+						);
+				}
+				this.popupProduct = this.product;
+			},
 			openMobileProduct() {
 				this.$store.commit('shopify/product/updateSelectedProduct', this.product);
 			},
@@ -329,6 +372,9 @@
 					this.selectPairOption(this.pairOption, "single")
 				}
 			},
+			productId() {
+				return this.product?.id;
+			},
 			selectOptionValue(option, value) {
 				this.selectedOptionValues = this.selectedOptionValues.filter(
 					v => v.option.name !== option.name
@@ -337,6 +383,7 @@
 					option,
 					value
 				});
+				this.product.selectedVariant = this.selectedVariants[0];
 			},
 			selectPairOption(option, value) {
 				this.selectedPairOptionValue = {
@@ -359,15 +406,12 @@
 			}
 		},
 		created() {
-			if (this.product._selectedVariant) {
-				this.product
-					.selectedVariant
-					.options
-					.forEach(option =>
-						this.selectOptionValue(option, option.value)
-					);
+			this.initialize();
+		},
+		watch: {
+			productId() {
+			
 			}
-			this.popupProduct = this.product;
 		}
 	};
 </script>

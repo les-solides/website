@@ -1,17 +1,19 @@
 <template>
-	<div v-if="addOnHandles.length">
+	<div v-if="addOns.length">
 		<span class="block mb-3 md:text-center w-full">add ons</span>
 		
 		<ul class="flex overflow-x-auto">
 			<ProductLink
+					:add-on-reference="product"
 					:class="{
 						'mr-4': true,
 						'md:mr-4': (index % 5) - 4,
 						'md:mr-0': (index % 5) - 5
 					 }"
-					:key="o(getProductByHandle(handle)).id"
-					:product="getProductByHandle(handle)"
-					v-for="(handle, index) of addOnHandles" />
+					:is-add-on="true"
+					:key="addOn.id"
+					:product="addOn"
+					v-for="(addOn, index) of addOns" />
 		</ul>
 	</div>
 </template>
@@ -30,15 +32,8 @@
 			}
 		},
 		computed: {
-			addOnHandles() {
-				return Array.from(this.product.selectElements('[data-add-on]') || [])
-					.map(addOn => addOn.dataset.addOn);
-			}
-		},
-		methods: {
-			getProductByHandle(handle) {
-				return this.$store.getters['shopify/product/allProducts']
-					.find(p => p.handle === handle);
+			addOns() {
+				return this.product.getAddOns() || [];
 			}
 		}
 	};

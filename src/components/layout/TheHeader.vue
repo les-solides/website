@@ -88,14 +88,14 @@
 					   to="/products">
 					products
 				</Route>
-				<Route class="md:py-0 px-2 py-4"
+				<!--<Route class="md:py-0 px-2 py-4"
 					   to="/collaborations">
 					collaborations
-				</Route>
-				<Route class="md:py-0 px-2 py-4"
+				</Route>-->
+				<!--<Route class="md:py-0 px-2 py-4"
 					   to="/lookbook">
 					lookbook
-				</Route>
+				</Route>-->
 				<Route class="md:py-0 px-2 py-4"
 					   to="/archive">
 					archive

@@ -5,6 +5,8 @@ import PriceV2 from "./PriceV2";
 import DomParser from "./DomParser";
 import ShopifyGraph from "./ShopifyGraph";
 import Option from "./Option";
+import addOnMixing from "../../mixins/addOnMixing";
+import variantSelectionMixin from "../../mixins/variantSelectionMixin";
 
 export default class Product extends ShopifyGraph {
 
@@ -18,6 +20,8 @@ export default class Product extends ShopifyGraph {
         this._selectedVariant =
             this.variantsAvailable[Math.floor(Math.random() * this.variantsAvailable.length)] ||
             this.variants[Math.floor(Math.random() * this.variants.length)];
+        Object.assign(this, addOnMixing);
+        Object.assign(this, variantSelectionMixin);
     }
 
     get availableForSale() {

@@ -7,7 +7,7 @@
 						'md:mr-0': (index % 5) - 5
 					 }"
 					 :product="product"
-					 :key="_.uniqueId(product.id)"
+					 :key="_.uniqueId(o(product).id)"
 					 v-for="(product, index) of products" />
 	</div>
 </template>
