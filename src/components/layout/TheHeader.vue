@@ -29,8 +29,8 @@
 							:key="item.id"
 							v-for="item of $cart.items">
 							<div style="width: 80px">
-								<img :src="item.image.src"
-									 :alt="item.image.alt" />
+								<img :src="o(item.image).src"
+									 :alt="o(item.image).alt" />
 							</div>
 							<div class="ml-4"
 								 style="width: calc(100% - 80px - 1rem);">
@@ -132,8 +132,8 @@
 							style="min-width: calc(18vw)"
 							v-for="item of $cart.items">
 							<div style="width: 80px">
-								<img :src="item.image.src"
-									 :alt="item.image.alt" />
+								<img :src="o(item.image).src"
+									 :alt="o(item.image).alt" />
 							</div>
 							<div class="ml-4"
 								 style="width: calc(100% - 80px - 1rem);">
