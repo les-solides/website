@@ -32,7 +32,7 @@
 				
 				root.style.setProperty(
 					'--header-height',
-					`${ header.clientHeight > 100 ? 44.8 : header.clientHeight }px`
+					`${ header.clientHeight > 100 ? 44.8 : 44.8 /*header.clientHeight*/ }px`
 				);
 			}
 		},

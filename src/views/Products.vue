@@ -14,14 +14,14 @@
 						 :product="product"
 						 :key="product.id"
 						 v-for="(product, index) of chunk" />
-			<router-link class="block relative w-full"
+			<router-link class="aspect-height aspect-width block mx-auto relative w-full"
 						 style="margin-bottom: var(--header-height)"
 						 :to="'/products/' + o(links[index]).href.split('/products/')[1]"
 						 v-if="o(links[index]).href">
 				<span class="absolute-center flex items-center justify-center magnified w-full"
 					  v-html="o(links[index]).innerHTML">
 				</span>
-				<img class="w-full"
+				<img class="h-full object-cover w-full"
 					 :src="o(images[index]).src"
 					 alt="">
 			</router-link>
@@ -100,6 +100,18 @@
 </script>
 <style scoped
 	   lang="scss">
+	@import "./../../src/scss/partials/variables";
+	.aspect-height {
+		height: calc((50vw - 8rem));
+		@media screen and (min-width: $breakpoint-md) {
+			height: calc((50vw - 8rem));
+		}
+	}
+	.aspect-width {
+		@media screen and (min-width: $breakpoint-md) {
+			width: calc((50vw - 8rem) * 1.5426744647);
+		}
+	}
 	.magnified h1 {
 		font-size: 2rem;
 	}
