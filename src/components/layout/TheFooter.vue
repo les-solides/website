@@ -107,6 +107,7 @@
 <style lang="scss">
 	article {
 		height: calc(100vh - 5.3rem);
+		opacity: .85;
 		padding-bottom: var(--footer-height);
 		top: 2.5rem;
 	}

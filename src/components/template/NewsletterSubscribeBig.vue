@@ -1,13 +1,19 @@
 <template>
 	<form @submit.prevent="subscribe"
 		  class="bg-white search-bar mb-8 pt-4 md:pt-0 sticky z-10">
-		<div v-html="article.contentHtml"></div>
+		<div class="big-font lowercase text-center"
+			 style="margin-bottom: 2rem"
+			 v-html="article.contentHtml"></div>
 		<label for="query"
 			   hidden></label>
-		<input id="query"
-			   placeholder="email"
-			   type="text"
-			   v-model="email">
+		<input
+				class="text-center"
+				id="query"
+				placeholder="email address"
+				type="text"
+				v-model="email">
+		
+		<input type="submit" value="submit">
 	</form>
 </template>
 
@@ -39,11 +45,11 @@
 							 position: "bottom-center"
 						 }))
 						 .catch(error => {
-						 	this.$toasted.show(error.response.data?.message, {
+							 this.$toasted.show(error.response.data?.message, {
 								 duration: 5000,
 								 position: "bottom-center",
 								 type: "error"
-							 })
+							 });
 						 });
 			}
 		}
@@ -51,6 +57,10 @@
 </script>
 <style scoped
 	   lang="scss">
+	.h1 {
+		font-size: 1.5rem;
+	}
+	
 	button.suggestion {
 		// border: 1px solid;
 		border-radius: 300px;
@@ -60,6 +70,12 @@
 			background: black;
 			color: white;
 		}
+	}
+	
+	input[type=submit] {
+		background: none;
+		border: none;
+		margin-top: 2rem;
 	}
 	
 	input {

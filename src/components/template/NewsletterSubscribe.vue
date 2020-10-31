@@ -1,30 +1,15 @@
 <template>
-	<form class="border border-black md:w-1/2 mx-auto p-8 w-full"
-		  style="margin-bottom: var(--header-height)"
-		  @submit.prevent="subscribe">
-		<h1 class="text-center">
-			{{ article.content }}
-		</h1>
-		<label for="email"
-			   hidden></label>
-		<input id="email"
-			   class="block border border-black mt-4 mx-auto p-4 placeholder-black text-black w-3/4"
-			   type="email"
-			   placeholder="your email here"
-			   v-model="email">
-		
-		<input class="bg-transparent block mt-4 mx-auto p-4 text-center"
-			   type="submit"
-			   value="Submit">
-	</form>
+	<NewsletterSubscribeBig :article="article" />
 </template>
 
 <script>
 	import Article from "../../modules/shopify/blog/Article";
 	import api from "../../api/api";
+	import NewsletterSubscribeBig from "./NewsletterSubscribeBig";
 	
 	export default {
 		name: "NewsletterSubscribe",
+		components: {NewsletterSubscribeBig},
 		props: {
 			article: {
 				type: Article,
@@ -47,11 +32,11 @@
 							 position: "bottom-center"
 						 }))
 						 .catch(error => {
-						 	this.$toasted.show(error.response.data, {
+							 this.$toasted.show(error.response.data, {
 								 duration: 5000,
 								 position: "bottom-center",
 								 type: "error"
-							 })
+							 });
 						 });
 			}
 		}

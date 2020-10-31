@@ -30,6 +30,9 @@
 					return;
 				}
 				
+				root.style.setProperty('--column-width-default',
+					`${ window.innerWidth * 0.38 }px`
+				);
 				root.style.setProperty(
 					'--header-height',
 					`${ header.clientHeight > 100 ? 44.8 : 44.8 /*header.clientHeight*/ }px`

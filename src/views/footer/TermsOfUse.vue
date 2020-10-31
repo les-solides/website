@@ -1,6 +1,6 @@
 <template>
-	<div class="footer-page w-2/3">
-		<div class="md:column-3" v-html="content"></div>
+	<div class="md:columnist-3">
+		<div v-html="content"></div>
 		<Error v-if="loaded && error" />
 	</div>
 </template>
@@ -33,3 +33,14 @@
 		}
 	};
 </script>
+<style scoped
+	   lang="scss">
+	@import "./../../scss/partials/variables";
+	
+	.md\:columnist-3 {
+		@media screen and (min-width: $breakpoint-md) {
+			columns: 3;
+			column-width: var(--column-width-3);
+		}
+	}
+</style>

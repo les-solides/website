@@ -40,6 +40,7 @@
 	import { mapGetters } from "vuex";
 	import TheGifLoadingScreen from "./components/layout/TheGifLoadingScreen";
 	import ProductDetail from "./components/shop/partials/ProductDetail";
+	import { debounce } from "lodash";
 	
 	export default {
 		components: {ProductDetail, TheGifLoadingScreen, CookieNotice, TheBody, TheFooter, TheHeader},
@@ -61,6 +62,12 @@
 		methods: {
 			handleResize() {
 				this.$store.commit('refreshIsMobile');
+				document.documentElement.style.setProperty('--column-width-default',
+					`${ window.innerWidth * 0.38 }px`
+				);
+				document.documentElement.style.setProperty('--column-width-3',
+					`${ window.innerWidth * 0.18 }px`
+				);
 			},
 			async removeInitialLoadingScreen() {
 				const app = document.querySelector('#app');
@@ -76,8 +83,8 @@
 			}
 		},
 		mounted() {
-			// window.addEventListener('resize', debounce(this.handleResize, 100));
-			// this.handleResize();
+			window.addEventListener('resize', debounce(this.handleResize, 100));
+			this.handleResize();
 			this.removeInitialLoadingScreen();
 		},
 		destroyed() {

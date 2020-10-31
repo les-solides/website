@@ -1,5 +1,5 @@
 <template>
-	<div class="w-1/3">
+	<div class="md:columnist-1">
 		<div v-html="content"></div>
 		<Error v-if="loaded && error" />
 	</div>
@@ -7,6 +7,7 @@
 
 <script>
 	import Error from "../../components/partials/Error";
+	
 	export default {
 		name: "About",
 		components: {Error},
@@ -33,3 +34,14 @@
 		}
 	};
 </script>
+
+<style scoped
+	   lang="scss">
+	@import "./../../scss/partials/variables";
+	
+	.md\:columnist-1 {
+		@media screen and (min-width: $breakpoint-md) {
+			width: var(--column-width-default);
+		}
+	}
+</style>
