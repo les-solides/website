@@ -1,7 +1,8 @@
 <template>
 	<div class="product-link"
 		 :class="{ short, small }"
-		 style="margin-bottom: var(--header-height)">
+		 style="margin-bottom: var(--header-height)"
+		 v-if="product">
 		
 		<!-- Image & QuickShop Overlay [start] -->
 		<div class="relative quick-buy"
@@ -369,7 +370,7 @@
 						this.selectOptionValue(option, option.value)
 					);
 				if (this.pairOptionName) {
-					this.selectPairOption(this.pairOption, "single")
+					this.selectPairOption(this.pairOption, "single");
 				}
 			},
 			productId() {
@@ -477,7 +478,7 @@
 			img, .empty-image-box {
 				height: 26vw;
 			}
-			min-width: auto;
+			min-width: calc(20% - .8rem);
 			width: calc(20% - .8rem);
 			&.small {
 				img, .empty-image-box {
