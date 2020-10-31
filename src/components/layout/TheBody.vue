@@ -31,7 +31,7 @@
 				}
 				
 				root.style.setProperty('--column-width-default',
-					`${ window.innerWidth * 0.38 }px`
+					`${ window.innerWidth * 0.387 }px`
 				);
 				root.style.setProperty(
 					'--header-height',

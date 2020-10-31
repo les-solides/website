@@ -1,5 +1,5 @@
 <template>
-	<form class="md:w-1/2 w-full"
+	<form class="md:columnist-1 w-full"
 		  @submit.prevent="contact">
 		<h1 class="mb-4">contact</h1>
 		<div class="flex w-full">
@@ -133,8 +133,14 @@
 		},
 	};
 </script>
-
 <style scoped lang="scss">
+	@import "./../../scss/partials/variables";
+	
+	.md\:columnist-1 {
+		@media screen and (min-width: $breakpoint-md) {
+			width: var(--column-width-default);
+		}
+	}
 	.divider {
 		height: .5px;
 		width: 100%;
