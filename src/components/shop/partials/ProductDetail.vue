@@ -108,6 +108,30 @@
 			validAmountOfOptions: 2
 		}),
 		computed: {
+			addOnMainImages() {
+				return this.product.getAddOnMainImages(
+					this.product,
+					this.addOnReference
+				);
+			},
+			addOnImages() {
+				return this.product.getAddOnImages(
+					this.product,
+					this.addOnReference
+				);
+			},
+			addOnImageShown() {
+				if (this.hover) {
+					if (this.product.materialIsSelected("gold")) {
+						return this.addOnMainImages.find(i => i.alt.includes("material:gold"));
+					}
+					return this.addOnMainImages.find(i => i.alt.includes("material:silver"));
+				}
+				if (this.product.materialIsSelected("gold")) {
+					return this.addOnImages.find(i => i.alt.includes("material:gold"));
+				}
+				return this.addOnImages.find(i => i.alt.includes("material:silver"));
+			},
 			descriptionRest() {
 				if (this.product.hasGoldSilverDescription) {
 					return this.selectedSilver ?
@@ -133,16 +157,19 @@
 					this.product.options.length <= this.validAmountOfOptions;
 			},
 			imageShown() {
-				if ( ! this.product || ! this.product.images.length) {
-					return {};
+				if (this.addOnImages.length) {
+					return this.addOnImageShown;
 				}
-				if (this.selectedVariants.length) {
-					return this.selectedVariants[0].image || this.product.images[0];
+				if (this.hover && this.selectedVariants[0]?.image) {
+					return this.selectedVariants[0]?.image;
 				}
 				if (this.hover) {
-					return this.product.images[1] || this.product.images[0];
+					return (this.product.materialIsSelected("gold") ?
+							this.product.images[1] : this.product.images[3]) ||
+						this.product.images[0];
 				}
-				return this.product.images[0];
+				return this.selectedVariantImage ||
+					this.product.images[0];
 			},
 			mainNode() {
 				return this.product ?
@@ -156,7 +183,7 @@
 				if ( ! this.product?.images?.length) {
 					return [];
 				}
-				return this.product.images.filter(i => i.id !== this.imageShown?.id);
+				return this.product.images.filter(i => i.src !== this.imageShown?.src);
 			},
 			pairOptionName() {
 				return this.product ? this.product.getTag(

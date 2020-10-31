@@ -32,13 +32,6 @@
 		data: () => ({
 			recommendations: []
 		}),
-		computed: {
-			products() {
-				return this.$store.getters['shopify/product/allProducts'].filter(
-					p => this.recommendations.find(r => r.id === p.id)
-				);
-			}
-		},
 		async created() {
 			// note: just ids returned
 			this.recommendations = await this.$store.dispatch(

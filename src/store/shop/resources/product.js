@@ -59,7 +59,7 @@ export default {
 					.sort(() => Math.random() - Math.random())
 					.slice(0, 8);
 				for (let product of more) {
-					if (recommendations.find(r => r.id === product.id)) {
+					if (recommendations.find(r => r.src === product.src)) {
 						continue;
 					}
 					if (recommendations.length >= 5) {
