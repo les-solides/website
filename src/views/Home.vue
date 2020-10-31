@@ -16,6 +16,7 @@
 	import LinkProductRow from "../components/template/LinkProductRow";
 	import LinkCenterFrame from "../components/template/LinkCenterFrame";
 	import LinkTwoFrames from "../components/template/LinkTwoFrames";
+	import LinkTwoFramesDoubleHeight from "../components/template/LinkTwoFramesDoubleHeight";
 	import NewsletterSubscribe from "../components/template/NewsletterSubscribe";
 	
 	import FrameLink from "../modules/shopify/FrameLink";
@@ -26,6 +27,7 @@
 			LinkArrow,
 			LinkCenterFrame,
 			LinkTwoFrames,
+			LinkTwoFramesDoubleHeight,
 			LinkProductRow,
 			NewsletterSubscribe
 		},
