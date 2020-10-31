@@ -213,7 +213,8 @@
 					return this.selectedVariants[0]?.image;
 				}
 				if (this.hover) {
-					return this.product.images[1] ||
+					return (this.product.materialIsSelected("gold") ?
+							this.product.images[1] : this.product.images[3]) ||
 						this.product.images[0];
 				}
 				return this.selectedVariantImage ||
