@@ -485,7 +485,7 @@
 				img, .empty-image-box {
 					height: 12vw;
 				}
-				
+				min-width: calc(10% - .9rem);
 				width: calc(10% - .9rem);
 			}
 		}
