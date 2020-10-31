@@ -12,14 +12,15 @@
 <script>
 	import { mapGetters } from "vuex";
 	
+	import FrameLink from "../modules/shopify/FrameLink";
 	import LinkArrow from "../components/template/LinkArrow";
 	import LinkProductRow from "../components/template/LinkProductRow";
 	import LinkCenterFrame from "../components/template/LinkCenterFrame";
 	import LinkTwoFrames from "../components/template/LinkTwoFrames";
 	import LinkTwoFramesDoubleHeight from "../components/template/LinkTwoFramesDoubleHeight";
 	import NewsletterSubscribe from "../components/template/NewsletterSubscribe";
+	import LinkTwoFramesPortrait from "../components/template/LinkTwoFramesPortrait";
 	
-	import FrameLink from "../modules/shopify/FrameLink";
 	
 	export default {
 		name: "Home",
@@ -28,6 +29,7 @@
 			LinkCenterFrame,
 			LinkTwoFrames,
 			LinkTwoFramesDoubleHeight,
+			LinkTwoFramesPortrait,
 			LinkProductRow,
 			NewsletterSubscribe
 		},
