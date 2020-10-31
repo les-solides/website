@@ -1,10 +1,11 @@
 <template>
-	<div class="flex flex-wrap justify-between" style="margin-bottom: var(--header-height)">
+	<div class="flex flex-wrap justify-between md:flex-no-wrap"
+		 style="margin-bottom: var(--header-height); height: calc((50vw - 1rem) * 0.6482248996)">
 		<!-- Left [start] -->
 		<a :href="leftImage.alt"
-		   class="flex items-center relative mb-4 md:mb-0 md:w-1/2 w-full"
+		   class="flex items-center relative mb-4 md:mb-0 md:mr-2 md:w-1/2 w-full"
 		   v-if="leftImage">
-			<LoadedImage class="md:pr-2 w-full"
+			<LoadedImage class="h-full object-cover w-full"
 						 :class="{ darken: article.selectElement('#overlay-left').innerText }"
 						 :src="leftImage.src"
 						 :alt="leftImage.alt" />
@@ -16,9 +17,9 @@
 		
 		<!-- Right [start] -->
 		<a :href="rightImage.alt"
-		   class="flex items-center relative md:w-1/2 w-full"
+		   class="flex items-center relative md:ml-2 md:w-1/2 w-full"
 		   v-if="rightImage">
-			<LoadedImage class="md:pl-2 w-full"
+			<LoadedImage class="h-full object-cover w-full"
 						 :class="{ darken: article.selectElement('#overlay-right').innerText }"
 						 :src="rightImage.src"
 						 :alt="rightImage.alt" />
