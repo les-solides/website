@@ -18,7 +18,7 @@
 						 style="margin-bottom: var(--header-height)"
 						 :to="'/products/' + o(links[index]).href.split('/products/')[1]"
 						 v-if="o(links[index]).href">
-				<span class="absolute-center flex items-center justify-center magnified w-full"
+				<span class="overlay absolute-center flex items-center justify-center magnified w-full"
 					  v-html="o(links[index]).innerHTML">
 				</span>
 				<img class="h-full object-cover w-full"
@@ -114,5 +114,8 @@
 	}
 	.magnified h1 {
 		font-size: 2rem;
+	}
+	.overlay {
+		width: calc(100vw - 2rem);
 	}
 </style>

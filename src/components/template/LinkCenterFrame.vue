@@ -45,5 +45,6 @@
 	left: 50%;
 	min-width: calc(100vw - 2rem);
 	transform: translateX(-50%);
+	width: calc(100vw - 2rem);
 }
 </style>
