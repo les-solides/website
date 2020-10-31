@@ -6,7 +6,7 @@
 		
 		<!-- Image & QuickShop Overlay [start] -->
 		<div class="relative quick-buy"
-			 @mouseenter="hover = true"
+			 @mouseenter="startHover"
 			 @mouseleave="unhover">
 			
 			<!-- Image -->
@@ -393,6 +393,10 @@
 					value
 				};
 			},
+			startHover() {
+				this.hover = true;
+				this.$forceUpdate();
+			},
 			async switchProduct(product) {
 				this.$store.commit('updateLoading', true);
 				this.popupProduct = await this.$store.dispatch(
@@ -409,6 +413,7 @@
 		},
 		created() {
 			this.initialize();
+			this.unhover();
 		},
 		watch: {
 			productId() {
