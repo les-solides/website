@@ -8,10 +8,16 @@
 		<button @click="select(value)"
 				:key="value"
 				v-for="(value, index) of option.values">
-			<span :class="{ 'text-gray-600': selected !== value }">{{ value }}</span>
-			<span class="mr-1"
-				  :class="{ 'text-gray-600': selected !== value }"
-				  v-if="index < option.values.length - 1">,</span>
+			<span :class="{
+					'italic': selected === value,
+					'text-gray-600': selected !== value
+				}">{{ value }}</span>
+			<span 	class="mr-1"
+				  	:class="{
+						'italic': selected === value,
+						'text-gray-600': selected !== value
+					}"
+				  	v-if="index < option.values.length - 1">,</span>
 		</button>
 	</div>
 </template>
