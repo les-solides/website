@@ -23,7 +23,7 @@
 						<div>{{ product.title }}</div>
 					</div>
 				</div>
-				<div class="mr-4 w-1/3"
+				<div class="description mr-4 w-1/3"
 					 v-html="descriptionTag.innerHTML"></div>
 				<div class="w-1/3">
 					<div class="flex justify-between">
@@ -55,7 +55,7 @@
 				</div>
 			</div>
 			
-			<div class="ws-1/3"
+			<div class="description ws-1/3"
 				 style="margin-bottom: var(--header-height)"
 				 v-html="descriptionRest.innerHTML"></div>
 			
