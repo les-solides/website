@@ -5,13 +5,11 @@
 		<ul class="flex overflow-x-auto">
 			<ProductLink
 					:class="{
-						'mr-4': true,
-						'md:mr-4': (index % 5) - 4,
-						'md:mr-0': (index % 5) - 5
+						'mr-4': true
 					 }"
 					:key="product.id"
 					:product="product"
-					v-for="(product, index) of recommendations" />
+					v-for="product of products" />
 		</ul>
 	</div>
 </template>
@@ -32,6 +30,14 @@
 		data: () => ({
 			recommendations: []
 		}),
+		computed: {
+			products() {
+				return [...this.$store.getters['shopify/product/allProducts'].filter(
+					p => this.recommendations.find(r => r.src === p.src)
+				)].sort(() => Math.random() - Math.random())
+				  .slice(0, 10);
+			}
+		},
 		async created() {
 			// note: just ids returned
 			this.recommendations = await this.$store.dispatch(
