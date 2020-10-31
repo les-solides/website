@@ -9,9 +9,8 @@
 						 :class="{ darken: article.selectElement('#overlay').innerText }"
 						 :src="image.src"
 						 :alt="image.alt" />
-			<span class="absolute h1 text-center text-white w-full">
-				{{ article.selectElement("#overlay").innerText }}
-			</span>
+			<span class="overlay absolute"
+				  v-html="articleOverlay"></span>
 		</a>
 		<!-- Right [end] -->
 	</div>
@@ -31,6 +30,9 @@
 			}
 		},
 		computed: {
+			articleOverlay() {
+				return this.article.selectElement("#overlay").outerHTML;
+			},
 			image() {
 				return this.article?.images?.[0];
 			}
@@ -39,5 +41,9 @@
 </script>
 
 <style scoped>
-
+.overlay {
+	min-width: calc(100vw - 2rem);
+	left: 50%;
+	transform: translateX(-50%);
+}
 </style>
