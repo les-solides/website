@@ -157,19 +157,8 @@
 					this.product.options.length <= this.validAmountOfOptions;
 			},
 			imageShown() {
-				if (this.addOnImages.length) {
-					return this.addOnImageShown;
-				}
-				if (this.hover && this.selectedVariants[0]?.image) {
-					return this.selectedVariants[0]?.image;
-				}
-				if (this.hover) {
-					return (this.product.materialIsSelected("gold") ?
-							this.product.images[1] : this.product.images[3]) ||
-						this.product.images[0];
-				}
-				return this.selectedVariantImage ||
-					this.product.images[0];
+				return this.selectedSilver ?
+					this.product.images[2] : this.product.images[0];
 			},
 			mainNode() {
 				return this.product ?
@@ -183,7 +172,13 @@
 				if ( ! this.product?.images?.length) {
 					return [];
 				}
-				return this.product.images.filter(i => i.src !== this.imageShown?.src);
+				return this.product.images.filter(i =>
+					i.src !== this.imageShown?.src
+				).filter(i =>
+					this.selectedSilver ?
+					i.alt.includes('silver') :
+					this.selectedGold ?
+					i.alt.includes('gold') : i);
 			},
 			pairOptionName() {
 				return this.product ? this.product.getTag(
@@ -214,6 +209,9 @@
 					return 5;
 				}
 				return 6;
+			},
+			selectedGold() {
+				return this.selectedOptionValues.find(o => o.value === "gold");
 			},
 			selectedSilver() {
 				return this.selectedOptionValues.find(o => o.value === "silver");
