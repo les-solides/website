@@ -64,7 +64,7 @@
 				);
 			},
 			filteredProducts() {
-				return this.allProducts.filter(p =>
+				return this.unarchivedProducts.filter(p =>
 					p.collections.find(c => c.title === this.$route.params.collection)
 				);
 			},
@@ -83,6 +83,11 @@
 					.filter(a =>
 						a.href.includes(this.$route.params.collection)
 					);
+			},
+			unarchivedProducts() {
+				return this.allProducts.filter(p =>
+					! p.getTag(/archive:*/, /archive:*/)
+				);
 			}
 		},
 		methods: {

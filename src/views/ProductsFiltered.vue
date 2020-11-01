@@ -47,7 +47,7 @@
 				);
 			},
 			filteredProducts() {
-				const products = this.allProducts.filter(p =>
+				const products = this.unarchivedProducts.filter(p =>
 					p.collections.find(c => c.title === this.$route.params.collection) &&
 					(p.variants.find(v => v.title === this.$route.params.variant) ||
 					(p.productType && p.productType.toLowerCase() === this.$route.params.variant)) 
@@ -56,6 +56,11 @@
 					p.selectedVariant = p.variants.find(v => v.title === this.$route.params.variant)
 				);
 				return products;
+			},
+			unarchivedProducts() {
+				return this.allProducts.filter(p =>
+					! p.getTag(/archive:*/, /archive:*/)
+				);
 			}
 		},
 		methods: {
