@@ -110,7 +110,7 @@ button.menu {
 
 // -- D [start]
 .darken {
-	filter: brightness(0.95);
+	filter: brightness(0.75);
 }
 
 .description {
@@ -262,6 +262,10 @@ header {
 	@media (min-width: $breakpoint-md) {
 		display: none;
 	}
+}
+
+.mt-text-default {
+	margin-top: .8rem;
 }
 
 .mt-minus-4 {

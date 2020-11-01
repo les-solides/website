@@ -14,6 +14,8 @@
 	
 	import FrameLink from "../modules/shopify/FrameLink";
 	import LinkArrow from "../components/template/LinkArrow";
+	import LinkArrowDouble from "../components/template/LinkArrowDouble";
+	import LinkArrowDoublePortrait from "../components/template/LinkArrowDoublePortrait";
 	import LinkProductRow from "../components/template/LinkProductRow";
 	import LinkCenterFrame from "../components/template/LinkCenterFrame";
 	import LinkTwoFrames from "../components/template/LinkTwoFrames";
@@ -21,11 +23,12 @@
 	import NewsletterSubscribe from "../components/template/NewsletterSubscribe";
 	import LinkTwoFramesPortrait from "../components/template/LinkTwoFramesPortrait";
 	
-	
 	export default {
 		name: "Home",
 		components: {
 			LinkArrow,
+			LinkArrowDouble,
+			LinkArrowDoublePortrait,
 			LinkCenterFrame,
 			LinkTwoFrames,
 			LinkTwoFramesDoubleHeight,

@@ -1,18 +1,32 @@
 <template>
 	<div class="flex flex-wrap justify-center"
 		 style="margin-bottom: var(--header-height)">
-		<!-- Right [start] -->
-		<a :href="image.alt"
-		   class="flex items-center relative md:w-1/2 w-full"
-		   v-if="image">
-			<LoadedImage class="md:pl-2 w-full"
-						 :class="{ darken: article.selectElement('#overlay').innerText }"
-						 :src="image.src"
-						 :alt="image.alt" />
-			<span class="overlay absolute"
-				  v-html="articleOverlay"></span>
-		</a>
-		<!-- Right [end] -->
+		<div class="md:w-1/2 w-full">
+			<a :href="image.alt"
+			   class="flex items-center relative"
+			   v-if="image">
+				<LoadedImage class="md:pl-2 w-full"
+							 :class="{ darken: article.selectElement('#overlay').innerText }"
+							 :src="image.src"
+							 :alt="image.alt" />
+				<span class="overlay absolute"
+					  v-html="articleOverlay"></span>
+			</a>
+			<div class="md:ml-2 mt-text-default w-full"
+				 v-if="link">
+				<!-- .h1 -->
+				<a class="block italic"
+				   :href="link"
+				   v-if="link && link.includes('http')">
+					{{ content.innerText }}
+				</a>
+				<router-link class="block italic"
+							 :to="link"
+							 v-else-if="link">
+					{{ content.innerText }}
+				</router-link>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -35,6 +49,12 @@
 			},
 			image() {
 				return this.article?.images?.[0];
+			},
+			content() {
+				return this.article.selectElement('[data-link]');
+			},
+			link() {
+				return this.content?.dataset?.link || "";
 			}
 		}
 	};
