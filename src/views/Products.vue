@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="chunkedArray.length">
 		<NavigationFilter base="/products"
 						  class="bg-white block md:hidden ml-0 py-4 sticky top-0 z-10"
 						  name="Navigation (Products)" />
@@ -12,7 +12,7 @@
 							'md:mr-0': (index % 5) - 5
 						 }"
 						 :product="product"
-						 :key="product.id"
+						 :key="o(product).id"
 						 v-for="(product, index) of chunk" />
 			<router-link class="aspect-height aspect-width block mx-auto relative w-full"
 						 style="margin-bottom: var(--header-height)"
@@ -46,12 +46,12 @@
 			...mapGetters("shopify/blog", ["articles"]),
 			...mapGetters("shopify/product", ["allProducts"]),
 			amountPerChunk() {
-				const amount = Math.floor(this.allProducts.length / this.links.length);
+				const amount = Math.floor(this.unarchivedProducts.length / this.links.length);
 				return amount - (amount % 5);
 			},
 			chunkedArray() {
 				return this.chunkArray(
-					shuffle([...this.allProducts]),
+					shuffle([...this.unarchivedProducts]),
 					this.amountPerChunk
 				);
 			},
@@ -71,6 +71,11 @@
 					return [];
 				}
 				return Array.from(this.content.selectElements('a'));
+			},
+			unarchivedProducts() {
+				return this.allProducts.filter(p =>
+					! p.getTag(/archive:*/, /archive:*/)
+				);
 			}
 		},
 		methods: {

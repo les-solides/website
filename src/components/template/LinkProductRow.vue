@@ -37,11 +37,10 @@
 		},
 		methods: {
 			async load() {
-				const products = await this.$store.dispatch(
-					'shopify/product/searchByHandles',
-					this.productHandles
-				);
-				this.products = this.productHandles.map(h => products.find(p => p.handle === h));
+				const products = this.$store.getters['shopify/product/allProducts'];
+				this.products = this.productHandles.map(h =>
+					products.find(p => p.handle === h)
+				).filter(p => p);
 			}
 		},
 		async created() {
