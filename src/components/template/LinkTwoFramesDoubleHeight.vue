@@ -14,6 +14,8 @@
 					{{ article.selectElement("#overlay-left").innerText }}
 				</span>
 			</a>
+			
+			<!--sublinks-->
 			<div class="mt-text-default w-full"
 				 v-if="linkLeft">
 				<!-- .h1 -->
@@ -32,9 +34,9 @@
 		<!-- Left [end] -->
 		
 		<!-- Right [start] -->
-		<div class="aspect-height md:ml-2 md:w-1/2 w-full">
+		<div class="md:ml-2 md:w-1/2 w-full">
 			<a :href="rightImage.alt"
-			   class="flex h-full items-center relative"
+			   class="aspect-height flex h-full items-center relative"
 			   v-if="rightImage">
 				<LoadedImage class="h-full object-cover w-full"
 							 :class="{ darken: article.selectElement('#overlay-right').innerText }"
@@ -44,6 +46,8 @@
 				{{ article.selectElement("#overlay-right").innerText }}
 			</span>
 			</a>
+			
+			<!--sublinks-->
 			<div class="mt-text-default w-full"
 				 v-if="linkRight">
 				<!-- .h1 -->
