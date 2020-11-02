@@ -72,7 +72,7 @@
 		
 		<nav class="h-full md:flex justify-between">
 			<div class="flex md:w-1/3">
-				<Route class="md:py-0 md:text-left md:w-auto py-16 text-center w-full"
+				<Route class="md:py-0 md:text-left md:w-auto w-full"
 					   to="/home"
 					   style="font-style: normal!important;">
 					les solides
