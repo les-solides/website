@@ -86,7 +86,7 @@
 						:disabled=" ! selectedVariants.length || ! selectedVariants[0].available"
 						:class="{ 'not-italic': ! selectedVariants.length }"
 						style="height: 3vw">
-					{{ addingToCart ? 'adding...' : 'add to bag' }}
+					{{ addingToCart ? 'adding...' : 'quick buy' }}
 				</button>
 			</div>
 			<!-- QuickShop Overlay -->
@@ -104,7 +104,7 @@
 						:disabled=" ! o(selectedVariants[0]).available"
 						style="height: 3vw"
 						v-if="quickShopType === 0 && hover">
-					{{ addingToCart ? 'adding...' : 'add to bag' }}
+					{{ addingToCart ? 'adding...' : 'quick buy' }}
 				</button>
 			</div>
 			<!--Buy Buttons (before / without QuickShop) [end]-->

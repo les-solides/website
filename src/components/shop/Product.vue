@@ -45,7 +45,7 @@
 									data-text="( add to bag )"
 									:disabled="addingToCart || ! o(selectedVariants[0]).available"
 									:style="o(selectedVariants[0]).available ? '' : 'color: #8a4646'"
-									class="glitch md:w-auto relative text-right w-full">
+									class="md:w-auto relative text-right w-full">
 								{{ addingToCart ? 'adding...' : o(selectedVariants[0]).available ? '( add to bag )' :
 								'[out of stock]' }}
 								<div class="scanlines"></div>
