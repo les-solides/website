@@ -1,7 +1,10 @@
 <template>
 	<div class="gif-loading">
-		<LoadedImage class="h-full object-cover"
+		<LoadedImage class="hidden md:block h-full object-cover"
 					 :src="selectedImage"
+					 @load="loaded = true" />
+		<LoadedImage class="block md:hidden mobile h-full object-cover"
+					 :src="selectedImageMobile"
 					 @load="loaded = true" />
 	</div>
 </template>
@@ -14,19 +17,21 @@
 		components: {LoadedImage},
 		data: () => ({
 			images: [
-				"/assets/loading/lessolides_placeholder_loading_1.gif",
-				"/assets/loading/lessolides_placeholder_loading_3.gif",
-				"/assets/loading/lessolides_placeholder_loading_4.gif",
-				"/assets/loading/lessolides_placeholder_loading_5.gif",
-				"/assets/loading/lessolides_placeholder_loading_6.gif",
-				"/assets/loading/lessolides_placeholder_loading_7.gif",
-				"/assets/loading/lessolides_placeholder_loading_8.gif"
+				"/assets/loading/lessolides_placeholder_desktop_loading_1.gif",
+				"/assets/loading/lessolides_placeholder_desktop_loading_2.gif"
+			],
+			imagesMobile: [
+				"/assets/loading/lessolides_placeholder_mobile_loading_1.gif",
+				"/assets/loading/lessolides_placeholder_mobile_loading_2.gif"
 			],
 			loaded: false
 		}),
 		computed: {
 			selectedImage() {
 				return this.images[Math.floor(Math.random() * this.images.length)];
+			},
+			selectedImageMobile() {
+				return this.imagesMobile[Math.floor(Math.random() * this.imagesMobile.length)];
 			}
 		}
 	};
