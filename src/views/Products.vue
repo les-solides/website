@@ -107,14 +107,14 @@
 	   lang="scss">
 	@import "./../../src/scss/partials/variables";
 	.aspect-height {
-		height: calc((50vw - 8rem));
+		height: calc((100vw - 2 * calc(20% - .8rem) - 4rem * 0.6482248996));
 		@media screen and (min-width: $breakpoint-md) {
-			height: calc((50vw - 8rem));
+			height: calc((100vw - 2 * calc(20% - .8rem) - 4rem) * 0.6482248996);
 		}
 	}
 	.aspect-width {
 		@media screen and (min-width: $breakpoint-md) {
-			width: calc((50vw - 8rem) * 1.5426744647);
+			width: calc(100vw - 2 * calc(20% - .8rem) - 4rem);
 		}
 	}
 	.magnified h1 {
