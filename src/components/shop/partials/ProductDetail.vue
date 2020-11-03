@@ -157,6 +157,9 @@
 					this.product.options.length <= this.validAmountOfOptions;
 			},
 			imageShown() {
+				if (this.product?.selectedVariant?.image) {
+					return this.product?.selectedVariant?.image;
+				}
 				return this.selectedSilver ?
 					this.product.images[2] : this.product.images[0];
 			},
@@ -324,6 +327,7 @@
 					option,
 					value
 				});
+				this.product.selectedVariant = this.selectedVariants?.[0];
 			},
 			selectPairOption(option, value) {
 				this.selectedPairOptionValue = {
