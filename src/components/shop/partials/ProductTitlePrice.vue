@@ -55,8 +55,8 @@
 		},
 		computed: {
 			outOfStock() {
-				return this.selectedVariants.length ?
-					! this.selectedVariants[0].available :
+				return this.product.selectedVariant ?
+					! this.product.selectedVariant.available :
 					! this.product.available;
 			},
 			price() {
