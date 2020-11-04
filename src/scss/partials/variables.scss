@@ -13,6 +13,21 @@
 	font-stretch: 90%;
 }
 
+@font-face {
+	font-family: 'CBradford';
+	src: url(/assets/fonts/Italic/BradfordLL-Light90.otf) format('opentype');
+	font-weight: 200;
+	font-style: normal;
+	font-stretch: 90%;
+}
+@font-face {
+	font-family: 'CBradford';
+	src: url(/assets/fonts/Italic/BradfordLL-LightItalic90.otf) format('opentype');
+	font-weight: 200;
+	font-style: italic;
+	font-stretch: 90%;
+}
+
 $size-base: 1rem;
 
 $font-family: Bradford, "Times New Roman", serif;

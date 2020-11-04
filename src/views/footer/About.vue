@@ -1,5 +1,5 @@
 <template>
-	<div class="md:columnist-1">
+	<div class="font-lg w-full">
 		<div v-html="content"></div>
 		<Error v-if="loaded && error" />
 	</div>

@@ -50,7 +50,7 @@
 			...mapGetters("shopify/product", ["allProducts"]),
 			amountPerChunk() {
 				const amount = Math.floor(this.filteredProducts.length / this.links.length);
-				return amount - (amount % 5);
+				return (amount - (amount % 5)) || amount;
 			},
 			chunkedArray() {
 				return this.chunkArray(
@@ -65,7 +65,7 @@
 			},
 			filteredProducts() {
 				return this.unarchivedProducts.filter(p =>
-					p.collections.find(c => c.title === this.$route.params.collection)
+					p.collections.find(c => c.handle === this.$route.params.collection)
 				);
 			},
 			images() {
@@ -115,7 +115,7 @@
 				if ( ! this.amountPerChunk) {
 					this.$store.dispatch('goToNotFound');
 				}
-			})
+			});
 			this.$store.commit('updateLoading', false);
 		}
 	};
