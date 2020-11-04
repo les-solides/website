@@ -1,7 +1,7 @@
 <template>
-	<div class="footer-page w-full">
-		<h3>{{ title }}</h3>
-		<div class="md:column-4" v-html="content"></div>
+	<div class="text-left footer-page w-full">
+		<!--<h3>{{ title }}</h3>-->
+		<div v-html="content"></div>
 		<Error v-if="loaded && error" />
 	</div>
 </template>
