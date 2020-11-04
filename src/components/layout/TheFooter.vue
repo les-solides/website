@@ -1,6 +1,7 @@
 <template>
-	<footer class="bg-white md:sticky" :class="{ 'bottom-0 z-20': open }">
-		<article class="bg-white fixed md:z-30 p-4 overflow-auto transition-medium w-full"
+	<footer class="bg-white"
+			:class="{ 'z-20': open }">
+		<article class="bg-white fixed md:z-30 md:p-4 overflow-auto transition-medium text-left"
 				 :class="{ 'top-100': ! open }">
 			<Burger @click.native="closeFooter"
 					class="fixed mr-4 right"
@@ -17,33 +18,34 @@
 			<TermsOfUse v-if="currentRoute === footer.routes.TERMS" />
 		</article>
 		
-		<div class="border-top md:flex mx-4" style="padding: .870rem 0 0.870rem 0 !important;">
+		<div class="bg-white border-top md:flex mx-4 text-left"
+			 style="padding: .870rem 0 0.870rem 0 !important;">
 			<button @click="openFooter(footer.routes.ABOUT)"
-					class="margin-deduct-4 mr-4">about
+					class="margin-deduct-4 mb-4 md:mb-0 mr-4">about
 			</button>
 			<button @click="openFooter(footer.routes.TERMS)"
-					class="margin-deduct-4 mr-4">terms of use
+					class="margin-deduct-4 mb-4 md:mb-0 mr-4">terms of use
 			</button>
 			<button @click="openFooter(footer.routes.PRIVACY)"
-					class="margin-deduct-4 mr-4">privacy policy
+					class="margin-deduct-4 mb-4 md:mb-0 mr-4">privacy policy
 			</button>
 			<!--<button @click="openFooter(footer.routes.COOKIE)"
 					class="mrmargin-deduct-4 -4">cookie policy
 			</button>-->
 			<button @click="openFooter(footer.routes.SHIPPING)"
-					class="margin-deduct-4 mr-4">shipping
+					class="margin-deduct-4 mb-4 md:mb-0 mr-4">shipping
 			</button>
 			<button @click="openFooter(footer.routes.RETURNS)"
-					class="margin-deduct-4 mr-4">returns and exchange
+					class="margin-deduct-4 mb-4 md:mb-0 mr-4">returns and exchange
 			</button>
 			<button @click="openFooter(footer.routes.NEWSLETTER)"
-					class="margin-deduct-4 mr-4">newsletter signup
+					class="margin-deduct-4 mb-4 md:mb-0 mr-4">newsletter signup
 			</button>
 			<button @click="openFooter(footer.routes.CONTACT)"
-					class="margin-deduct-4 mr-4">contact
+					class="margin-deduct-4 mb-4 md:mb-0 mr-4">contact
 			</button>
 			<button @click="openFooter(footer.routes.STOCKISTS)"
-					class="margin-deduct-4 mr-4">stockist
+					class="margin-deduct-4 mb-4 md:mb-0 mr-4">stockist
 			</button>
 			<button @click="openFooter(footer.routes.SIZE)"
 					class="margin-deduct-4 mr-4">size guide
@@ -74,7 +76,8 @@
 			Contact,
 			Stockist,
 			NewsletterSignup,
-			ReturnsAndExchanges, Shipping, PrivacyPolicy, SizeGuide, TermsOfUse, About, Burger},
+			ReturnsAndExchanges, Shipping, PrivacyPolicy, SizeGuide, TermsOfUse, About, Burger
+		},
 		data: () => ({
 			footer: Footer
 		}),
@@ -105,10 +108,30 @@
 </script>
 
 <style lang="scss">
+	@import "./src/scss/partials/variables";
+	
 	article {
-		height: calc(100vh - 5.3rem);
+		height: calc(100vh - 4.5rem);
 		opacity: .85;
+		padding-top: .75rem;
 		padding-bottom: var(--footer-height);
-		top: 2.5rem;
+		top: 0;
+		width: calc(100% - 2rem);
+		@media screen and (min-width: $breakpoint-md) {
+			height: calc(100vh - 2.5rem);
+			top: var(--header-height);
+			width: 100%;
+		}
+	}
+	
+	footer {
+		bottom: 72px;
+		position: absolute;
+		top: unset;
+		z-index: 30;
+		@media screen and (min-width: $breakpoint-md) {
+			bottom: 0;
+			position: relative;
+		}
 	}
 </style>

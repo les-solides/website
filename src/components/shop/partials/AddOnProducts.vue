@@ -7,13 +7,13 @@
 					:add-on-reference="product"
 					:class="{
 						'mr-4': true,
-						'md:mr-4': (index % 5) - 4,
-						'md:mr-0': (index % 5) - 5
+						/*'md:mr-4': (index % 5) - 4,
+						'md:mr-0': (index % 5) - 5*/
 					 }"
 					:is-add-on="true"
 					:key="addOn.id"
 					:product="addOn"
-					v-for="(addOn, index) of addOns" />
+					v-for="(addOn) of addOns" />
 		</ul>
 	</div>
 </template>

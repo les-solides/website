@@ -3,7 +3,7 @@
 					text-center top-0 transition-medium w-full z-20"
 			:class="{ 'top-100': ! menuOpen }">
 		
-		<div class="left-0 bg-white bottom-0 fixed flex justify-between menu mobile p-4 shadow-inner w-full z-10">
+		<div class="mobile-footer left-0 bg-white bottom-0 fixed flex justify-between menu mobile p-4 shadow-inner w-full z-10">
 			<Burger @click.native="updateMenuOpen( ! menuOpen)"
 					:open="menuOpen" />
 			<div class="flex justify-end md:w-1/3">
@@ -72,18 +72,19 @@
 		
 		<nav class="h-full md:flex justify-between">
 			<div class="flex md:w-1/3">
-				<Route class="md:py-0 md:text-left md:w-auto w-full"
+				<Route class="md:py-0 text-left md:w-auto w-full"
 					   to="/home"
 					   style="font-style: normal!important;">
 					les solides
 				</Route>
-				<NavigationFilter base="/products"
-								  class="hidden md:flex"
-								  name="Navigation (Products)"
-								  v-if="$route.path.includes('product')" />
+				<NavigationFilter
+						base="/products"
+						class="hidden md:flex"
+						name="Navigation (Products)"
+						v-if="$route.path.includes('product')" />
 			</div>
 			<div class="md:flex justify-center md:w-1/3">
-				<Route class="md:py-0 px-2 py-4"
+				<Route class="md:py-0 px-2 pb-6 pt-16 text-left"
 					   :exact="false"
 					   to="/products">
 					products
@@ -96,7 +97,7 @@
 					   to="/lookbook">
 					lookbook
 				</Route>-->
-				<Route class="md:py-0 px-2 py-4"
+				<Route class="md:py-0 pb-6 px-2 text-left"
 					   to="/archive">
 					archive
 				</Route>
@@ -104,12 +105,13 @@
 					   to="/search">
 					search
 				</Route>
-				<TheFooter class="block bottom-0 md:hidden mt-16 relative z-0" />
+				<TheFooter class="block md:bottom-0 md:hidden mt-16 md:relative z-0" />
 			</div>
 			<div class="cursor-pointer hidden md:flex justify-end md:w-1/3 select-none z-20"
 				 unselectable="on"
 				 @click="checkoutOpen = ! checkoutOpen">
-				<div class="md:py-0 py-4" v-if=" ! checkoutOpen">
+				<div class="md:py-0 py-4"
+					 v-if=" ! checkoutOpen">
 					bag ({{ amountOfCartItems }})
 				</div>
 				<div class="md:py-0 py-4"
@@ -235,3 +237,18 @@
 		}
 	};
 </script>
+
+<style lang="scss">
+	@import "./src/scss/partials/variables";
+	
+	.mobile-footer {
+		height: 72px;
+		@media screen and (min-width: $breakpoint-md) {
+			height: var(--footer-height);
+		}
+		
+		.comp__burger {
+			height: 20px;
+		}
+	}
+</style>

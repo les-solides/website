@@ -8,7 +8,8 @@
 				<Cross @click="close" />
 			</div>
 			<!-- Image -->
-			<div class="block flex md:hidden overflow-x-scroll"
+			<div id="scroller-detail"
+				 class="block flex md:hidden overflow-x-scroll"
 				 style="height: 125vw">
 				<LoadedImage class="h-full object-cover mr-4 w-full"
 							 :src="o(imageShown).src || o(imageShown).originalSrc" />
@@ -83,6 +84,7 @@
 	import RecommendedProducts from "./RecommendedProducts";
 	import Cross from "../../partials/Cross";
 	import AddOnProducts from "./AddOnProducts";
+	import HorizontalScrollIndicator from "../../../modules/HorizontalScrollIndicator";
 	
 	export default {
 		name: "ProductDetail",
@@ -161,7 +163,7 @@
 					return this.product?.selectedVariant?.image;
 				}
 				return this.selectedSilver ?
-					this.product.images[2] : this.product.images[0];
+					   this.product.images[2] : this.product.images[0];
 			},
 			mainNode() {
 				return this.product ?
@@ -177,11 +179,12 @@
 				}
 				return this.product.images.filter(i =>
 					i.src !== this.imageShown?.src
-				).filter(i =>
-					this.selectedSilver ?
-					i.alt.includes('silver') :
-					this.selectedGold ?
-					i.alt.includes('gold') : i);
+				)
+						   .filter(i =>
+							   this.selectedSilver ?
+							   i.alt.includes('silver') :
+							   this.selectedGold ?
+							   i.alt.includes('gold') : i);
 			},
 			pairOptionName() {
 				return this.product ? this.product.getTag(
@@ -338,6 +341,13 @@
 			switchProduct(product) {
 				this.$store.commit('shopify/product/updateSelectedProduct', product);
 			}
+		},
+		mounted() {
+			this.$nextTick(async () => {
+				await this.wait(2000);
+				let indicator = new HorizontalScrollIndicator('#scroller-detail');
+				await indicator.start();
+			});
 		}
 	};
 </script>

@@ -9,8 +9,8 @@
 				<LoadedImage class="h-full object-cover product-image ws-1/3"
 							 :key="image.id"
 							 :class="{
-								'mr-4': index < images.length - 1,
-									 'object-cover w-1/3': index < 3
+									'mr-4': index < images.length - 1,
+									'object-cover w-1/3': index < 3
 							}"
 							 v-for="(image, index) of images"
 							 :src="image.src" />
@@ -45,7 +45,7 @@
 									data-text="( add to bag )"
 									:disabled="addingToCart || ! o(selectedVariants[0]).available"
 									:style="o(selectedVariants[0]).available ? '' : 'color: #8a4646'"
-									class="md:w-auto relative text-right w-full">
+									class="md:w-auto mt-5 relative text-link text-right w-full">
 								{{ addingToCart ? 'adding...' : o(selectedVariants[0]).available ? '( add to bag )' :
 								'[out of stock]' }}
 								<div class="scanlines"></div>
@@ -55,7 +55,7 @@
 				</div>
 			</div>
 			
-			<div class="description ws-1/3"
+			<div class="description text-purple ws-1/3"
 				 style="margin-bottom: var(--header-height)"
 				 v-html="descriptionRest.innerHTML"></div>
 			

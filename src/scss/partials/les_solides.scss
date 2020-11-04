@@ -115,8 +115,13 @@ button.menu {
 
 .description {
 	a {
-		color: gray;
+		color: $color-link;
 	}
+}
+
+div#main a {
+	color: purple;
+	font-style: unset;
 }
 // -- D [end]
 
@@ -322,6 +327,10 @@ header {
 	transform: scale(.9, 1) translate(-5%, 0);
 }*/
 // -- T [start]
+.text-link {
+	color: $color-link;
+}
+
 .tooltip {
 	position: absolute;
 	color: black;

@@ -50,7 +50,7 @@
 			...mapGetters("shopify/product", ["allProducts"]),
 			amountPerChunk() {
 				const amount = Math.floor(this.filteredProducts.length / this.links.length);
-				return (amount - (amount % 5)) || amount;
+				return this.filteredProducts.length <= 5 ? amount : amount - (amount % 5);
 			},
 			chunkedArray() {
 				return this.chunkArray(
