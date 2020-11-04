@@ -1,13 +1,14 @@
 <template>
 	<footer class="bg-white"
-			:class="{ 'z-20': open }">
-		<article class="bg-white fixed md:z-30 md:p-4 overflow-auto transition-medium text-left"
+			:class="{ 'z-30': open }">
+		<article class="bg-white fixed md:z-30 md:px-4 pb-16 overflow-auto transition-medium text-left"
 				 :class="{ 'top-100': ! open }">
 			<Burger @click.native="closeFooter"
 					class="fixed mr-4 right"
 					:open="true" />
 			
 			<About v-if="currentRoute === footer.routes.ABOUT" />
+			<TermsOfUse v-if="currentRoute === footer.routes.TERMS" />
 			<Contact v-if="currentRoute === footer.routes.CONTACT" />
 			<SizeGuide v-if="currentRoute === footer.routes.SIZE" />
 			<NewsletterSignup v-if="currentRoute === footer.routes.NEWSLETTER" />
@@ -15,10 +16,9 @@
 			<ReturnsAndExchanges v-if="currentRoute === footer.routes.RETURNS" />
 			<Shipping v-if="currentRoute === footer.routes.SHIPPING" />
 			<Stockist v-if="currentRoute === footer.routes.STOCKISTS" />
-			<TermsOfUse v-if="currentRoute === footer.routes.TERMS" />
 		</article>
 		
-		<div class="bg-white border-top md:flex mx-4 text-left"
+		<div class="bg-white border-top md:flex mx-4 text-left z-50"
 			 style="padding: .870rem 0 0.870rem 0 !important;">
 			<button @click="openFooter(footer.routes.ABOUT)"
 					class="margin-deduct-4 mb-4 md:mb-0 mr-4">about
@@ -117,6 +117,12 @@
 		padding-bottom: var(--footer-height);
 		top: 0;
 		width: calc(100% - 2rem);
+		h1, h2, h3, p, a {
+			font-size: 1.75rem;
+			@media screen and (min-width: $breakpoint-md) {
+				font-size: 2.15rem;
+			}
+		}
 		@media screen and (min-width: $breakpoint-md) {
 			height: calc(100vh - 2.5rem);
 			top: var(--header-height);

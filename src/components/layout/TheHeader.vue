@@ -1,6 +1,6 @@
 <template>
 	<header class="bg-white fixed h-full md:h-auto md:sticky md:p-default md:top-0
-					text-center top-0 transition-medium w-full z-20"
+					text-center top-0 transition-medium w-full z-30"
 			:class="{ 'top-100': ! menuOpen }">
 		
 		<div class="mobile-footer left-0 bg-white bottom-0 fixed flex justify-between menu mobile p-4 shadow-inner w-full z-10">
