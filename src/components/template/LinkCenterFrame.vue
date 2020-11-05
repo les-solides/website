@@ -3,7 +3,7 @@
 		 style="margin-bottom: var(--header-height)">
 		<div class="aspect-height md:w-1/2 w-full">
 			<a :href="image.alt"
-			   class="flex items-center relative"
+			   class="flex items-center h-full relative"
 			   v-if="image">
 				<LoadedImage class="md:pl-2 h-full object-cover w-full"
 							 :class="{ darken: article.selectElement('#overlay').innerText }"
