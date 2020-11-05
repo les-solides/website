@@ -49,7 +49,7 @@
 			...mapGetters("shopify/blog", ["articles"]),
 			...mapGetters("shopify/product", ["allProducts"]),
 			amountPerChunk() {
-				const amount = Math.floor(this.filteredProducts.length / this.links.length);
+				const amount = Math.floor(this.filteredProducts.length / (this.links.length || 1));
 				return this.filteredProducts.length <= 5 ? amount : amount - (amount % 5);
 			},
 			chunkedArray() {
@@ -111,11 +111,11 @@
 				'shopify/blog/fetchArticlesByBlog',
 				"Products Page (Main)"
 			))?.[0];
-			this.$nextTick(() => {
+			/*this.$nextTick(() => {
 				if ( ! this.amountPerChunk) {
 					this.$store.dispatch('goToNotFound');
 				}
-			});
+			});*/
 			this.$store.commit('updateLoading', false);
 		}
 	};
