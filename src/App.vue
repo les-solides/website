@@ -71,7 +71,7 @@
 			},
 			async removeInitialLoadingScreen() {
 				const app = document.querySelector('#app');
-				/*const loader = document.querySelector('#initial-load');
+				const loader = document.querySelector('#initial-load');
 				if ( ! loader) {
 					return;
 				}
@@ -79,7 +79,7 @@
 				loader.style.opacity = 0;
 				await this.wait(500);
 				loader.remove();
-				app.style.opacity = 1;*/
+				app.style.opacity = 1;
 			}
 		},
 		mounted() {
