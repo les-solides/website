@@ -291,6 +291,16 @@ header {
 }
 // -- M [end]
 
+// --- O [start]
+.overlay {
+	span {
+		width: 100%;
+	}
+}
+#overlay {
+	width: 100%;
+}
+
 // -- P [start]
 .product-image {
 	height: calc(((33.3333333333vw - 2rem) * 1.455) - var(--header-height) / 2);
