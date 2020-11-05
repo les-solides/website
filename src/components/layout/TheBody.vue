@@ -48,10 +48,6 @@
 
 <style scoped>
 	#main {
-	calc(
-	100vh -
-	var(--header-height) -
-	var(--footer-height)
-	+ .75rem)
+		calc(100vh - var(--header-height) - var(--footer-height) + .75rem);
 	}
 </style>
