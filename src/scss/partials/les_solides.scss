@@ -298,7 +298,11 @@ header {
 	}
 }
 #overlay {
+	font-size: 3rem!important;
 	width: 100%;
+	@media all and (min-width: $breakpoint-md) {
+		font-size: 5rem!important;
+	}
 }
 
 // -- P [start]
