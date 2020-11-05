@@ -50,8 +50,8 @@
 				const products = this.unarchivedProducts.filter(p =>
 					p.collections.find(c => c.title === this.$route.params.collection) &&
 					(p.variants.find(v => v.title === this.$route.params.variant) ||
-					(p.productType && p.productType.toLowerCase() === this.$route.params.variant)) /*||
-					(this.$route.params.variant === 'add-ons' && p.isAddOn())*/
+					(p.productType && p.productType.toLowerCase() === this.$route.params.variant)) ||
+					p.collections.find(c => c.title === this.$route.params.variant)
 				);
 				products.forEach(p =>
 					p.selectedVariant = p.variants.find(v => v.title === this.$route.params.variant)
