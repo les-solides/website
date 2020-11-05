@@ -150,7 +150,7 @@
 		background: none;
 		font-size: 2.15rem;
 	}
-	input {
+	input, textarea {
 		font-size: 2.15rem;
 	}
 	::placeholder {
