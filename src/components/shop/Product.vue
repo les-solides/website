@@ -250,7 +250,7 @@
 				});
 			},
 			openSizeGuide() {
-				this.$store.commit('updateFooterRoute', Footer.routes.CARE);
+				this.$store.commit('updateFooterRoute', Footer.routes.SIZE);
 				this.$store.commit('updateFooterOpen', true);
 			},
 			selectOptionValue(option, value) {
