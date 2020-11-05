@@ -18,20 +18,20 @@
 		data: () => ({
 			images: [
 				"/assets/loading/lessolides_placeholder_desktop_loading_1.gif",
-				"/assets/loading/lessolides_placeholder_desktop_loading_2.gif"
+				/*"/assets/loading/lessolides_placeholder_desktop_loading_2.gif"*/
 			],
 			imagesMobile: [
 				"/assets/loading/lessolides_placeholder_mobile_loading_1.gif",
-				"/assets/loading/lessolides_placeholder_mobile_loading_2.gif"
+				/*"/assets/loading/lessolides_placeholder_mobile_loading_2.gif"*/
 			],
 			loaded: false
 		}),
 		computed: {
 			selectedImage() {
-				return this.images[Math.floor(Math.random() * 2)];
+				return this.images[0];
 			},
 			selectedImageMobile() {
-				return this.imagesMobile[Math.floor(Math.random() * 2)];
+				return this.imagesMobile[0];
 			}
 		}
 	};
