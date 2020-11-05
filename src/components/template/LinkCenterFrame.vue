@@ -1,11 +1,11 @@
 <template>
 	<div class="flex flex-wrap justify-center"
 		 style="margin-bottom: var(--header-height)">
-		<div class="md:w-1/2 w-full">
+		<div class="aspect-height md:w-1/2 w-full">
 			<a :href="image.alt"
 			   class="flex items-center relative"
 			   v-if="image">
-				<LoadedImage class="md:pl-2 w-full"
+				<LoadedImage class="md:pl-2 h-full object-cover w-full"
 							 :class="{ darken: article.selectElement('#overlay').innerText }"
 							 :src="image.src"
 							 :alt="image.alt" />
@@ -66,5 +66,8 @@
 	min-width: calc(100vw - 2rem);
 	transform: translateX(-50%);
 	width: calc(100vw - 2rem);
+}
+.aspect-height {
+	height: calc(64.82249vw - 1.29645rem);
 }
 </style>
