@@ -22,7 +22,7 @@
 		</Route>
 		<Route class="mr-1"
 			   :class="{ 'text-gray-600': $route.params.variant !== 'rings' }"
-			   to="/products/jewelry/rings">rings
+			   to="/products/jewelry/rings">rings,
 		</Route>
 		<Route class="mr-1"
 			   :class="{ 'text-gray-600': $route.params.variant !== 'add-ons' }"

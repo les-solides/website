@@ -16,7 +16,7 @@
 						 :product="product"
 						 :key="product.id"
 						 v-for="(product, index) of chunk" />
-			<router-link class="block mb-16 relative w-full"
+			<!--<router-link class="block mb-16 relative w-full"
 						 :to="'/products/' + o(links[index]).href.split('/products/')[1]"
 						 v-if="o(links[index]).href">
 				<span class="absolute-center flex items-center justify-center magnified w-full"
@@ -25,7 +25,7 @@
 				<img class="w-full"
 					 :src="o(images[index]).src"
 					 alt="">
-			</router-link>
+			</router-link>-->
 		</div>
 	</div>
 </template>
