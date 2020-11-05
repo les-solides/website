@@ -344,7 +344,7 @@
 		},
 		mounted() {
 			this.$nextTick(async () => {
-				await this.wait(2000);
+				await this.wait(1000);
 				let indicator = new HorizontalScrollIndicator('#scroller-detail');
 				await indicator.start();
 			});

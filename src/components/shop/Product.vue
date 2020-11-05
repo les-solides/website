@@ -245,7 +245,7 @@
 				// this.$store.commit('updateLoading', true);
 				await this.wait(2000);
 				this.$nextTick(async () => {
-					await this.wait(2000);
+					// await this.wait(2000);
 					let indicator = new HorizontalScrollIndicator('#scroller');
 					await indicator.start();
 				});
