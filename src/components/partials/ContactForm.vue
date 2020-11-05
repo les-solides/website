@@ -1,5 +1,5 @@
 <template>
-	<form class="md:columnist-1 w-full"
+	<form class=""
 		  @submit.prevent="contact">
 		<h1 class="mb-4">contact</h1>
 		<div class="flex w-full">
@@ -148,10 +148,13 @@
 	}
 	input[type=submit] {
 		background: none;
-		font-size: 1.25rem;
+		font-size: 2.15rem;
+	}
+	input {
+		font-size: 2.15rem;
 	}
 	::placeholder {
 		color: gray;
-		font-size: 1.25rem;
+		font-size: 2.15rem;
 	}
 </style>

@@ -1,7 +1,6 @@
 <template>
-	<div class="footer-page w-1/4">
-		<h3>{{ title }}</h3>
-		<div class="md:column-1" v-html="content"></div>
+	<div class="footer-page">
+		<div v-html="content"></div>
 		<Error v-if="loaded && error" />
 	</div>
 </template>

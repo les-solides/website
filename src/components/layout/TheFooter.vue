@@ -7,7 +7,7 @@
 					class="fixed mr-4 right"
 					:open="true" />
 			
-			<About v-if="currentRoute === footer.routes.ABOUT" />
+			<About page="page:about" v-if="currentRoute === footer.routes.ABOUT" />
 			<TermsOfUse v-if="currentRoute === footer.routes.TERMS" />
 			<Contact v-if="currentRoute === footer.routes.CONTACT" />
 			<SizeGuide v-if="currentRoute === footer.routes.SIZE" />
@@ -15,7 +15,8 @@
 			<PrivacyPolicy v-if="currentRoute === footer.routes.PRIVACY" />
 			<ReturnsAndExchanges v-if="currentRoute === footer.routes.RETURNS" />
 			<Shipping v-if="currentRoute === footer.routes.SHIPPING" />
-			<Stockist v-if="currentRoute === footer.routes.STOCKISTS" />
+			<!--<Stockist v-if="currentRoute === footer.routes.STOCKISTS" />-->
+			<About page="page:care-instructions" v-if="currentRoute === footer.routes.CARE" />
 		</article>
 		
 		<div class="bg-white border-top md:flex mx-4 text-left z-50"
@@ -44,11 +45,14 @@
 			<button @click="openFooter(footer.routes.CONTACT)"
 					class="margin-deduct-4 mb-4 md:mb-0 mr-4">contact
 			</button>
-			<button @click="openFooter(footer.routes.STOCKISTS)"
+			<!--<button @click="openFooter(footer.routes.STOCKISTS)"
 					class="margin-deduct-4 mb-4 md:mb-0 mr-4">stockist
-			</button>
+			</button>-->
 			<button @click="openFooter(footer.routes.SIZE)"
 					class="margin-deduct-4 mr-4">size guide
+			</button>
+			<button @click="openFooter(footer.routes.CARE)"
+					class="margin-deduct-4 mr-4">care instructions
 			</button>
 			<!--<button @click="openFooter(footer.routes.PRESS)"
 					class="mrmargin-deduct-4 -4">press
@@ -74,7 +78,6 @@
 		name: "TheFooter",
 		components: {
 			Contact,
-			Stockist,
 			NewsletterSignup,
 			ReturnsAndExchanges, Shipping, PrivacyPolicy, SizeGuide, TermsOfUse, About, Burger
 		},
@@ -117,11 +120,17 @@
 		padding-bottom: var(--footer-height);
 		top: 0;
 		width: calc(100% - 2rem);
-		h1, h2, h3, p, a {
+		h1, h2, h3, p, a, ul, li, td {
 			font-size: 1.75rem;
 			@media screen and (min-width: $breakpoint-md) {
 				font-size: 2.15rem;
 			}
+		}
+		table {
+			margin-bottom: 3rem;
+		}
+		li {
+			list-style: inside;
 		}
 		@media screen and (min-width: $breakpoint-md) {
 			height: calc(100vh - 2.5rem);

@@ -83,7 +83,7 @@
 		border-radius: 500px;
 		padding: .5rem 1rem;
 		width: 100%;
-		font-size: 1.5rem;
+		font-size: 2.15rem;
 		
 		&::placeholder {
 			color: gray;

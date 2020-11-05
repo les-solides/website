@@ -11,26 +11,39 @@
 	export default {
 		name: "About",
 		components: {Error},
+		props: {
+			page: String
+		},
 		data: () => ({
 			content: null,
 			error: false,
 			loaded: false,
 			title: null
 		}),
-		async created() {
-			const result = await this.$store.dispatch(
-				'shopify/blog/fetchFirstArticleByTags',
-				'page:about'
-			);
-			
-			this.loaded = true;
-			
-			if ( ! result) {
-				return this.error = true;
+		methods: {
+			async load() {
+				const result = await this.$store.dispatch(
+					'shopify/blog/fetchFirstArticleByTags',
+					this.page
+				);
+				
+				this.loaded = true;
+				
+				if ( ! result) {
+					return this.error = true;
+				}
+				
+				this.content = result.contentHtml;
+				this.title = result.title;
 			}
-			
-			this.content = result.contentHtml;
-			this.title = result.title;
+		},
+		async created() {
+			await this.load();
+		},
+		watch: {
+			page() {
+				this.load();
+			}
 		}
 	};
 </script>

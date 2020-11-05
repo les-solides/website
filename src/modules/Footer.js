@@ -1,6 +1,7 @@
 export default class Footer {
 	static routes = {
 		ABOUT: 'about',
+		CARE: 'care',
 		TERMS: 'terms',
 		PRIVACY: 'privacy',
 		COOKIE: 'cookie',
