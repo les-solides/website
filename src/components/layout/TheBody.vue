@@ -48,10 +48,10 @@
 
 <style scoped>
 	#main {
-		min-height: calc(
-				100vh -
-				var(--header-height) -
-				var(--footer-height)
-		);
+	calc(
+	100vh -
+	var(--header-height) -
+	var(--footer-height)
+	+ .75rem)
 	}
 </style>
