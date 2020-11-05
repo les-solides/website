@@ -110,9 +110,9 @@
 	@import "./../../../src/scss/partials/variables";
 	
 	.aspect-height {
-		height: calc((100vw - 2rem) * 0.6482248996);
+		height: calc((100vw - 2rem) * 0.9);
 		@media screen and (min-width: $breakpoint-md) {
-			height: calc((50vw - 1rem) * 0.6482248996);
+			height: calc((50vw - 1rem) * 0.9);
 		}
 	}
 

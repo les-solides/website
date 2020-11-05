@@ -111,7 +111,7 @@
 	.aspect-height {
 		height: calc((100vw) * 0.6482248996 * 2);
 		@media screen and (min-width: $breakpoint-md) {
-			height: calc((50vw - 1.5rem));
+			height: calc((50vw - 1.5rem) * .955);
 		}
 	}
 	.aspect-width {
