@@ -7,7 +7,7 @@
 				v-if="$route.params.collection === 'jewelry'" />
 		<div class="flex flex-wrap"
 			 :key="o(chunk[0]).id"
-			 v-for="(chunk, index) of chunkedArray">
+			 v-for="(chunk) of chunkedArray">
 			<ProductLink :class="{
 							'mr-4': (index % 2) - 1,
 							'md:mr-4': (index % 5) - 4,
