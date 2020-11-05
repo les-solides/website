@@ -68,6 +68,6 @@
 	width: calc(100vw - 2rem);
 }
 .aspect-height {
-	height: calc(64.82249vw - 1.29645rem);
+	max-height: calc(64.82249vw - 1.29645rem);
 }
 </style>
