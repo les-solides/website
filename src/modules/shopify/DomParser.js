@@ -15,6 +15,11 @@ export default class DomParser {
 						.querySelectorAll('img');
 	}
 	
+	static fetchAllVideos(dom) {
+		return DomParser.createDom(dom)
+						.querySelectorAll('video');
+	}
+	
 	static fetchFirstBySelector(dom, selector) {
 		return DomParser.createDom(dom)
 				 .querySelector(selector);

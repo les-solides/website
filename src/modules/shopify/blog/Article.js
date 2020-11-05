@@ -81,4 +81,8 @@ export default class Article extends ShopifyGraph {
 		) || [];
 	}
 	
+	get videos() {
+		return DomParser.fetchAllVideos(this.contentHtml) || [];
+	}
+	
 }

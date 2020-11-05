@@ -24,6 +24,10 @@
 			   :class="{ 'text-gray-600': $route.params.variant !== 'rings' }"
 			   to="/products/jewelry/rings">rings
 		</Route>
+		<Route class="mr-1"
+			   :class="{ 'text-gray-600': $route.params.variant !== 'add-ons' }"
+			   to="/products/jewelry/add-ons">add-ons
+		</Route>
 	</div>
 </template>
 
