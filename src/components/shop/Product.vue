@@ -35,6 +35,11 @@
 							<Option :option="pairOption"
 									@select="selectPairOption(pairOption, $event)"
 									v-if="pairOptionName" />
+							<button @click="openSizeGuide"
+									class="text-link"
+									v-if="isRing">
+								don't know your size?
+							</button>
 						</div>
 						<div class="flex flex-wrap justify-end w-1/2">
 							<span class="block kapitälchen text-right w-full"
@@ -85,6 +90,7 @@
 	import RecommendedProducts from "./partials/RecommendedProducts";
 	import HorizontalScrollIndicator from "../../modules/HorizontalScrollIndicator";
 	import AddOnProducts from "./partials/AddOnProducts";
+	import Footer from "../../modules/Footer";
 	
 	export default {
 		name: "Product",
@@ -96,38 +102,43 @@
 				name: '',
 				values: ['single', 'pair']
 			}),
-			product: null,
 			recommendations: [],
 			selectedOptionValues: [],
 			selectedPairOptionValue: {}
 		}),
 		computed: {
 			descriptionRest() {
-				if (this.product.hasGoldSilverDescription) {
+				if (this.product?.hasGoldSilverDescription) {
 					return this.selectedSilver ?
 						   this.product.descriptionRest
 							   .find(d => d.dataset.option === "material:silver") :
 						   this.product.descriptionRest
 							   .find(d => d.dataset.option === "material:gold");
 				}
-				return this.product.descriptionRest;
+				return this.product?.descriptionRest;
 			},
 			descriptionTag() {
-				if (this.product.hasGoldSilverTag) {
+				if (this.product?.hasGoldSilverTag) {
 					return this.selectedSilver ?
 						   this.product.getDescriptionTagByDataOption('material:silver') :
 						   this.product.getDescriptionTagByDataOption('material:gold');
 				}
 				const tags = document.createElement('div');
-				[].forEach.call(this.product.descriptionTags || [], node => tags.appendChild(node));
+				[].forEach.call(this.product?.descriptionTags || [], node => tags.appendChild(node));
 				return tags;
 			},
 			images() {
-				return this.product.images.filter(i =>
+				if ( ! this.product) {
+					return [];
+				}
+				return this.product?.images.filter(i =>
 					this.selectedSilver ?
 					! i.altText.includes("material:gold") :
 					! i.altText.includes("material:silver")
 				);
+			},
+			isRing() {
+				return this.product && this.product.options.find(o => o.name === 'choose your size');
 			},
 			mainNode() {
 				return this.product ?
@@ -142,7 +153,13 @@
 					/^variant-rule-pairs:(.*)/, 'variant-rule-pairs:'
 				) : null;
 			},
+			product() {
+				return this.$store.getters['shopify/product/byHandle'](this.$route.params.handle);
+			},
 			price() {
+				if ( ! this.product) {
+					return 0;
+				}
 				let price = 0;
 				for (let variant of this.selectedVariants) {
 					price += Number(variant.price.amount);
@@ -156,6 +173,9 @@
 				return this.product?.id;
 			},
 			quickShopType() {
+				if ( ! this.product) {
+					return;
+				}
 				if (this.product.options.length === 1 && this.product.variants.length === 1) {
 					return 0;
 				}
@@ -174,6 +194,9 @@
 				return this.selectedOptionValues.find(o => o.value === "silver");
 			},
 			selectedVariants() {
+				if ( ! this.product) {
+					return;
+				}
 				if (this.product.variants.length === 1) {
 					return [this.product.variants[0]];
 				}
@@ -188,6 +211,9 @@
 				) : [];
 			},
 			visibleOptions() {
+				if ( ! this.product) {
+					return;
+				}
 				if (this.product.variants.length <= 1) {
 					return [];
 				}
@@ -216,15 +242,16 @@
 			},
 			async load() {
 				// this.$store.commit('updateLoading', true);
-				this.product = await this.$store.dispatch(
-					"shopify/product/fetchByHandle",
-					this.$route.params.handle
-				);
+				await this.wait(2000);
 				this.$nextTick(async () => {
 					await this.wait(2000);
 					let indicator = new HorizontalScrollIndicator('#scroller');
 					await indicator.start();
 				});
+			},
+			openSizeGuide() {
+				this.$store.commit('updateFooterRoute', Footer.routes.CARE);
+				this.$store.commit('updateFooterOpen', true);
 			},
 			selectOptionValue(option, value) {
 				this.selectedOptionValues = this.selectedOptionValues.filter(

@@ -133,6 +133,9 @@ export default {
 				)
 			);
 		},
+		byHandle: state => handle => {
+			return state.products.find(p => p.handle === handle);
+		},
 		selectedProduct(state) {
 			return state.selectedProduct || null;
 		}
