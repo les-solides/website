@@ -1,7 +1,8 @@
 <template>
-	<router-link class="block"
-				 :to="to"
-				 :exact="exact">
+	<router-link
+			class="block"
+			:to="to"
+			:exact="exact">
 		<slot></slot>
 	</router-link>
 </template>
@@ -24,6 +25,10 @@
 
 <style scoped>
 	.router-link-active {
-		font-style: italic;
+		color: black !important;
+		font-style: italic !important;
+	}
+	.text-gray-600 {
+		color: #757575!important;
 	}
 </style>

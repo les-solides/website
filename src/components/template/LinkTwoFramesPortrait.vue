@@ -15,17 +15,17 @@
 				</span>
 			</a>
 			<div class="mt-text-default w-full"
-				 v-if="linkRight">
+				 v-if="linkLeft">
 				<!-- .h1 -->
 				<a class="block italic"
-				   :href="linkRight"
-				   v-if="linkRight && linkRight.includes('http')">
-					{{ contentRight.innerText }}
+				   :href="linkLeft"
+				   v-if="linkLeft && linkLeft.includes('http')">
+					{{ contentLeft.innerText }}
 				</a>
 				<router-link class="block italic"
-							 :to="linkRight"
-							 v-else-if="linkRight">
-					{{ contentRight.innerText }}
+							 :to="linkLeft"
+							 v-else-if="linkLeft">
+					{{ contentLeft.innerText }}
 				</router-link>
 			</div>
 		</div>
