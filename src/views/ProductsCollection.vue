@@ -111,11 +111,11 @@
 				'shopify/blog/fetchArticlesByBlog',
 				"Products Page (Main)"
 			))?.[0];
-			/*this.$nextTick(() => {
+			this.$nextTick(() => {
 				if ( ! this.amountPerChunk) {
 					this.$store.dispatch('goToNotFound');
 				}
-			});*/
+			});
 			this.$store.commit('updateLoading', false);
 		}
 	};
