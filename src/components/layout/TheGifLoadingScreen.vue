@@ -28,10 +28,10 @@
 		}),
 		computed: {
 			selectedImage() {
-				return this.images[Math.floor(Math.random() * this.images.length)];
+				return this.images[Math.floor(Math.random() * 2)];
 			},
 			selectedImageMobile() {
-				return this.imagesMobile[Math.floor(Math.random() * this.imagesMobile.length)];
+				return this.imagesMobile[Math.floor(Math.random() * 2)];
 			}
 		}
 	};
