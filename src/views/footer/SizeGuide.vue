@@ -1,5 +1,5 @@
 <template>
-	<div class="footer-page w-2/3">
+	<div class="footer-page">
 		<div v-html="content"></div>
 		<Error v-if="loaded && error" />
 	</div>

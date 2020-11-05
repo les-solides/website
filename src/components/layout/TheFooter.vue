@@ -141,9 +141,14 @@
 	
 	footer {
 		bottom: 72px;
+		line-height: 1;
 		position: absolute;
 		top: unset;
 		z-index: 30;
+		h1, p, h2, ul, li {
+			line-height: 1;
+			text-transform: lowercase;
+		}
 		@media screen and (min-width: $breakpoint-md) {
 			bottom: 0;
 			position: relative;
