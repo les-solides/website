@@ -37,6 +37,7 @@
 									v-if="pairOptionName" />
 							<button @click="openSizeGuide"
 									class="text-link"
+									style="color: purple"
 									v-if="isRing">
 								don't know your size?
 							</button>
@@ -49,7 +50,7 @@
 							<button @click="addToCart"
 									data-text="( add to bag )"
 									:disabled="addingToCart || ! o(selectedVariants[0]).available"
-									:style="o(selectedVariants[0]).available ? '' : 'color: #8a4646'"
+									:style="o(selectedVariants[0]).available ? 'color:purple' : 'color: #8a4646'"
 									class="md:w-auto mt-5 relative text-link text-right w-full">
 								{{ addingToCart ? 'adding...' : o(selectedVariants[0]).available ? '( add to bag )' :
 								'[out of stock]' }}
