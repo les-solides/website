@@ -24,7 +24,7 @@
 					</div>
 				</div>
 				<div class="description mr-4 w-1/3"
-					 v-html="descriptionTag.innerHTML"></div>
+					 v-html="o(descriptionTag).innerHTML"></div>
 				<div class="w-1/3">
 					<div class="flex justify-between">
 						<div class="md:w-1/2">
@@ -57,7 +57,7 @@
 			
 			<div class="description text-purple ws-1/3"
 				 style="margin-bottom: var(--header-height)"
-				 v-html="descriptionRest.innerHTML"></div>
+				 v-html="o(descriptionRest).innerHTML"></div>
 			
 			<AddOnProducts
 					:name="product.id"
