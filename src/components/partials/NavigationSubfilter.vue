@@ -47,13 +47,13 @@
 	.subfilter {
 		background: white;
 		left: 0;
-		padding: 0 1rem 1rem 0;
+		margin-bottom: 1rem;
 		position: sticky;
 		top: 3rem;
 		width: 100%;
 		z-index: 10;
 		@media (min-width: $breakpoint-md) {
-			padding: calc(1rem + var(--header-height)) 1rem 1rem;
+			padding: calc(1rem + var(--header-height)) 1rem 0;
 			position: fixed;
 			top: 0;
 		}
