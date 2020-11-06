@@ -1,5 +1,5 @@
 <template>
-	<div class="flex subfilter">
+	<div class="flex flex-wrap subfilter">
 		<Route class="mr-1"
 			   :class="{ 'text-gray-600': $route.params.variant !== 'bracelets' }"
 			   to="/products/jewelry/bracelets">bracelets,
@@ -47,13 +47,13 @@
 	.subfilter {
 		background: white;
 		left: 0;
-		margin-bottom: 1rem;
+		padding-bottom: 1rem;
 		position: sticky;
 		top: 3rem;
 		width: 100%;
 		z-index: 10;
 		@media (min-width: $breakpoint-md) {
-			padding: calc(1rem + var(--header-height)) 1rem 0;
+			padding: calc(1rem + var(--header-height)) 1rem 1rem;
 			position: fixed;
 			top: 0;
 		}
