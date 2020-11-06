@@ -75,11 +75,11 @@
 				if ( ! loader) {
 					return;
 				}
-				loader.innerHTML = "loading (100%)";
+				/*loader.innerHTML = "loading (100%)";
 				loader.style.opacity = 0;
 				await this.wait(500);
 				loader.remove();
-				app.style.opacity = 1;
+				app.style.opacity = 1;*/
 			}
 		},
 		mounted() {

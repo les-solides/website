@@ -5,10 +5,11 @@
 			<a :href="image.alt"
 			   class="flex items-center h-full relative"
 			   v-if="image">
-				<LoadedImage class="md:pl-2 h-full object-cover w-full"
-							 :class="{ darken: article.selectElement('#overlay').innerText }"
-							 :src="image.src"
-							 :alt="image.alt" />
+				<LoadedImage
+						class="md:pl-2 h-full object-cover w-full"
+						:class="{ darken: article.selectElement('#overlay').innerText }"
+						:src="image.src"
+						:alt="image.alt" />
 				<span class="overlay absolute"
 					  v-html="articleOverlay"></span>
 			</a>
@@ -61,13 +62,14 @@
 </script>
 
 <style scoped>
-.overlay {
-	left: 50%;
-	min-width: calc(100vw - 2rem);
-	transform: translateX(-50%);
-	width: calc(100vw - 2rem);
-}
-.aspect-height {
-	max-height: calc(64.82249vw - 1.29645rem);
-}
+	.overlay {
+		left: 50%;
+		min-width: calc(100vw - 2rem);
+		transform: translateX(-50%);
+		width: calc(100vw - 2rem);
+	}
+	
+	.aspect-height {
+		max-height: calc(64.82249vw - 1.29645rem);
+	}
 </style>
