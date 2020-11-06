@@ -55,6 +55,9 @@
 			<button @click="openFooter(footer.routes.CARE)"
 					class="margin-deduct-4 mr-4">care instructions
 			</button>
+			<button @click="openFooter(footer.routes.LEGAL)"
+					class="margin-deduct-4 mr-4">legal notes
+			</button>
 			<!--<button @click="openFooter(footer.routes.PRESS)"
 					class="mrmargin-deduct-4 -4">press
 			</button>-->

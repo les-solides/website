@@ -3,7 +3,7 @@
 		<Cross @click="$router.go(-1)"
 			   class="absolute"
 			   style="top: calc(1rem + var(--header-height));right: 1.5rem;" />
-		<form class="bg-white search-bar pt-4 md:pt-0 sticky z-10">
+		<form class="bg-white search-bar mt-16 md:pt-0 sticky z-10">
 			<label for="query"
 				   hidden></label>
 			<input id="query"
