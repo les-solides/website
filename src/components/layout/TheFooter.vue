@@ -17,6 +17,7 @@
 			<Shipping v-if="currentRoute === footer.routes.SHIPPING" />
 			<!--<Stockist v-if="currentRoute === footer.routes.STOCKISTS" />-->
 			<About page="page:care-instructions" v-if="currentRoute === footer.routes.CARE" />
+			<About page="page:legal-notes" v-if="currentRoute === footer.routes.LEGAL" />
 		</article>
 		
 		<div class="bg-white border-top md:flex mx-4 text-left z-50"
