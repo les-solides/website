@@ -20,7 +20,7 @@
 			<About page="page:legal-notes" v-if="currentRoute === footer.routes.LEGAL" />
 		</article>
 		
-		<div class="bg-white border-top md:flex mx-4 text-left z-50"
+		<div class="bg-white border-top md:flex mr-4 md:mx-4 text-left z-50"
 			 style="padding: .870rem 0 0.870rem 0 !important;">
 			<button @click="openFooter(footer.routes.ABOUT)"
 					class="margin-deduct-4 mb-4 md:mb-0 mr-4">about
