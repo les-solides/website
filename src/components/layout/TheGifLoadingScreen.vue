@@ -1,9 +1,9 @@
 <template>
 	<div class="gif-loading">
-		<LoadedImage class="hidden md:block h-full object-cover"
+		<LoadedImage class="hidden md:block h-full object-cover w-full"
 					 :src="selectedImage"
 					 @load="loaded = true" />
-		<LoadedImage class="block md:hidden mobile h-full object-cover"
+		<LoadedImage class="block md:hidden mobile h-full object-cover w-full"
 					 :src="selectedImageMobile"
 					 @load="loaded = true" />
 	</div>
