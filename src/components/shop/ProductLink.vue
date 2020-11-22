@@ -371,7 +371,7 @@
 						this.selectOptionValue(option, option.value)
 					);
 				if (this.pairOptionName) {
-					this.selectPairOption(this.pairOption, "single");
+					this.selectPairOption(this.pairOption, "pair");
 				}
 			},
 			productId() {
