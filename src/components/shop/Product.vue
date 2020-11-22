@@ -37,7 +37,6 @@
 									v-if="pairOptionName" />
 							<button @click="openSizeGuide"
 									class="text-link"
-									style="color: purple"
 									v-if="isRing">
 								don't know your size?
 							</button>
