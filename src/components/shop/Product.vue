@@ -48,11 +48,11 @@
 								{{ price }}
 							</span>
 							<button @click="addToCart"
-									data-text="( add to bag )"
+									data-text="( add to cart )"
 									:disabled="addingToCart || ! o(selectedVariants[0]).available"
 									:style="o(selectedVariants[0]).available ? 'color:purple' : 'color: #8a4646'"
 									class="md:w-auto mt-5 relative text-link text-right w-full">
-								{{ addingToCart ? 'adding...' : o(selectedVariants[0]).available ? '( add to bag )' :
+								{{ addingToCart ? 'adding...' : o(selectedVariants[0]).available ? '( add to cart )' :
 								'[out of stock]' }}
 								<div class="scanlines"></div>
 							</button>
@@ -236,7 +236,7 @@
 						});
 				}
 				this.addingToCart = false;
-				this.$toasted.show("added to bag", {
+				this.$toasted.show("added to cart", {
 					duration: 5000,
 					position: "bottom-center"
 				});

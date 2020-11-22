@@ -14,7 +14,7 @@
 				<div class="cursor-pointer select-none z-10"
 					 unselectable="on"
 					 @click="checkoutOpen = ! checkoutOpen">
-					bag ({{ amountOfCartItems }})
+					cart ({{ amountOfCartItems }})
 				</div>
 				<div class="checkout-overview checkout-footer shadow mt-2 z-10"
 					 :class="{ open: checkoutOpen }">
@@ -112,7 +112,7 @@
 				 @click="checkoutOpen = ! checkoutOpen">
 				<div class="md:py-0 py-4"
 					 v-if=" ! checkoutOpen">
-					bag ({{ amountOfCartItems }})
+					cart ({{ amountOfCartItems }})
 				</div>
 				<div class="md:py-0 py-4"
 					 v-if="checkoutOpen">

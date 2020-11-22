@@ -314,7 +314,7 @@
 							quantity: 1
 						});
 					delay(() => this.addingToCart = false, 200);
-					return this.$toasted.show("added to bag", {
+					return this.$toasted.show("added to cart", {
 						duration: 5000,
 						position: "bottom-center"
 					});
@@ -326,7 +326,7 @@
 							quantity: 2
 						});
 					delay(() => this.addingToCart = false, 200);
-					return this.$toasted.show("added to bag", {
+					return this.$toasted.show("added to cart", {
 						duration: 5000,
 						position: "bottom-center"
 					});
@@ -339,7 +339,7 @@
 						});
 				}
 				delay(() => this.addingToCart = false, 200);
-				this.$toasted.show("added to bag", {
+				this.$toasted.show("added to cart", {
 					duration: 5000,
 					position: "bottom-center"
 				});
