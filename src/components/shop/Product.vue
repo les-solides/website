@@ -101,7 +101,7 @@
 			pairOption: new OptionModule({
 				id: uniqueId(),
 				name: '',
-				values: ['single', 'pair']
+				values: ['pair', 'single']
 			}),
 			recommendations: [],
 			selectedOptionValues: [],
