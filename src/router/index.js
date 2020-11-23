@@ -76,7 +76,7 @@ const routes = [
 	},
 	{
 		path: '/products/:handle',
-		name: 'Product',
+		name: 'Products',
 		component: () => import(/* webpackChunkName: "Product" */ '../components/shop/Product')
 	},
 	{
