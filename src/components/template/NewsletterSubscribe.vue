@@ -1,5 +1,7 @@
 <template>
-	<NewsletterSubscribeBig :article="article" />
+	<NewsletterSubscribeBig
+			class="mb-24 mt-24"
+			:article="article" />
 </template>
 
 <script>
