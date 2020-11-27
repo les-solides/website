@@ -5,12 +5,13 @@
 		
 		<div class="mobile-footer left-0 bg-white bottom-0 fixed flex justify-between menu mobile p-4 shadow-inner w-full z-10">
 			<Burger @click.native="updateMenuOpen( ! menuOpen)"
+					class="w-1/3"
 					:open="menuOpen" />
-			<div class="flex justify-end md:w-1/3">
-				<Route class="px-2"
-					   to="/search">
-					search
-				</Route>
+			<Route class="px-2 w-1/3"
+				   to="/search">
+				search
+			</Route>
+			<div class="flex justify-end w-1/3">
 				<div class="cursor-pointer select-none z-10"
 					 unselectable="on"
 					 @click="checkoutOpen = ! checkoutOpen">
@@ -72,9 +73,9 @@
 		
 		<nav class="h-full md:flex justify-between">
 			<div class="flex md:w-1/3">
-				<Route class="md:py-0 text-left md:w-auto w-full"
+				<Route class="fixed md:py-0 text-left md:w-auto w-full"
 					   to="/home"
-					   style="font-style: normal!important;">
+					   style="font-style: normal!important;top: .75rem">
 					les solides
 				</Route>
 				<NavigationFilter

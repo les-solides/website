@@ -113,7 +113,10 @@
 			))?.[0];
 			this.$nextTick(() => {
 				if ( ! this.amountPerChunk) {
-					this.$store.dispatch('goToNotFound');
+					//this.$store.dispatch('goToNotFound');
+					this.$router.push({
+						name: 'Product'
+					})
 				}
 			});
 			this.$store.commit('updateLoading', false);

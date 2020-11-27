@@ -134,7 +134,7 @@
 			margin-bottom: 3rem;
 		}
 		li {
-			list-style: inside;
+			margin-left: 2rem;
 		}
 		@media screen and (min-width: $breakpoint-md) {
 			height: calc(100vh - 2.5rem);
