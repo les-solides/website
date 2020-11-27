@@ -73,9 +73,9 @@
 		
 		<nav class="h-full md:flex justify-between">
 			<div class="flex md:w-1/3">
-				<Route class="fixed md:py-0 text-left md:w-auto w-full"
+				<Route class="bg-white fixed md:py-0 md:relative py-4 text-left top-0 md:w-auto w-full"
 					   to="/home"
-					   style="font-style: normal!important;top: .75rem">
+					   style="font-style: normal!important">
 					les solides
 				</Route>
 				<NavigationFilter

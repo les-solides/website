@@ -1,7 +1,7 @@
 <template>
 	<div v-if="chunkedArray.length">
 		<NavigationFilter base="/products"
-						  class="bg-white block md:hidden ml-0 py-4 sticky top-0 z-10"
+						  class="bg-white block md:hidden ml-0 py-4 sticky top-4 md:top-0 z-10"
 						  name="Navigation (Products)" />
 		<div class="flex flex-wrap"
 			 :key="o(chunk[0]).id"
