@@ -85,7 +85,7 @@
 						v-if="$route.path.includes('product')" />
 			</div>
 			<div class="md:flex justify-center md:w-1/3">
-				<Route class="md:py-0 px-2 pb-6 pt-16 text-left"
+				<Route class="md:py-0 md:px-2 pb-6 pt-16 text-left"
 					   :exact="false"
 					   to="/products">
 					products
@@ -98,7 +98,7 @@
 					   to="/lookbook">
 					lookbook
 				</Route>-->
-				<Route class="md:py-0 pb-6 px-2 text-left"
+				<Route class="md:py-0 pb-6 md:px-2 text-left"
 					   to="/archive">
 					archive
 				</Route>
