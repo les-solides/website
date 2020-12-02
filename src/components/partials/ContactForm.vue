@@ -3,11 +3,11 @@
 		  @submit.prevent="contact">
 		<h1 class="mb-4">contact</h1>
 		<div class="flex w-full">
-			<div class="w-1/4">
+			<div class="flex items-center md:w-1/4 w-1/2">
 				<label for="name" hidden></label>
 				<h1>name*</h1>
 			</div>
-			<div class="flex items-center w-3/4">
+			<div class="flex items-center md:w-3/4 w-1/2">
 				<input id="name"
 					   class="special block placeholder-black text-black w-3/4"
 					   type="text"
@@ -17,11 +17,11 @@
 		</div>
 		
 		<div class="flex w-full">
-			<div class="w-1/4">
+			<div class="flex items-center md:w-1/4 w-1/2">
 				<label for="email" hidden></label>
 				<h1>email*</h1>
 			</div>
-			<div class="flex items-center w-3/4">
+			<div class="flex items-center md:w-3/4 w-1/2">
 				<input id="email"
 					   class="special block placeholder-black text-black w-3/4"
 					   type="email"
@@ -31,11 +31,11 @@
 		</div>
 		
 		<div class="flex w-full">
-			<div class="w-1/4">
+			<div class="flex items-center md:w-1/4 w-1/2">
 				<label for="phone" hidden></label>
 				<h1>phone number</h1>
 			</div>
-			<div class="flex items-center w-3/4">
+			<div class="flex items-center md:w-3/4 w-1/2">
 				<input id="phone"
 					   class="special block placeholder-black text-black w-3/4"
 					   type="text"
@@ -45,11 +45,11 @@
 		</div>
 		
 		<div class="flex w-full">
-			<div class="w-1/4">
+			<div class="flex items-center md:w-1/4 w-1/2">
 				<label for="order" hidden></label>
 				<h1>order number</h1>
 			</div>
-			<div class="flex items-center w-3/4">
+			<div class="flex items-center md:w-3/4 w-1/2">
 				<input id="order"
 					   class="special block placeholder-black text-black w-3/4"
 					   type="text"
@@ -59,11 +59,11 @@
 		</div>
 		
 		<div class="flex w-full">
-			<div class="w-1/4">
+			<div class="flex items-center md:w-1/4 w-1/2">
 				<label for="subject" hidden></label>
 				<h1>subject*</h1>
 			</div>
-			<div class="flex items-center w-3/4">
+			<div class="flex items-center md:w-3/4 w-1/2">
 				<input id="subject"
 					   class="special block placeholder-black text-black w-3/4"
 					   type="text"
@@ -148,13 +148,22 @@
 	}
 	input[type=submit] {
 		background: none;
-		font-size: 2.15rem;
+		font-size: 1.75rem;
+		@media screen and (min-width: $breakpoint-md) {
+			font-size: 2.15rem;
+		}
 	}
 	input, textarea {
-		font-size: 2.15rem;
+		font-size: 1.75rem;
+		@media screen and (min-width: $breakpoint-md) {
+			font-size: 2.15rem;
+		}
 	}
 	::placeholder {
 		color: gray;
-		font-size: 2.15rem;
+		font-size: 1.75rem;
+		@media screen and (min-width: $breakpoint-md) {
+			font-size: 2.15rem;
+		}
 	}
 </style>
