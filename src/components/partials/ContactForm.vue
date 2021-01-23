@@ -111,6 +111,8 @@
 		methods: {
 			async contact() {
 				await this.$store.commit('updateLoading', true);
+				
+				// api.les-solides
 				await api.post('/api/contact', {
 					email: this.email,
 					subject: this.subject,
