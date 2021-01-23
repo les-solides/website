@@ -33,7 +33,7 @@
 		fill:none;
 		stroke:#000;
 		stroke-miterlimit:10;
-		stroke-width: 4;
+		stroke-width: 7;
 		transition: 1s;
 	}
 </style>

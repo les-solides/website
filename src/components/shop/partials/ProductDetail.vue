@@ -4,9 +4,13 @@
 		<div class="sticky top-0 quick-buy"
 			 @mouseenter="hover = true"
 			 @mouseleave="hover = false">
-			<div class="flex justify-end pb-4 w-full">
+			<div class="flex justify-between pb-4 w-full">
+				<Share @click="copy" />
 				<Cross @click="close" />
 			</div>
+			
+			<button id="share-url" hidden>{{ productShareURL }}</button>
+			
 			<!-- Image -->
 			<div id="scroller-detail"
 				 class="block flex md:hidden overflow-x-scroll"
@@ -46,11 +50,14 @@
 				</div>
 			</div>
 			
-			<button class="border-btn mb-8 px-6 py-4 w-full"
+			<button class="border-btn mb-2 px-6 py-4 w-full"
 					@click="addToCart"
 					:disabled="addingToCart">
 				{{ addingToCart ? 'adding...' : 'add to cart' }}
 			</button>
+			
+			<button @click="handleGoToCartClick"
+					class="pb-8 pt-2">↳ go to cart</button>
 			
 			<div class="mb-8"
 				 v-html="o(descriptionTag).innerHTML"></div>
@@ -85,10 +92,12 @@
 	import Cross from "../../partials/Cross";
 	import AddOnProducts from "./AddOnProducts";
 	import HorizontalScrollIndicator from "../../../modules/HorizontalScrollIndicator";
+	import Share from "../../partials/Share";
+	const copy = require('copy-text-to-clipboard');
 	
 	export default {
 		name: "ProductDetail",
-		components: {AddOnProducts, Cross, RecommendedProducts, Option, ArrowUp, LoadedImage},
+		components: {Share, AddOnProducts, Cross, RecommendedProducts, Option, ArrowUp, LoadedImage},
 		props: {
 			product: {
 				type: Product,
@@ -200,6 +209,9 @@
 					price = price * 2;
 				}
 				return price ? `CHF ${ price.toFixed(2) }` : this.product.price;
+			},
+			productShareURL() {
+				return window.location.origin + "/product/" + this.product?.handle;
 			},
 			quickShopType() {
 				if (this.product.options.length === 1 && this.product.variants.length === 1) {
@@ -321,6 +333,17 @@
 					});
 				}
 				this.$store.commit('shopify/product/updateSelectedProduct');
+			},
+			copy() {
+				copy(this.productShareURL);
+				this.$toasted.show("copied share link", {
+					duration: 5000,
+					position: "bottom-center"
+				});
+			},
+			handleGoToCartClick() {
+				this.close();
+				this.$store.commit("updateBagOpen", true);
 			},
 			selectOptionValue(option, value) {
 				this.selectedOptionValues = this.selectedOptionValues.filter(

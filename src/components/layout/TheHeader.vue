@@ -22,7 +22,7 @@
 					<div class="loading-overlay h-full w-full"
 						 v-if="loading"></div>
 					<ul v-if=" ! amountOfCartItems">
-						<li>your cart is empty</li>
+						<li class="mb-4">your cart is empty</li>
 					</ul>
 					<ul class="mb-4 checkout-item-list"
 						v-if="amountOfCartItems">
@@ -126,7 +126,7 @@
 					<div class="loading-overlay h-full w-full"
 						 v-if="loading"></div>
 					<ul v-if=" ! amountOfCartItems">
-						<li>your cart is empty</li>
+						<li class="mb-4">your cart is empty</li>
 					</ul>
 					<ul class="mb-4 checkout-item-list"
 						v-if="amountOfCartItems">
