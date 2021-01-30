@@ -7,9 +7,14 @@ import "./scss/main.scss";
 
 Vue.use(VueFacebookPixel);
 
+
 (async () => {
 	
 	await require('./bootstrap').default();
+	
+	Vue.analytics.fbq.init('689797371764862', {
+		em: 'hello@lessolides.com'
+	});
 	
 	Vue.config.devtools = process.env.NODE_ENV === 'development';
 	
