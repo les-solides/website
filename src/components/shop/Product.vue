@@ -233,6 +233,14 @@
 							variant,
 							quantity: 1
 						});
+					this.$analytics.fbq.event("AddToCart", {
+						content_name: variant.title,
+						content_category: this.o(this.o(this.o(this.product).collections)[0]).title,
+						content_ids: [variant.id],
+						content_type: this.o(this.product).productType,
+						value: this.o(this.o(variant).price).amount,
+						currency: "CHF"
+					});
 				}
 				this.addingToCart = false;
 				this.$toasted.show("added to cart", {

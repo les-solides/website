@@ -50,7 +50,7 @@ export default class Cart {
 	}
 	
 	async add(variant) {
-		return await store.dispatch(
+		return store.dispatch(
 			'shopify/addToCheckout',
 			variant
 		);

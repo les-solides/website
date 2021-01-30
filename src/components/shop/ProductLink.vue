@@ -313,6 +313,14 @@
 							variant: this.product.variants[0],
 							quantity: 1
 						});
+					this.$analytics.fbq.event("AddToCart", {
+						content_name: this.o(this.product.variants[0]).title,
+						content_category: this.o(this.o(this.o(this.product).collections)[0]).title,
+						content_ids: [this.o(this.product.variants[0]).id],
+						content_type: this.o(this.product).productType,
+						value: this.o(this.o(this.product.variants[0]).price).amount,
+						currency: "CHF"
+					});
 					delay(() => this.addingToCart = false, 200);
 					return this.$toasted.show("added to cart", {
 						duration: 5000,
@@ -325,6 +333,14 @@
 							variant: this.selectedVariants[0],
 							quantity: 2
 						});
+					this.$analytics.fbq.event("AddToCart", {
+						content_name: this.o(this.product.variants[0]).title,
+						content_category: this.o(this.o(this.o(this.product).collections)[0]).title,
+						content_ids: [this.o(this.product.variants[0]).id],
+						content_type: this.o(this.product).productType,
+						value: this.o(this.o(this.product.variants[0]).price).amount,
+						currency: "CHF"
+					});
 					delay(() => this.addingToCart = false, 200);
 					return this.$toasted.show("added to cart", {
 						duration: 5000,
@@ -337,6 +353,14 @@
 							variant,
 							quantity: 1
 						});
+					this.$analytics.fbq.event("AddToCart", {
+						content_name: variant.title,
+						content_category: this.o(this.o(this.o(this.product).collections)[0]).title,
+						content_ids: [variant.id],
+						content_type: this.o(this.product).productType,
+						value: this.o(this.o(variant).price).amount,
+						currency: "CHF"
+					});
 				}
 				delay(() => this.addingToCart = false, 200);
 				this.$toasted.show("added to cart", {

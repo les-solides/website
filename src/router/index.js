@@ -115,6 +115,7 @@ router.afterEach((to) => {
 	store.state.collaborationHash = to.hash.slice(1);
 	delay(() => store.state.routeClick = false, 100);
 	delay(() => store.commit('updateLoading', false));
+	Vue.analytics.fbq.event('PageView');
 });
 
 export default router;

@@ -19,6 +19,7 @@
     "shopify-buy": "^2.10.0",
     "tailwindcss": "^1.4.6",
     "vue": "^2.6.11",
+    "vue-analytics-facebook-pixel": "^1.0.1",
     "vue-fullpage.js": "^0.1.6",
     "vue-router": "^3.2.0",
     "vue-toasted": "^1.1.28",
