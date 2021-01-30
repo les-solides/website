@@ -390,6 +390,14 @@
 			}
 		},
 		mounted() {
+			this.$analytics.fbq.event('ViewContent', {
+				content_name: this.product.title,
+				content_category: this.o(this.o(this.o(this.product).collections)[0]).title,
+				content_ids: [this.product.id],
+				content_type: this.o(this.product).productType,
+				value: this.o(this.o(this.product).price).amount,
+				currency: "CHF"
+			});
 			this.$nextTick(async () => {
 				await this.wait(1000);
 				let indicator = new HorizontalScrollIndicator('#scroller-detail');
