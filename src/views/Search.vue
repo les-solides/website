@@ -46,7 +46,7 @@
 <script>
 	import ProductLink from "../components/shop/ProductLink";
 	import Cross from "../components/partials/Cross";
-	import { debounce } from "lodash";
+	import { debounce, lowerCase } from "lodash";
 	
 	export default {
 		name: "Search",
@@ -60,12 +60,15 @@
 		computed: {
 			results() {
 				return this.$store.getters['shopify/product/allProducts'].filter(p =>
-					p.title.includes(this.search) ||
-					p.handle.includes(this.search) ||
-					p.collections.find(c => c.title.includes(this.search)) ||
-					p.tags.find(t => t.includes(this.search)) ||
-					p.productType.includes(this.search)
+					p.title.includes(this.searchLowercase) ||
+					p.handle.includes(this.searchLowercase) ||
+					p.collections.find(c => c.title.includes(this.searchLowercase)) ||
+					p.tags.find(t => t.includes(this.searchLowercase)) ||
+					p.productType.includes(this.searchLowercase)
 				);
+			},
+			searchLowercase() {
+				return lowerCase(this.search);
 			}
 		},
 		methods: {
