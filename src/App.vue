@@ -82,6 +82,10 @@
 				app.style.opacity = 1;
 			}
 		},
+		metaInfo: {
+			title: 'home',
+			titleTemplate: '%s | les solides'
+		},
 		mounted() {
 			window.addEventListener('resize', debounce(this.handleResize, 100));
 			this.handleResize();

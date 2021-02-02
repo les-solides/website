@@ -11,11 +11,13 @@ export default function (handles, first = 250) {
                     collections(first: 250) {
                         edges {
                             node {
+                            	description,
                                 descriptionHtml,
                                 handle
                             }
                         }
                     },
+                    description,
                     descriptionHtml,
                     handle,
                     id,

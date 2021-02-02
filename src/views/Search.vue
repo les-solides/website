@@ -81,6 +81,15 @@
 				 this.loaded = true;*/
 			}, 500)
 		},
+		metaInfo: {
+			title: "search",
+			meta: [
+				{
+					name: "description",
+					content: "can't find what you were looking for. try out our search and hopefully it will help you find just what you need."
+				}
+			],
+		},
 		async mounted() {
 			const article = await this.$store.dispatch(
 				'shopify/blog/fetchFirstArticleByTags',

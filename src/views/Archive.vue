@@ -10,7 +10,7 @@
 			<LinkProductGroup
 					class="mb-4"
 					:style="`align-content: baseline; ${ index === years.length - 1 ? ' min-height: calc(100vh - 10gsrem)' : ''}`"
-					:products="products.filter(product => product.getTag(/^archive:(.*)/, 'archive:') === year)"/>
+					:products="products.filter(product => product.getTag(/^archive:(.*)/, 'archive:') === year)" />
 		</div>
 	</div>
 </template>
@@ -18,6 +18,7 @@
 <script>
 	import Divider from "../components/partials/Divider";
 	import LinkProductGroup from "../components/template/LinkProductGroup";
+	
 	export default {
 		name: "Archive",
 		components: {LinkProductGroup, Divider},
@@ -27,9 +28,18 @@
 		computed: {
 			years() {
 				return this._.uniq(this.products
-						   .map(product => product.getTag(/^archive:(.*)/, 'archive:'))
-						   .sort((a, b) => Number(b) - Number(a)));
+									   .map(product => product.getTag(/^archive:(.*)/, 'archive:'))
+									   .sort((a, b) => Number(b) - Number(a)));
 			}
+		},
+		metaInfo: {
+			title: 'archive',
+			meta: [
+				{
+					name: "description",
+					content: "many of our products are no longer available, but we would still like to show you what we have offered in the past. visit our archive to learn more about the history of les solides."
+				}
+			]
 		},
 		async created() {
 			await this.$store.commit('updateLoading', true);

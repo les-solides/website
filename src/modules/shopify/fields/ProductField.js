@@ -14,6 +14,7 @@ export default class ProductField {
         MetafieldsField.addTo(field, {first: 250});
         PriceRangeField.addTo(field);
         field.add('title');
+        field.add('description');
         VariantsField.addTo(field, {first: 250});
     }
 }

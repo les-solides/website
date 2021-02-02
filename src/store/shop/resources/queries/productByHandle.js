@@ -5,11 +5,13 @@ export default function (handle) {
             collections(first: 250) {
                 edges {
                     node {
+                        description,
                         descriptionHtml,
                         handle
                     }
                 }
             },
+            description,
             descriptionHtml,
             handle,
             id,

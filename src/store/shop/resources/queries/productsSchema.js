@@ -8,12 +8,14 @@ export default function (first = 250) {
                     collections(first: 250) {
                         edges {
                             node {
+                                description,
                                 descriptionHtml,
                                 handle,
                                 title
                             }
                         }
                     },
+                    description,
                     descriptionHtml,
                     handle,
                     id,

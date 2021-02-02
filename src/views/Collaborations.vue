@@ -60,6 +60,15 @@
 				this.$refs.fullPage.init();
 			}
 		},
+		metaInfo: {
+			title: 'collaborations',
+			meta: [
+				{
+					name: "description",
+					content: "we at les solides love to collaborate with talented artists. visit our collaboration page to see who we have been working with."
+				}
+			]
+		},
 		async mounted() {
 			await this.$store.commit('updateLoading', true);
 			

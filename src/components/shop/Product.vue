@@ -280,6 +280,18 @@
 				location.href = `/product/${ product.handle }`;
 			}
 		},
+		metaInfo() {
+			const product = this.product;
+			return {
+				title: () => product?.title || 'product',
+				meta: [
+					{
+						name: "description",
+						content: this.product?._graph?.description
+					}
+				],
+			}
+		},
 		async created() {
 			await this.load();
 			this.$store.commit('updateLoading', false);

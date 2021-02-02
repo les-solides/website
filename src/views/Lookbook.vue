@@ -40,6 +40,15 @@
 						   .sort((a, b) => a.order - b.order);
 			}
 		},
+		metaInfo: {
+			title: "lookbook",
+			meta: [
+				{
+					name: "description",
+					content: "we are fortunate to be able to work with many talented artists. some of whom capture incredible moods for les solides. visit our lookbook to get inspired."
+				}
+			],
+		},
 		async created() {
 			if (this.lookbookArticles.length) {
 				return;
