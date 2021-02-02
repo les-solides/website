@@ -11,7 +11,7 @@
 				   placeholder="enter your search text here"
 				   type="text"
 				   v-model="search">
-			<div class="flex justify-center py-4">
+			<div class="flex flex-wrap justify-center py-4">
 				<!--:class="{ selected: search === suggestion.innerText }"-->
 				<button class="suggestion"
 						:key="suggestion.innerText"
