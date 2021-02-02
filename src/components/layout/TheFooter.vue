@@ -1,5 +1,5 @@
 <template>
-	<footer class="bg-white"
+	<footer class="bg-white md:fixed w-full"
 			:class="{ 'z-30': open }">
 		<article class="bg-white fixed md:z-30 md:px-4 pb-16 overflow-auto transition-medium text-left"
 				 :class="{ 'top-100': ! open }">
@@ -137,7 +137,7 @@
 			margin-left: 2rem;
 		}
 		@media screen and (min-width: $breakpoint-md) {
-			height: calc(100vh - 2.5rem);
+			height: calc(100vh - 5.6rem);
 			top: var(--header-height);
 			width: 100%;
 		}
