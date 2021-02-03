@@ -1,9 +1,10 @@
 <template>
-	<div class="gif-loading">
-		<LoadedImage class="hidden md:block h-full object-cover w-full"
+	<div class="gif-loading"
+		 style="background: #fbfbfb">
+		<LoadedImage class="hidden md:block h-full object-contain w-full"
 					 :src="selectedImage"
 					 @load="loaded = true" />
-		<LoadedImage class="block md:hidden mobile h-full object-cover w-full"
+		<LoadedImage class="block md:hidden mobile h-full object-contain object-top w-full"
 					 :src="selectedImageMobile"
 					 @load="loaded = true" />
 	</div>
@@ -17,11 +18,11 @@
 		components: {LoadedImage},
 		data: () => ({
 			images: [
-				"/assets/loading/lessolides_placeholder_desktop_loading_1.gif",
+				"/assets/loading/lessolides_placeholder_desktop_loading_1.gif"
 				/*"/assets/loading/lessolides_placeholder_desktop_loading_2.gif"*/
 			],
 			imagesMobile: [
-				"/assets/loading/lessolides_placeholder_mobile_loading_1.gif",
+				"/assets/loading/lessolides_placeholder_mobile_loading_1.gif"
 				/*"/assets/loading/lessolides_placeholder_mobile_loading_2.gif"*/
 			],
 			loaded: false

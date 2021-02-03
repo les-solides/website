@@ -77,8 +77,8 @@
 				}
 				loader.innerHTML = "loading (100%)";
 				loader.style.opacity = 0;
-				await this.wait(500);
 				loader.remove();
+				await this.wait(500);
 				app.style.opacity = 1;
 			}
 		},
