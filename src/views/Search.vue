@@ -1,8 +1,8 @@
 <template>
 	<div class="search-page">
-		<Cross @click="$router.go(-1)"
+		<!--<Cross @click="$router.go(-1)"
 			   class="absolute"
-			   style="top: calc(1rem + var(--header-height));right: 1.5rem;" />
+			   style="top: calc(1rem + var(&#45;&#45;header-height));right: 1.5rem;" />-->
 		<form class="bg-white search-bar mt-16 md:mt-0 sticky z-10">
 			<label for="query"
 				   hidden></label>
@@ -45,12 +45,11 @@
 
 <script>
 	import ProductLink from "../components/shop/ProductLink";
-	import Cross from "../components/partials/Cross";
 	import { debounce, lowerCase } from "lodash";
 	
 	export default {
 		name: "Search",
-		components: {Cross, ProductLink},
+		components: {ProductLink},
 		data: () => ({
 			loaded: false,
 			/*results: [],*/

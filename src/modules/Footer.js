@@ -10,6 +10,7 @@ export default class Footer {
 		RETURNS: 'returns',
 		NEWSLETTER: 'newsletter',
 		CONTACT: 'contact',
+		SEARCH: 'search',
 		STOCKISTS: 'stockists',
 		SIZE: 'size',
 		PRESS: 'press'

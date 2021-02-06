@@ -7,10 +7,10 @@
 			<Burger @click.native="updateMenuOpen( ! menuOpen)"
 					class="w-1/3"
 					:open="menuOpen" />
-			<Route class="px-2 w-1/3"
-				   to="/search">
+			<div @click="openFooter(footer.routes.SEARCH)"
+				 class="cursor-pointer p-0 px-2 w-1/3">
 				search
-			</Route>
+			</div>
 			<div class="flex justify-end w-1/3">
 				<div class="cursor-pointer select-none z-10"
 					 unselectable="on"
@@ -102,10 +102,10 @@
 					   to="/archive">
 					archive
 				</Route>
-				<Route class="hidden md:block md:py-0 px-2 py-4"
-					   to="/search">
+				<div @click="openFooter(footer.routes.SEARCH)"
+					 class="cursor-pointer hidden md:block md:py-0 px-2 py-4">
 					search
-				</Route>
+				</div>
 				<TheFooter class="block md:bottom-0 md:hidden mt-16 md:relative z-0" />
 			</div>
 			<div class="cursor-pointer hidden md:flex justify-end md:w-1/3 select-none z-20"
@@ -184,6 +184,7 @@
 	import TheFooter from "./TheFooter";
 	import Cross from "../partials/Cross";
 	import store from './../../store/index';
+	import Footer from "../../modules/Footer";
 	
 	let timeout = null;
 	
@@ -191,6 +192,7 @@
 		name: "TheHeader",
 		components: {Cross, TheFooter, NavigationFilter, Route, Burger},
 		data: () => ({
+			footer: Footer,
 			loading: false,
 			selectedLineItemForQuantityEdit: null
 		}),
@@ -206,9 +208,28 @@
 				set(value) {
 					this.$store.commit('updateBagOpen', value);
 				}
+			},
+			currentRoute() {
+				return this.$store.getters['footerRoute'];
+			},
+			open() {
+				return this.$store.getters['footerIsOpen'];
 			}
 		},
 		methods: {
+			closeFooter() {
+				this.$store.commit('updateFooterOpen', false);
+			},
+			openFooter(route) {
+				if (
+					this.open &&
+					this.currentRoute === route
+				) {
+					return this.closeFooter();
+				}
+				this.$store.commit('updateFooterRoute', route);
+				return this.$store.commit('updateFooterOpen', true);
+			},
 			async updateQuantity(item, {target}) {
 				this.loading = true;
 				if (Number(target?.value) === 0) {

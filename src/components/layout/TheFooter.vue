@@ -18,6 +18,7 @@
 			<!--<Stockist v-if="currentRoute === footer.routes.STOCKISTS" />-->
 			<About page="page:care-instructions" v-if="currentRoute === footer.routes.CARE" />
 			<About page="page:legal-notes" v-if="currentRoute === footer.routes.LEGAL" />
+			<Search page="page:search" v-if="currentRoute === footer.routes.SEARCH" />
 		</article>
 		
 		<div class="bg-white border-top md:flex mr-4 md:mx-4 text-left z-50"
@@ -58,6 +59,9 @@
 			<button @click="openFooter(footer.routes.LEGAL)"
 					class="margin-deduct-4 mr-4">legal notes
 			</button>
+			<!--<button @click="openFooter(footer.routes.SEARCH)"
+					class="margin-deduct-4 mr-4">search
+			</button>-->
 			<!--<button @click="openFooter(footer.routes.PRESS)"
 					class="mrmargin-deduct-4 -4">press
 			</button>-->
@@ -77,10 +81,12 @@
 	import NewsletterSignup from "../../views/footer/NewsletterSignup";
 	import Stockist from "../../views/footer/Stockist";
 	import Contact from "../template/Contact";
+	import Search from "../../views/Search";
 	
 	export default {
 		name: "TheFooter",
 		components: {
+			Search,
 			Contact,
 			NewsletterSignup,
 			ReturnsAndExchanges, Shipping, PrivacyPolicy, SizeGuide, TermsOfUse, About, Burger
