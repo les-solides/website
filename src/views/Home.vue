@@ -48,6 +48,17 @@
 						   .sort((a, b) => a.order - b.order);
 			}
 		},
+		metaInfo() {
+			return {
+				title: () => 'home',
+				meta: [
+					{
+						name: "description",
+						content: "les solides is inspired by nature, the people and craftsmanship. all their products are produced locally in bali and their vision is to preserve the traditional craftsmanship and to build sustainable and personal relationships with their producers. anna z’brun sees her label as a counterpoint to mass consumption and fast pace, she relies on minimal and timeless design."
+					}
+				],
+			}
+		},
 		beforeCreate() {
 			this.$store.commit('updateLoading', true);
 		},
