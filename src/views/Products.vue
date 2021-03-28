@@ -105,23 +105,27 @@
 				let products = this.allProducts
 					// Products that don't have a tag that starts with "archive:".
 					.filter(p => ! p.getTag(/archive:*/, /archive:*/))
-					// If on collection page show only collections products.
+					// If currently on collection page, show only collections products.
 					.filter(p =>
 						! this.isCollectionPage ||
 						p.collections.find(c => c.handle === this.$route.params.collection)
 					);
 				
 				if (this.isFilteredPage) {
+					// See router/index.js to see what a filtered page means.
 					products = products.filter(p =>
-						p.collections.find(c => c.title === this.$route.params.collection) &&
+						// Filter products, which have a variant, where the title equals the variant in the URL.
 						(p.variants.find(v => v.title === this.$route.params.variant) ||
-							(p.productType && p.productType.toLowerCase() === this.$route.params.variant)) ||
+						// Or products, where the product type equals the variant in the URL.
+						(p.productType && p.productType.toLowerCase() === this.$route.params.variant)) ||
+						// Or collections, which a title that equals the variant in the URL.
 						p.collections.find(c => c.title === this.$route.params.variant)
 					);
+					
 					products.forEach(p =>
+						// Go through each product and select the correct variant.
 						p.selectedVariant = p.variants.find(v => v.title === this.$route.params.variant)
 					);
-					return products || [];
 				}
 				
 				return products || [];
