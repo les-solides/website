@@ -67,7 +67,7 @@ const routes = [
 		meta: {
 			navigationArticle: "Navigation (Products)"
 		},
-		component: () => import(/* webpackChunkName: "Product" */ '../views/ProductsFiltered')
+		component: () => import(/* webpackChunkName: "Product" */ '../views/Products')
 	},
 	{
 		path: '/product/:handle',

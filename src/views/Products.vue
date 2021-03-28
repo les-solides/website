@@ -102,7 +102,7 @@
 				return Array.from(this.content.selectElements('a')) || [];
 			},
 			filteredProducts() {
-				return this.allProducts
+				let products = this.allProducts
 					// Products that don't have a tag that starts with "archive:".
 					.filter(p => ! p.getTag(/archive:*/, /archive:*/))
 					// If on collection page show only collections products.
@@ -110,6 +110,21 @@
 						! this.isCollectionPage ||
 						p.collections.find(c => c.handle === this.$route.params.collection)
 					);
+				
+				if (this.isFilteredPage) {
+					products = products.filter(p =>
+						p.collections.find(c => c.title === this.$route.params.collection) &&
+						(p.variants.find(v => v.title === this.$route.params.variant) ||
+							(p.productType && p.productType.toLowerCase() === this.$route.params.variant)) ||
+						p.collections.find(c => c.title === this.$route.params.variant)
+					);
+					products.forEach(p =>
+						p.selectedVariant = p.variants.find(v => v.title === this.$route.params.variant)
+					);
+					return products || [];
+				}
+				
+				return products || [];
 			}
 		},
 		methods: {
