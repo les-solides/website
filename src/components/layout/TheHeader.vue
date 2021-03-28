@@ -17,7 +17,8 @@
 					 @click="checkoutOpen = ! checkoutOpen">
 					cart ({{ amountOfCartItems }})
 				</div>
-				<div class="checkout-overview checkout-footer shadow mt-2 z-10"
+				
+				<div class="checkout-overview checkout-footer mt-2 shadow z-10"
 					 :class="{ open: checkoutOpen }">
 					<div class="loading-overlay h-full w-full"
 						 v-if="loading"></div>
@@ -68,6 +69,7 @@
 						{{ amountOfCartItems ? '( checkout )' : '( go to products )' }}
 					</a>
 				</div>
+				
 			</div>
 		</div>
 		
@@ -121,7 +123,7 @@
 				</div>
 			</div>
 			<transition name="fade">
-				<div class="checkout-overview mt-2 open z-10"
+				<div class="checkout-overview mt-2 open shadow z-10"
 					 v-show="checkoutOpen">
 					<div class="loading-overlay h-full w-full"
 						 v-if="loading"></div>

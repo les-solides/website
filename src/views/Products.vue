@@ -2,12 +2,12 @@
 	<div v-if="chunkedArray.length">
 		
 		<NavigationFilter
-				base="/products"
-				class="bg-white block md:hidden ml-0 py-4 sticky top-4 md:top-0 z-10"
-				name="Navigation (Products)" />
+			base="/products"
+			class="bg-white block md:hidden ml-0 py-4 sticky top-4 md:top-0 z-10"
+			name="Navigation (Products)" />
 		
 		<NavigationSubfilter
-				v-if="$route.params.collection === 'jewelry'" />
+			v-if="$route.params.collection === 'jewelry'" />
 		
 		<!-- Each chunk has an equal amount of products -->
 		<!-- After the equal amount of products an image and links is added -->
@@ -17,17 +17,17 @@
 			
 			<!-- All products of current chunk -->
 			<ProductLink
-					:class="getProductLinkClassesByIndex(index)"
-					:key="o(product).id"
-					:product="product"
-					v-for="(product, index) of chunk" />
+				:class="getProductLinkClassesByIndex(index)"
+				:key="o(product).id"
+				:product="product"
+				v-for="(product, index) of chunk" />
 			
 			<!-- Link (and image) section after equal amount of products -->
 			<router-link
-					class="aspect-height aspect-width block mx-auto relative w-full"
-					style="margin-bottom: var(--header-height)"
-					:to="'/products/' + o(links[index]).href.split('/products/')[1]"
-					v-if="chunkHasLink(index)">
+				class="aspect-height aspect-width block mx-auto relative w-full"
+				style="margin-bottom: var(--header-height)"
+				:to="'/products/' + o(links[index]).href.split('/products/')[1]"
+				v-if="chunkHasLink(index)">
 				
 				<!-- Link text overlay -->
 				<span class="overlay absolute-center flex items-center justify-center magnified w-full"
@@ -56,9 +56,9 @@
 	export default {
 		name: "Products",
 		components: {
+			NavigationFilter,
 			NavigationSubfilter,
-			ProductLink,
-			NavigationFilter
+			ProductLink
 		},
 		computed: {
 			...mapGetters("shopify/blog", ["articles"]),
@@ -86,7 +86,9 @@
 			},
 			images() {
 				// The images in between the product chunks.
-				if ( ! this.content) return [];
+				if ( ! this.content) {
+					return [];
+				}
 				return Array.from(this.content.images) || [];
 			},
 			isCollectionPage() {
@@ -97,8 +99,12 @@
 			},
 			links() {
 				// the links in between the product chunks.
-				if ( ! this.content) return [];
-				if (this.isCollectionPage || this.isFilteredPage) return [];
+				if ( ! this.content) {
+					return [];
+				}
+				if (this.isCollectionPage || this.isFilteredPage) {
+					return [];
+				}
 				return Array.from(this.content.selectElements('a')) || [];
 			},
 			filteredProducts() {
@@ -116,8 +122,8 @@
 					products = products.filter(p =>
 						// Filter products, which have a variant, where the title equals the variant in the URL.
 						(p.variants.find(v => v.title === this.$route.params.variant) ||
-						// Or products, where the product type equals the variant in the URL.
-						(p.productType && p.productType.toLowerCase() === this.$route.params.variant)) ||
+							// Or products, where the product type equals the variant in the URL.
+							(p.productType && p.productType.toLowerCase() === this.$route.params.variant)) ||
 						// Or collections, which a title that equals the variant in the URL.
 						p.collections.find(c => c.title === this.$route.params.variant)
 					);

@@ -1,29 +1,35 @@
 <template>
 	<div class="product-link"
-		 :class="{ short, small }"
 		 style="margin-bottom: var(--header-height)"
+		 :class="{ short, small }"
 		 v-if="product">
 		
 		<!-- Image & QuickShop Overlay [start] -->
-		<div class="relative quick-buy"
-			 @mouseenter="startHover"
-			 @mouseleave="unhover">
+		<div @mouseenter="startHover"
+			 @mouseleave="unhover"
+			 class="relative quick-buy">
 			
-			<!-- Image -->
-			<router-link :to="`/product/${ product.handle }`"
-						 class="hidden md:block overflow-hidden">
-				<LoadedImage class="h-full object-cover zoomed w-full"
-							 :src="o(imageShown).src || o(imageShown).originalSrc" />
+			<!-- Image & Link Desktop [start] -->
+			<router-link
+				class="hidden md:block overflow-hidden"
+				:to="`/product/${ product.handle }`">
+				<LoadedImage
+					class="h-full object-cover zoomed w-full"
+					:src="o(imageShown).src || o(imageShown).originalSrc" />
 			</router-link>
-			<div class="block md:hidden"
-				 @click="openMobileProduct">
-				<LoadedImage class="h-full object-cover w-full"
-							 :src="o(imageShown).src || o(imageShown).originalSrc" />
+			<!-- Image & Link Desktop [end] -->
+			
+			<!-- Image & Link Mobile [start] -->
+			<div @click="openMobileProduct"
+				 class="block md:hidden">
+				<LoadedImage
+					class="h-full object-cover w-full"
+					:src="o(imageShown).src || o(imageShown).originalSrc" />
 			</div>
-			<!-- Image -->
+			<!-- Image & Link Mobile [end] -->
 			
 			<!-- QuickShop Overlay -->
-			<div class="absolute  h-full hidden left-0 product-link-overlay top-0 w-full"
+			<div class="absolute h-full hidden left-0 product-link-overlay top-0 w-full"
 				 :class="{ 'md:block': hover && hasValidAmountOfOptions && quickBuyActive }"
 				 v-if=" ! this.small">
 				<div class="flex"
@@ -114,12 +120,12 @@
 		
 		<!-- Title & Price -->
 		<ProductTitlePrice
-				style="padding-top: 4.8px;"
-				:product="product"
-				:quick-shop-type="quickShopType"
-				:selected-variants="selectedVariants"
-				:selected-pair-option-value="selectedPairOptionValue"
-				with-price />
+			style="padding-top: 4.8px;"
+			with-price
+			:product="product"
+			:quick-shop-type="quickShopType"
+			:selected-variants="selectedVariants"
+			:selected-pair-option-value="selectedPairOptionValue" />
 		<!-- Title & Price -->
 	
 	</div>
@@ -438,17 +444,13 @@
 		created() {
 			this.initialize();
 			this.unhover();
-		},
-		watch: {
-			productId() {
-			
-			}
 		}
 	};
 </script>
 
 <style lang="scss"
 	   scoped>
+	
 	/*todo:refactor*/
 	.collaboration .product-link {
 		img, .empty-image-box {
@@ -514,6 +516,7 @@
 				img, .empty-image-box {
 					height: 12vw;
 				}
+				
 				min-width: calc(10% - .9rem);
 				width: calc(10% - .9rem);
 			}
