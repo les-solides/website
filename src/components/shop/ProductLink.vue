@@ -105,6 +105,8 @@
 						v-if="quickShopType !== 0 && hasValidAmountOfOptions && hover && ! quickBuyActive">
 					quick buy
 				</button>
+				
+				<!-- Has no variants (QuickShop type 0) -->
 				<button class="absolute add-to-cart  bottom-0 hidden md:block outside-btn text-center w-full"
 						@click="addToCart"
 						:disabled=" ! o(selectedVariants[0]).available"
@@ -259,6 +261,13 @@
 				return this.product?.selectedVariant?.image;
 			},
 			selectedVariants() {
+				if (this.quickShopType === 0 && this.product) {
+					// For products without any options.
+					return [
+						this.product.selectedVariant ||
+						this.product.variants[0]
+					];
+				}
 				return this.product && Array.isArray(this.product.variants) ?
 					   this.product.variants.filter(variant =>
 						   variant.options.filter(o =>
@@ -313,12 +322,14 @@
 				if (this.quickShopType === 6) {
 					return this.$router.push(`/product/${ this.product.handle }`);
 				}
+				
 				if (this.quickShopType === 0) {
+					// For products without any options.
 					await this.$store.dispatch(
-						"shopify/addToCheckout", {
-							variant: this.product.variants[0],
-							quantity: 1
-						});
+					"shopify/addToCheckout", {
+						variant: this.product.variants[0],
+						quantity: 1
+					});
 					this.$analytics.fbq.event("AddToCart", {
 						content_name: this.o(this.product.variants[0]).title,
 						content_category: this.o(this.o(this.o(this.product).collections)[0]).title,
@@ -333,6 +344,7 @@
 						position: "bottom-center"
 					});
 				}
+				
 				if (this.quickShopType === 2) {
 					await this.$store.dispatch(
 						"shopify/addToCheckout", {
@@ -383,6 +395,7 @@
 							this.selectOptionValue(option, option.value)
 						);
 				}
+				
 				this.popupProduct = this.product;
 			},
 			openMobileProduct() {
