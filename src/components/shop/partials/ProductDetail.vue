@@ -309,11 +309,13 @@
 						position: "bottom-center"
 					});
 				}
+				
 				if (this.quickShopType === 2) {
 					await this.$store.dispatch(
 						"shopify/addToCheckout", {
 							variant: this.selectedVariants[0],
-							quantity: 2
+							quantity: this.o(this.selectedPairOptionValue).value === "single" ? 1 :
+									  this.pairOptionName ? 2 : 1
 						});
 					this.$analytics.fbq.event("AddToCart", {
 						content_name: this.o(this.selectedVariants[0]).title,
@@ -329,6 +331,7 @@
 						position: "bottom-center"
 					});
 				}
+				
 				for (let variant of this.selectedVariants) {
 					await this.$store.dispatch(
 						"shopify/addToCheckout", {

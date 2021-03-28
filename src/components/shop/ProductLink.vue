@@ -242,6 +242,7 @@
 				) : null;
 			},
 			quickShopType() {
+				
 				// if only one variant (default): type 0
 				if (this.product.options.length === 1 && this.product.variants.length === 1) {
 					return 0;
@@ -333,10 +334,10 @@
 				if (this.quickShopType === 0) {
 					// For products without any options.
 					await this.$store.dispatch(
-					"shopify/addToCheckout", {
-						variant: this.product.variants[0],
-						quantity: 1
-					});
+						"shopify/addToCheckout", {
+							variant: this.product.variants[0],
+							quantity: 1
+						});
 					this.$analytics.fbq.event("AddToCart", {
 						content_name: this.o(this.product.variants[0]).title,
 						content_category: this.o(this.o(this.o(this.product).collections)[0]).title,
@@ -373,6 +374,7 @@
 						position: "bottom-center"
 					});
 				}
+				
 				for (let variant of this.selectedVariants) {
 					await this.$store.dispatch(
 						"shopify/addToCheckout", {
@@ -388,7 +390,9 @@
 						currency: "CHF"
 					});
 				}
+				
 				delay(() => this.addingToCart = false, 200);
+				
 				this.$toasted.show("added to cart", {
 					duration: 5000,
 					position: "bottom-center"
