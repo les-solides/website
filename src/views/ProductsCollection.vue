@@ -1,31 +1,27 @@
 <template>
 	<div>
-		<NavigationFilter base="/products"
-						  class="bg-white block md:hidden ml-0 py-4 sticky top-4 md:top-0 z-10"
-						  name="Navigation (Products)" />
+		<NavigationFilter
+				base="/products"
+				class="bg-white block md:hidden ml-0 py-4 sticky top-4 md:top-0 z-10"
+				name="Navigation (Products)" />
+		
 		<NavigationSubfilter
 				v-if="$route.params.collection === 'jewelry'" />
+		
 		<div class="flex flex-wrap"
 			 :key="o(chunk[0]).id"
 			 v-for="(chunk) of chunkedArray">
-			<ProductLink :class="{
-							'mr-4': (index % 2) - 1,
-							'md:mr-4': (index % 5) - 4,
-							'md:mr-0': (index % 5) - 5
-						 }"
-						 :product="product"
-						 :key="product.id"
-						 v-for="(product, index) of chunk" />
-			<!--<router-link class="block mb-16 relative w-full"
-						 :to="'/products/' + o(links[index]).href.split('/products/')[1]"
-						 v-if="o(links[index]).href">
-				<span class="absolute-center flex items-center justify-center magnified w-full"
-					  v-html="o(links[index]).innerHTML">
-				</span>
-				<img class="w-full"
-					 :src="o(images[index]).src"
-					 alt="">
-			</router-link>-->
+			
+			<ProductLink
+					:class="{
+						'mr-4': (index % 2) - 1,
+						'md:mr-4': (index % 5) - 4,
+						'md:mr-0': (index % 5) - 5
+					 }"
+					:product="product"
+					:key="product.id"
+					v-for="(product, index) of chunk" />
+		
 		</div>
 	</div>
 </template>
@@ -111,22 +107,23 @@
 					name: "description",
 					content: "les solides is inspired by nature, the people and craftsmanship. all their products are produced locally in bali and their vision is to preserve the traditional craftsmanship and to build sustainable and personal relationships with their producers. anna z’brun sees her label as a counterpoint to mass consumption and fast pace, she relies on minimal and timeless design."
 				}
-			],
+			]
 		},
 		async created() {
-			// this.$store.commit('updateLoading', true);
+			
 			this.article = (await this.$store.dispatch(
 				'shopify/blog/fetchArticlesByBlog',
 				"Products Page (Main)"
 			))?.[0];
+			
 			this.$nextTick(() => {
 				if ( ! this.amountPerChunk) {
-					//this.$store.dispatch('goToNotFound');
 					this.$router.push({
-						name: 'Product'
-					})
+						name: 'products'
+					});
 				}
 			});
+			
 			this.$store.commit('updateLoading', false);
 		}
 	};

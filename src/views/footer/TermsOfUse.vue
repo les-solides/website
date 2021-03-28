@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="ls-footer-page-content">
 		<div v-html="content"></div>
 		<Error v-if="loaded && error" />
 	</div>

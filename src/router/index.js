@@ -47,7 +47,7 @@ const routes = [
 	},
 	{
 		path: '/products',
-		name: 'Products (Main)',
+		name: 'products',
 		meta: {
 			navigationArticle: "Navigation (Products)"
 		},
@@ -55,15 +55,15 @@ const routes = [
 	},
 	{
 		path: '/products/:collection',
-		name: 'Products (Collection)',
+		name: 'products-collection',
 		meta: {
 			navigationArticle: "Navigation (Products)"
 		},
-		component: () => import(/* webpackChunkName: "Product" */ '../views/ProductsCollection')
+		component: () => import(/* webpackChunkName: "Product" */ '../views/Products')
 	},
 	{
 		path: '/products/:collection/:variant',
-		name: 'Products (Filtered)',
+		name: 'products-filtered',
 		meta: {
 			navigationArticle: "Navigation (Products)"
 		},
