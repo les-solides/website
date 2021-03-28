@@ -242,19 +242,26 @@
 				) : null;
 			},
 			quickShopType() {
-				// if only one variant (default)
+				// if only one variant (default): type 0
 				if (this.product.options.length === 1 && this.product.variants.length === 1) {
 					return 0;
 				}
+				
+				// if one option with two variants: type 2
 				if (this.product.options.length === 1 && this.product.variants.length === 2) {
 					return 2;
 				}
+				
+				// if two options with four variants: type 3 & 4
 				if (this.product.options.length === 2 && this.product.variants.length === 4) {
 					return this.pairOptionName === "side" ? 4 : 3;
 				}
+				
+				// if two options with more than 4 variants: type 5
 				if (this.product.options.length === 2) {
 					return 5;
 				}
+				
 				return 6;
 			},
 			selectedVariantImage() {
@@ -349,7 +356,8 @@
 					await this.$store.dispatch(
 						"shopify/addToCheckout", {
 							variant: this.selectedVariants[0],
-							quantity: 2
+							quantity: this.o(this.selectedPairOptionValue).value === "single" ? 1 :
+									  this.pairOptionName ? 2 : 1
 						});
 					this.$analytics.fbq.event("AddToCart", {
 						content_name: this.o(this.product.variants[0]).title,
