@@ -11,7 +11,7 @@
 			
 			<!-- Image & Link Desktop [start] -->
 			<router-link
-				class="hidden md:block overflow-hidden"
+				class="hidden md:block overflow-hidden router-link"
 				:to="`/product/${ product.handle }`">
 				<LoadedImage
 					class="h-full object-cover zoomed w-full"

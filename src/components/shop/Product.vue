@@ -36,7 +36,7 @@
 									@select="selectPairOption(pairOption, $event)"
 									v-if="pairOptionName" />
 							<button @click="openSizeGuide"
-									class="text-link"
+									class="link text-link"
 									v-if="isRing">
 								don't know your size?
 							</button>
@@ -72,13 +72,6 @@
 					:name="product.id"
 					:product="product" />
 		</div>
-		<!--<PopupMobile class="block md:hidden"
-					 :value="true"
-					 @close="$router.back()"
-					 v-if="product">
-			<ProductDetail :product="product"
-						   @click="switchProduct($event)" />
-		</PopupMobile>-->
 	</div>
 </template>
 

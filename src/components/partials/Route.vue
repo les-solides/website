@@ -1,6 +1,6 @@
 <template>
 	<router-link
-			class="block"
+			class="block router-link"
 			:to="to"
 			:exact="exact">
 		<slot></slot>

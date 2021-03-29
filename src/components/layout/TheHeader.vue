@@ -64,7 +64,7 @@
 						<div class="text-left">total</div>
 						<div class="kapitälchen">CHF {{ Number($cart.total).toFixed(2) }}</div>
 					</div>
-					<a class="checkout-button mt-4"
+					<a class="checkout-button link mt-4"
 					   :href="amountOfCartItems ? $cart.url : '/products'">
 						{{ amountOfCartItems ? '( checkout )' : '( go to products )' }}
 					</a>
@@ -168,7 +168,7 @@
 						<div class="text-left">total</div>
 						<div class="kapitälchen">CHF {{ Number($cart.total).toFixed(2) }}</div>
 					</div>
-					<a class="checkout-button mt-4"
+					<a class="checkout-button link mt-4"
 					   :href="amountOfCartItems ? $cart.url : '/products'">
 						{{ amountOfCartItems ? '( checkout )' : '( go to products )' }}
 					</a>

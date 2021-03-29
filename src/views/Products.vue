@@ -24,7 +24,7 @@
 			
 			<!-- Link (and image) section after equal amount of products -->
 			<router-link
-				class="aspect-height aspect-width block mx-auto relative w-full"
+				class="aspect-height aspect-width block mx-auto relative router-link w-full"
 				style="margin-bottom: var(--header-height)"
 				:to="'/products/' + o(links[index]).href.split('/products/')[1]"
 				v-if="chunkHasLink(index)">

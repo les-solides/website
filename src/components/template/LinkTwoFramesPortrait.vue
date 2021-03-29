@@ -4,7 +4,7 @@
 		<!-- Left [start] -->
 		<div class="aspect-width mb-4 md:mb-0 md:mr-2 w-full">
 			<a :href="leftImage.alt"
-			   class="aspect-height flex h-full items-center relative"
+			   class="aspect-height flex h-full items-center link relative"
 			   v-if="leftImage">
 				<LoadedImage class="h-full object-cover w-full"
 							 :class="{ darken: article.selectElement('#overlay-left').innerText }"
@@ -17,12 +17,12 @@
 			<div class="mt-text-default w-full"
 				 v-if="linkLeft">
 				<!-- .h1 -->
-				<a class="block italic"
+				<a class="block italic link"
 				   :href="linkLeft"
 				   v-if="linkLeft && linkLeft.includes('http')">
 					{{ contentLeft.innerText }}
 				</a>
-				<router-link class="block italic"
+				<router-link class="block italic router-link"
 							 :to="linkLeft"
 							 v-else-if="linkLeft">
 					{{ contentLeft.innerText }}
@@ -34,7 +34,7 @@
 		<!-- Right [start] -->
 		<div class="aspect-width md:ml-2 w-full">
 			<a :href="rightImage.alt"
-			   class="aspect-height flex h-full items-center relative"
+			   class="aspect-height flex h-full items-center link relative"
 			   v-if="rightImage">
 				<LoadedImage class="h-full object-cover w-full"
 							 :class="{ darken: article.selectElement('#overlay-right').innerText }"
@@ -47,12 +47,12 @@
 			<div class="mt-text-default w-full"
 				 v-if="linkRight">
 				<!-- .h1 -->
-				<a class="block italic"
+				<a class="block italic link"
 				   :href="linkRight"
 				   v-if="linkRight && linkRight.includes('http')">
 					{{ contentRight.innerText }}
 				</a>
-				<router-link class="block italic"
+				<router-link class="block italic router-link"
 							 :to="linkRight"
 							 v-else-if="linkRight">
 					{{ contentRight.innerText }}

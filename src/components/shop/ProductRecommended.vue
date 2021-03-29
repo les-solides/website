@@ -1,7 +1,7 @@
 <template>
 	<a :href="product.handle"
 	   :class="{ mobile }"
-	   class="mb-8 product-link"
+	   class="link mb-8 product-link"
 	   v-if=" ! mobile">
 		
 		<!-- Image & QuickShop Overlay [start] -->
@@ -19,7 +19,7 @@
 		
 		<!-- Title & Price -->
 		<router-link :to="`/product/${ product.handle }`"
-					 class="block mt-2 overflow-hidden">
+					 class="block mt-2 overflow-hidden router-link">
 			<span class="block mr-4 whitespace-no-wrap">{{ product.title }}</span>
 			<span class="kapitälchen">{{ price }}</span>
 		</router-link>
@@ -48,7 +48,7 @@
 		
 		<!-- Title & Price -->
 		<router-link :to="`/product/${ product.handle }`"
-					 class="block mt-2 overflow-hidden">
+					 class="block mt-2 overflow-hidden router-link">
 			<span class="block mr-4 whitespace-no-wrap">{{ product.title }}</span>
 			<span class="kapitälchen">{{ price }}</span>
 		</router-link>

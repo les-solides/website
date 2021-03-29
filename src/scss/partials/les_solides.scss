@@ -23,6 +23,13 @@
 }
 
 // -- A [start]
+a.link,
+footer article a,
+.description a {
+	color: gray!important;
+	font-style: italic!important;
+}
+
 .absolute-center {
 	left: 50%;
 	position: absolute;

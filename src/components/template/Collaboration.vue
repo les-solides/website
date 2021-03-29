@@ -29,7 +29,7 @@
 					:src="o(activeImage).src || o(activeImage).transformedSrc" />
 			<div class="flex justify-end w-full"
 				 style="margin-left: calc(33.33333% - 1rem);width: calc(66.66666% + 1rem)">
-				<router-link :to="productRoute">go to product</router-link>
+				<router-link class="router-link" :to="productRoute">go to product</router-link>
 			</div>
 		</button>
 	</div>

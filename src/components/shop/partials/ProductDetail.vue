@@ -59,10 +59,10 @@
 			<button @click="handleGoToCartClick"
 					class="pb-8 pt-2">↳ go to cart</button>
 			
-			<div class="mb-8"
+			<div class="description mb-8"
 				 v-html="o(descriptionTag).innerHTML"></div>
 			
-			<div class="mb-8"
+			<div class="description mb-8"
 				 v-html="o(descriptionRest).innerHTML"></div>
 			
 			<AddOnProducts

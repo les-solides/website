@@ -1,5 +1,5 @@
 <template>
-	<a class="block h1 mt-4 relative"
+	<a class="block h1 link mt-4 relative"
 	   :href="link"
 	   v-if="link && link.includes('http')">
 		<LoadedImage class="w-full"
@@ -7,7 +7,7 @@
 		<div class="absolute center font-xl text-center w-full"
 			  v-html="article.contentHtml"></div>
 	</a>
-	<router-link class="block h1 mt-4 relative"
+	<router-link class="block h1 mt-4 relative router-link"
 				 :to="link"
 				 v-else>
 		<LoadedImage class="w-full"

@@ -7,7 +7,7 @@
 			</div>
 			<div class="flex justify-start md:justify-end md:w-1/4 md:mt-0 mt-8 w-full">
 				<a :href="url"
-				   class="mr-2"
+				   class="link mr-2"
 				   v-if="url">read more</a>
 				<button class="primary"
 						@click="accept">{{ buttonContent }}

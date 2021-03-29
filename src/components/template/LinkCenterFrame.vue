@@ -3,7 +3,7 @@
 		 style="margin-bottom: var(--header-height)">
 		<div class="aspect-height md:w-1/2 w-full">
 			<a :href="image.alt"
-			   class="flex items-center h-full relative"
+			   class="flex items-center h-full link relative"
 			   v-if="image">
 				<LoadedImage
 						class="md:pl-2 h-full object-cover w-full"
@@ -16,12 +16,12 @@
 			<div class="md:ml-2 mt-text-default w-full"
 				 v-if="link">
 				<!-- .h1 -->
-				<a class="block italic"
+				<a class="block italic link"
 				   :href="link"
 				   v-if="link && link.includes('http')">
 					{{ content.innerText }}
 				</a>
-				<router-link class="block italic"
+				<router-link class="block italic router-link"
 							 :to="link"
 							 v-else-if="link">
 					{{ content.innerText }}

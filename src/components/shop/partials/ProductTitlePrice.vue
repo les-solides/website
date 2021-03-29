@@ -1,6 +1,6 @@
 <template>
 	<router-link :to="`/product/${ product.handle }`"
-				 class="block line-height-1 overflow-hidden">
+				 class="block line-height-1 overflow-hidden router-link">
 		<div class="flex flex-wrap justify-between">
 			<span class="block line-height-1 mr-2 mt-2 whitespace-no-wrap" style="line-height: .7">
 				{{ product.title }}
