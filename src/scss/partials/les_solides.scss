@@ -23,9 +23,11 @@
 }
 
 // -- A [start]
-a.link,
+a.link:not(.checkout-button,.router-link),
+button.link:not(.router-link),
 footer article a,
-.description a {
+.description a,
+a:not(.checkout-button,.router-link) {
 	color: gray!important;
 	font-style: italic!important;
 }

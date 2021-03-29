@@ -36,7 +36,7 @@
 									@select="selectPairOption(pairOption, $event)"
 									v-if="pairOptionName" />
 							<button @click="openSizeGuide"
-									class="link text-link"
+									class="link"
 									v-if="isRing">
 								don't know your size?
 							</button>
