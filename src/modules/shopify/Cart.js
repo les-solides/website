@@ -1,6 +1,8 @@
 import store from "./../../store/index";
 import LineItem from "./../shopify/LineItem";
 
+const version = "1.0.0";
+
 export default class Cart {
 	
 	// @todo: remove sold out products on construct
@@ -11,6 +13,7 @@ export default class Cart {
 	
 	constructor(id) {
 		this.id = id;
+		this.version = version;
 		window.onbeforeunload = () => {
 			this.persist();
 		};
@@ -34,7 +37,7 @@ export default class Cart {
 	}
 	
 	static key() {
-		return "cart";
+		return version + "-ls-cart";
 	}
 	
 	get length() {
