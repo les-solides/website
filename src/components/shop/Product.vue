@@ -93,7 +93,7 @@
 			pairOption: new OptionModule({
 				id: uniqueId(),
 				name: '',
-				values: ['pair', 'single']
+				values: ['single', 'pair']
 			}),
 			recommendations: [],
 			selectedOptionValues: [],
@@ -224,7 +224,8 @@
 					await this.$store.dispatch(
 						"shopify/addToCheckout", {
 							variant,
-							quantity: 1
+							quantity: this.o(this.selectedPairOptionValue).value === "single" ? 1 :
+									  this.pairOptionName ? 2 : 1
 						});
 					this.$analytics.fbq.event("AddToCart", {
 						content_name: variant.title,
