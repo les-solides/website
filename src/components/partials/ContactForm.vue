@@ -5,13 +5,13 @@
 		
 		<div class="form-inputs">
 			<div class="flex w-full">
-				<div class="flex items-center md:w-1/4 w-1/2">
+				<div class="flex items-center md:w-1/3 w-1/2">
 					<label for="name" hidden></label>
 					<h1>name*</h1>
 				</div>
-				<div class="flex items-center md:w-3/4 w-1/2">
+				<div class="flex items-center md:w-2/3 w-1/2">
 					<input id="name"
-						   class="special block placeholder-black text-black w-3/4"
+						   class="special block placeholder-black text-black w-full"
 						   type="text"
 						   placeholder="name"
 						   v-model="name">
@@ -19,13 +19,13 @@
 			</div>
 			
 			<div class="flex w-full">
-				<div class="flex items-center md:w-1/4 w-1/2">
+				<div class="flex items-center md:w-1/3 w-1/2">
 					<label for="email" hidden></label>
 					<h1>email*</h1>
 				</div>
-				<div class="flex items-center md:w-3/4 w-1/2">
+				<div class="flex items-center md:w-2/3 w-1/2">
 					<input id="email"
-						   class="special block placeholder-black text-black w-3/4"
+						   class="special block placeholder-black text-black w-full"
 						   type="email"
 						   placeholder="email"
 						   v-model="email">
@@ -33,13 +33,13 @@
 			</div>
 			
 			<div class="flex w-full">
-				<div class="flex items-center md:w-1/4 w-1/2">
+				<div class="flex items-center md:w-1/3 w-1/2">
 					<label for="phone" hidden></label>
 					<h1>phone number</h1>
 				</div>
-				<div class="flex items-center md:w-3/4 w-1/2">
+				<div class="flex items-center md:w-2/3 w-1/2">
 					<input id="phone"
-						   class="special block placeholder-black text-black w-3/4"
+						   class="special block placeholder-black text-black w-full"
 						   type="text"
 						   placeholder="phone number"
 						   v-model="phone">
@@ -47,13 +47,13 @@
 			</div>
 			
 			<div class="flex w-full">
-				<div class="flex items-center md:w-1/4 w-1/2">
+				<div class="flex items-center md:w-1/3 w-1/2">
 					<label for="order" hidden></label>
 					<h1>order number</h1>
 				</div>
-				<div class="flex items-center md:w-3/4 w-1/2">
+				<div class="flex items-center md:w-2/3 w-1/2">
 					<input id="order"
-						   class="special block placeholder-black text-black w-3/4"
+						   class="special block placeholder-black text-black w-full"
 						   type="text"
 						   placeholder="#0000"
 						   v-model="order">
@@ -61,13 +61,13 @@
 			</div>
 			
 			<div class="flex w-full">
-				<div class="flex items-center md:w-1/4 w-1/2">
+				<div class="flex items-center md:w-1/3 w-1/2">
 					<label for="subject" hidden></label>
 					<h1>subject*</h1>
 				</div>
-				<div class="flex items-center md:w-3/4 w-1/2">
+				<div class="flex items-center md:w-2/3 w-1/2">
 					<input id="subject"
-						   class="special block placeholder-black text-black w-3/4"
+						   class="special block placeholder-black text-black w-full"
 						   type="text"
 						   placeholder="subject"
 						   v-model="subject">
@@ -150,6 +150,12 @@
 	
 	.form-inputs h1 {
 		font-size: 1.25rem;
+		font-style: normal;
+		margin-bottom: 0;
+		padding: 0.5rem 0;
+		@media screen and (min-width: $breakpoint-md) {
+			font-size: 2.15rem;
+		}
 	}
 	
 	.divider {
