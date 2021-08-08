@@ -43,6 +43,9 @@
 			}
 		},
 		created() {
+			if (this.option.values[0] === 'single') {
+				return this.select(this.option.values[1]);
+			}
 			this.select(this.option.values[0]);
 		}
 	};
