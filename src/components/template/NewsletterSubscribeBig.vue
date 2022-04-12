@@ -1,7 +1,7 @@
 <template>
 	<form @submit.prevent="subscribe"
 		  class="bg-white search-bar mb-8 pt-4 md:pt-0 z-10">
-		<div class="big-font lowercase text-center"
+		<div class="big-font lowercase text-center  test"
 			 style="margin-bottom: 2rem"
 			 v-html="article.contentHtml"></div>
 		<label for="query"
