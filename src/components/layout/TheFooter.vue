@@ -15,7 +15,7 @@
 			<PrivacyPolicy v-if="currentRoute === footer.routes.PRIVACY" />
 			<ReturnsAndExchanges v-if="currentRoute === footer.routes.RETURNS" />
 			<Shipping v-if="currentRoute === footer.routes.SHIPPING" />
-			<!--<Stockist v-if="currentRoute === footer.routes.STOCKISTS" />-->
+			<Stockist v-if="currentRoute === footer.routes.STOCKISTS" />
 			<About page="page:care-instructions" v-if="currentRoute === footer.routes.CARE" />
 			<About page="page:legal-notes" v-if="currentRoute === footer.routes.LEGAL" />
 			<Search page="page:search" v-if="currentRoute === footer.routes.SEARCH" />
@@ -47,9 +47,9 @@
 			<button @click="openFooter(footer.routes.CONTACT)"
 					class="margin-deduct-4 mb-4 md:mb-0 mr-4">contact
 			</button>
-			<!--<button @click="openFooter(footer.routes.STOCKISTS)"
+			<button @click="openFooter(footer.routes.STOCKISTS)"
 					class="margin-deduct-4 mb-4 md:mb-0 mr-4">stockist
-			</button>-->
+			</button>
 			<button @click="openFooter(footer.routes.SIZE)"
 					class="margin-deduct-4 mr-4">size guide
 			</button>
