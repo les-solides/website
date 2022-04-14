@@ -2,7 +2,10 @@
 	<NewsletterSubscribeBig
 			class="mb-24 mt-24"
 			:article="article" />
+
+			
 </template>
+
 
 <script>
 	import Article from "../../modules/shopify/blog/Article";

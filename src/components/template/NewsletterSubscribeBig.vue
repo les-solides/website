@@ -1,20 +1,13 @@
 <template>
-	<form @submit.prevent="subscribe"
-		  class="bg-white search-bar mb-8 pt-4 md:pt-0 z-10">
-		<div class="big-font lowercase text-center  test"
+<div>
+ <form id="mc-embedded-subscribe-form" class="validate bg-white search-bar mb-8 pt-4 md:pt-0 z-10" action="https://lessolides.us2.list-manage.com/subscribe/post?u=ee80bf8a410a28ab2c01fdcd1&amp;id=19b796f6e9" method="post" name="mc-embedded-subscribe-form" target="_blank">
+ 		<div class="big-font lowercase text-center  test"
 			 style="margin-bottom: 2rem"
 			 v-html="article.contentHtml"></div>
-		<label for="query"
-			   hidden></label>
-		<input
-				class="text-center"
-				id="query"
-				placeholder="email address"
-				type="text"
-				v-model="email">
-		
-		<input type="submit" value="submit">
-	</form>
+                <input id="mce-EMAIL" class="required email" name="EMAIL" size="30" type="email" value="" placeholder="Enter your email address" />
+                <input id="mc-embedded-subscribe" class="button cursor-pointer" name="subscribe" type="submit" value="Sign up" />
+            </form></div>
+
 </template>
 
 <script>
