@@ -14,7 +14,7 @@
 			<!-- Image -->
 			<div id="scroller-detail"
 				 class="block flex md:hidden overflow-x-scroll"
-				 style="height: 125vw">
+				 style="height: 110vw">
 				<LoadedImage class="h-full object-cover mr-4 w-full"
 							 :src="o(imageShown).src || o(imageShown).originalSrc" />
 				<LoadedImage
@@ -77,8 +77,8 @@
 					@click="switchProduct($event)"
 					v-if="product" />
 		</div>
-	
 	</div>
+
 </template>
 
 <script>
