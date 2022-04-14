@@ -89,7 +89,7 @@
 			Search,
 			Contact,
 			NewsletterSignup,
-			ReturnsAndExchanges, Shipping, PrivacyPolicy, SizeGuide, TermsOfUse, About, Burger
+			ReturnsAndExchanges, Shipping, PrivacyPolicy, Stockist, SizeGuide, TermsOfUse, About, Burger
 		},
 		data: () => ({
 			footer: Footer
