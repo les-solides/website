@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-white overflow-y-auto fixed p-default h-full top-0 w-full z-40 md:hidden">
+	<div class="bg-white overflow-y-auto fixed p-default h-full top-0 w-full z-40 md:hidden product-detail">
 		<!-- Image & QuickShop Overlay [start] -->
 		<div class="sticky top-0 quick-buy"
 			 @mouseenter="hover = true"
@@ -14,7 +14,7 @@
 			<!-- Image -->
 			<div id="scroller-detail"
 				 class="block flex md:hidden overflow-x-scroll"
-				 style="height: 110vw">
+				 style="height: 105vw">
 				<LoadedImage class="h-full object-cover mr-4 w-full"
 							 :src="o(imageShown).src || o(imageShown).originalSrc" />
 				<LoadedImage
@@ -28,7 +28,7 @@
 		<!-- Image & QuickShop Overlay [end] -->
 		
 		<div class="bg-white py-4 relative z-10">
-			<div class="flex justify-between mb-8">
+			<div class="flex justify-between mb-2">
 				<!-- Title & Price -->
 				<div class="block overflow-hidden">
 					<span class="block mr-4 whitespace-no-wrap">{{ product.title }}</span>
@@ -38,7 +38,7 @@
 				<ArrowUp />
 			</div>
 			
-			<div class="flex justify-between mb-8">
+			<div class="flex justify-between mb-2">
 				<div v-if="product.variants.length > 1">
 					<Option :option="option"
 							:key="option.id"
@@ -415,4 +415,11 @@
 	button.border-btn {
 		border: 1px solid black;
 	}
+
+	/*	@media screen and (max-width: 768px) {
+			.product-detail {
+				z-index: 20 !important;
+			}
+		}*/
+
 </style>

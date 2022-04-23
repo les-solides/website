@@ -123,7 +123,7 @@
 				</div>
 			</div>
 			<transition name="fade">
-				<div class="checkout-overview mt-2 open shadow z-10"
+				<div class="checkout-overview mt-2 open shadow z-10 mobile-view"
 					 v-show="checkoutOpen">
 					<div class="loading-overlay h-full w-full"
 						 v-if="loading"></div>
@@ -275,4 +275,13 @@
 			height: 20px;
 		}
 	}
+
+/*	.mobile-view {
+			@media screen and (max-width: 768px) {
+				position: fixed !important;
+				width: 100vw;
+				left: 0;
+				z-index: 100 !important;
+			}
+	}*/
 </style>
