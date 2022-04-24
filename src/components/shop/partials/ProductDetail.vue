@@ -14,7 +14,7 @@
 			<!-- Image -->
 			<div id="scroller-detail"
 				 class="block flex md:hidden overflow-x-scroll"
-				 style="height: 105vw">
+				 style="height: 95vw">
 				<LoadedImage class="h-full object-cover mr-4 w-full"
 							 :src="o(imageShown).src || o(imageShown).originalSrc" />
 				<LoadedImage
@@ -27,7 +27,7 @@
 		</div>
 		<!-- Image & QuickShop Overlay [end] -->
 		
-		<div class="bg-white py-4 relative z-10">
+		<div class="bg-white py-2 relative z-10">
 			<div class="flex justify-between mb-2">
 				<!-- Title & Price -->
 				<div class="block overflow-hidden">
