@@ -253,7 +253,7 @@
 					clearTimeout(timeout);
 					timeout = setTimeout(
 						() => this.$store.commit('updateBagOpen', false),
-						3000
+						5000
 					);
 				}
 				this.$store.commit('updateBagOpen', true);
@@ -278,12 +278,14 @@
 
 	.mobile-footer .checkout-overview {
 			@media screen and (max-width: 768px) {
-				display: none !important;
+			
 			}
 	}
 
 	.mobile-view {
+
 			@media screen and (max-width: 768px) {
+				display: none !important;
 				position: fixed !important;
 				width: 100vw;
 				left: 0;
