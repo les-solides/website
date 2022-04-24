@@ -1,9 +1,9 @@
 <template>
 	<header class="bg-white fixed h-full md:h-auto md:sticky md:p-default md:top-0
-					text-center top-0 transition-medium w-full z-30"
+					text-center top-0 transition-medium w-full z-50"
 			:class="{ 'top-100': ! menuOpen }">
 		
-		<div class="mobile-footer left-0 bg-white bottom-0 fixed flex justify-between menu mobile p-4 shadow-inner w-full z-10">
+		<div class="mobile-footer left-0 bg-white bottom-0 fixed flex justify-between menu mobile p-4 shadow-inner w-full z-50">
 			<Burger @click.native="updateMenuOpen( ! menuOpen)"
 					class="w-1/3"
 					:open="menuOpen" />
@@ -75,7 +75,7 @@
 		
 		<nav class="h-full md:flex justify-between">
 			<div class="flex md:w-1/3">
-				<Route class="bg-white fixed md:py-0 md:relative py-4 text-left top-0 md:w-auto w-full"
+				<Route class="bg-white fixed md:py-0 is-logo md:relative py-4 text-left top-0 md:w-auto w-full"
 					   to="/home"
 					   style="font-style: normal!important">
 					les solides
@@ -276,12 +276,18 @@
 		}
 	}
 
-/*	.mobile-view {
+	.mobile-footer .checkout-overview {
+			@media screen and (max-width: 768px) {
+				display: none !important;
+			}
+	}
+
+	.mobile-view {
 			@media screen and (max-width: 768px) {
 				position: fixed !important;
 				width: 100vw;
 				left: 0;
 				z-index: 100 !important;
 			}
-	}*/
+	}
 </style>

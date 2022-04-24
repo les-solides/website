@@ -354,6 +354,8 @@
 				});
 			},
 			close() {
+				document.querySelector('.is-logo').classList.remove('hide-logo');
+
 				if (this.$route.path.includes('/product/')) {
 					this.$router.push({
 						name: 'Products (Main)'
@@ -393,6 +395,8 @@
 			}
 		},
 		mounted() {
+			document.querySelector('.is-logo').classList.add('hide-logo');
+
 			this.$analytics.fbq.event('ViewContent', {
 				content_name: this.product.title,
 				content_category: this.o(this.o(this.o(this.product).collections)[0]).title,
@@ -416,10 +420,15 @@
 		border: 1px solid black;
 	}
 
-	/*	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 768px) {
 			.product-detail {
-				z-index: 20 !important;
+				height: calc(100vh - 4.5rem) !important;
 			}
-		}*/
+
+			.hide-logo {
+				opacity: 0 !important;
+				pointer-events: none !important;
+			}
+		}
 
 </style>
