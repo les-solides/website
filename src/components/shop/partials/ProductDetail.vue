@@ -395,6 +395,7 @@
 			}
 		},
 		mounted() {
+			console.log('does-this-send');
 			document.querySelector('.is-logo').classList.add('hide-logo-small');
 
 			this.$analytics.fbq.event('ViewContent', {
