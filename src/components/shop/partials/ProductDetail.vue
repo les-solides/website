@@ -354,7 +354,7 @@
 				});
 			},
 			close() {
-				document.querySelector('.is-logo').classList.remove('hide-logo');
+				document.querySelector('.is-logo').classList.remove('hide-logo-small');
 
 				if (this.$route.path.includes('/product/')) {
 					this.$router.push({
@@ -395,7 +395,7 @@
 			}
 		},
 		mounted() {
-			document.querySelector('.is-logo').classList.add('hide-logo');
+			document.querySelector('.is-logo').classList.add('hide-logo-small');
 
 			this.$analytics.fbq.event('ViewContent', {
 				content_name: this.product.title,
@@ -425,7 +425,7 @@
 				height: calc(100vh - 4.5rem) !important;
 			}
 
-			.hide-logo {
+			.hide-logo-small {
 				opacity: 0 !important;
 				pointer-events: none !important;
 			}
