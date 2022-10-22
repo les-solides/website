@@ -38,12 +38,12 @@
 	import TheBody from "./components/layout/TheBody";
 	import CookieNotice from "./components/partials/CookieNotice";
 	import { mapGetters } from "vuex";
-	import TheGifLoadingScreen from "./components/layout/TheGifLoadingScreen";
+	//import TheGifLoadingScreen from "./components/layout/TheGifLoadingScreen";
 	import ProductDetail from "./components/shop/partials/ProductDetail";
 	import { debounce } from "lodash";
 	
 	export default {
-		components: {ProductDetail, TheGifLoadingScreen, CookieNotice, TheBody, TheFooter, TheHeader},
+		components: {ProductDetail, CookieNotice, TheBody, TheFooter, TheHeader},
 		data: () => ({
 			ready: false
 		}),

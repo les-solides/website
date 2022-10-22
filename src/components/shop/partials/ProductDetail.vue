@@ -4,7 +4,7 @@
 		<div class="sticky top-0 quick-buy"
 			 @mouseenter="hover = true"
 			 @mouseleave="hover = false">
-			<div class="flex justify-between pb-4 w-full">
+			<div class="flex justify-between pb-4 w-full share-bar">
 				<Share @click="copy" />
 				<Cross @click="close" />
 			</div>
@@ -422,6 +422,13 @@
 	}
 
 	@media screen and (max-width: 768px) {
+
+
+.share-bar {
+	padding-top: 2.2rem;
+}
+
+
 			.product-detail {
 				height: calc(100vh - 4.5rem) !important;
 			}
