@@ -46,7 +46,7 @@ export default function (handle) {
 						variants (first: 250) {
 							edges {
 								node {
-									available,
+									availableForSale,
 									compareAtPriceV2 {
 										amount,
 										currencyCode
